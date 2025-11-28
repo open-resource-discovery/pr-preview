@@ -3528,7 +3528,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "The visibility states who is allowed to \"see\" and access the resource definition, in case it differs from the resource visibility.\n\nIf not given, the resource definition has the same visibility as the resource it describes.\nThe visibility of a resource definition MUST be lower (more restrictive) than the visibility of the resource it describes.\nE.g. a public resource can have metadata definitions that are internal only.",
+          "description": "The visibility states who is allowed to \"see\" and access the resource definition, in case it differs from the resource visibility.\n\nIf not given, the resource definition has the same visibility as the resource it describes.\nThe visibility of a resource definition MUST be lower (more restrictive) than the visibility of the resource it describes.\nE.g. a public resource can have metadata definitions that are internal only.\n\nThis makes it also possible to provide both a public and an internal metadata description of the resource,\nin case that some metadata must only be made accessible to internal consumers.",
           "oneOf": [
             {
               "const": "public",
@@ -3658,7 +3658,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "The visibility states who is allowed to \"see\" and access the resource definition, in case it differs from the resource visibility.\n\nIf not given, the resource definition has the same visibility as the resource it describes.\nThe visibility of a resource definition MUST be lower (more restrictive) than the visibility of the resource it describes.\nE.g. a public resource can have metadata definitions that are internal only.",
+          "description": "The visibility states who is allowed to \"see\" and access the resource definition, in case it differs from the resource visibility.\n\nIf not given, the resource definition has the same visibility as the resource it describes.\nThe visibility of a resource definition MUST be lower (more restrictive) than the visibility of the resource it describes.\nE.g. a public resource can have metadata definitions that are internal only.\n\nThis makes it also possible to provide both a public and an internal metadata description of the resource,\nin case that some metadata must only be made accessible to internal consumers.",
           "oneOf": [
             {
               "const": "public",
@@ -4140,7 +4140,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "The visibility states who is allowed to \"see\" and access the resource definition, in case it differs from the resource visibility.\n\nIf not given, the resource definition has the same visibility as the resource it describes.\nThe visibility of a resource definition MUST be lower (more restrictive) than the visibility of the resource it describes.\nE.g. a public resource can have metadata definitions that are internal only.",
+          "description": "The visibility states who is allowed to \"see\" and access the resource definition, in case it differs from the resource visibility.\n\nIf not given, the resource definition has the same visibility as the resource it describes.\nThe visibility of a resource definition MUST be lower (more restrictive) than the visibility of the resource it describes.\nE.g. a public resource can have metadata definitions that are internal only.\n\nThis makes it also possible to provide both a public and an internal metadata description of the resource,\nin case that some metadata must only be made accessible to internal consumers.",
           "oneOf": [
             {
               "const": "public",
