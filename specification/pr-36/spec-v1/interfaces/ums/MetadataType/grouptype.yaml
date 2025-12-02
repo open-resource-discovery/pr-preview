@@ -1,0 +1,58 @@
+apiVersion: 'metadata-service.resource.api.sap/v6alpha1'
+type: 'MetadataType'
+metadata:
+  name: 'grouptype'
+  path: '/sap/core/ucl/metadata/ord/v1'
+  labels: {}
+spec:
+  typeName: 'GroupType'
+  key:
+    - 'id'
+  visibility: 'public'
+  embedded: false
+  description: "A Group Type defines the semantics of [group assignments](#group).\nWhat the Group Type means and how it is to be used correctly SHOULD be described in the `description` (which may include markdown links).\n\nGroup Types can be defined centrally (ownership by authority namespace) or decentrally (defined by application / service itself).\n\nTo learn more about the concept, see [Group Concept Documentation](../concepts/grouping-and-bundling#Groups)."
+  metadataProperties:
+    - name: 'id'
+      type: 'guid'
+      mandatory: true
+      unique: true
+      description: 'UMS ID (globally unique), used for relations.'
+    - name: 'groupTypeId'
+      type: 'string'
+      description: 'GroupType ID, which MUST be a valid [Concept ID](../../spec-v1/#concept-id).'
+      mandatory: true
+      constraints:
+        pattern: '^([a-z0-9-]+(?:[.][a-z0-9-]+)*):([a-zA-Z0-9._\-\/]+)$'
+    - name: 'title'
+      type: 'string'
+      description: 'Human readable title of the group type.'
+      mandatory: true
+      constraints:
+        minLength: 1
+        maxLength: 255
+    - name: 'description'
+      type: 'string'
+      description: "Full description, notated in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nThe description SHOULD not be excessive in length and is not meant to provide full documentation.\nDetailed documentation SHOULD be attached as (typed) links."
+      constraints:
+        minLength: 1
+    - name: 'labels'
+      type: 'custom'
+      customTypeName: 'Labels'
+      description: 'Generic labels that can be applied to most ORD information.'
+    - name: 'correlationIds'
+      type: 'string'
+      array: true
+      description: "Correlation IDs can be used to create a reference to related data in other repositories (especially to the system of record).\n\nThey express an \"identity\" / \"equals\" / \"mappable\" relationship to the target ID.\n\nIf a \"part of\" relationship needs to be expressed, use the `partOfGroups` assignment instead.\n\nMUST be a valid [Correlation ID](../index.md#correlation-id)."
+  customTypeDefinitions:
+    - name: 'Labels'
+      metadataProperties:
+        - name: 'key'
+          type: 'string'
+        - name: 'value'
+          type: 'string'
+  metadataRelations:
+    - propertyName: 'groups'
+      relatedTypeName: 'Group'
+      relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
+      description: 'Group instances of the group type.'
+      mandatory: false
