@@ -1172,7 +1172,7 @@
         },
         "resourceDefinitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nAs a consequence the same definition type MUST NOT be provided more than once.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nAs a consequence the same definition type MUST NOT be provided more than once.\nThe exception is when the same definition type is provided more than once, but with a different `visibility`.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/ApiResourceDefinition"
           }
@@ -1882,7 +1882,7 @@
         },
         "resourceDefinitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nAs a consequence the same definition type MUST NOT be provided more than once.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nAs a consequence the same definition type MUST NOT be provided more than once.\nThe exception is when the same definition type is provided more than once, but with a different `visibility`.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/EventResourceDefinition"
           }
@@ -3996,7 +3996,7 @@
         },
         "definitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nAs a consequence the same definition type MUST NOT be provided more than once.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nAs a consequence the same definition type MUST NOT be provided more than once.\nThe exception is when the same definition type is provided more than once, but with a different `visibility`.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/CapabilityDefinition"
           }
