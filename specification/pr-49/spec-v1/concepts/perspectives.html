@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Perspectives | Open Resource Discovery</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Perspectives | Open Resource Discovery"><meta data-rh="true" name="description" content="Metadata can be described from static or dynamic perspectives. This article explains the concept in more detail."><meta data-rh="true" property="og:description" content="Metadata can be described from static or dynamic perspectives. This article explains the concept in more detail."><link data-rh="true" rel="icon" href="/pr-preview/specification/pr-49/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives" hreflang="en"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORD Concepts","item":"https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/"},{"@type":"ListItem","position":2,"name":"Perspectives","item":"https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives"}]}</script><script src="/pr-preview/specification/pr-49/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-49/assets/css/styles.c899b7f8.css">
-<script src="/pr-preview/specification/pr-49/assets/js/runtime~main.29af2038.js" defer="defer"></script>
+<script src="/pr-preview/specification/pr-49/assets/js/runtime~main.145e90d9.js" defer="defer"></script>
 <script src="/pr-preview/specification/pr-49/assets/js/main.4d56fead.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -31,6 +31,29 @@ The <code>system-type</code> information apply no matter which system version or
 Either the metadata is always the same or it explicitly ignores the tenant-specific extensibility, configuration and any feature toggles - describing what&#x27;s generic and shared.
 The advantage of static metadata is that is always available, there is no need to first provision tenants to get it. It is also a good integration contract for everything that is meant to work potentially with <em>any</em> tenant.</p>
 <p>At SAP, we have the <a href="https://api.sap.com/" target="_blank" rel="noopener noreferrer" class="">SAP Business Accelerator Hub</a> that documents the static perspective.</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="system-version-guidelines">System Version Guidelines<a href="#system-version-guidelines" class="hash-link" aria-label="Direct link to System Version Guidelines" title="Direct link to System Version Guidelines" translate="no">​</a></h4>
+<p>Versions and Lifecycle is often difficult. Putting a version on a system is not always straightforward.
+Here are some guidelines how to choose the correct version for the <code>system-version</code> perspective:</p>
+<ul>
+<li class="">If the system has explicit versions (e.g. &quot;v1.0.1&quot;, &quot;v2.0.0&quot;), use these versions.</li>
+<li class="">If the system does not use SemVer, it has to be converted so that SemVer conventions apply (conservatively).<!-- -->
+<ul>
+<li class="">E.g. if the system uses simple incremental versions like &quot;1&quot;, &quot;2&quot; or &quot;2404, convert these to &quot;1.0.0&quot;, &quot;2.0.0&quot;, &quot;2404.0.0&quot; respectively.</li>
+<li class="">E.g. if the system uses date-based versions like &quot;2024-01-15&quot;, convert these to &quot;2024.1.15&quot;.</li>
+</ul>
+</li>
+<li class="">If the system is continuously delivered and does not have explicit versions at all, use the <code>system-type</code> perspective instead.<!-- -->
+<ul>
+<li class="">However, consider that you may still have different releases rolled out over time and on different stages. If this causes a problem, use <code>system-version</code> with below conventions.</li>
+<li class="">Alternatively, use a fixed <code>1.0.0</code> version and overwrite it with every new release.</li>
+</ul>
+</li>
+<li class="">If the system has no versions, but we need to keep track of releases deployed on different environments or stages, use a synthetic versioning scheme:<!-- -->
+<ul>
+<li class="">Use <code>1.0.0-DEV-SNAPSHOT</code>, <code>1.0.0-PROD-SNAPSHOT</code> or similar semver suffixes to indicate different stages or environments, where static metadata is identical.</li>
+</ul>
+</li>
+</ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="dynamic-perspective">Dynamic Perspective<a href="#dynamic-perspective" class="hash-link" aria-label="Direct link to Dynamic Perspective" title="Direct link to Dynamic Perspective" translate="no">​</a></h3>
 <p>The dynamic perspective describes an application or service how it really looks like, <em>at run-time</em>.
 This is more precise than the static perspective, because it can reflect configuration, customization and extensions of the system instance (tenant).</p>
