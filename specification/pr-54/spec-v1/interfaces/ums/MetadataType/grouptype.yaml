@@ -1,0 +1,61 @@
+apiVersion: 'metadata-service.resource.api.sap/v6alpha1'
+type: 'MetadataType'
+metadata:
+  name: 'grouptype'
+  path: '/sap/core/ucl/metadata/ord/v1'
+  labels: {}
+spec:
+  typeName: 'GroupType'
+  key:
+    - 'id'
+  visibility: 'public'
+  embedded: false
+  description: "A Group Type defines the semantics of [group assignments](#group).\nWhat the Group Type means and how it is to be used correctly SHOULD be described in the `description` (which may include markdown links).\n\nGroup Types can be defined centrally (ownership by authority namespace) or decentrally (defined by application / service itself).\n\nTo learn more about the concept, see [Group Concept Documentation](../concepts/grouping-and-bundling#Groups)."
+  metadataProperties:
+    - name: 'id'
+      type: 'guid'
+      mandatory: true
+      unique: true
+      description: 'UMS ID (globally unique), used for relations.'
+    - name: 'groupTypeId'
+      type: 'string'
+      description: 'GroupType ID, which MUST be a valid [Concept ID](../../spec-v1/#concept-id).'
+      mandatory: true
+      constraints:
+        pattern: '^([a-z0-9-]+(?:[.][a-z0-9-]+)*):([a-zA-Z0-9._\-\/]+)$'
+    - name: 'title'
+      type: 'string'
+      description: 'Human readable title of the group type.'
+      mandatory: true
+      constraints:
+        minLength: 1
+        maxLength: 255
+    - name: 'description'
+      type: 'string'
+      description: "Full description, notated in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nThe description SHOULD not be excessive in length and is not meant to provide full documentation.\nDetailed documentation SHOULD be attached as (typed) links."
+      constraints:
+        minLength: 1
+    - name: 'partOfGroupTypes_ID'
+      type: 'guid'
+      array: true
+      description: "A group type can logically be part of another group type, for example in hierarchical taxonomies or graph relationships.\nAssigning a group type to be part of another group type is a lightweight and flexible approach to express such relationships.\n\nThis relationship does not imply inheritance, but can be interpreted as such for specific group types and scenarios."
+  customTypeDefinitions: []
+  metadataRelations:
+    - propertyName: 'partOfGroupTypes'
+      relatedTypeName: 'GroupType'
+      relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
+      propertyBased: true
+      managedByProperty: 'partOfGroupTypes_ID'
+      description: "A group type can logically be part of another group type, for example in hierarchical taxonomies or graph relationships.\nAssigning a group type to be part of another group type is a lightweight and flexible approach to express such relationships.\n\nThis relationship does not imply inheritance, but can be interpreted as such for specific group types and scenarios."
+      reverseRelation:
+        relationPropertyName: 'inversePartOfGroupTypes'
+    - propertyName: 'inversePartOfGroupTypes'
+      relatedTypeName: 'GroupType'
+      relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
+      description: 'The Group Types that are part of the given Group Type, assigned from the inverse direction.'
+      mandatory: false
+    - propertyName: 'groups'
+      relatedTypeName: 'Group'
+      relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
+      description: 'Group instances of the group type.'
+      mandatory: false
