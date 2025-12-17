@@ -5228,7 +5228,7 @@
     "GroupType": {
       "title": "Group Type",
       "type": "object",
-      "description": "A Group Type defines the semantics of [group assignments](#group).\nWhat the Group Type means and how it is to be used correctly SHOULD be described in the `description` (which may include markdown links).\n\nGroup Types can be defined centrally (ownership by authority namespace) or decentrally (defined by application / service itself).\n\nTo learn more about the concept, see [Group Concept Documentation](../concepts/grouping-and-bundling#Groups).",
+      "description": "A Group Type defines the semantics of [group assignments](#group).\nWhat the Group Type means and how it is to be used correctly SHOULD be described in the `description` (which may include markdown links).\n\nGroup Types can be defined centrally (ownership by authority namespace) or decentrally (defined by application / service itself).\n\nTo learn more about the concept, see [Group Concept Documentation](../concepts/grouping-and-bundling#groups).",
       "x-introduced-in-version": "1.9.0",
       "properties": {
         "groupTypeId": {
@@ -5273,7 +5273,7 @@
     "Group": {
       "title": "Group",
       "type": "object",
-      "description": "Group (instance) that resources can be assigned to.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nTo learn more about the concept, see [Group Concept Documentation](../concepts/grouping-and-bundling#Groups).",
+      "description": "Group (instance) that resources can be assigned to.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nTo learn more about the concept, see [Group Concept Documentation](../concepts/grouping-and-bundling#groups).",
       "x-introduced-in-version": "1.9.0",
       "properties": {
         "groupId": {
