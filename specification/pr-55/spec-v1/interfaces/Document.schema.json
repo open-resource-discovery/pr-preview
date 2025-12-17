@@ -57,15 +57,15 @@
       "oneOf": [
         {
           "const": "system-version",
-          "description": "Describes the static [system-version](../index.md#def-system-version) perspective, usually known at deploy-time.\n\nIf chosen, `describedSystemVersion`.`version` MUST be provided, too.\n\nThis perspective describes how a system of a particular type and version generally look like.\nThe latest system-version MAY also be interpreted as the [system-type](../index.md#def-system-type) perspective."
+          "description": "Describes the static [system-version](../index.md#system-version) perspective, usually known at deploy-time.\n\nIf chosen, `describedSystemVersion`.`version` MUST be provided, too.\n\nThis perspective describes how a system of a particular type and version generally look like.\nThe latest system-version MAY also be interpreted as the [system-type](../index.md#system-type) perspective."
         },
         {
           "const": "system-instance",
-          "description": "Describes the complete dynamic [system-instance](../index.md#def-system-instance) (tenant) perspective as known at run-time.\nThis allows to also reflect tenant specific extensions, customizations and runtime configuration.\n\nIf provided, it will completely override the static system-version perspective when metadata about system instances is requested."
+          "description": "Describes the complete dynamic [system-instance](../index.md#system-instance) (tenant) perspective as known at run-time.\nThis allows to also reflect tenant specific extensions, customizations and runtime configuration.\n\nIf provided, it will completely override the static system-version perspective when metadata about system instances is requested."
         },
         {
           "const": "system-independent",
-          "description": "Describes content that is independent of [system-versions](../index.md#def-system-version) or [system-instances](../index.md#def-system-instance).\nThis content is always static and has independent visibility and lifecycle from the systems in a particular landscape.\nThe \"system-independent\" content MUST NOT be overridden via system-version or system-instance perspective metadata.\n\nExamples are: Vendors, products, globally aligned entity types, groups and group types (taxonomy), which are usually shared by multiple systems."
+          "description": "Describes content that is independent of [system-versions](../index.md#system-version) or [system-instances](../index.md#system-instance).\nThis content is always static and has independent visibility and lifecycle from the systems in a particular landscape.\nThe \"system-independent\" content MUST NOT be overridden via system-version or system-instance perspective metadata.\n\nExamples are: Vendors, products, globally aligned entity types, groups and group types (taxonomy), which are usually shared by multiple systems."
         }
       ],
       "default": "system instance",
@@ -75,17 +75,17 @@
     },
     "describedSystemInstance": {
       "$ref": "#/definitions/SystemInstance",
-      "description": "Information on the [system-instance](../index.md#def-system-instance) that this ORD document describes.\n\nWhether this information is required or recommended to add, depends on the requirements of the ORD aggregator."
+      "description": "Information on the [system-instance](../index.md#system-instance) that this ORD document describes.\n\nWhether this information is required or recommended to add, depends on the requirements of the ORD aggregator."
     },
     "describedSystemType": {
       "$ref": "#/definitions/SystemType",
       "x-introduced-in-version": "1.10.0",
-      "description": "Information on the [system type](../index.md#def-system-type) that this ORD document describes."
+      "description": "Information on the [system type](../index.md#system-type) that this ORD document describes."
     },
     "describedSystemVersion": {
       "$ref": "#/definitions/SystemVersion",
       "x-introduced-in-version": "1.10.0",
-      "description": "Information on the [system version](../index.md#def-system-version) that this ORD document describes."
+      "description": "Information on the [system version](../index.md#system-version) that this ORD document describes."
     },
     "policyLevel": {
       "type": "string",
@@ -1026,7 +1026,7 @@
         },
         "minSystemVersion": {
           "type": "string",
-          "description": "The resource has been introduced in the given [system version](../index.md#def-system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
+          "description": "The resource has been introduced in the given [system version](../index.md#system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
         },
         "deprecationDate": {
           "type": "string",
@@ -1070,7 +1070,7 @@
         },
         "entryPoints": {
           "type": "array",
-          "description": "List of [URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the target host.\n\nIf the API resource can be accessed through an entry point, it MUST be described here.\n\nThe list of entry points MUST not include duplicates.\nIf multiple entry points are provided they MUST be arbitrarily exchangeable without effects.\nThis means that the URLs are just an alias to each other and the `resourceDefinitions` apply to all entry points equally.\nIn case of multiple entry points it is RECOMMENDED to provide a `defaultEntryPoint` through `partOfConsumptionBundles`.\nThe entry point URLs SHOULD match with the target host(s) in the resource definition files (e.g. OpenAPI `servers`).\nIf there is no match, the information in ORD takes precedence.\n\n**Provider View:**\nIf the URL is relative to the system that describes the ORD information,\nit is RECOMMENDED to use relative references and (if known) to provide the `describedSystemInstance`.`baseUrl`.\nIf the URL is not relative to the described system instance [base URL](../index.md#def-base-url), a full URL MUST be provided.\nIf the entry points are rewritten by middleware - incl. the special case of client/consumer specific entry points - it is RECOMMENDED to provide relative URLs, so only the `describedSystemInstance`.`baseUrl` has to be rewritten.\nThe provider should not have to describe all middleware or consumer specific entry points. If they are enriched later by the aggregator, it MAY omit the entry points.\n\n**Consumer View**:\nWhen fetching the information from an ORD Aggregator, the consumer MAY rely on receiving full URLs.",
+          "description": "List of [URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the target host.\n\nIf the API resource can be accessed through an entry point, it MUST be described here.\n\nThe list of entry points MUST not include duplicates.\nIf multiple entry points are provided they MUST be arbitrarily exchangeable without effects.\nThis means that the URLs are just an alias to each other and the `resourceDefinitions` apply to all entry points equally.\nIn case of multiple entry points it is RECOMMENDED to provide a `defaultEntryPoint` through `partOfConsumptionBundles`.\nThe entry point URLs SHOULD match with the target host(s) in the resource definition files (e.g. OpenAPI `servers`).\nIf there is no match, the information in ORD takes precedence.\n\n**Provider View:**\nIf the URL is relative to the system that describes the ORD information,\nit is RECOMMENDED to use relative references and (if known) to provide the `describedSystemInstance`.`baseUrl`.\nIf the URL is not relative to the described system instance [base URL](../index.md#base-url), a full URL MUST be provided.\nIf the entry points are rewritten by middleware - incl. the special case of client/consumer specific entry points - it is RECOMMENDED to provide relative URLs, so only the `describedSystemInstance`.`baseUrl` has to be rewritten.\nThe provider should not have to describe all middleware or consumer specific entry points. If they are enriched later by the aggregator, it MAY omit the entry points.\n\n**Consumer View**:\nWhen fetching the information from an ORD Aggregator, the consumer MAY rely on receiving full URLs.",
           "items": {
             "type": "string",
             "format": "uri-reference"
@@ -1618,7 +1618,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [system instance aware](../index.md#def-system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#def-system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system instance aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -1838,7 +1838,7 @@
         },
         "minSystemVersion": {
           "type": "string",
-          "description": "The resource has been introduced in the given [system version](../index.md#def-system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
+          "description": "The resource has been introduced in the given [system version](../index.md#system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
         },
         "deprecationDate": {
           "type": "string",
@@ -2278,7 +2278,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [system instance aware](../index.md#def-system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#def-system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system instance aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -2644,7 +2644,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [system instance aware](../index.md#def-system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#def-system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system instance aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -2670,7 +2670,7 @@
       "type": "object",
       "title": "Data Product",
       "x-introduced-in-version": "1.8.0",
-      "description": "A [Data Product](../concepts/data-product) is a data set exposed for consumption outside the boundaries of the producing application via APIs and described by high quality metadata that can be accessed through the [ORD Aggregator](../../spec-v1/#def-ord-aggregator).\n\nPlease note that this concept is in beta, see [Data Product - Current Status](../concepts/data-product#current-status).",
+      "description": "A [Data Product](../concepts/data-product) is a data set exposed for consumption outside the boundaries of the producing application via APIs and described by high quality metadata that can be accessed through the [ORD Aggregator](../../spec-v1/#ord-aggregator).\n\nPlease note that this concept is in beta, see [Data Product - Current Status](../concepts/data-product#current-status).",
       "properties": {
         "ordId": {
           "type": "string",
@@ -2842,7 +2842,7 @@
         },
         "minSystemVersion": {
           "type": "string",
-          "description": "The resource has been introduced in the given [system version](../index.md#def-system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
+          "description": "The resource has been introduced in the given [system version](../index.md#system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
         },
         "lifecycleStatus": {
           "type": "string",
@@ -3333,7 +3333,7 @@
         "systemInstanceAware": {
           "x-feature-status": "beta",
           "type": "boolean",
-          "description": "All resources that are [system instance aware](../index.md#def-system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#def-system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system instance aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -3943,7 +3943,7 @@
         },
         "minSystemVersion": {
           "type": "string",
-          "description": "The resource has been introduced in the given [system version](../index.md#def-system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
+          "description": "The resource has been introduced in the given [system version](../index.md#system-version).\nThis implies that the resource is only available if the system instance is of at least that system version."
         },
         "relatedEntityTypes": {
           "type": "array",
@@ -3998,7 +3998,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [system instance aware](../index.md#def-system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#def-system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system instance aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system instance unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system instance aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system instance aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -4469,7 +4469,7 @@
         },
         "systemTypeRestriction": {
           "type": "array",
-          "description": "In case that the event subscriptions are limited to known [system types](../index.md#def-system-type), they can be listed here as [system namespaces](../index.md#system-namespace).\n\nIf given, only system types of the defined namespaces are supported as integration partners.\nIf not given, there is no restriction which system type provides the events.",
+          "description": "In case that the event subscriptions are limited to known [system types](../index.md#system-type), they can be listed here as [system namespaces](../index.md#system-namespace).\n\nIf given, only system types of the defined namespaces are supported as integration partners.\nIf not given, there is no restriction which system type provides the events.",
           "items": {
             "type": "string",
             "description": "Valid [system namespace](../index.md#system-namespace).\n",
@@ -4917,12 +4917,12 @@
     "SystemInstance": {
       "type": "object",
       "title": "System Instance",
-      "description": "A [system instance](../index.md#def-system-instance) is a concrete, running instance of a system type.\nIn a multi-tenant system, it corresponds to a tenant.\nIn a single-tenant system, it corresponds to the [system installation](../index.md#def-system-deployment) itself.",
+      "description": "A [system instance](../index.md#system-instance) is a concrete, running instance of a system type.\nIn a multi-tenant system, it corresponds to a tenant.\nIn a single-tenant system, it corresponds to the [system installation](../index.md#system-deployment) itself.",
       "properties": {
         "baseUrl": {
           "type": "string",
           "format": "uri-reference",
-          "description": "Optional [base URL](../index.md#def-base-url) of the **system instance**.\nBy providing the base URL, relative URLs in the document are resolved relative to it.\n\nThe `baseUrl` MUST not contain a leading slash.\n\nMUST be provided if the base URL is not known to the ORD aggregators.\nMUST be provided when the document needs to be fully self contained, e.g. when used for manual imports.",
+          "description": "Optional [base URL](../index.md#base-url) of the **system instance**.\nBy providing the base URL, relative URLs in the document are resolved relative to it.\n\nThe `baseUrl` MUST not contain a leading slash.\n\nMUST be provided if the base URL is not known to the ORD aggregators.\nMUST be provided when the document needs to be fully self contained, e.g. when used for manual imports.",
           "pattern": "^http[s]?:\\/\\/[^:\\/\\s]+\\.[^:\\/\\s\\.]+(:\\d+)?(\\/[a-zA-Z0-9-\\._~]+)*$",
           "examples": [
             "https://example-sap-system.com",
@@ -4980,7 +4980,7 @@
     "SystemType": {
       "type": "object",
       "title": "System Type",
-      "description": "A [system type](../index.md#def-system-type) is the abstract type of an application or service, from operational perspective.",
+      "description": "A [system type](../index.md#system-type) is the abstract type of an application or service, from operational perspective.",
       "properties": {
         "systemNamespace": {
           "type": "string",
@@ -5034,7 +5034,7 @@
     "SystemVersion": {
       "type": "object",
       "title": "System Version",
-      "description": "A [system version](../index.md#def-system-version) states the design-time version / release of a [system instance](../index.md#def-system-instance).\nIt provides versioning for operational purposes for the [system type](../index.md#def-system-type).",
+      "description": "A [system version](../index.md#system-version) states the design-time version / release of a [system instance](../index.md#system-instance).\nIt provides versioning for operational purposes for the [system type](../index.md#system-type).",
       "properties": {
         "version": {
           "type": "string",
