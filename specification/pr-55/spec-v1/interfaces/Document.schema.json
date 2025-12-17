@@ -1894,6 +1894,9 @@
             {
               "type": "string",
               "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(apiResource):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+              "x-association-target": [
+                "#/definitions/ApiResource/ordId"
+              ],
               "description": "Any valid [API Resource ORD ID](../index.md#ord-id).\n\nRECOMMENDED to use if the contract is published via ORD and has an ORD ID."
             },
             {
