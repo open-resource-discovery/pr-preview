@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">ORD Specification | Open Resource Discovery</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://open-resource-discovery.org/pr-preview/specification/pr-55/spec-v1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="ORD Specification | Open Resource Discovery"><meta data-rh="true" name="description" content="Notational Conventions"><meta data-rh="true" property="og:description" content="Notational Conventions"><link data-rh="true" rel="icon" href="/pr-preview/specification/pr-55/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://open-resource-discovery.org/pr-preview/specification/pr-55/spec-v1"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-55/spec-v1" hreflang="en"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-55/spec-v1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORD Specification","item":"https://open-resource-discovery.org/pr-preview/specification/pr-55/spec-v1/"}]}</script><script>window.bannerServerBaseUrl=""</script>
 <script src="/pr-preview/specification/pr-55/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-55/assets/css/styles.c6556125.css">
-<script src="/pr-preview/specification/pr-55/assets/js/runtime~main.03324c07.js" defer="defer"></script>
+<script src="/pr-preview/specification/pr-55/assets/js/runtime~main.229cc5bc.js" defer="defer"></script>
 <script src="/pr-preview/specification/pr-55/assets/js/main.6ef5b84e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -22,12 +22,14 @@ Depending on the role of the adopter, only some parts of the specification are r
 A <a href="#def-system-type" class="">system type</a> can implement multiple roles, e.g. an ORD Consumer MAY also be an ORD Provider.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-ord-provider">ORD Provider<a href="#def-ord-provider" class="hash-link" aria-label="Direct link to ORD Provider" title="Direct link to ORD Provider" translate="no">​</a></h3>
 <p>An <strong>ORD provider</strong> is a system instance (of an application or service) that exposes ORD information for self-description.
-The <strong>provider role</strong> applies to business applications/services that want to describe themselves (<strong>described system instance</strong><a id="def-described-system-instance"></a>).</p>
+The <strong>provider role</strong> applies to business applications/services that want to describe themselves (<a href="#def-described-system-instance" class="">described system instance</a>).</p>
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-described-system-instance">Described System Instance<a href="#def-described-system-instance" class="hash-link" aria-label="Direct link to Described System Instance" title="Direct link to Described System Instance" translate="no">​</a></h4>
+<p>A <strong>described system instance</strong> is a system instance that is being described by an ORD provider.</p>
 <blockquote>
 <p>ℹ In theory, it is also possible to describe other system instances &quot;on behalf&quot;. In this case, the ORD provider system instance not necessarily identical described system instances (see <a class="" href="/pr-preview/specification/pr-55/spec-v1/interfaces/Document#ord-document_describedsysteminstance"><code>describedSystemInstance</code></a> property). For example, an ORD Provider could pre-aggregate information from multiple system instances and then describe them in one place via multiple ORD documents. Whether this is supported, depends on the ORD aggregator.</p>
 </blockquote>
 <p>An ORD provider MUST implement the <a href="#ord-provider-api" class="">ORD Provider API</a>, which entails providing an <a href="#ord-configuration-endpoint" class="">ORD configuration endpoint</a> and <a href="#ord-document" class="">ORD document(s)</a>.
-An ORD provider MUST use one of the standardized <a href="#ord-transport-modes" class="">ORD transport modes</a> for the ORD documents. Depending on the overall architecture, it MUST integrate with specific <a href="#ord-aggregator" class="">ORD aggregators</a>.</p>
+An ORD provider MUST use one of the standardized <a href="#ord-transport-modes" class="">ORD transport modes</a> for the ORD documents. Depending on the overall architecture, it MUST integrate with specific <a href="#def-ord-aggregator" class="">ORD aggregators</a>.</p>
 <blockquote>
 <p>📖 See also: <a class="" href="/pr-preview/specification/pr-55/help/faq/adopt-ord-as-provider">How To Adopt ORD as a Provider</a>.</p>
 </blockquote>
@@ -36,9 +38,9 @@ An ORD provider MUST use one of the standardized <a href="#ord-transport-modes" 
 <p>An <strong>ORD aggregator</strong> is a system that collects, aggregates, and proxies the ORD information from multiple <a href="#def-ord-provider" class="">ORD providers</a>.
 It reflects the combined information on the ORD providers that it aggregates.
 The aggregator itself MAY represent a <a href="#def-static-perspective" class="">static perspective</a> or a <a href="#def-dynamic-perspective" class="">dynamic perspective</a>, or both.</p>
-<p>The ORD information MUST be made available to <a href="#ord-consumer" class="">ORD Consumers</a> through a higher-quality API, for example via an <a href="#ord-discovery-api" class="">ORD Discovery API</a> that allows for more advanced consumption patterns.</p>
+<p>The ORD information MUST be made available to <a href="#def-ord-consumer" class="">ORD Consumers</a> through a higher-quality API, for example via an <a href="#ord-discovery-api" class="">ORD Discovery API</a> that allows for more advanced consumption patterns.</p>
 <p>An ORD aggregator MUST ensure that information that has <code>visibility</code> of <code>private</code> or <code>internal</code> is not made available to consumers that don&#x27;t have the corresponding permissions to get such information (e.g. external consumers). If ORD consumers get private or internal information, they inherit the responsibility of protecting it.</p>
-<p>There are <a href="#aggregation-rules" class="">aggregation rules</a> and <a href="#validation-rules" class="">validation rules</a> that an ORD aggregator MUST implement and <a href="#ord-consumer" class="">ORD Consumers</a> MAY hold to.</p>
+<p>There are <a href="#aggregation-rules" class="">aggregation rules</a> and <a href="#validation-rules" class="">validation rules</a> that an ORD aggregator MUST implement and <a href="#def-ord-consumer" class="">ORD Consumers</a> MAY hold to.</p>
 <p>It MUST support all <a href="#ord-transport-modes" class="">ORD transport modes</a> that are used by the systems it aggregates.</p>
 <p>In case the ORD aggregator that supports the <a href="#def-dynamic-perspective" class="">dynamic perspective</a>:</p>
 <ul>
@@ -177,7 +179,7 @@ The actual value is then provided through an accompanying property, such as <cod
 <p>If such custom values or labels are relied upon by more than one application or team, they SHOULD be standardized through ORD.
 Please <a href="https://github.com/open-resource-discovery/specification/issues" target="_blank" rel="noopener noreferrer" class="">create an issue</a> to request this.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-provider-api">ORD Provider API<a href="#ord-provider-api" class="hash-link" aria-label="Direct link to ORD Provider API" title="Direct link to ORD Provider API" translate="no">​</a></h3>
-<p>This section details how an <a href="#ord-provider" class="">ORD Provider</a> exposes one or multiple <a href="#ord-document" class="">ORD documents</a> for the <a href="#pull-transport" class="">pull transport mode</a>.</p>
+<p>This section details how an <a href="#def-ord-provider" class="">ORD Provider</a> exposes one or multiple <a href="#ord-document" class="">ORD documents</a> for the <a href="#pull-transport" class="">pull transport mode</a>.</p>
 <p>The ORD Provider MUST implement a RESTful API that provides an <a href="#ord-configuration-endpoint" class="">ORD configuration endpoint</a> and at least one <a href="#ord-document-endpoint" class="">ORD document endpoint</a>.</p>
 <p>The API contract is defined as an <a href="https://open-resource-discovery.org/spec-v1/interfaces/DocumentAPI.oas3.yaml" target="_blank" rel="noopener noreferrer" class="">OpenAPI 3 Definition</a>.
 The definition contains the well-known ORD configuration endpoint and one exemplary document endpoint.</p>
@@ -220,7 +222,7 @@ This could be implemented either through explicit solutions like a central syste
 <p>If the ORD configuration endpoint is customized, the ORD configuration response MUST either use absolute URLs or provide the <code>baseUrl</code>.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-document-endpoint">ORD Document Endpoint<a href="#ord-document-endpoint" class="hash-link" aria-label="Direct link to ORD Document Endpoint" title="Direct link to ORD Document Endpoint" translate="no">​</a></h4>
 <p>The <dfn id="def-document-endpoint">ORD document endpoint</dfn> provides an <a href="#ord-document" class="">ORD document</a> via <a href="#pull-transport" class="">pull transport</a>.
-An <a href="#ord-provider" class="">ORD Provider</a> MUST implement one ORD document endpoint for each ORD document it exposes.</p>
+An <a href="#def-ord-provider" class="">ORD Provider</a> MUST implement one ORD document endpoint for each ORD document it exposes.</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="provider-implementation-1">Provider Implementation<a href="#provider-implementation-1" class="hash-link" aria-label="Direct link to Provider Implementation" title="Direct link to Provider Implementation" translate="no">​</a></h5>
 <p>The content of an <a href="#ord-document" class="">ORD document</a> MUST be made available via an HTTP GET request and be returned with the <code>application/json;charset=UTF-8</code> MIME type and the HTTP Status Code <code>200</code>.</p>
 <p>All of the <a href="#common-rest-characteristics" class="">common REST characteristics</a> MUST be met.</p>
@@ -247,7 +249,7 @@ The aggregator is allowed to send a select request on the config endpoint, but i
 <div class="language-http codeBlockContainer_Ckt0 theme-code-block" style="--prism-background-color:#282c34;--prism-color:#ffffff"><div class="codeBlockContent_QJqH"><pre tabindex="0" class="prism-code language-http codeBlock_bY9V thin-scrollbar" style="background-color:#282c34;color:#ffffff"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#ffffff"><span class="token plain">GET http://example.com/ord/document-1?select=sap.foo:dataProduct:astronomy:v1</span><br></span><span class="token-line" style="color:#ffffff"><span class="token plain">Content-Type: application/json</span><br></span></code></pre></div></div>
 <p>The response contains the requested resource and MAY include related ORD information that need to be updated together, e.g. when a data product is requested, it could also return its output ports API resources. Returning Tombstones is out of scope.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="consumer-perspective">Consumer Perspective<a href="#consumer-perspective" class="hash-link" aria-label="Direct link to Consumer Perspective" title="Direct link to Consumer Perspective" translate="no">​</a></h4>
-<p>An <a href="#ord-consumer" class="">ORD consumer</a> MUST first consult the <a href="#ord-configuration-endpoint" class="">ORD configuration endpoint</a>.
+<p>An <a href="#def-ord-consumer" class="">ORD consumer</a> MUST first consult the <a href="#ord-configuration-endpoint" class="">ORD configuration endpoint</a>.
 The response will indicate the supported version(s) of ORD, the URLs of the exposed <a href="#ord-document" class="">ORD documents</a>, and additional information that has implications for accessing the information. The ORD documents may contain links to metadata definitions and how to access them.</p>
 <p>The most important rules are:</p>
 <ul>
@@ -263,17 +265,17 @@ It is RECOMMENDED to also provide an <a href="https://developer.mozilla.org/en-U
 <p>If an ORD resource, or any of its referenced resource definitions, has changed, the <code>version</code> of the affected resource MUST be updated/incremented.
 The <code>ETag</code> header value on the document REST response will implicitly be updated as a consequence.</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-consumer-cache-handling">ORD Consumer Cache Handling<a href="#ord-consumer-cache-handling" class="hash-link" aria-label="Direct link to ORD Consumer Cache Handling" title="Direct link to ORD Consumer Cache Handling" translate="no">​</a></h5>
-<p>An arbitrary <a href="#ord-consumer" class="">ORD consumer</a> MAY implement the following cache handling rules to optimize frequent access.
-An <a href="#ord-aggregator" class="">ORD aggregator</a> MUST implement the cache handling rules in order to reduce unnecessary load on the ORD providers.</p>
+<p>An arbitrary <a href="#def-ord-consumer" class="">ORD consumer</a> MAY implement the following cache handling rules to optimize frequent access.
+An <a href="#def-ord-aggregator" class="">ORD aggregator</a> MUST implement the cache handling rules in order to reduce unnecessary load on the ORD providers.</p>
 <p>The <code>Cache-Control</code> and <code>ETag</code> headers (as described in <a href="#ord-provider-cache-handling" class="">ORD Provider Cache Handling</a>) MUST be respected and correctly implemented from the client&#x27;s side.</p>
 <p>Referenced definition files MUST only be fetched if they have not been retrieved yet or the <code>version</code> has been incremented since the last retrieval.</p>
 <p>ORD documents and ORD resources that have been marked as <a href="#def-system-instance-aware" class="">system instance aware</a> MUST each be fetched per tenant.
 If they are <a href="#def-system-instance-unaware" class="">system instance unaware</a> they SHOULD only be fetched once per system.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-aggregation">ORD Aggregation<a href="#ord-aggregation" class="hash-link" aria-label="Direct link to ORD Aggregation" title="Direct link to ORD Aggregation" translate="no">​</a></h3>
-<p>This section covers the aggregation rules and validations for <a href="#ord-aggregator" class="">ORD aggregators</a>.</p>
+<p>This section covers the aggregation rules and validations for <a href="#def-ord-aggregator" class="">ORD aggregators</a>.</p>
 <p><a href="#def-ord-consumer" class="">ORD Consumers</a> that retrieve information from an aggregator MAY rely on the outlined rules.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="aggregation-rules">Aggregation Rules<a href="#aggregation-rules" class="hash-link" aria-label="Direct link to Aggregation Rules" title="Direct link to Aggregation Rules" translate="no">​</a></h4>
-<p>One of the responsibilities of an <a href="#ord-aggregator" class="">ORD aggregator</a> is to combine the ORD information from multiple system instances.
+<p>One of the responsibilities of an <a href="#def-ord-aggregator" class="">ORD aggregator</a> is to combine the ORD information from multiple system instances.
 When information from many different system instances comes together, some situations may arise that need to be resolved through clearly defined rules.</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="merging-ord-information">Merging ORD information<a href="#merging-ord-information" class="hash-link" aria-label="Direct link to Merging ORD information" title="Direct link to Merging ORD information" translate="no">​</a></h5>
 <p>This section outlines the rules of how ORD information is merged and - if conflicts arise - how they are resolved.</p>
@@ -366,7 +368,7 @@ The ORD Aggregator MUST remove unpublished information that has been tombstoned 
 The files MUST be stored, hosted, and made available by the ORD aggregator system itself.
 The URLs to the hosted files MUST be rewritten accordingly in the <a href="#ord-discovery-api" class="">ORD Discovery API</a> responses.
 The aggregator MUST implement caching and error handling according to the <a href="#common-rest-characteristics" class="">common REST characteristics</a>.</p>
-<p>The hosting ensures that ORD consumers can retrieve the referenced files directly from the aggregator itself. They don&#x27;t need to fetch them from the <a href="#ord-provider" class="">ORD Providers</a> individually.
+<p>The hosting ensures that ORD consumers can retrieve the referenced files directly from the aggregator itself. They don&#x27;t need to fetch them from the <a href="#def-ord-provider" class="">ORD Providers</a> individually.
 This eliminates the need for authentication and authorization against many different systems.
 It also ensures that the files have the same high SLA availability that the ORD aggregator has.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="validation-rules">Validation Rules<a href="#validation-rules" class="hash-link" aria-label="Direct link to Validation Rules" title="Direct link to Validation Rules" translate="no">​</a></h4>
@@ -386,11 +388,11 @@ Please be aware that this could happen within an ORD Document, within the same O
 For migration transitions this rule MAY be violated temporarily.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-discovery-api">ORD Discovery API<a href="#ord-discovery-api" class="hash-link" aria-label="Direct link to ORD Discovery API" title="Direct link to ORD Discovery API" translate="no">​</a></h3>
-<p>The ORD Discovery API is a higher quality API, provided by an <a href="#ord-aggregator" class="">ORD aggregator</a> that is optimized for easy consumption of ORD information.
+<p>The ORD Discovery API is a higher quality API, provided by an <a href="#def-ord-aggregator" class="">ORD aggregator</a> that is optimized for easy consumption of ORD information.
 It MAY support advanced features like pagination, filtering, search, expansion, etc.
 Such features are deliberately missing at the <a href="#ord-provider-api" class="">ORD Provider API</a> to keep the provider interface simple.</p>
-<p>The ORD Discovery API MUST be implemented by the <a href="#ord-aggregator" class="">ORD aggregator</a> role.
-It is the RECOMMENDED interface for <a href="#ord-consumer" class="">ORD consumers</a> to retrieve ORD information.</p>
+<p>The ORD Discovery API MUST be implemented by the <a href="#def-ord-aggregator" class="">ORD aggregator</a> role.
+It is the RECOMMENDED interface for <a href="#def-ord-consumer" class="">ORD consumers</a> to retrieve ORD information.</p>
 <p>An ORD aggregator MAY expose more information than it received from the ORD providers, for example additional information it acquired through service discovery or other metadata sources.</p>
 <p>As long as there is no standardized ORD Discovery API contract, each ORD aggregator MAY implement their own API contract.
 Ideally this contract is based on the <a href="#ord-provider-api" class="">ORD Provider API</a> interfaces with only minor differences and additions.</p>
@@ -459,8 +461,8 @@ This falls into the responsibility of the registered namespace owner and assumes
 <li class="">It is RECOMMENDED to keep namespaces as short as reasonable, as they become part of IDs which have their own length limitations.
 Shorter namespaces leave more room for the overall IDs.</li>
 </ul>
-<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="vendor-namespace">Vendor Namespace<a href="#vendor-namespace" class="hash-link" aria-label="Direct link to Vendor Namespace" title="Direct link to Vendor Namespace" translate="no">​</a></h4>
-<p>A <a id="def-ord-vendor-namespace"></a><dfn id="def-ord-vendor-namespace">vendor namespace</dfn> is a stable and globally unique identifier namespace that corresponds to a vendor / company.
+<h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-ord-vendor-namespace">Vendor Namespace<a href="#def-ord-vendor-namespace" class="hash-link" aria-label="Direct link to Vendor Namespace" title="Direct link to Vendor Namespace" translate="no">​</a></h4>
+<p>A <strong>vendor namespace</strong> is a stable and globally unique identifier namespace that corresponds to a vendor / company.
 The vendor owns this top-level namespace and is responsible for governing this namespace and all the namespaces within it.</p>
 <p>A vendor namespace MUST be constructed according to the following rules:</p>
 <p><code>&lt;vendorNamespace&gt;</code> := <code>&lt;vendorId&gt;</code></p>
@@ -494,7 +496,7 @@ How this boundary is drawn depends on the technical decisions of the application
 <p>An system namespace MUST be constructed according to the following rules:</p>
 <p><code>&lt;systemNamespace&gt; := &lt;vendorNamespace&gt;.&lt;systemTypeId&gt;</code></p>
 <ul>
-<li class=""><code>&lt;systemNamespace&gt;</code> MUST be a valid <a href="#vendor-namespace" class="">vendor namespace</a></li>
+<li class=""><code>&lt;systemNamespace&gt;</code> MUST be a valid <a href="#def-ord-vendor-namespace" class="">vendor namespace</a></li>
 <li class=""><code>&lt;systemTypeId&gt;</code> is the identifier of the technical system type (of the application or service).<!-- -->
 <ul>
 <li class="">MUST only consist of lower case ASCII letters (<code>a-z</code>) and digits (<code>0-9</code>).</li>
@@ -509,7 +511,7 @@ Authority namespaces are relevant when contracts, interfaces or taxonomy are own
 <p>An authority namespace MUST be constructed according to the following rules:</p>
 <p><code>&lt;authority&gt;</code> := <code>&lt;vendorNamespace&gt;.&lt;authorityIdentifier&gt;</code></p>
 <ul>
-<li class=""><code>&lt;vendorNamespace&gt;</code> MUST be a valid <a href="#vendor-namespace" class="">vendor namespace</a></li>
+<li class=""><code>&lt;vendorNamespace&gt;</code> MUST be a valid <a href="#def-ord-vendor-namespace" class="">vendor namespace</a></li>
 <li class=""><code>&lt;authorityIdentifier&gt;</code> is the identifier of the organizational unit.<!-- -->
 <ul>
 <li class="">MUST only consist of lower case ASCII letters (<code>a-z</code>) and digits (<code>0-9</code>).</li>
@@ -543,7 +545,7 @@ Authority namespaces are relevant when contracts, interfaces or taxonomy are own
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="customer-namespace">Customer Namespace<a href="#customer-namespace" class="hash-link" aria-label="Direct link to Customer Namespace" title="Direct link to Customer Namespace" translate="no">​</a></h3>
 <p>Some systems allow their customers / end-users to create their own resources (in-app extensions).
 In most cases these resources are local to the tenant, so we don&#x27;t need to force the customer to register a namespace.</p>
-<p>To keep this situation simple, there is a reserved <a href="#vendor-namespace" class="">vendor namespace</a>: <code>customer</code>.
+<p>To keep this situation simple, there is a reserved <a href="#def-ord-vendor-namespace" class="">vendor namespace</a>: <code>customer</code>.
 Everything within this namespace is owned by the customer, the owner of the tenant.
 In addition, there is one reserved authority namespace, specifically for customer in-app extensions: <code>customer.ext</code>.</p>
 <p>The limitation of using <code>customer.*</code> namespaces is that they are unique only within a tenant and once the resources are published and shared outside the local scope, the <code>customer</code> namespace will be insufficient.</p>
@@ -657,7 +659,7 @@ In this case it needs to be taken care that static publishing does not create co
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-id-resolving">ORD ID Resolving<a href="#ord-id-resolving" class="hash-link" aria-label="Direct link to ORD ID Resolving" title="Direct link to ORD ID Resolving" translate="no">​</a></h4>
 <p>An ORD ID should contain all of the necessary information to be self contained and to be successfully resolved.</p>
 <p>Resolving an ORD ID can serve multiple purposes, for example, by having an ID we can construct the link to the API Catalog page describing this resource.
-Or we can construct the API request to an <a href="#ord-aggregator" class="">ORD aggregator</a> where the ORD resource can be accessed.</p>
+Or we can construct the API request to an <a href="#def-ord-aggregator" class="">ORD aggregator</a> where the ORD resource can be accessed.</p>
 <p>The rules about how an ORD ID is resolved to the customer&#x27;s own URLs/APIs SHOULD be provided by the ORD aggregator.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="correlation-id">Correlation ID<a href="#correlation-id" class="hash-link" aria-label="Direct link to Correlation ID" title="Direct link to Correlation ID" translate="no">​</a></h3>
 <p>A <dfn id="def-correlation-id">Correlation ID</dfn> is a stable and globally unique reference and is conceptually similar to an <a href="#ord-id" class="">ORD ID</a>.
@@ -819,15 +821,19 @@ It refers to the standard (as defined by the specification) as a whole.</p>
 <p>The <strong>static perspective</strong> describes how a system generically looks like (&quot;baseline&quot;), without any customizations or extensions but with all pre-delivered capabilities fully described. Such static perspectives can be described at <strong>design-time</strong> or <strong>deploy-time</strong>. They can be used to describe a <a href="#def-system-type" class="">system type</a> and <a href="#def-system-version" class="">system version</a>. This is useful, e.g. to describe potential resources users / customers <em>could</em> use before they actually provision systems.</p>
 <ul>
 <li class="">This can be explicitly set with <code>perspective</code>: <code>system-version</code></li>
-<li class="">This is also referred to as <strong>system instance unaware</strong><a id="def-system-instance-unaware"></a> information. They are identical across all <a href="#def-system-instance" class="">system instance</a> of the described <a href="#def-system-type" class="">system type</a> and <a href="#def-system-version" class="">system version</a>.</li>
+<li class="">This is also referred to as <a href="#def-system-instance-unaware" class="">system instance unaware</a> information. They are identical across all <a href="#def-system-instance" class="">system instance</a> of the described <a href="#def-system-type" class="">system type</a> and <a href="#def-system-version" class="">system version</a>.</li>
 </ul>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-system-instance-unaware">System Instance Unaware<a href="#def-system-instance-unaware" class="hash-link" aria-label="Direct link to System Instance Unaware" title="Direct link to System Instance Unaware" translate="no">​</a></h5>
+<p><strong>System instance unaware</strong> information is identical across all system instances of the described system type and system version.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-dynamic-perspective">Dynamic Perspective<a href="#def-dynamic-perspective" class="hash-link" aria-label="Direct link to Dynamic Perspective" title="Direct link to Dynamic Perspective" translate="no">​</a></h4>
 <p>The <strong>dynamic perspective</strong> describes a <a href="#def-system-instance" class="">system instance</a> at <strong>run-time</strong> and can therefore reflect how it is currently configured, customized or extended. This is also referred to as <a href="#def-system-instance-aware" class="">system instance aware</a>.</p>
 <ul>
 <li class="">This can be explicitly set with <code>perspective</code>: <code>system-instance</code></li>
-<li class="">This is also referred to as <strong>system instance aware</strong><a id="def-system-instance-aware"></a> information.
+<li class="">This is also referred to as <a href="#def-system-instance-aware" class="">system instance aware</a> information.
 System instance aware information are allowed to be different between system instances of the same <a href="#def-system-type" class="">system type</a>.</li>
 </ul>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-system-instance-aware">System Instance Aware<a href="#def-system-instance-aware" class="hash-link" aria-label="Direct link to System Instance Aware" title="Direct link to System Instance Aware" translate="no">​</a></h5>
+<p><strong>System instance aware</strong> information is allowed to be different between system instances of the same system type.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-ord-resource">ORD Resource<a href="#def-ord-resource" class="hash-link" aria-label="Direct link to ORD Resource" title="Direct link to ORD Resource" translate="no">​</a></h4>
 <p>ORD information can be categorized into resources and taxonomies:</p>
 <p><strong>ORD resource</strong> information describes application and service <a href="#def-resource" class="">resources</a>.
@@ -854,15 +860,15 @@ A <a href="#def-system-installation" class="">system installation</a> of a speci
 <p>Please note that a system type is similar, but not necessarily identical to a <a href="#def-product" class="">product</a>.
 System type is a technical concept, while product is a term for external communication and sales.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-system-installation">System Installation<a href="#def-system-installation" class="hash-link" aria-label="Direct link to System Installation" title="Direct link to System Installation" translate="no">​</a></h4>
-<a id="def-system-deployment"></a>
-<p>A <strong>system installation</strong> is a concrete running instance of a <a href="#def-system-type" class="">system type</a> of a specific <a href="#def-system-version" class="">system version</a>. If the system type supports tenant isolation, a system installation may offer multiple <a href="#def-system-instance" class="">system instances</a>. A system installation has at least one <a href="#def-base-url" class="">base URL</a>.</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-system-deployment">System Deployment<a href="#def-system-deployment" class="hash-link" aria-label="Direct link to System Deployment" title="Direct link to System Deployment" translate="no">​</a></h5>
+<p>A <strong>system installation</strong> (also called <strong>system deployment</strong>) is a concrete running instance of a <a href="#def-system-type" class="">system type</a> of a specific <a href="#def-system-version" class="">system version</a>. If the system type supports tenant isolation, a system installation may offer multiple <a href="#def-system-instance" class="">system instances</a>. A system installation has at least one <a href="#def-base-url" class="">base URL</a>.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-system-version">System Version<a href="#def-system-version" class="hash-link" aria-label="Direct link to System Version" title="Direct link to System Version" translate="no">​</a></h4>
 <p>A <strong>system version</strong> is a particular software version of a <a href="#def-system-installation" class="">system installation</a>, which is always of the same <a href="#def-system-type" class="">system type</a>. It states the design-time version or release of a system and provides versioning for operational purposes. All system instances of the same system version could have the same static metadata description.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-system-instance">System Instance<a href="#def-system-instance" class="hash-link" aria-label="Direct link to System Instance" title="Direct link to System Instance" translate="no">​</a></h4>
 <p>A <strong>system instance</strong> is a running, isolated instance of a <a href="#def-system-type" class="">system type</a>, running in a <a href="#def-system-installation" class="">system installation</a> of a particular <a href="#def-system-version" class="">system version</a>. It always refers to the <em>most specific</em> instance from a customer, account, and data isolation perspective.</p>
 <p>If the system type offers tenant isolation (multi-tenancy), system instance refers to a tenant. If there is no tenant isolation, there are two options: Either the isolation is achieved by having a dedicated <a href="#def-system-installation" class="">system installation</a> per tenant or system isolation does not matter. In those cases, system instance equals the system installation.</p>
 <p>The term is also known as System (simplified public SAP communication). For internal SAP communication it is referred to as tenant (<a href="https://support.sap.com/en/tools/software-logistics-tools/landscape-management-process/system-landscape-directory.html" target="_blank" rel="noopener noreferrer" class="">SAP CLD</a>) if multi-tenancy is supported or system (<a href="https://support.sap.com/en/tools/software-logistics-tools/landscape-management-process/system-landscape-directory.html" target="_blank" rel="noopener noreferrer" class="">SAP CLD</a>) if not.</p>
-<p>A system instance can act as an <a href="#ord-provider" class="">ORD Provider</a>.</p>
+<p>A system instance can act as an <a href="#def-ord-provider" class="">ORD Provider</a>.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-system-landscape">System Landscape<a href="#def-system-landscape" class="hash-link" aria-label="Direct link to System Landscape" title="Direct link to System Landscape" translate="no">​</a></h4>
 <p>A <strong>system landscape</strong> is a set of <a href="#def-system-instance" class="">system instances</a> that are explicitly combined together, for example via a shared zone of trust/connectivity, an account or a <a href="#namespaces" class="">namespace concept</a>.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="def-resource">Resource<a href="#def-resource" class="hash-link" aria-label="Direct link to Resource" title="Direct link to Resource" translate="no">​</a></h4>
