@@ -110,15 +110,6 @@ spec:
       customTypeName: 'ChangelogEntry'
       array: true
       description: 'Contains changelog entries that summarize changes with special regards to version and releaseStatus'
-    - name: 'policyLevel'
-      type: 'string'
-      description: "The [policy level](../../spec-extensions/policy-levels/) (aka. compliance level) that the described resources need to be compliant with.\nDepending on the chosen policy level, additional expectations and validations rules will be applied.\n\nThe policy level can be defined on ORD Document level, but also be overwritten on an individual package or resource level.\n"
-    - name: 'customPolicyLevel'
-      type: 'string'
-      description: "If the fixed `policyLevel` values need to be extended, an arbitrary `customPolicyLevel` can be provided.\nThe policy level is inherited from packages to resources they contain, but can be overwritten at resource level.\n\nMUST only be provided if `policyLevel` is set to `custom`.\nMUST be a valid [Specification ID](../index.md#specification-id)."
-      constraints:
-        maxLength: 255
-        pattern: '^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-]+):(v0|v[1-9][0-9]*)$'
     - name: 'policyLevels'
       type: 'string'
       array: true

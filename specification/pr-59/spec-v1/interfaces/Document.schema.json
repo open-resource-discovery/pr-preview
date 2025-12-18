@@ -3880,40 +3880,6 @@
             "$ref": "#/definitions/ChangelogEntry"
           }
         },
-        "policyLevel": {
-          "type": "string",
-          "description": "The [policy level](../../spec-extensions/policy-levels/) (aka. compliance level) that the described resources need to be compliant with.\nDepending on the chosen policy level, additional expectations and validations rules will be applied.\n\nThe policy level can be defined on ORD Document level, but also be overwritten on an individual package or resource level.\n",
-          "anyOf": [
-            {
-              "type": "string",
-              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-              "description": "Any valid [Specification ID](../index.md#specification-id)."
-            },
-            {
-              "const": "none",
-              "description": "No policy level chosen. Only the base rules on how to create correct ORD documents apply."
-            },
-            {
-              "const": "custom",
-              "description": "Custom policy level.\nFurther validation MAY be defined and implemented by the policy-level owner.\nThis level MAY be chosen by 3rd party or customer solutions.\nIf chosen, `customPolicyLevel` MUST be provided."
-            }
-          ],
-          "default": "none",
-          "x-introduced-in-version": "1.3.0",
-          "examples": [
-            "sap:core:v1"
-          ]
-        },
-        "customPolicyLevel": {
-          "type": "string",
-          "description": "If the fixed `policyLevel` values need to be extended, an arbitrary `customPolicyLevel` can be provided.\nThe policy level is inherited from packages to resources they contain, but can be overwritten at resource level.\n\nMUST only be provided if `policyLevel` is set to `custom`.\nMUST be a valid [Specification ID](../index.md#specification-id).",
-          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-          "maxLength": 255,
-          "x-introduced-in-version": "1.3.0",
-          "examples": [
-            "sap.xref:customPolicy:v1"
-          ]
-        },
         "policyLevels": {
           "type": "array",
           "description": "A list of [policy levels](../../spec-extensions/policy-levels/) that the described resources need to be compliant with.\nFor each chosen policy level, additional expectations and validations rules will be applied.\n\nPolicy levels can be defined on ORD Document level, but also be overwritten on an individual package or resource level.\n\nA policy level MUST be a valid [Specification ID](../index.md#specification-id).",
