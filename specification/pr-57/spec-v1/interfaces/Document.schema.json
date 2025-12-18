@@ -46,7 +46,7 @@
       "minLength": 1,
       "description": "Optional description of the ORD document itself.\nPlease note that this information is NOT further processed or considered by an ORD aggregator.\n\nNotated in [CommonMark](https://spec.commonmark.org/) (Markdown).",
       "examples": [
-        "This ORD document contains all APIs that are System-Instance-Aware and have APIs that\ncan change their behavior at runtime.\n"
+        "This ORD document contains all APIs that are system-instance-aware and have APIs that\ncan change their behavior at runtime.\n"
       ]
     },
     "perspective": {
@@ -1022,7 +1022,7 @@
         "disabled": {
           "type": "boolean",
           "default": false,
-          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the System-Instance-Aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
+          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the system-instance-aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
         },
         "minSystemVersion": {
           "type": "string",
@@ -1618,7 +1618,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [System-Instance-Aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [System-Instance-Unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **System-Instance-Aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a System-Instance-Aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system-instance-aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system-instance-unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system-instance-aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system-instance-aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -1834,7 +1834,7 @@
         "disabled": {
           "type": "boolean",
           "default": false,
-          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the System-Instance-Aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
+          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the system-instance-aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
         },
         "minSystemVersion": {
           "type": "string",
@@ -2278,7 +2278,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [System-Instance-Aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [System-Instance-Unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **System-Instance-Aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a System-Instance-Aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system-instance-aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system-instance-unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system-instance-aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system-instance-aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -2644,7 +2644,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [System-Instance-Aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [System-Instance-Unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **System-Instance-Aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a System-Instance-Aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system-instance-aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system-instance-unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system-instance-aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system-instance-aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -2838,7 +2838,7 @@
           "x-feature-status": "beta",
           "type": "boolean",
           "default": false,
-          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the System-Instance-Aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
+          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the system-instance-aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
         },
         "minSystemVersion": {
           "type": "string",
@@ -2846,7 +2846,7 @@
         },
         "lifecycleStatus": {
           "type": "string",
-          "description": "Lifecycle status of the Data Product as a whole.\n\nMUST be provided when describing the System-Instance-Aware (run-time) perspective.\nSHOULD NOT be provided in static (design-time) perspective. Static aggregators MUST ignore this property.",
+          "description": "Lifecycle status of the Data Product as a whole.\n\nMUST be provided when describing the system-instance-aware (run-time) perspective.\nSHOULD NOT be provided in static (design-time) perspective. Static aggregators MUST ignore this property.",
           "oneOf": [
             {
               "const": "inactive",
@@ -3333,7 +3333,7 @@
         "systemInstanceAware": {
           "x-feature-status": "beta",
           "type": "boolean",
-          "description": "All resources that are [System-Instance-Aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [System-Instance-Unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **System-Instance-Aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a System-Instance-Aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system-instance-aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system-instance-unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system-instance-aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system-instance-aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
@@ -3939,7 +3939,7 @@
         "disabled": {
           "type": "boolean",
           "default": false,
-          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the System-Instance-Aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
+          "description": "Indicates that this resource is currently not available for consumption at runtime, but could be configured to be so.\nThis can happen either because it has not been setup for use or disabled by an admin / user.\n\nIf the resource is not available in principle for a particular system instance, e.g. due to lack of entitlement, it MUST not be described in the system-instance-aware perspective.\n\nThis property can only reflect the knowledge of the described system instance itself.\nOutside factors for availability can't need to be considered (e.g. network connectivity, middlewares).\n\nA disabled resource MAY skip describing its resource definitions.\n"
         },
         "minSystemVersion": {
           "type": "string",
@@ -3998,7 +3998,7 @@
         },
         "systemInstanceAware": {
           "type": "boolean",
-          "description": "All resources that are [System-Instance-Aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [System-Instance-Unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **System-Instance-Aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a System-Instance-Aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
+          "description": "All resources that are [system-instance-aware](../index.md#system-instance-aware) should now be put together in one ORD document that has `perspective`: `system-instance`.\nAll resources that are [system-instance-unaware](../index.md#system-instance-unaware) should now be put together in one ORD document that has `perspective`: `system-version`.\n\nDefines whether this ORD resource is **system-instance-aware**.\nThis is the case (and relevant) when the referenced resource definitions are potentially different between **system instances**.\n\nIf this behavior applies, `systemInstanceAware` MUST be set to true.\nAn ORD aggregator that represents a system-instance-aware perspective MUST fetch the referenced resource definitions,\nnot just once per system type, but once per **system instance**.",
           "default": false,
           "examples": [
             true
