@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">Perspectives | Open Resource Discovery</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Perspectives | Open Resource Discovery"><meta data-rh="true" name="description" content="Metadata can be described from static or dynamic perspectives. This article explains the concept in more detail."><meta data-rh="true" property="og:description" content="Metadata can be described from static or dynamic perspectives. This article explains the concept in more detail."><link data-rh="true" rel="icon" href="/pr-preview/specification/pr-49/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives" hreflang="en"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORD Concepts","item":"https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/"},{"@type":"ListItem","position":2,"name":"Perspectives","item":"https://open-resource-discovery.org/pr-preview/specification/pr-49/spec-v1/concepts/perspectives"}]}</script><script>window.bannerServerBaseUrl=""</script>
-<script src="/pr-preview/specification/pr-49/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-49/assets/css/styles.686af362.css">
-<script src="/pr-preview/specification/pr-49/assets/js/runtime~main.250ced80.js" defer="defer"></script>
+<script src="/pr-preview/specification/pr-49/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-49/assets/css/styles.32c6f6f3.css">
+<script src="/pr-preview/specification/pr-49/assets/js/runtime~main.dc481817.js" defer="defer"></script>
 <script src="/pr-preview/specification/pr-49/assets/js/main.045cae29.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -30,7 +30,7 @@ But consider that also cloud software that is going through phased deployments t
 The <code>system-type</code> information apply no matter which system version or instance is used.</p>
 <p>The static perspective describes the shared metadata of all system instances (tenants) of the same system version or version independent.
 Either the metadata is always the same or it explicitly ignores the tenant-specific extensibility, configuration and any feature toggles - describing what&#x27;s generic and shared.
-The advantage of static metadata is that is always available, there is no need to first provision tenants to get it. It is also a good integration contract for everything that is meant to work potentially with <em>any</em> tenant.</p>
+The advantage of static metadata is that it is always available, there is no need to first provision tenants to get it. It is also a good integration contract for everything that is meant to work potentially with <em>any</em> tenant.</p>
 <p>At SAP, we have the <a href="https://api.sap.com/" target="_blank" rel="noopener noreferrer" class="">SAP Business Accelerator Hub</a> that documents the static perspective.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="system-version-guidelines">System Version Guidelines<a href="#system-version-guidelines" class="hash-link" aria-label="Direct link to System Version Guidelines" title="Direct link to System Version Guidelines" translate="no">​</a></h4>
 <p>Versions and Lifecycle is often difficult. Putting a version on a system is not always straightforward.
@@ -51,7 +51,7 @@ Here are some guidelines how to choose the correct version for the <code>system-
 </li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="dynamic-perspective">Dynamic Perspective<a href="#dynamic-perspective" class="hash-link" aria-label="Direct link to Dynamic Perspective" title="Direct link to Dynamic Perspective" translate="no">​</a></h3>
-<p>The dynamic perspective describes an application or service how it really looks like, <em>at run-time</em>.
+<p>The dynamic perspective describes an application or service as it really looks like, <em>at run-time</em>.
 This is more precise than the static perspective, because it can reflect configuration, customization and extensions of the system instance (tenant).</p>
 <p>In ORD, we describe this with <code>perspective</code>: <code>system-instance</code>.</p>
 <p>The <code>system-instance</code> perspective is the correct choice, when the resource description or its metadata is actually different between system instances of the same system version.
@@ -60,13 +60,13 @@ It is not a &quot;diff&quot; on the static perspective, for this we may consider
 <p>Some examples when metadata can be dynamic:</p>
 <ul>
 <li class="">APIs or Events can be activated and deactivated per system instance / tenant.</li>
-<li class="">APIs or Events interfaces can be extended, e.g. through field extensibility.</li>
+<li class="">API or Event interfaces can be extended, e.g. through field extensibility.</li>
 <li class="">New resources can be created by the user of the application at run-time (typical situation for frameworks, platforms and extensible applications).</li>
 <li class="">Endpoint URLs may be dynamic</li>
 </ul>
 <p>At SAP, the run-time discovery of dynamic metadata (system-installation) is handled by the <a class="" href="/pr-preview/specification/pr-49/introduction#unified-customer-landscape">Unified Customer Landscape</a> in BTP.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="system-independent-perspective">System Independent Perspective<a href="#system-independent-perspective" class="hash-link" aria-label="Direct link to System Independent Perspective" title="Direct link to System Independent Perspective" translate="no">​</a></h3>
-<p>Some ORD information like Taxonomies, Products and Vendors are not dependent on systems and can use the <code>system-independent</code> perspective.
+<p>Some ORD information like Taxonomies, Products and Vendors is not dependent on systems and can use the <code>system-independent</code> perspective.
 They can be considered global, static content that can be shared by multiple systems.</p>
 <p>Such content is of a &quot;singleton&quot; quality for the whole ORD aggregator and SHOULD not be republished by the individual systems.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="how-perspectives-relate-to-each-other">How Perspectives relate to each other<a href="#how-perspectives-relate-to-each-other" class="hash-link" aria-label="Direct link to How Perspectives relate to each other" title="Direct link to How Perspectives relate to each other" translate="no">​</a></h3>
@@ -120,7 +120,7 @@ If the system has dynamic metadata, it should describe both perspectives complet
 For the <code>system-type</code> perspective, the version property is NOT required as this perspective is version-independent.
 Ideally, ORD providers SHOULD define the <code>describedSystemVersion</code>.<code>version</code> property on both the <code>system-version</code> and <code>system-instance</code> perspectives.</p>
 <p>The <code>version</code> becomes effectively the &quot;join&quot; criteria for how the dynamic metadata is associated to the version-specific static metadata.</p>
-<p>Some addition considerations that need to be looked into:</p>
+<p>Some additional considerations that need to be looked into:</p>
 <ul>
 <li class="">An older version of an application / service can have a resource which has been decommissioned (via a <code>Tombstone</code>) in a newer version.<!-- -->
 <ul>
