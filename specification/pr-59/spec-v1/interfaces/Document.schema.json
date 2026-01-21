@@ -181,7 +181,7 @@
     "agents": {
       "type": "array",
       "description": "Array of all AI Agents that are described in this ORD document.",
-      "x-introduced-in-version": "1.13.0",
+      "x-introduced-in-version": "1.14.0",
       "x-feature-status": "beta",
       "items": {
         "$ref": "#/definitions/Agent"
