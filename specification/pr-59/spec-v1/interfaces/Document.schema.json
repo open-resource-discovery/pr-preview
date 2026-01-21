@@ -4208,12 +4208,13 @@
           "type": "array",
           "description": "Optional list of API Resources that expose the functionality of the agent. Typically using the A2A protocol, but other protocols are possible as well.\n\nMUST be a valid reference to an [API Resource](#api-resource) ORD ID.",
           "items": {
-            "type": "string",
-            "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(apiResource):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$"
+            "$ref": "#/definitions/ExposedApiResourcesTarget"
           },
           "examples": [
             [
-              "sap.foo:apiResource:DisputeResolutionAgent:v1"
+              {
+                "ordId": "sap.foo:apiResource:DisputeResolutionAgent:v1"
+              }
             ]
           ]
         },
@@ -6196,8 +6197,33 @@
         }
       ]
     },
+    "ExposedApiResourcesTarget": {
+      "title": "Exposed API Resource",
+      "x-introduced-in-version": "1.14.0",
+      "x-ums-type": "embedded",
+      "type": "object",
+      "description": "Reference to an API Resource that exposes the functionality of an agent.\n\nThis is a complex object to allow additional properties / selections to be attached in the future.",
+      "properties": {
+        "ordId": {
+          "type": "string",
+          "description": "The API Resource ORD ID that this reference points to.\n\nMUST be a valid reference to an [API Resource](#api-resource) ORD ID.",
+          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(apiResource):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+          "maxLength": 255,
+          "examples": [
+            "sap.foo:apiResource:DisputeResolutionAgent:v1"
+          ],
+          "x-association-target": [
+            "#/definitions/ApiResource/ordId"
+          ]
+        }
+      },
+      "required": [
+        "ordId"
+      ],
+      "additionalProperties": false
+    },
     "EntityTypeOrdIdTarget": {
-      "title": "Entity Type Target (Ord Id)",
+      "title": "Entity Type Target (ORD ID)",
       "x-introduced-in-version": "1.6.0",
       "x-ums-type": "custom",
       "type": "object",
