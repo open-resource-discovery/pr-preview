@@ -759,11 +759,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -1009,11 +1009,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -1839,11 +1839,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -2501,11 +2501,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -2854,11 +2854,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -3618,11 +3618,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -3749,11 +3749,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -3883,11 +3883,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -4559,11 +4559,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -4778,11 +4778,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -4911,11 +4911,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
@@ -6671,11 +6671,11 @@
           "oneOf": [
             {
               "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via `releaseStatus` (e.g., deprecation policies, versioning commitments, SLAs)\nand follow formal API lifecycle management. For SAP resources, see the [SAP API Deprecation Policy](https://help.sap.com/viewer/84b35b9c39b247e3ba2a31f02beee46d/Cloud/en-US/5cbfda5a9efe4e97a3e24ddaf7ec5c16.html).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and follow formal API lifecycle management. For more details see [Version and Lifecycle](../index.md#version-and-lifecycle) section.\nand follow formal API lifecycle management and deprecation policies.\n\nExample: A REST API that customers use to integrate with your SaaS product."
             },
             {
               "const": "internal",
-              "description": "Metadata can only be discovered and accessed by within your organization (same vendor).\nMUST NOT be made available to external parties or customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
             },
             {
               "const": "private",
