@@ -80,10 +80,6 @@
         "system-instance"
       ]
     },
-    "describedSystemInstance": {
-      "$ref": "#/definitions/SystemInstance",
-      "description": "Information on the [system-instance](../index.md#system-instance) that this ORD document describes.\n\nWhether this information is required or recommended to add, depends on the requirements of the ORD aggregator."
-    },
     "describedSystemType": {
       "$ref": "#/definitions/SystemType",
       "x-introduced-in-version": "1.10.0",
@@ -93,6 +89,10 @@
       "$ref": "#/definitions/SystemVersion",
       "x-introduced-in-version": "1.10.0",
       "description": "Information on the [system version](../index.md#system-version) that this ORD document describes."
+    },
+    "describedSystemInstance": {
+      "$ref": "#/definitions/SystemInstance",
+      "description": "Information on the [system-instance](../index.md#system-instance) that this ORD document describes.\n\nWhether this information is required or recommended to add, depends on the requirements of the ORD aggregator."
     },
     "policyLevel": {
       "type": "string",
@@ -3560,6 +3560,10 @@
               "x-introduced-in-version": "1.9.4"
             },
             {
+              "const": "ord:overlay:v1",
+              "description": "ORD Overlay file for patching ORD resources and/or referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-extensions/models/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
+            },
+            {
               "const": "custom",
               "description": "If chosen, `customType` MUST be provided."
             }
@@ -3675,6 +3679,10 @@
             {
               "const": "sap-csn-interop-effective-v1",
               "description": "[CSN Interop Effective](https://sap.github.io/csn-interop-specification/) is a standardized and interoperable flavor of [CSN](https://cap.cloud.sap/docs/cds/csn).\nCSN is a notation for compact representations of [CDS](https://cap.cloud.sap/docs/cds/) models.\n\nIn CDS based frameworks (like ABAP, CAP), APIs and Events are derived from a CDS Service definition and its constituent entities.\nIn this case the original CDS service definition MAY be attached, as it usually contains more metadata insight than other formats.\n\nWARNING: Only expose the CDS Service definition that effectively is governed by the API contract and stability. Do not expose internal models!\n\nThe `mediaType` MUST be be set to `application/json`."
+            },
+            {
+              "const": "ord:overlay:v1",
+              "description": "ORD Overlay file for patching ORD resources and/or referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-extensions/models/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
               "const": "custom",
