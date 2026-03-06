@@ -1,5 +1,5 @@
 {
-  "description": "⚠️ ALPHA: This specification is in alpha and subject to change.\n\nThe ORD Overlay is an optional ORD model extension.\n\nIt allows patching both ORD resources and referenced resource definition files (e.g. OpenAPI,\nAsyncAPI, OData CSDL, MCP Agent Cards) without modifying the original source files.\n\nOverlay files can be provided through the ORD configuration endpoint\n(https://open-resource-discovery.org/spec-v1/index#ord-configuration-endpoint),\nor attached as `resourceDefinitions` entries on API or Event resources with type `ord:overlay:v1`.\n\nPatches use concept-level selectors that are independent of the internal structure of the target format,\nmaking overlays resilient to format changes (e.g. OpenAPI 3.0 → 3.1, OData CSDL JSON → XML).\nA JSON Path selector is available as a generic fallback for any JSON/YAML-based target format.\n\nConceptual selector levels (from high to low):\n  - Resource level: ORD ID (resolved via the ORD registry)\n  - Operation level: operation (OpenAPI `operationId`, MCP tool `name`)\n  - Entity type level: entityType (OData EntityType)\n  - Property type level: propertyType (OData Property scoped by entity type)\n  - Generic fallback: jsonPath (any JSON/YAML document, structure-bound)\n\nSelector support by metadata format:\n  - `operation`: OpenAPI (`openapi-v2`, `openapi-v3`, `openapi-v3.1+`) and MCP (identified via a Specification ID in `definitionType`).\n  - `entityType` and `propertyType`: OData (`edmx` for v2/v4, `csdl-json` for v4).\n  - `jsonPath`: any JSON/YAML-based metadata file (including OpenAPI and MCP files).\n  - `ordId`: ORD resource metadata level (patching ORD resources themselves).\n\nTODO (OData operations):\n  - Best current guess: map selector `operation` to OData operation names:\n    - schema-level `Action`/`Function` names (prefer fully-qualified name)\n    - container-level `ActionImport`/`FunctionImport` names when exposed via entity container\n    Needs validation with OData experts.\n\nValidation assumption:\n  - overlays and overlay application assume the selected target document is already valid\n    for its native metadata format.\n  - the merge process does not fully validate all target metadata formats.\n  - the merged output should be validated again with the corresponding format-specific tooling.",
+  "description": "⚠️ ALPHA: This specification is in alpha and subject to change.\n\nThe ORD Overlay is an optional ORD model extension.\n\nIt allows patching both ORD resources and referenced resource definition files (e.g. OpenAPI,\nAsyncAPI, OData CSDL, MCP Agent Cards) without modifying the original source files.\n\nOverlay files can be provided through the ORD configuration endpoint\n(https://open-resource-discovery.org/spec-v1/index#ord-configuration-endpoint),\nor attached as `resourceDefinitions` entries on API or Event resources with type `ord:overlay:v1`.\n\nPatches use concept-level selectors that are independent of the internal structure of the target format,\nmaking overlays resilient to format changes (e.g. OpenAPI 3.0 → 3.1, OData CSDL JSON → XML).\nA JSON Path selector is available as a generic fallback for any JSON/YAML-based target format.\n\nConceptual selector levels (from high to low):\n  - Resource level: ORD ID (resolved via the ORD registry)\n  - Operation level: operation (OpenAPI `operationId`, MCP tool `name`)\n  - Entity type level: entityType (OData EntityType)\n  - Property type level: propertyType (OData Property scoped by entity type)\n  - Generic fallback: jsonPath (any JSON/YAML document, structure-bound)\n\nSelector support by metadata format:\n  - `operation`: OpenAPI (`openapi-v2`, `openapi-v3`, `openapi-v3.1+`) and MCP (identified via a Specification ID in `definitionType`).\n  - `entityType` and `propertyType`: OData (`edmx` for v2/v4, `csdl-json` for v4).\n  - `jsonPath`: any JSON/YAML-based metadata file (including OpenAPI and MCP files).\n  - `ordId`: ORD resource metadata level (patching ORD resources themselves).\n\nValidation assumption:\n  - overlays and overlay application assume the selected target document is already valid\n    for its native metadata format.\n  - the merge process does not fully validate all target metadata formats.\n  - the merged output should be validated again with the corresponding format-specific tooling.",
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://open-resource-discovery.org/spec-extension/models/OrdOverlay.schema.json#",
   "title": "ORD Overlay",
@@ -34,7 +34,7 @@
       "type": "string",
       "maxLength": 255,
       "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(overlay):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-      "description": "Optional ORD ID of this overlay document.\nMUST follow the ORD ID shape `*:overlay:*:v*`.\n\nTODO:\n- Do we need this?\n- If overlays are published via the configuration endpoint without direct ORD resource context, what should their stable ID be?\n- Should this be mandatory or optional?",
+      "description": "Optional ORD ID of this overlay document.\nMUST be provided if the ORD Overlay is published via ORD Configuration endpoint.",
       "examples": [
         "sap.foo:overlay:astronomy-api-openapi:v1"
       ]
@@ -47,23 +47,27 @@
         "This overlay adds descriptive metadata for AI use-cases\nwithout modifying the original resource definition.\n"
       ]
     },
+    "perspective": {
+      "$ref": "#/definitions/OverlayPerspective",
+      "description": "Overlay-specific [perspective](../../spec-v1/index.md#perspectives) that scopes where this overlay should be applied.\n\nUse this together with `describedSystemType`, `describedSystemVersion`, and `describedSystemInstance`\nto describe whether the overlay applies broadly to a system type, to one released system version,\nor only to a specific system instance."
+    },
     "describedSystemType": {
       "$ref": "#/definitions/OverlaySystemType",
-      "description": "Information on the [system type](../../spec-v1/index.md#system-type) this overlay describes."
+      "description": "Information on the [system type](../../spec-v1/index.md#system-type) this overlay describes.\nThis is the primary context object for `perspective: system-type`, and also the parent context\nfor more specific `system-version` and `system-instance` overlays."
     },
     "describedSystemVersion": {
       "$ref": "#/definitions/OverlaySystemVersion",
-      "description": "Information on the [system version](../../spec-v1/index.md#system-version) this overlay describes."
+      "description": "Information on the [system version](../../spec-v1/index.md#system-version) this overlay describes.\nUse this when the overlay should only patch metadata for one specific released system version."
     },
     "describedSystemInstance": {
       "$ref": "#/definitions/OverlaySystemInstance",
-      "description": "Information on the [system instance](../../spec-v1/index.md#system-instance) this overlay describes."
+      "description": "Information on the [system instance](../../spec-v1/index.md#system-instance) this overlay describes.\nUse this when the overlay should only patch metadata for one concrete tenant / runtime instance."
     },
     "visibility": {
-      "$ref": "#/definitions/Visibility"
+      "$ref": "#/definitions/OverlayVisibility"
     },
     "target": {
-      "description": "Optional target context for this overlay.\nThe target can reference an ORD resource or a referenced resource definition file.\n\n`ordId` selects the ORD resource metadata itself.\nIf patches are intended for a specific attached metadata definition file, `ordId` alone can be ambiguous\nwhen the resource exposes multiple definitions.\nIn that case, use `url` and/or `definitionType` to clarify the intended file.\n\nExample: an OData API resource may provide both `edmx` and `openapi-v3` definitions.\nUse `definitionType` and/or an explicit `url` to identify which one is patched.\n\nFor overlays that only patch ORD-level metadata via patch selectors (`selector.ordId`),\na `target.ordId` is often not needed. In that case, `target` may be omitted entirely,\nor provided as an empty object for informational purposes.\nMultiple resources can still be patched by defining multiple patches with different selector `ordId` values.\n\nIf the ORD document URL is known, it can be provided via `target.url` as additional context.\n\nTODO:\n- decide what should be optional vs mandatory on target resolution\n- review cleanup after discussion: this proposal adds fields for transparency; some may be dropped again",
+      "description": "Optional target context for this overlay.\nThe target can reference an ORD resource or a referenced resource definition file.\n\n`ordId` selects the ORD resource metadata itself.\nIf patches are intended for a specific attached metadata definition file, `ordId` alone can be ambiguous\nwhen the resource exposes multiple definitions.\nIn that case, use `url` and/or `definitionType` to clarify the intended file.\n\nExample: an OData API resource may provide both `edmx` and `openapi-v3` definitions.\nUse `definitionType` and/or an explicit `url` to identify which one is patched.\n\nFor overlays that only patch ORD-level metadata via patch selectors (`selector.ordId`),\na `target.ordId` is often not needed. In that case, `target` may be omitted entirely,\nor provided as an empty object for informational purposes.\nMultiple resources can still be patched by defining multiple patches with different selector `ordId` values.\n\nIf the ORD document URL is known, it can be provided via `target.url` as additional context.",
       "$ref": "#/definitions/OverlayTarget"
     },
     "patches": {
@@ -71,7 +75,7 @@
       "minItems": 1,
       "description": "Ordered sequence of patches to apply to the targeted resource(s).\nPatches are applied in the order listed.",
       "items": {
-        "$ref": "#/definitions/Patch"
+        "$ref": "#/definitions/OverlayPatch"
       }
     }
   },
@@ -80,9 +84,9 @@
     "patches"
   ],
   "definitions": {
-    "CorrelationId": {
+    "OverlayCorrelationId": {
       "type": "string",
-      "title": "Correlation ID",
+      "title": "Overlay Correlation ID",
       "x-ums-type": "ignore",
       "description": "Correlation ID identifying related records in external systems of record.\nMUST be a valid [Correlation ID](../../spec-v1/index.md#correlation-id).",
       "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+):([a-zA-Z0-9._\\-\\/]+)$",
@@ -154,9 +158,9 @@
         "sap.mdo:mdi-capability-definition:v1"
       ]
     },
-    "Visibility": {
+    "OverlayVisibility": {
       "type": "string",
-      "title": "Visibility",
+      "title": "Overlay Visibility",
       "x-ums-type": "ignore",
       "description": "Defines metadata access control - which categories of consumers are allowed to discover and access the resource and its metadata.\n\nThis controls who can see that the resource exists and retrieve its metadata level information.\nIt does NOT control runtime access to the resource itself - that is managed separately through authentication and authorization mechanisms.\n\nUse this to prevent exposing internal implementation details to inappropriate consumer audiences.",
       "oneOf": [
@@ -172,6 +176,31 @@
           "const": "private",
           "description": "The overlay should not be discoverable outside the application / service's own deployment scope (e.g., outside of the provider application or the same system namespace / system type)."
         }
+      ]
+    },
+    "OverlayPerspective": {
+      "type": "string",
+      "title": "Overlay Perspective",
+      "x-ums-type": "ignore",
+      "description": "Declares from which system landscape perspective this overlay is meant to be applied.\n\nUnlike an ORD Document perspective, an overlay perspective scopes where the patch content should be consumed:\n- `system-type`: patch the targeted resource metadata across the system type in general.\n- `system-version`: patch the targeted resource metadata only for one released system version.\n- `system-instance`: patch the targeted resource metadata only for one concrete system instance / tenant.\n\nUse this together with `describedSystemType`, `describedSystemVersion`, and `describedSystemInstance`\nto make the intended overlay scope explicit.",
+      "oneOf": [
+        {
+          "const": "system-type",
+          "description": "Applies the overlay at system-type level.\n\nUse this when the overlay should patch the same targeted resource across versions and instances\nof the same system type, typically for the same ORD resource major version.\n`describedSystemType` SHOULD be provided as the identifying context."
+        },
+        {
+          "const": "system-version",
+          "description": "Applies the overlay to one concrete system version.\n\nUse this when metadata differs between released versions and the patch should only affect\na specific version of the target resource.\n`describedSystemVersion` SHOULD be provided, and `describedSystemType` SHOULD also be provided as parent context."
+        },
+        {
+          "const": "system-instance",
+          "description": "Applies the overlay to one concrete system instance / tenant.\n\nUse this when the patch reflects tenant-specific configuration, extensions, or runtime differences\nin the target metadata.\n`describedSystemInstance` SHOULD be provided."
+        }
+      ],
+      "examples": [
+        "system-type",
+        "system-version",
+        "system-instance"
       ]
     },
     "OverlaySystemInstance": {
@@ -203,7 +232,7 @@
           "description": "Correlation IDs for linking this system instance to external systems of record.",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/CorrelationId"
+            "$ref": "#/definitions/OverlayCorrelationId"
           },
           "examples": [
             [
@@ -236,7 +265,7 @@
           "description": "Correlation IDs for linking this system type to external systems of record.",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/CorrelationId"
+            "$ref": "#/definitions/OverlayCorrelationId"
           },
           "examples": [
             [
@@ -276,7 +305,7 @@
           "description": "Correlation IDs for linking this system version to external systems of record.",
           "minItems": 1,
           "items": {
-            "$ref": "#/definitions/CorrelationId"
+            "$ref": "#/definitions/OverlayCorrelationId"
           },
           "examples": [
             [
@@ -291,7 +320,7 @@
       "type": "object",
       "title": "Overlay Target",
       "x-ums-type": "embedded",
-      "description": "Optional context about the target being patched.\nThe target can refer to an ORD resource or to a referenced resource definition file.\n\n`ordId` targets the ORD resource metadata itself.\nFor patching a specific resource definition file of that resource, use `url` and/or `definitionType`\nto disambiguate.\n\nExample: one OData API resource can have both `edmx` and `openapi-v3` definitions attached.\nIn such cases, provide `definitionType` and/or `url` to make the concrete patch target explicit.\n\nFor ORD-level-only overlays, this object can be omitted (or left empty) and\nselectors can directly identify resources via `selector.ordId`.\nMultiple identifiers, if provided, are treated as all pointing to the same resource.\n\nTODO:\n- decide what should be optional vs mandatory here\n- revisit cleanup after discussion; some transparency-focused fields may be removed",
+      "description": "Optional context about the target being patched.\nThe target can refer to an ORD resource or to a referenced resource definition file.\n\n`ordId` targets the ORD resource metadata itself.\nFor patching a specific resource definition file of that resource, use `url` and/or `definitionType`\nto disambiguate.\n\nExample: one OData API resource can have both `edmx` and `openapi-v3` definitions attached.\nIn such cases, provide `definitionType` and/or `url` to make the concrete patch target explicit.\n\nFor ORD-level-only overlays, this object can be omitted (or left empty) and\nselectors can directly identify resources via `selector.ordId`.\nMultiple identifiers, if provided, are treated as all pointing to the same resource.",
       "additionalProperties": false,
       "properties": {
         "ordId": {
@@ -332,9 +361,9 @@
         }
       }
     },
-    "Patch": {
+    "OverlayPatch": {
       "type": "object",
-      "title": "Patch",
+      "title": "Overlay Patch",
       "x-ums-type": "embedded",
       "description": "A single patch action to apply to the element identified by the selector.",
       "required": [
@@ -353,39 +382,39 @@
           ]
         },
         "selector": {
-          "$ref": "#/definitions/Selector"
+          "$ref": "#/definitions/OverlaySelector"
         },
         "data": {
-          "$ref": "#/definitions/PatchValue"
+          "$ref": "#/definitions/OverlayPatchValue"
         }
       }
     },
-    "Selector": {
+    "OverlaySelector": {
       "type": "object",
-      "title": "Selector",
+      "title": "Overlay Selector",
       "x-ums-type": "embedded",
       "description": "Identifies the element in the target to patch.\nExactly one selector type is used per patch. The selector object uses one explicit key:\n\n- `ordId`: resource level - targets an ORD resource (API, Event, Data Product, ...)\n- `operation`: operation level - targets an operation by its concept-level ID\n- `entityType`: entity type level - targets an entity/type by its concept-level ID\n- `propertyType`: property type level - targets a property/element within an entity type\n- `jsonPath`: generic fallback - targets any location in a JSON/YAML-based target document by path\n\nPrefer concept-level selectors (operation, entityType, propertyType) over jsonPath\nwhere possible, as they are resilient to structural changes in the target format.",
       "oneOf": [
         {
-          "$ref": "#/definitions/SelectorByJsonPath"
+          "$ref": "#/definitions/OverlaySelectorByJsonPath"
         },
         {
-          "$ref": "#/definitions/SelectorByOrdId"
+          "$ref": "#/definitions/OverlaySelectorByOrdId"
         },
         {
-          "$ref": "#/definitions/SelectorByOperation"
+          "$ref": "#/definitions/OverlaySelectorByOperation"
         },
         {
-          "$ref": "#/definitions/SelectorByEntityType"
+          "$ref": "#/definitions/OverlaySelectorByEntityType"
         },
         {
-          "$ref": "#/definitions/SelectorByPropertyType"
+          "$ref": "#/definitions/OverlaySelectorByPropertyType"
         }
       ]
     },
-    "SelectorByJsonPath": {
+    "OverlaySelectorByJsonPath": {
       "type": "object",
-      "title": "Selector By JsonPath",
+      "title": "Overlay Selector By JsonPath",
       "x-ums-type": "embedded",
       "additionalProperties": false,
       "required": [
@@ -403,9 +432,9 @@
         }
       }
     },
-    "SelectorByOrdId": {
+    "OverlaySelectorByOrdId": {
       "type": "object",
-      "title": "Selector By ORD ID",
+      "title": "Overlay Selector By ORD ID",
       "x-ums-type": "embedded",
       "additionalProperties": false,
       "required": [
@@ -431,9 +460,9 @@
         }
       }
     },
-    "SelectorByOperation": {
+    "OverlaySelectorByOperation": {
       "type": "object",
-      "title": "Selector By Operation",
+      "title": "Overlay Selector By Operation",
       "x-ums-type": "embedded",
       "additionalProperties": false,
       "required": [
@@ -443,7 +472,7 @@
         "operation": {
           "type": "string",
           "minLength": 1,
-          "description": "Concept-level operation identifier.\nSupported mappings by format:\n- OpenAPI (`openapi-v2`, `openapi-v3`, `openapi-v3.1+`): maps to the `operationId` field on\n  an HTTP operation inside `paths.{path}.{method}`.\n- MCP (any Specification ID other than `a2a-agent-card`): maps to `tools[].name`.\n  See: https://modelcontextprotocol.io/specification/2025-11-25/schema#tool-name\n- A2A Agent Card (`a2a-agent-card`): maps to `skills[].id`.\n  See: https://google.github.io/A2A/specification/#agentskill-object\n\nWhen `definitionType` is not provided, the implementation tries OpenAPI paths first,\nthen MCP tools, then A2A skills, returning the first match found.\n\nNot currently supported for OData selectors.\nBest current guess for future OData support:\n- map to `Action`/`Function` names (prefer fully-qualified name)\n- or `ActionImport`/`FunctionImport` names when exposed via the entity container\nTODO: validate this mapping with OData experts.",
+          "description": "Concept-level operation identifier.\nSupported mappings by format:\n- OpenAPI (`openapi-v2`, `openapi-v3`, `openapi-v3.1+`): maps to the `operationId` field on\n  an HTTP operation inside `paths.{path}.{method}`.\n- MCP (any Specification ID other than `a2a-agent-card`): maps to `tools[].name`.\n  See: https://modelcontextprotocol.io/specification/2025-11-25/schema#tool-name\n- A2A Agent Card (`a2a-agent-card`): maps to `skills[].id`.\n  See: https://google.github.io/A2A/specification/#agentskill-object\n\nWhen `definitionType` is not provided, the implementation tries OpenAPI paths first,\nthen MCP tools, then A2A skills, returning the first match found.\n\nNot currently supported for OData selectors.",
           "examples": [
             "getBusinessPartner",
             "dispute-case-resolution"
@@ -451,9 +480,9 @@
         }
       }
     },
-    "SelectorByEntityType": {
+    "OverlaySelectorByEntityType": {
       "type": "object",
-      "title": "Selector By Entity Type",
+      "title": "Overlay Selector By Entity Type",
       "x-ums-type": "embedded",
       "additionalProperties": false,
       "required": [
@@ -471,9 +500,9 @@
         }
       }
     },
-    "SelectorByPropertyType": {
+    "OverlaySelectorByPropertyType": {
       "type": "object",
-      "title": "Selector By Property Type",
+      "title": "Overlay Selector By Property Type",
       "x-ums-type": "embedded",
       "additionalProperties": false,
       "required": [
@@ -501,12 +530,16 @@
         }
       }
     },
-    "PatchValue": {
+    "OverlayPatchValue": {
       "type": [
         "object",
-        "string"
+        "array",
+        "string",
+        "number",
+        "boolean",
+        "null"
       ],
-      "title": "Patch Value",
+      "title": "Overlay Patch Value",
       "x-ums-type": "embedded",
       "description": "The value to be used together with patch actions:\n- with `action: append`:\n  - string value appended to selected text field\n- with `action: merge`:\n  - objects are deep-merged recursively\n  - scalar values overwrite existing values\n  - arrays are appended to existing arrays\n- with `action: update`, it replaces the selected element entirely\n- with `action: remove`:\n  - if omitted, the selected element is removed entirely\n  - if provided, fields set to `null` are deleted (recursively, including nested fields;\n    JSON Merge Patch-style delete semantics)\n\nTo fully replace an existing array, use two ordered patches:\n1. remove the array\n2. merge the new array value\n\nThis is a free-form value whose structure depends on the target being patched."
     }
