@@ -443,19 +443,10 @@
       "properties": {
         "ordId": {
           "type": "string",
-          "description": "ORD ID targeting an ORD resource (API, Event, Data Product, ...).\nMUST be a valid [ORD ID](../../spec-v1/index.md#ord-id).\nUse this selector when patching ORD resource metadata itself.",
+          "description": "ORD ID targeting an ORD resource (API, Event, Data Product, ...).\nMUST be a valid [ORD ID](../../spec-v1/index.md#ord-id).\nUse this selector when patching ORD resource metadata itself.\nThe ORD resource type is derived from the ORD ID itself.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
           "examples": [
             "sap.s4:apiResource:OP_API_BUSINESS_PARTNER_SRV:v1"
-          ]
-        },
-        "resourceType": {
-          "type": "string",
-          "description": "Optional hint when selecting by `ordId`.\nSpecifies the ORD resource type to speed up resolution.\nIf omitted, implementations SHOULD scan all resource types.",
-          "examples": [
-            "apiResource",
-            "eventResource",
-            "dataProduct"
           ]
         }
       }
@@ -506,14 +497,13 @@
       "x-ums-type": "embedded",
       "additionalProperties": false,
       "required": [
-        "propertyType",
-        "entityType"
+        "propertyType"
       ],
       "properties": {
         "propertyType": {
           "type": "string",
           "minLength": 1,
-          "description": "Concept-level property/element identifier.\nCurrently supported for OData metadata:\n- `edmx` (OData v2/v4 CSDL XML)\n- `csdl-json` (OData v4 CSDL JSON)",
+          "description": "Concept-level property/element identifier.\nCurrently supported for OData metadata:\n- `edmx` (OData v2/v4 CSDL XML)\n- `csdl-json` (OData v4 CSDL JSON)\n\nIf the property type is globally unique in the targeted metadata, this field alone is sufficient.\nIf it is ambiguous, `entityType` SHOULD be provided in addition to disambiguate the lookup.",
           "examples": [
             "BusinessPartnerFullName",
             "LegacySearchTerm1"
@@ -522,7 +512,7 @@
         "entityType": {
           "type": "string",
           "minLength": 1,
-          "description": "Entity type context of the selected property.\nThis scopes the property lookup to avoid ambiguity.\nFor OData metadata, this identifies the containing EntityType.",
+          "description": "Optional entity type context of the selected property.\nProvide this when `propertyType` alone is ambiguous.\nFor OData metadata, this identifies the containing EntityType.",
           "examples": [
             "BusinessPartner",
             "A_BusinessPartnerType"
