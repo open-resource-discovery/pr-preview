@@ -48,141 +48,10 @@
       ]
     },
     "perspective": {
-      "$ref": "#/definitions/OverlayPerspective",
-      "description": "Overlay-specific [perspective](../../spec-v1/index.md#perspectives) that scopes where this overlay should be applied.\n\nUse this together with `describedSystemType`, `describedSystemVersion`, and `describedSystemInstance`\nto describe whether the overlay applies broadly to a system type, to one released system version,\nor only to a specific system instance."
-    },
-    "describedSystemType": {
-      "$ref": "#/definitions/OverlaySystemType",
-      "description": "Information on the [system type](../../spec-v1/index.md#system-type) this overlay describes.\nThis is the primary context object for `perspective: system-type`, and also the parent context\nfor more specific `system-version` and `system-instance` overlays."
-    },
-    "describedSystemVersion": {
-      "$ref": "#/definitions/OverlaySystemVersion",
-      "description": "Information on the [system version](../../spec-v1/index.md#system-version) this overlay describes.\nUse this when the overlay should only patch metadata for one specific released system version."
-    },
-    "describedSystemInstance": {
-      "$ref": "#/definitions/OverlaySystemInstance",
-      "description": "Information on the [system instance](../../spec-v1/index.md#system-instance) this overlay describes.\nUse this when the overlay should only patch metadata for one concrete tenant / runtime instance."
-    },
-    "visibility": {
-      "$ref": "#/definitions/OverlayVisibility"
-    },
-    "target": {
-      "description": "Optional target context for this overlay.\nThe target can reference an ORD resource or a referenced resource definition file.\n\n`ordId` selects the ORD resource metadata itself.\nIf patches are intended for a specific attached metadata definition file, `ordId` alone can be ambiguous\nwhen the resource exposes multiple definitions.\nIn that case, use `url` and/or `definitionType` to clarify the intended file.\n\nExample: an OData API resource may provide both `edmx` and `openapi-v3` definitions.\nUse `definitionType` and/or an explicit `url` to identify which one is patched.\n\nFor overlays that only patch ORD-level metadata via patch selectors (`selector.ordId`),\na `target.ordId` is often not needed. In that case, `target` may be omitted entirely,\nor provided as an empty object for informational purposes.\nMultiple resources can still be patched by defining multiple patches with different selector `ordId` values.\n\nIf the ORD document URL is known, it can be provided via `target.url` as additional context.",
-      "$ref": "#/definitions/OverlayTarget"
-    },
-    "patches": {
-      "type": "array",
-      "minItems": 1,
-      "description": "Ordered sequence of patches to apply to the targeted resource(s).\nPatches are applied in the order listed.",
-      "items": {
-        "$ref": "#/definitions/OverlayPatch"
-      }
-    }
-  },
-  "required": [
-    "ordOverlay",
-    "patches"
-  ],
-  "definitions": {
-    "OverlayCorrelationId": {
-      "type": "string",
-      "title": "Overlay Correlation ID",
-      "x-ums-type": "ignore",
-      "description": "Correlation ID identifying related records in external systems of record.\nMUST be a valid [Correlation ID](../../spec-v1/index.md#correlation-id).",
-      "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+):([a-zA-Z0-9._\\-\\/]+)$",
-      "maxLength": 255
-    },
-    "OverlayDefinitionType": {
-      "type": "string",
-      "title": "Overlay Definition Type",
-      "x-ums-type": "ignore",
-      "description": "Type of the targeted metadata definition file.\nThis can be used to disambiguate how selectors are interpreted for the target.\n\nMUST be either:\n- any valid [Specification ID](../../spec-v1/index.md#specification-id), or\n- one of the pre-defined values reused from:\n  - API Resource Definition `type`\n  - Event Resource Definition `type`\n  - Capability Definition `type`\n\nThe literal value `custom` is deprecated for `definitionType` and MUST NOT be used.\nIn such cases, use a concrete [Specification ID](../../spec-v1/index.md#specification-id) instead.",
-      "anyOf": [
-        {
-          "type": "string",
-          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-          "description": "Any valid [Specification ID](../../spec-v1/index.md#specification-id)."
-        },
-        {
-          "const": "openapi-v2"
-        },
-        {
-          "const": "openapi-v3"
-        },
-        {
-          "const": "openapi-v3.1+"
-        },
-        {
-          "const": "raml-v1"
-        },
-        {
-          "const": "edmx"
-        },
-        {
-          "const": "csdl-json"
-        },
-        {
-          "const": "graphql-sdl"
-        },
-        {
-          "const": "wsdl-v1"
-        },
-        {
-          "const": "wsdl-v2"
-        },
-        {
-          "const": "a2a-agent-card"
-        },
-        {
-          "const": "sap-rfc-metadata-v1"
-        },
-        {
-          "const": "sap-sql-api-definition-v1"
-        },
-        {
-          "const": "sap-csn-interop-effective-v1"
-        },
-        {
-          "const": "asyncapi-v2"
-        },
-        {
-          "const": "sap.mdo:mdi-capability-definition:v1"
-        },
-        {
-          "const": "ord:overlay:v1"
-        }
-      ],
-      "examples": [
-        "openapi-v3",
-        "asyncapi-v2",
-        "sap.mdo:mdi-capability-definition:v1"
-      ]
-    },
-    "OverlayVisibility": {
-      "type": "string",
-      "title": "Overlay Visibility",
-      "x-ums-type": "ignore",
-      "description": "Defines metadata access control - which categories of consumers are allowed to discover and access the resource and its metadata.\n\nThis controls who can see that the resource exists and retrieve its metadata level information.\nIt does NOT control runtime access to the resource itself - that is managed separately through authentication and authorization mechanisms.\n\nUse this to prevent exposing internal implementation details to inappropriate consumer audiences.",
-      "oneOf": [
-        {
-          "const": "public",
-          "description": "The overlay can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties."
-        },
-        {
-          "const": "internal",
-          "description": "The overlay can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers."
-        },
-        {
-          "const": "private",
-          "description": "The overlay should not be discoverable outside the application / service's own deployment scope (e.g., outside of the provider application or the same system namespace / system type)."
-        }
-      ]
-    },
-    "OverlayPerspective": {
+      "description": "Overlay-specific [perspective](../../spec-v1/index.md#perspectives) that scopes where this overlay should be applied.\n\nUse this together with `describedSystemType`, `describedSystemVersion`, and `describedSystemInstance`\nto describe whether the overlay applies broadly to a system type, to one released system version,\nor only to a specific system instance.",
       "type": "string",
       "title": "Overlay Perspective",
       "x-ums-type": "ignore",
-      "description": "Declares from which system landscape perspective this overlay is meant to be applied.\n\nUnlike an ORD Document perspective, an overlay perspective scopes where the patch content should be consumed:\n- `system-type`: patch the targeted resource metadata across the system type in general.\n- `system-version`: patch the targeted resource metadata only for one released system version.\n- `system-instance`: patch the targeted resource metadata only for one concrete system instance / tenant.\n\nUse this together with `describedSystemType`, `describedSystemVersion`, and `describedSystemInstance`\nto make the intended overlay scope explicit.",
       "oneOf": [
         {
           "const": "system-type",
@@ -203,119 +72,56 @@
         "system-instance"
       ]
     },
-    "OverlaySystemInstance": {
-      "type": "object",
-      "title": "Overlay System Instance",
-      "x-ums-type": "ignore",
-      "description": "A [system instance](../../spec-v1/index.md#system-instance) is a concrete, running instance of a system type.",
-      "properties": {
-        "baseUrl": {
-          "type": "string",
-          "format": "uri-reference",
-          "description": "Optional [base URL](../../spec-v1/index.md#base-url) of the system instance.\nBy providing the base URL, relative URLs in the overlay are resolved relative to it.",
-          "pattern": "^http[s]?:\\/\\/[^:\\/\\s]+\\.[^:\\/\\s\\.]+(:\\d+)?(\\/[a-zA-Z0-9-\\._~]+)*$",
-          "examples": [
-            "https://example-sap-system.com",
-            "https://sub.foo.bar.com/api/v1"
-          ]
-        },
-        "localId": {
-          "type": "string",
-          "description": "Optional local ID for the system instance, as known by the described system.",
-          "maxLength": 255,
-          "examples": [
-            "LocalTenantId123"
-          ]
-        },
-        "correlationIds": {
-          "type": "array",
-          "description": "Correlation IDs for linking this system instance to external systems of record.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/OverlayCorrelationId"
-          },
-          "examples": [
-            [
-              "sap.cld:tenant:741234567"
-            ]
-          ]
-        }
-      },
-      "additionalProperties": false
+    "describedSystemType": {
+      "$ref": "#/definitions/OverlaySystemType",
+      "description": "Information on the [system type](../../spec-v1/index.md#system-type) this overlay describes.\nThis object is identical to the ORD Document [`describedSystemType`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemtype) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nThis is the primary context object for `perspective: system-type`, and also the parent context\nfor more specific `system-version` and `system-instance` overlays.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
     },
-    "OverlaySystemType": {
-      "type": "object",
-      "title": "Overlay System Type",
-      "x-ums-type": "ignore",
-      "description": "A [system type](../../spec-v1/index.md#system-type) is the abstract type of an application or service, from operational perspective.",
-      "properties": {
-        "systemNamespace": {
-          "type": "string",
-          "description": "The [system namespace](../../spec-v1/index.md#system-namespace) is a unique identifier for the system type.",
-          "pattern": "^[a-z0-9]+(?:[.][a-z0-9]+){1}$",
-          "maxLength": 32,
-          "examples": [
-            "sap.s4",
-            "sap.c4c",
-            "sap.cld"
-          ]
-        },
-        "correlationIds": {
-          "type": "array",
-          "description": "Correlation IDs for linking this system type to external systems of record.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/OverlayCorrelationId"
-          },
-          "examples": [
-            [
-              "sap.cld:systemRole:S4_PC"
-            ]
-          ]
-        }
-      },
-      "additionalProperties": false
+    "describedSystemVersion": {
+      "$ref": "#/definitions/OverlaySystemVersion",
+      "description": "Information on the [system version](../../spec-v1/index.md#system-version) this overlay describes.\nThis object is identical to the ORD Document [`describedSystemVersion`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemversion) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUse this when the overlay should only patch metadata for one specific released system version.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
     },
-    "OverlaySystemVersion": {
-      "type": "object",
-      "title": "Overlay System Version",
-      "x-ums-type": "ignore",
-      "description": "A [system version](../../spec-v1/index.md#system-version) describes a version/release of the system.",
-      "properties": {
-        "version": {
-          "type": "string",
-          "description": "The version of the system instance (run-time) or the version of the described system-version perspective.\n\nIt MUST follow the [Semantic Versioning 2.0.0](https://semver.org/) standard.",
-          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
-          "examples": [
-            "1.2.3",
-            "2024.8.0"
-          ]
-        },
-        "title": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255,
-          "description": "Human-readable title of the system version.",
-          "examples": [
-            "SAP S/4HANA Cloud 2408"
-          ]
-        },
-        "correlationIds": {
-          "type": "array",
-          "description": "Correlation IDs for linking this system version to external systems of record.",
-          "minItems": 1,
-          "items": {
-            "$ref": "#/definitions/OverlayCorrelationId"
-          },
-          "examples": [
-            [
-              "sap.cld:release:2408"
-            ]
-          ]
-        }
-      },
-      "additionalProperties": false
+    "describedSystemInstance": {
+      "$ref": "#/definitions/OverlaySystemInstance",
+      "description": "Information on the [system instance](../../spec-v1/index.md#system-instance) this overlay describes.\nThis object is identical to the ORD Document [`describedSystemInstance`](../../spec-v1/interfaces/Document.md#ord-document_describedsysteminstance) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUse this when the overlay should only patch metadata for one concrete tenant / runtime instance.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
     },
+    "visibility": {
+      "type": "string",
+      "title": "Overlay Visibility",
+      "x-ums-type": "ignore",
+      "description": "Defines metadata access control - which categories of consumers are allowed to discover and access the resource and its metadata.\n\nThis controls who can see that the resource exists and retrieve its metadata level information.\nIt does NOT control runtime access to the resource itself - that is managed separately through authentication and authorization mechanisms.\n\nUse this to prevent exposing internal implementation details to inappropriate consumer audiences.",
+      "oneOf": [
+        {
+          "const": "public",
+          "description": "The overlay can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties."
+        },
+        {
+          "const": "internal",
+          "description": "The overlay can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers."
+        },
+        {
+          "const": "private",
+          "description": "The overlay should not be discoverable outside the application / service's own deployment scope (e.g., outside of the provider application or the same system namespace / system type)."
+        }
+      ]
+    },
+    "target": {
+      "description": "Optional target context for this overlay.\nThe target can reference an ORD resource or a referenced resource definition file.\n\n`ordId` selects the ORD resource metadata itself.\nIf patches are intended for a specific attached metadata definition file, `ordId` alone can be ambiguous\nwhen the resource exposes multiple definitions.\nIn that case, use `url` and/or `definitionType` to clarify the intended file.\n\nExample: an OData API resource may provide both `edmx` and `openapi-v3` definitions.\nUse `definitionType` and/or an explicit `url` to identify which one is patched.\n\nFor overlays that only patch ORD-level metadata via patch selectors (`selector.ordId`),\na `target.ordId` is often not needed. In that case, `target` may be omitted entirely,\nor provided as an empty object for informational purposes.\nMultiple resources can still be patched by defining multiple patches with different selector `ordId` values.\n\nIf the ORD document URL is known, it can be provided via `target.url` as additional context.",
+      "$ref": "#/definitions/OverlayTarget"
+    },
+    "patches": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered sequence of patches to apply to the targeted resource(s).\nPatches are applied in the order listed.",
+      "items": {
+        "$ref": "#/definitions/OverlayPatch"
+      }
+    }
+  },
+  "required": [
+    "ordOverlay",
+    "patches"
+  ],
+  "definitions": {
     "OverlayTarget": {
       "type": "object",
       "title": "Overlay Target",
@@ -357,7 +163,70 @@
           ]
         },
         "definitionType": {
-          "$ref": "#/definitions/OverlayDefinitionType"
+          "description": "Optional, but RECOMMENDED type of the target definition being patched.\nIf provided, this SHOULD match the `type` of the referenced metadata definition\n(as used in API/Event/Capability resource definitions).\nThis is especially useful when `ordId` resolves to a resource with multiple attached definitions.\n\nThis can be used to disambiguate how selectors are interpreted for the target.\n\nMUST be either:\n- any valid [Specification ID](../../spec-v1/index.md#specification-id), or\n- one of the pre-defined values reused from:\n  - API Resource Definition `type`\n  - Event Resource Definition `type`\n  - Capability Definition `type`\n\nThe literal value `custom` is deprecated for `definitionType` and MUST NOT be used.\nIn such cases, use a concrete [Specification ID](../../spec-v1/index.md#specification-id) instead.",
+          "type": "string",
+          "title": "Overlay Definition Type",
+          "x-ums-type": "ignore",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+              "description": "Any valid [Specification ID](../../spec-v1/index.md#specification-id)."
+            },
+            {
+              "const": "openapi-v2"
+            },
+            {
+              "const": "openapi-v3"
+            },
+            {
+              "const": "openapi-v3.1+"
+            },
+            {
+              "const": "raml-v1"
+            },
+            {
+              "const": "edmx"
+            },
+            {
+              "const": "csdl-json"
+            },
+            {
+              "const": "graphql-sdl"
+            },
+            {
+              "const": "wsdl-v1"
+            },
+            {
+              "const": "wsdl-v2"
+            },
+            {
+              "const": "a2a-agent-card"
+            },
+            {
+              "const": "sap-rfc-metadata-v1"
+            },
+            {
+              "const": "sap-sql-api-definition-v1"
+            },
+            {
+              "const": "sap-csn-interop-effective-v1"
+            },
+            {
+              "const": "asyncapi-v2"
+            },
+            {
+              "const": "sap.mdo:mdi-capability-definition:v1"
+            },
+            {
+              "const": "ord:overlay:v1"
+            }
+          ],
+          "examples": [
+            "openapi-v3",
+            "asyncapi-v2",
+            "sap.mdo:mdi-capability-definition:v1"
+          ]
         }
       }
     },
@@ -532,6 +401,134 @@
       "title": "Overlay Patch Value",
       "x-ums-type": "embedded",
       "description": "The value to be used together with patch actions:\n- with `action: append`:\n  - string value appended to selected text field\n- with `action: merge`:\n  - objects are deep-merged recursively\n  - scalar values overwrite existing values\n  - arrays are appended to existing arrays\n- with `action: update`, it replaces the selected element entirely\n- with `action: remove`:\n  - if omitted, the selected element is removed entirely\n  - if provided, fields set to `null` are deleted (recursively, including nested fields;\n    JSON Merge Patch-style delete semantics)\n\nTo fully replace an existing array, use two ordered patches:\n1. remove the array\n2. merge the new array value\n\nThis is a free-form value whose structure depends on the target being patched."
+    },
+    "OverlaySystemInstance": {
+      "type": "object",
+      "title": "Overlay System Instance",
+      "x-ums-type": "ignore",
+      "description": "A [system instance](../../spec-v1/index.md#system-instance) is a concrete, running instance of a system type.\nThis object is identical to the ORD Document [`describedSystemInstance`](../../spec-v1/interfaces/Document.md#ord-document_describedsysteminstance) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
+      "properties": {
+        "baseUrl": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "Optional [base URL](../../spec-v1/index.md#base-url) of the system instance.\nBy providing the base URL, relative URLs in the overlay are resolved relative to it.",
+          "pattern": "^http[s]?:\\/\\/[^:\\/\\s]+\\.[^:\\/\\s\\.]+(:\\d+)?(\\/[a-zA-Z0-9-\\._~]+)*$",
+          "examples": [
+            "https://example-sap-system.com",
+            "https://sub.foo.bar.com/api/v1"
+          ]
+        },
+        "localId": {
+          "type": "string",
+          "description": "Optional local ID for the system instance (usually tenant ID), as known by the described system.",
+          "maxLength": 255,
+          "examples": [
+            "LocalTenantId123"
+          ]
+        },
+        "correlationIds": {
+          "type": "array",
+          "description": "Correlation IDs for linking this system instance to external systems of record.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "title": "Overlay Correlation ID",
+            "x-ums-type": "ignore",
+            "description": "Correlation ID identifying related records in external systems of record.\nMUST be a valid [Correlation ID](../../spec-v1/index.md#correlation-id).",
+            "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+):([a-zA-Z0-9._\\-\\/]+)$",
+            "maxLength": 255
+          },
+          "examples": [
+            [
+              "sap.cld:tenant:741234567"
+            ]
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OverlaySystemType": {
+      "type": "object",
+      "title": "Overlay System Type",
+      "x-ums-type": "ignore",
+      "description": "A [system type](../../spec-v1/index.md#system-type) is the abstract type of an application or service, from operational perspective.\nThis object is identical to the ORD Document [`describedSystemType`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemtype) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
+      "properties": {
+        "systemNamespace": {
+          "type": "string",
+          "description": "The [system namespace](../../spec-v1/index.md#system-namespace) is a unique identifier for the system type.",
+          "pattern": "^[a-z0-9]+(?:[.][a-z0-9]+){1}$",
+          "maxLength": 32,
+          "examples": [
+            "sap.s4",
+            "sap.c4c",
+            "sap.cld"
+          ]
+        },
+        "correlationIds": {
+          "type": "array",
+          "description": "Correlation IDs for linking this system type to external systems of record.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "title": "Overlay Correlation ID",
+            "x-ums-type": "ignore",
+            "description": "Correlation ID identifying related records in external systems of record.\nMUST be a valid [Correlation ID](../../spec-v1/index.md#correlation-id).",
+            "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+):([a-zA-Z0-9._\\-\\/]+)$",
+            "maxLength": 255
+          },
+          "examples": [
+            [
+              "sap.cld:systemRole:S4_PC"
+            ]
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "OverlaySystemVersion": {
+      "type": "object",
+      "title": "Overlay System Version",
+      "x-ums-type": "ignore",
+      "description": "A [system version](../../spec-v1/index.md#system-version) describes a version/release of the system.\nThis object is identical to the ORD Document [`describedSystemVersion`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemversion) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
+      "properties": {
+        "version": {
+          "type": "string",
+          "description": "The version of the system instance (run-time) or the version of the described system-version perspective.\n\nIt MUST follow the [Semantic Versioning 2.0.0](https://semver.org/) standard.",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+          "examples": [
+            "1.2.3",
+            "2024.8.0"
+          ]
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 255,
+          "description": "Human-readable title of the system version.",
+          "examples": [
+            "SAP S/4HANA Cloud 2408"
+          ]
+        },
+        "correlationIds": {
+          "type": "array",
+          "description": "Correlation IDs for linking this system version to external systems of record.",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "title": "Overlay Correlation ID",
+            "x-ums-type": "ignore",
+            "description": "Correlation ID identifying related records in external systems of record.\nMUST be a valid [Correlation ID](../../spec-v1/index.md#correlation-id).",
+            "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+):([a-zA-Z0-9._\\-\\/]+)$",
+            "maxLength": 255
+          },
+          "examples": [
+            [
+              "sap.cld:release:2408"
+            ]
+          ]
+        }
+      },
+      "additionalProperties": false
     }
   }
 }
