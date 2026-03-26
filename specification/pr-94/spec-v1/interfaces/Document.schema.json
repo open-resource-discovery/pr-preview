@@ -5370,7 +5370,7 @@
     "File": {
       "type": "object",
       "title": "File",
-      "description": "File that can be attached to packages or Open Resource Discovery resources.\n",
+      "description": "File that can be attached on ORD package level.\n",
       "x-ums-type": "custom",
       "properties": {
         "title": {
