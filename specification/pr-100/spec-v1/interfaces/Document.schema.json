@@ -1046,7 +1046,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -1890,7 +1890,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -2564,7 +2564,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -2927,7 +2927,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -3931,7 +3931,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -4608,7 +4608,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -4995,7 +4995,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -5420,7 +5420,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -6977,7 +6977,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
