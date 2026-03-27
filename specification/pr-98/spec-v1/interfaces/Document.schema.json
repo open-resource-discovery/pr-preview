@@ -5368,7 +5368,7 @@
         "description": {
           "type": "string",
           "minLength": 1,
-          "description": "Full description, notated in [CommonMark](https://spec.commonmark.org/) (Markdown)",
+          "description": "Full description, notated in [CommonMark](https://spec.commonmark.org/) (Markdown).",
           "examples": [
             "This gives you an overview on where to find which kind of APIs in SAP S/4HANA.\n"
           ]
