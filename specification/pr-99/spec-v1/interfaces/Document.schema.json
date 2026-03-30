@@ -385,6 +385,14 @@
             "$ref": "#/definitions/Link"
           }
         },
+        "files": {
+          "type": "array",
+          "x-introduced-in-version": "1.14.2",
+          "description": "Generic list of files with arbitrary meaning and content. Meant to be used for linking PDFs, Word or similar content. This option MUST NOT be used for linking the actual metadata files like OpenAPI, AsyncAPI, CSN, etc.",
+          "items": {
+            "$ref": "#/definitions/File"
+          }
+        },
         "licenseType": {
           "type": "string",
           "minLength": 1,
@@ -1034,8 +1042,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -1874,8 +1887,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -2544,8 +2562,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -2903,8 +2926,13 @@
           "description": "The `releaseStatus` specifies the stability towards incompatible changes in the future.\nIn the context of data products, it it covers only properties on the data product level.\nAPIs that are part of the input and output ports have their own independent `releaseStatus` and `version`.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -3903,8 +3931,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -4576,8 +4609,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -4624,6 +4662,54 @@
           "examples": [
             [
               "sap.odm:entityType:WorkforcePerson:v1"
+            ]
+          ]
+        },
+        "relatedApiResources": {
+          "type": "array",
+          "x-introduced-in-version": "1.14.2",
+          "description": "Optional list of related API Resources.\n\nUse this to indicate which APIs implement, expose, or are otherwise related to this capability.",
+          "items": {
+            "$ref": "#/definitions/RelatedApiResource"
+          },
+          "examples": [
+            [
+              {
+                "ordId": "sap.s4:apiResource:API_BUSINESS_PARTNER:v1",
+                "relationType": "foo.bar:relationName"
+              }
+            ]
+          ]
+        },
+        "relatedEventResources": {
+          "type": "array",
+          "x-introduced-in-version": "1.14.2",
+          "description": "Optional list of related Event Resources.\n\nUse this to indicate which events are emitted, consumed, or otherwise related to this capability.",
+          "items": {
+            "$ref": "#/definitions/RelatedEventResource"
+          },
+          "examples": [
+            [
+              {
+                "ordId": "sap.s4:eventResource:BusinessPartnerEvents:v1",
+                "relationType": "foo.bar:relationName"
+              }
+            ]
+          ]
+        },
+        "relatedCapabilities": {
+          "type": "array",
+          "x-introduced-in-version": "1.14.2",
+          "description": "Optional list of related Capabilities.\n\nUse this to indicate dependencies, extensions, or other relationships between capabilities.",
+          "items": {
+            "$ref": "#/definitions/RelatedCapability"
+          },
+          "examples": [
+            [
+              {
+                "ordId": "sap.foo:capability:baseExtensibility:v1",
+                "relationType": "foo.bar:relationName"
+              }
             ]
           ]
         },
@@ -4911,8 +4997,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -5065,6 +5156,13 @@
           "items": {
             "$ref": "#/definitions/EventResourceIntegrationAspect"
           }
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of Capability Dependencies.",
+          "items": {
+            "$ref": "#/definitions/CapabilityIntegrationAspect"
+          }
         }
       },
       "additionalProperties": false,
@@ -5205,6 +5303,37 @@
         "operationId"
       ]
     },
+    "CapabilityIntegrationAspect": {
+      "type": "object",
+      "title": "Capability Integration Aspect",
+      "x-introduced-in-version": "1.14.2",
+      "x-ums-type": "custom",
+      "description": "Capability related integration aspect",
+      "properties": {
+        "ordId": {
+          "type": "string",
+          "description": "The ORD ID is a stable, globally unique ID for ORD resources or taxonomy.\n\nIt MUST be a valid [ORD ID](../index.md#ord-id) of the appropriate ORD type.",
+          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(capability):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+          "maxLength": 255,
+          "examples": [
+            "sap.foo.bar:capability:fieldExtensibility:v1"
+          ]
+        },
+        "minVersion": {
+          "type": "string",
+          "description": "Minimum version of the references resource that the integration requires.\n",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+          "examples": [
+            "1.2.3",
+            "1.0.0-alpha.1"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "ordId"
+      ]
+    },
     "Vendor": {
       "type": "object",
       "title": "Vendor",
@@ -5294,8 +5423,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -5383,6 +5517,62 @@
           "url": "https://blogs.sap.com/2018/04/11/testing-of-s4hana-inventory-management-odata-apis-via-sap-api-hub/",
           "title": "APIs for SAP S/4HANA",
           "description": "This gives you an overview on where to find which kind of APIs in SAP S/4HANA."
+        }
+      ]
+    },
+    "File": {
+      "type": "object",
+      "title": "File",
+      "x-introduced-in-version": "1.14.2",
+      "description": "File that can be attached on ORD package level.\n",
+      "x-ums-type": "custom",
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human readable title of the file.\n\nMUST be unique within the collection of files provided.",
+          "examples": [
+            "Developer Guide for SAP Ariba Portal"
+          ]
+        },
+        "url": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "[URL](https://tools.ietf.org/html/rfc3986) of the link.\n\nThe file target MAY be relative or absolute.\nIf a relative URL is given, it is relative to the [`describedSystemInstance.baseUrl`](#system-instance_baseurl).\nIf an absolute URL is given, then it MUST be openly accessible.",
+          "examples": [
+            "/ord/v1/Ariba/Files/DeveloperPortal/SAP-Ariba-developer-portal.pdf"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Full description, notated in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nThe description SHOULD not be excessive in length and is not meant to provide full documentation.\nDetailed documentation SHOULD be attached as (typed) links.",
+          "examples": [
+            "Includes administrator, quick start, and authentication guides.\n"
+          ]
+        },
+        "mediaType": {
+          "description": "The [Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) of the definition serialization format.\nA consuming application can use this information to know which file format parser it needs to use.\n\nIf no Media Type is registered for the referenced file, `text/plain` MAY be used for arbitrary plain-text and `application/octet-stream` for arbitrary binary data.\n",
+          "type": "string",
+          "pattern": "^(application|text)\\/[a-zA-Z0-9][a-zA-Z0-9.+\\-]*$",
+          "examples": [
+            "application/json",
+            "text/plain",
+            "application/xml"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "url",
+        "mediaType"
+      ],
+      "examples": [
+        {
+          "url": "/ord/v1/Ariba/Files/DeveloperPortal/SAP-Ariba-developer-portal.pdf",
+          "title": "Developer Guide for SAP Ariba Portal",
+          "description": "Includes administrator, quick start, and authentication guides.",
+          "mediaType": "application/pdf"
         }
       ]
     },
@@ -6429,10 +6619,15 @@
         },
         "relationType": {
           "type": "string",
-          "description": "Optional type of the relationship, which defines a stricter semantic what the relationship implies.\n\nIf not provided, the relationship type has no semantics, it's \"related somehow\".",
+          "description": "Optional type of the relationship, which defines a stricter semantic what the relationship implies.\n\nIf not provided, the relationship type has no semantics, it's \"related somehow\".\n\nMUST be a valid [Concept ID](../index.md#concept-id).",
           "x-introduced-in-version": "1.12.0",
           "x-feature-status": "beta",
-          "oneOf": [
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../index.md#concept-id)."
+            },
             {
               "const": "part-of",
               "description": "The described entity type is a composite part of the referenced entity type.\nE.g. a `SalesOrderItem` is part of a `SalesOrder`."
@@ -6443,7 +6638,125 @@
             }
           ],
           "examples": [
-            "can-share-identity"
+            "can-share-identity",
+            "foo.bar:relationName"
+          ]
+        }
+      },
+      "required": [
+        "ordId"
+      ],
+      "additionalProperties": false
+    },
+    "RelatedApiResource": {
+      "title": "Related API Resource",
+      "x-introduced-in-version": "1.14.2",
+      "x-ums-type": "embedded",
+      "type": "object",
+      "description": "Defines a relation to an API Resource (via its ORD ID).",
+      "properties": {
+        "ordId": {
+          "type": "string",
+          "description": "The ORD ID is a stable, globally unique ID for ORD resources or taxonomy.\n\nIt MUST be a valid [ORD ID](../index.md#ord-id) of the appropriate ORD type.",
+          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(apiResource):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+          "maxLength": 255,
+          "examples": [
+            "sap.s4:apiResource:API_BUSINESS_PARTNER:v1"
+          ],
+          "x-association-target": [
+            "#/definitions/ApiResource/ordId"
+          ]
+        },
+        "relationType": {
+          "type": "string",
+          "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../index.md#concept-id)."
+            }
+          ],
+          "examples": [
+            "foo.bar:relationName"
+          ]
+        }
+      },
+      "required": [
+        "ordId"
+      ],
+      "additionalProperties": false
+    },
+    "RelatedEventResource": {
+      "title": "Related Event Resource",
+      "x-introduced-in-version": "1.14.2",
+      "x-ums-type": "embedded",
+      "type": "object",
+      "description": "Defines a relation to an Event Resource (via its ORD ID).",
+      "properties": {
+        "ordId": {
+          "type": "string",
+          "description": "The ORD ID is a stable, globally unique ID for ORD resources or taxonomy.\n\nIt MUST be a valid [ORD ID](../index.md#ord-id) of the appropriate ORD type.",
+          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(eventResource):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+          "maxLength": 255,
+          "examples": [
+            "sap.s4:eventResource:BusinessPartnerEvents:v1"
+          ],
+          "x-association-target": [
+            "#/definitions/EventResource/ordId"
+          ]
+        },
+        "relationType": {
+          "type": "string",
+          "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../index.md#concept-id)."
+            }
+          ],
+          "examples": [
+            "foo.bar:relationName"
+          ]
+        }
+      },
+      "required": [
+        "ordId"
+      ],
+      "additionalProperties": false
+    },
+    "RelatedCapability": {
+      "title": "Related Capability",
+      "x-introduced-in-version": "1.14.2",
+      "x-ums-type": "embedded",
+      "type": "object",
+      "description": "Defines a relation to another Capability (via its ORD ID).",
+      "properties": {
+        "ordId": {
+          "type": "string",
+          "description": "The ORD ID is a stable, globally unique ID for ORD resources or taxonomy.\n\nIt MUST be a valid [ORD ID](../index.md#ord-id) of the appropriate ORD type.",
+          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(capability):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+          "maxLength": 255,
+          "examples": [
+            "sap.foo:capability:fieldExtensibility:v1"
+          ],
+          "x-association-target": [
+            "#/definitions/Capability/ordId"
+          ]
+        },
+        "relationType": {
+          "type": "string",
+          "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../index.md#concept-id)."
+            }
+          ],
+          "examples": [
+            "foo.bar:relationName"
           ]
         }
       },
@@ -6669,8 +6982,13 @@
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../index.md#lifecycle) and [Compatibility](../concepts/compatibility.md) for more details.",
           "oneOf": [
             {
+              "const": "development",
+              "x-introduced-in-version": "1.14.2",
+              "description": "The resource is unreleased and under active development. The API contract is unstable and subject to\nbreaking changes at any time. Not intended for consumption outside of the development team."
+            },
+            {
               "const": "beta",
-              "description": "The API contract has no stability guarantees. Breaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
