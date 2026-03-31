@@ -386,14 +386,23 @@
         },
         "x-association-target": {
           "type": "array",
-          "description": "Point to the association target entity and optionally the property which is used as its ID.\nUse a $ref pointer array as values\n",
+          "description": "Points to the association target entity and optionally the property which is used as its ID.\n",
           "items": {
             "type": "string"
-          }
+          },
+          "examples": [
+            [
+              "#/definitions/EntityDefinition"
+            ],
+            [
+              "#/definitions/ApiResource/ordId",
+              "#/definitions/EventResource/ordId"
+            ]
+          ]
         },
         "x-hide": {
           "type": "boolean",
-          "description": "Hide JSON path node from generated documentation, but keep it in exported JSON Schema."
+          "description": "Hide JSON path node from generated markdown documentation, but keep it in exported JSON Schema."
         },
         "x-extension-points": {
           "type": "array",
@@ -630,14 +639,23 @@
         },
         "x-association-target": {
           "type": "array",
-          "description": "Point to the association target entity and optionally the property which is used as its ID.\nUse a $ref pointer array as values\n",
+          "description": "Points to the association target entity and optionally the property which is used as its ID.\n",
           "items": {
             "type": "string"
-          }
+          },
+          "examples": [
+            [
+              "#/definitions/EntityDefinition"
+            ],
+            [
+              "#/definitions/ApiResource/ordId",
+              "#/definitions/EventResource/ordId"
+            ]
+          ]
         },
         "x-hide": {
           "type": "boolean",
-          "description": "Hide JSON path node from generated documentation, but keep it in exported JSON Schema."
+          "description": "Hide JSON path node from generated markdown documentation, but keep it in exported JSON Schema."
         },
         "x-extension-points": {
           "type": "array",
