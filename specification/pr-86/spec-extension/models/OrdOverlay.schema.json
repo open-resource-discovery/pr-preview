@@ -115,6 +115,10 @@
       "items": {
         "$ref": "#/definitions/OverlayPatch"
       }
+    },
+    "meta": {
+      "$ref": "#/definitions/OverlayMeta",
+      "description": "Optional arbitrary metadata associated with this overlay document for use by overlay consumers, tooling, and registries.\nThe contents of this block are **never applied to the target document** — they are strictly out-of-band and ignored by the patch merge process.\n\nUse this to carry document-level information such as provenance, approval status, or processing instructions\nthat apply to the overlay as a whole rather than to individual patches."
     }
   },
   "required": [
@@ -287,16 +291,27 @@
           ]
         },
         "meta": {
-          "$ref": "#/definitions/OverlayPatchMeta"
+          "$ref": "#/definitions/OverlayMeta"
         }
       }
     },
-    "OverlayPatchMeta": {
+    "OverlayMeta": {
       "type": "object",
-      "title": "Overlay Patch Meta",
+      "title": "Overlay Meta",
       "x-ums-type": "embedded",
-      "description": "Optional arbitrary metadata associated with the patched element for use by overlay\nconsumers, tooling, and registries.\nThe contents of this block are **never applied to the target document** — they are\nstrictly out-of-band and ignored by the patch merge process.\n\nUse this to carry information that enrichment sources associate with a specific element\nbut that has no standard representation in the target metadata format.\n\nThis is an open/extensible object — any properties are allowed.",
-      "additionalProperties": true
+      "description": "Optional arbitrary metadata for use by overlay consumers, tooling, and registries.\nThe contents of this block are **never applied to the target document** — they are strictly out-of-band and ignored by the patch merge process.\n\nWhen used at the document level, this carries information about the overlay as a whole (e.g. provenance, approval status, processing instructions).\nWhen used at the patch level, this carries information specific to the patched element (e.g. confidence scores, source references).\n\nThis is an open/extensible object — any properties are allowed.",
+      "additionalProperties": true,
+      "examples": [
+        {
+          "sourceSystem": "AI Enrichment Pipeline v2.1",
+          "enrichmentDate": "2026-04-01"
+        },
+        {
+          "someMetadataKey": {
+            "complex": "object"
+          }
+        }
+      ]
     },
     "OverlaySelector": {
       "type": "object",
