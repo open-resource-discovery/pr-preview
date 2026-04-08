@@ -2859,10 +2859,21 @@
       "description": "Machine-readable definition that describes the entity type's conceptual domain model structure.\n\n**Why Entity Types are usually private**: Entity Types represent conceptual domain models - abstract descriptions of business concepts and data structures.\nUnlike API Resources, they cannot be accessed or interacted with directly.\nThey describe *what* the data is, not *how* to access it.\n\nInteraction with the actual data happens through API Resources or Event Resources that expose these entity types.\nSince entity type definitions contain internal modeling details, they SHOULD be marked as `private` visibility.\n\n**Finding related APIs**: To discover which APIs expose a particular Entity Type, check the API Resource's `relatedEntityTypes` property.\n\n**When to use public visibility**: Only mark definitions as `public` for:\n- Public standards or specifications that need open access\n- Conceptual models explicitly intended for documentation or standardization\n- Specific business requirements to expose the internal data model\n\nIn most cases, consumers should interact through the public APIs that expose the entity types, not through direct access to the conceptual model definitions.",
       "properties": {
         "type": {
-          "description": "Type of the entity type resource definition.\n\nAny valid [Specification ID](../index.md#specification-id).",
+          "description": "Type of the entity type resource definition.\n\nMUST be either:\n- any valid [Specification ID](../index.md#specification-id), or\n- one of the pre-defined values listed below.",
           "type": "string",
-          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+              "description": "Any valid [Specification ID](../index.md#specification-id)."
+            },
+            {
+              "const": "sap-csn-interop-effective-v1",
+              "description": "[CSN Interop Effective](https://sap.github.io/csn-interop-specification/) is a standardized and interoperable [CSN](https://cap.cloud.sap/docs/cds/csn) export, used to describe [CDS](https://cap.cloud.sap/docs/cds/) models.\nThe `mediaType` MUST be be set to `application/json`."
+            }
+          ],
           "examples": [
+            "sap-csn-interop-effective-v1",
             "sap.example:entity-model-definition:v1"
           ]
         },
