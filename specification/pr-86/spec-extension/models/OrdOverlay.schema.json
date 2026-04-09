@@ -241,8 +241,7 @@
       "description": "A single patch action to apply to the element identified by the selector.",
       "required": [
         "action",
-        "selector",
-        "data"
+        "selector"
       ],
       "properties": {
         "description": {
