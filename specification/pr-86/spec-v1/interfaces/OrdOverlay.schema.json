@@ -130,7 +130,7 @@
       "type": "object",
       "title": "Overlay Target",
       "x-ums-type": "embedded",
-      "description": "Optional context about the target being patched.\nThe target can refer to an ORD resource or to a referenced resource definition file.\n\nWhen this object is present, at least one of `ordId`, `url`, or `correlationIds`\nMUST be provided so that consumers can identify what is being patched.\nException: if all patches exclusively use `selector.ordId` selectors, `target` may be omitted entirely.\n\n`ordId` targets the ORD resource metadata itself.\nFor patching a specific resource definition file of that resource, use `url` and/or `definitionType`\nto disambiguate.\n\nExample: one OData API resource can have both `edmx` and `openapi-v3` definitions attached.\nIn such cases, provide `definitionType` and/or `url` to make the concrete patch target explicit.\n\nMultiple identifiers, if provided, are treated as all pointing to the same resource.",
+      "description": "Optional context about the target being patched.\nThe target can refer to an ORD resource or to a referenced resource definition file.\n\nWhen this object is present, at least one of `ordId`, `url`, or `correlationIds`\nMUST be provided so that consumers can identify what is being patched.\nException: if all patches exclusively use [`selector.ordId`](#overlay-selector-by-ord-id) selectors, `target` may be omitted entirely.\n\n`ordId` targets the ORD resource metadata itself.\nFor patching a specific resource definition file of that resource, use `url` and/or `definitionType`\nto disambiguate.\n\nExample: one OData API resource can have both `edmx` and `openapi-v3` definitions attached.\nIn such cases, provide `definitionType` and/or `url` to make the concrete patch target explicit.\n\nMultiple identifiers, if provided, are treated as all pointing to the same resource.",
       "additionalProperties": false,
       "properties": {
         "ordId": {
@@ -238,7 +238,7 @@
       "type": "object",
       "title": "Overlay Patch",
       "x-ums-type": "embedded",
-      "description": "A single patch action to apply to the element identified by the selector.",
+      "description": "A single patch action to apply to the element identified by the [`selector`](#overlay-patch_selector).",
       "required": [
         "action",
         "selector",
@@ -433,7 +433,7 @@
         "operation": {
           "type": "string",
           "minLength": 1,
-          "description": "Concept-level operation identifier.\nSupported mappings by format:\n- OpenAPI (`openapi-v2`, `openapi-v3`, `openapi-v3.1+`): maps to the `operationId` field on\n  an HTTP operation inside `paths.{path}.{method}`.\n- MCP (any Specification ID other than `a2a-agent-card`): maps to `tools[].name`.\n  See: https://modelcontextprotocol.io/specification/2025-11-25/schema#tool-name\n- A2A Agent Card (`a2a-agent-card`): maps to `skills[].id`.\n  See: https://google.github.io/A2A/specification/#agentskill-object\n- OData (`edmx`, `csdl-json`): maps to the Action or Function name at Schema level.\n  MUST use the namespace-qualified name (e.g. `OData.Demo.Approval`) to be unambiguous.\n  For OData v2 `edmx` targets: also searches FunctionImport elements in EntityContainer\n  when no Schema-level Action/Function matches the name.\n  For bound operations overloaded on multiple entity types, use `jsonPath` as a fallback\n  to target the specific overload.\n\nWhen `definitionType` is set on `target`, the format is known and the selector resolves unambiguously.\nWhen `definitionType` is absent, the implementation SHOULD infer the format from the target\ndocument's content (e.g. the `openapi` field, `$schema`, or `$kind` markers).",
+          "description": "Concept-level operation identifier.\nSupported mappings by format:\n- OpenAPI (`openapi-v2`, `openapi-v3`, `openapi-v3.1+`): maps to the `operationId` field on\n  an HTTP operation inside `paths.{path}.{method}`.\n- MCP (any Specification ID other than `a2a-agent-card`): maps to `tools[].name`.\n  See: https://modelcontextprotocol.io/specification/2025-11-25/schema#tool-name\n- A2A Agent Card (`a2a-agent-card`): maps to `skills[].id`.\n  See: https://google.github.io/A2A/specification/#agentskill-object\n- OData (`edmx`, `csdl-json`): maps to the Action or Function name at Schema level.\n  MUST use the namespace-qualified name (e.g. `OData.Demo.Approval`) to be unambiguous.\n  For OData v2 `edmx` targets: also searches FunctionImport elements in EntityContainer\n  when no Schema-level Action/Function matches the name.\n  For bound operations overloaded on multiple entity types, use [`jsonPath`](#overlay-selector-by-jsonpath) as a fallback\n  to target the specific overload.\n\nWhen `definitionType` is set on `target`, the format is known and the selector resolves unambiguously.\nWhen `definitionType` is absent, the implementation SHOULD infer the format from the target\ndocument's content (e.g. the `openapi` field, `$schema`, or `$kind` markers).",
           "examples": [
             "getConstellationByAbbreviation",
             "dispute-case-resolution",
@@ -467,7 +467,7 @@
         "entityType": {
           "type": "string",
           "minLength": 1,
-          "description": "**OData-specific** selector targeting an EntityType element by its namespace-qualified name.\n\nAn EntityType in OData is a structured type with a key that represents a business entity\n(e.g. `Customer`, `Order`, `Employee`). This maps to:\n- `edmx` (OData v2/v4 CSDL XML): targets `<EntityType Name=\"...\">` elements in the Schema.\n- `csdl-json` (OData v4 CSDL JSON): targets elements with `$Kind: \"EntityType\"`.\n\nMUST use the namespace-qualified name (e.g. `OData.Demo.Customer`) for unambiguous resolution.\nFor EntitySet-level patching (Capabilities annotations), use the `entitySet` selector instead.\n\nFor CSN Interop targets (`sap-csn-interop-effective-v1`), this selector targets a `definitions`\nentry by its fully qualified key (e.g. `AirlineService.Airline`).\n\nTo target ComplexType or EnumType elements, use the dedicated `complexType` or `enumType` selectors.",
+          "description": "**OData-specific** selector targeting an EntityType element by its namespace-qualified name.\n\nAn EntityType in OData is a structured type with a key that represents a business entity\n(e.g. `Customer`, `Order`, `Employee`). This maps to:\n- `edmx` (OData v2/v4 CSDL XML): targets `<EntityType Name=\"...\">` elements in the Schema.\n- `csdl-json` (OData v4 CSDL JSON): targets elements with `$Kind: \"EntityType\"`.\n\nMUST use the namespace-qualified name (e.g. `OData.Demo.Customer`) for unambiguous resolution.\nFor EntitySet-level patching (Capabilities annotations), use the [`entitySet`](#overlay-selector-by-entity-set) selector instead.\n\nFor CSN Interop targets (`sap-csn-interop-effective-v1`), this selector targets a `definitions`\nentry by its fully qualified key (e.g. `AirlineService.Airline`).\n\nTo target ComplexType or EnumType elements, use the dedicated `complexType` or `enumType` selectors.",
           "examples": [
             "OData.Demo.Customer",
             "OData.Demo.LeaveRequest",
@@ -522,7 +522,7 @@
         "enumType": {
           "type": "string",
           "minLength": 1,
-          "description": "**OData-specific** selector targeting an EnumType element by its namespace-qualified name.\n\nAn EnumType in OData is an enumeration type with named members representing a fixed set\nof values (e.g. `OrderStatus`, `Priority`, `Gender`). This maps to:\n- `edmx` (OData v2/v4 CSDL XML): targets `<EnumType Name=\"...\">` elements in the Schema.\n- `csdl-json` (OData v4 CSDL JSON): targets elements with `$Kind: \"EnumType\"`.\n\nMUST use the namespace-qualified name (e.g. `OData.Demo.OrderStatus`) for unambiguous resolution.\n\nTo patch individual enum members, use the `propertyType` selector with this `enumType` as context.",
+          "description": "**OData-specific** selector targeting an EnumType element by its namespace-qualified name.\n\nAn EnumType in OData is an enumeration type with named members representing a fixed set\nof values (e.g. `OrderStatus`, `Priority`, `Gender`). This maps to:\n- `edmx` (OData v2/v4 CSDL XML): targets `<EnumType Name=\"...\">` elements in the Schema.\n- `csdl-json` (OData v4 CSDL JSON): targets elements with `$Kind: \"EnumType\"`.\n\nMUST use the namespace-qualified name (e.g. `OData.Demo.OrderStatus`) for unambiguous resolution.\n\nTo patch individual enum members, use the [`propertyType`](#overlay-selector-by-property-type) selector with this `enumType` as context.",
           "examples": [
             "OData.Demo.OrderStatus",
             "OData.Demo.Priority",
