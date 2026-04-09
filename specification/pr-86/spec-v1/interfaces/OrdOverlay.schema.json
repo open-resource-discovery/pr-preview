@@ -241,7 +241,8 @@
       "description": "A single patch action to apply to the element identified by the selector.",
       "required": [
         "action",
-        "selector"
+        "selector",
+        "data"
       ],
       "properties": {
         "description": {
@@ -255,12 +256,26 @@
         },
         "action": {
           "type": "string",
-          "description": "The patch operation to perform on the selected element:\n\n- `update`: Replace the selected element entirely with `data`.\n- `append`:\n  - When `data` is a string: append it to the selected string value.\n    Only valid when the selected element is a text/string field.\n  - When `data` is an object: recursively append each string property in `data`\n    to the corresponding string field in the selected object.\n    Nested objects are traversed; arrays in `data` are appended to matching arrays.\n    Throws an error if a string in `data` targets a non-string field in the target.\n  - Useful to extend existing descriptions, summaries, or other text fields\n    without replacing them entirely.\n- `remove`:\n  - `data: {}` (empty object): remove the selected element from the document entirely.\n  - `data` with null-valued properties: remove only those fields (recursively).\n    Nested `null` values remove nested fields as well\n    (JSON Merge Patch-style delete semantics).\n\nExample for partial removal:\n`data: { \"foo\": { \"bar\": null } }` removes only `foo.bar` inside the selected element.\nTo remove the entire selected element, use `data: {}`.\n- `merge`:\n  - objects are deep-merged recursively.\n  - scalar values are overwritten by the value from `data`.\n  - arrays are appended (new array items are added after existing items).\n  - existing object properties not mentioned in `data` are preserved.\n\n  To fully replace an array, use two ordered patches:\n  1. `remove` the array at the selected location.\n  2. `merge` the new array content.",
-          "enum": [
-            "update",
-            "append",
-            "remove",
-            "merge"
+          "title": "Overlay Patch Action",
+          "x-ums-type": "ignore",
+          "description": "The patch operation to perform on the selected element.",
+          "oneOf": [
+            {
+              "const": "update",
+              "description": "Replace the selected element entirely with `data`."
+            },
+            {
+              "const": "append",
+              "description": "Append content to the selected element.\n\n- When `data` is a string: append it to the selected string value.\n  Only valid when the selected element is a text/string field.\n- When `data` is an object: recursively append each string property in `data`\n  to the corresponding string field in the selected object.\n  Nested objects are traversed; arrays in `data` are appended to matching arrays.\n  Throws an error if a string in `data` targets a non-string field in the target.\n\nUseful to extend existing descriptions, summaries, or other text fields\nwithout replacing them entirely."
+            },
+            {
+              "const": "remove",
+              "description": "Remove the selected element or specific fields within it.\n\n- When `data: {}` (empty object): remove the selected element from the document entirely.\n- When `data` contains properties with `null` values: remove only those specific fields (recursively).\n  This uses JSON Merge Patch-style delete semantics where `null` indicates deletion.\n  Nested `null` values remove nested fields as well."
+            },
+            {
+              "const": "merge",
+              "description": "Deep-merge `data` into the selected element.\n\n- Objects are deep-merged recursively.\n- Scalar values are overwritten by the value from `data`.\n- Arrays are appended (new array items are added after existing items).\n- Existing object properties not mentioned in `data` are preserved."
+            }
           ]
         },
         "selector": {
