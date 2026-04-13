@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">ORD Specification | Open Resource Discovery</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://open-resource-discovery.org/pr-preview/specification/pr-113/spec-v1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="ORD Specification | Open Resource Discovery"><meta data-rh="true" name="description" content="Notational Conventions"><meta data-rh="true" property="og:description" content="Notational Conventions"><link data-rh="true" rel="icon" href="/pr-preview/specification/pr-113/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://open-resource-discovery.org/pr-preview/specification/pr-113/spec-v1"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-113/spec-v1" hreflang="en"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-113/spec-v1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORD Specification","item":"https://open-resource-discovery.org/pr-preview/specification/pr-113/spec-v1/"}]}</script><script>window.bannerServerBaseUrl=""</script>
 <script src="/pr-preview/specification/pr-113/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-113/assets/css/styles.74be9d38.css">
-<script src="/pr-preview/specification/pr-113/assets/js/runtime~main.43af9ca7.js" defer="defer"></script>
+<script src="/pr-preview/specification/pr-113/assets/js/runtime~main.cb1ef1e2.js" defer="defer"></script>
 <script src="/pr-preview/specification/pr-113/assets/js/main.9bbcc59f.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -485,10 +485,10 @@ The vendor owns this top-level namespace and is responsible for governing this n
 <ul>
 <li class="">MUST only consist of lower case ASCII letters (<code>a-z</code>) and digits (<code>0-9</code>).</li>
 <li class="">The organization using ORD MUST ensure that <code>&lt;vendorId&gt;</code> is uniquely registered, e.g. in a namespace registry.</li>
-<li class="">There is a special reserved vendor namespace <code>customer</code>:<!-- -->
+<li class="">There are reserved vendor namespaces:<!-- -->
 <ul>
-<li class="">It can be used in extension scenarios, where the customer of an application (tenant owner) creates their own ORD resources.</li>
-<li class="">This avoids that customers need to register their own namespaces (which could still be done as an alternative).</li>
+<li class=""><code>customer</code>: Used in extension scenarios, where the customer of an application (tenant owner) creates their own ORD resources. This avoids that customers need to register their own namespaces (which could still be done as an alternative).</li>
+<li class=""><code>ord</code>: Reserved for ORD specification-defined values in extensible enums that use <a href="#specification-id" class="">Specification IDs</a> or <a href="#concept-id" class="">Concept IDs</a>. MUST NOT be used by vendors.</li>
 </ul>
 </li>
 </ul>
