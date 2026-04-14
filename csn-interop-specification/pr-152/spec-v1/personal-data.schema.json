@@ -1,0 +1,172 @@
+{
+  "description": "This is the interface description of @PersonalData.",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sap.github.io/csn-interop-specification/spec-v1/personal-data.schema.json#",
+  "title": "PersonalData Document",
+  "type": "object",
+  "definitions": {
+    "@PersonalData.entitySemantics": {
+      "type": "object",
+      "description": "Primary meaning of the entities in the annotated entity set. Entities annotated with @PersonalData.entitySemantics are synonymous to @PersonalData.isPotentiallyPersonal.",
+      "properties": {
+        "#": {
+          "type": "string",
+          "description": "Provide the value in `{ \"#\": \"<value>\" }` enum notation.",
+          "oneOf": [
+            {
+              "const": "DATA_SUBJECT",
+              "description": "Describes a data subject, for example, a customer or vendor."
+            },
+            {
+              "const": "DATA_SUBJECT_DETAILS",
+              "description": "Describes entities that contain details for a data subject, for example an address."
+            },
+            {
+              "const": "OTHER",
+              "description": "Entities that contain personal data or references to data subjects but do not represent data subjects or details itself. For example: customer quote, customer order, or purchase order."
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "#"
+      ],
+      "x-extension-targets": [
+        "Entity"
+      ],
+      "examples": [
+        {
+          "#": "DATA_SUBJECT"
+        }
+      ],
+      "title": "@PersonalData.entitySemantics"
+    },
+    "@PersonalData.dataSubjectRole": {
+      "type": "string",
+      "description": "Role of the data subjects in this set (e.g. employee, customer). Values are application-specific.",
+      "x-extension-targets": [
+        "Entity"
+      ],
+      "title": "@PersonalData.dataSubjectRole"
+    },
+    "@PersonalData.dataSubjectRoleDescription": {
+      "type": "string",
+      "description": "Language-dependent description of the role of the data subjects in this set (e.g. employee, customer). Values are application-specific.",
+      "x-extension-targets": [
+        "Entity"
+      ],
+      "title": "@PersonalData.dataSubjectRoleDescription"
+    },
+    "@PersonalData.fieldSemantics": {
+      "type": "object",
+      "description": "Primary meaning of the personal data contained in the annotated property. Changes to values of annotated properties are tracked in the audit log. Use this annotation also on fields that are already marked as contact or address data. Properties annotated with fieldSemantics need not be additionally annotated with @PersonalData.isPotentiallyPersonal.",
+      "properties": {
+        "#": {
+          "type": "string",
+          "description": "Provide the value in `{ \"#\": \"<value>\" }` enum notation.",
+          "oneOf": [
+            {
+              "const": "DATA_SUBJECT_ID",
+              "description": "Identifies the data subject unique key or references it."
+            },
+            {
+              "const": "DATA_SUBJECT_ID_TYPE",
+              "description": "The type describing the DataSubjectID identifying the data subject, e.g., an e-mail address, semantic of the ID or a customer."
+            },
+            {
+              "const": "CONSENT_ID",
+              "description": "The unique identifier for a consent. A consent is an action of data subjects confirming that the usage of their personal data shall be allowed for a given purpose. A consent functionality allows the storage of a consent record in relation to a specific purpose and shows if a data subject has granted, withdrawn, or denied consent."
+            },
+            {
+              "const": "PURPOSE_ID",
+              "description": "The unique identifier for the purpose of processing of personal data. Any processing of personal data is based on specified, explicit, and legitimate purposes and not further processed in a manner that is incompatible with those purposes. The purpose is defined by the data controller or joint data controllers."
+            },
+            {
+              "const": "CONTRACT_RELATED_ID",
+              "description": "The unique identifier for transactional data that is related to a contract that requires processing of personal data. For example, Sales Contract ID, Purchase Contract ID, or Service Contract ID."
+            },
+            {
+              "const": "DATA_CONTROLLER_ID",
+              "description": "The unique identifier of a legal entity which alone or jointly with others determines the purposes and means of the processing of personal data. The Data Controller is fully responsible (and accountable) that data protection and privacy principles (such as purpose limitation or data minimization), defined in the European General Data Protection Regulation (GDPR) or any other data protection legislation, are adhered to when processing personal data. The DataControllerID succeeds the LegalEntityID."
+            },
+            {
+              "const": "USER_ID",
+              "description": "The unique identifier of a user. A user is an individual who interacts with the services supplied by a system."
+            },
+            {
+              "const": "END_OF_BUSINESS_DATE",
+              "description": "Defines the end of active business and the start of residence time and retention period. End of business is the point in time when the processing of a set of personal data is no longer required for the active business, for example, when a contract is fulfilled. After it has been reached and a customer-defined residence period has passed, the data is blocked and can only be accessed by users with special authorizations (for example, tax auditors). All fields of type Edm.Date or Edm.DateTimeOffset on which the end of business determination depends should be annotated."
+            },
+            {
+              "const": "BLOCKING_DATE",
+              "description": "Defines a date that marks when the provider of the data will block these. This is the point in time when the processing of a set of personal data is no longer required for the active business, for example, when a contract is fulfilled. After it has been reached, the data is blocked in the source and can only be displayed by users with special authorizations (for example, tax auditors); however, it is not allowed to create/change/copy/follow-up blocked data. Consumers of the data should consider if there is an additional purpose to process the data beyond the defined blocking date. Personal data that is blocked for processing MAY be indicated by either BLOCKING_DATE or IS_BLOCKED_INDICATOR."
+            },
+            {
+              "const": "IS_BLOCKED_INDICATOR",
+              "description": "The indicator shows if the personal data is blocked from further processing by the provider. A value of true means that the provider no longer needs to process this data for active business purposes, such as after a contract has been completed. Data consumers should evaluate whether there are any additional legitimate reasons to process the data beyond its blocked status. Personal data that is blocked for processing MAY be indicated by either BLOCKING_DATE or IS_BLOCKED_INDICATOR."
+            },
+            {
+              "const": "END_OF_RETENTION_DATE",
+              "description": "Defines a date that marks when the provider of the data can destroy these. Consumers of the data should consider if there is an additional purpose (or a legal hold) to process the data beyond the defined destruction date."
+            },
+            {
+              "const": "DATA_CATEGORY_ID",
+              "description": "Defines a unique identifier for a local data category that is assigned to this instance."
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "#"
+      ],
+      "x-extension-targets": [
+        "Type"
+      ],
+      "examples": [
+        {
+          "#": "DATA_SUBJECT_ID"
+        }
+      ],
+      "title": "@PersonalData.fieldSemantics"
+    },
+    "@PersonalData.isPotentiallyPersonal": {
+      "type": "boolean",
+      "description": "Property contains potentially personal data. Properties annotated with `@PersonalData.fieldSemantics` need not be additionally annotated with this annotation. Personal data describes any information which is related to an identified or identifiable natural person (data subject). An identifiable person is one who can be identified, directly or indirectly, in particular by a reference to an identifier such as a name, an identification number, location data, an online identifier, or to one or more factors specific to the physical, physiological, genetic, mental, economic, cultural, or social identity of that natural person.",
+      "default": true,
+      "x-extension-targets": [
+        "Type"
+      ],
+      "title": "@PersonalData.isPotentiallyPersonal"
+    },
+    "@PersonalData.isPotentiallySensitive": {
+      "type": "boolean",
+      "description": "Property or entity containing potentially sensitive personal data. Sensitive personal data is a category of personal data that needs special handling. The determination which personal data is sensitive may differ for different legal areas or industries.\nExamples of sensitive personal data:\n-\tSpecial categories of personal data, such as data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, genetic data, biometric data, data concerning health or sex life or sexual orientation.\n-\tPersonal data subject to professional secrecy\n-\tPersonal data relating to criminal or administrative offenses\n-\tPersonal data concerning insurances and bank or credit card accounts",
+      "default": true,
+      "x-extension-targets": [
+        "Type",
+        "Entity"
+      ],
+      "title": "@PersonalData.isPotentiallySensitive"
+    },
+    "@PersonalData.relatedDataCategoryID": {
+      "description": "The annotation value is an array of strings, enabling the assignment of multiple data categories to one entity or field. The strings must adhere to the format of an Correlation ID corresponding to the concept name \"dataCategory\" in conjunction with an localIdentifier introduced herein (refer to ORD Specification | Open Resource Discovery).",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "sap.s4com:dataCategory:SalesOrder",
+          "sap.s4com:dataCategory:PurchaseContract"
+        ]
+      ],
+      "x-extension-targets": [
+        "Type",
+        "Entity"
+      ],
+      "title": "@PersonalData.relatedDataCategoryID"
+    }
+  }
+}
