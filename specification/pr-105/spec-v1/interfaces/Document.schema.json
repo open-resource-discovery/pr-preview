@@ -1048,7 +1048,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -1056,11 +1056,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -1925,7 +1925,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -1933,11 +1933,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -2632,7 +2632,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -2640,11 +2640,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -2737,7 +2737,7 @@
           "type": "array",
           "x-introduced-in-version": "1.15.0",
           "x-feature-status": "beta",
-          "description": "List of available machine-readable definitions, which describe the entity type's conceptual domain model in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEach definition is an alternative description format for the same entity type.\nThe same definition type MUST NOT be provided more than once, except with different `visibility`.\n\nIt is RECOMMENDED to provide definitions to enable machine-readable use cases.\nIf definitions are added or changed, the `version` MUST be incremented.\n\n**Privacy Note**: Entity Type definitions SHOULD usually be marked as `private` visibility since they represent conceptual models that cannot be accessed directly. See `EntityTypeDefinition` for detailed guidance.",
+          "description": "List of available machine-readable definitions, which describe the entity type's conceptual domain model in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEach definition is an alternative description format for the same entity type.\nThe same definition type MUST NOT be provided more than once, except with different `visibility`.\n\nIt is RECOMMENDED to provide definitions to enable machine-readable use cases.\nIf definitions are added or changed, the `version` MUST be incremented.\n\n**Privacy Note**: Entity Type definitions SHOULD usually be marked as `private` visibility since they are an internal implementation detail that cannot be accessed directly. See `EntityTypeDefinition` for detailed guidance.",
           "items": {
             "$ref": "#/definitions/EntityTypeDefinition"
           }
@@ -2911,7 +2911,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "Who is allowed to access the entity type definition. Defaults to `private`.\n\nEntity Type definitions typically contain internal modeling details and SHOULD remain `private`.\nConsumers interact with the data through related API Resources, not the conceptual model directly.\n\nThe visibility MUST be equal to or more restrictive than the Entity Type resource's visibility.\n\nOnly use `public` visibility when the conceptual model itself needs open access for standardization or documentation purposes.",
+          "description": "Who is allowed to access the entity type definition. Defaults to `private`.\n\nEntity Type definitions typically contain internal modeling details and SHOULD remain `private`.\nConsumers interact with the data through related API Resources, not the conceptual model directly.\n\nThe visibility MUST be equal to or more restrictive than the Entity Type resource's visibility.\n\nOnly use `public` visibility when the internal model definition itself needs open access for standardization or documentation purposes.",
           "oneOf": [
             {
               "const": "public",
@@ -3092,7 +3092,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -3100,11 +3100,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -4097,7 +4097,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -4105,11 +4105,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -4775,7 +4775,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -4783,11 +4783,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -5163,7 +5163,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -5171,11 +5171,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -5589,7 +5589,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -5597,11 +5597,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
@@ -5972,7 +5972,7 @@
       "type": "object",
       "title": "System Instance",
       "x-ums-type": "ignore",
-      "description": "A [system instance](../index.md#system-instance) is a concrete, running instance of a system type.\nIn a multi-tenant system, it corresponds to a tenant.\nIn a single-tenant system, it corresponds to the [system installation](../index.md#system-deployment) itself.",
+      "description": "A [system instance](../index.md#system-instance) is a concrete, running instance of a system type.\nIn a multi-tenant system, it corresponds to a tenant.\nIn a single-tenant system, it corresponds to the [system deployment](../index.md#system-deployment) itself.",
       "properties": {
         "baseUrl": {
           "type": "string",
@@ -7148,7 +7148,7 @@
             },
             {
               "const": "beta",
-              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` status MAY be changed or removed at the provider's discretion."
+              "description": "The API contract is released / available to consumers, but has no final stability guarantees.\nBreaking changes may occur at any time without notice or deprecation period.\n\nNot recommended for production use unless you can tolerate breaking changes. Suitable for experimentation, early adopters,\nand feedback gathering. Resources of `beta` `releaseStatus` MAY be changed or removed at the provider's discretion."
             },
             {
               "const": "active",
@@ -7156,11 +7156,11 @@
             },
             {
               "const": "deprecated",
-              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
+              "description": "The resource is still functional but scheduled for removal. No new development should depend on it.\n\nIf the `releaseStatus` is set to `deprecated`, the `deprecationDate` SHOULD be provided.\nIf the `releaseStatus` is set to `deprecated`, and the `sunsetDate` is already known, then the `sunsetDate` SHOULD be provided.\n\nIf successor resources exist, they MUST be referenced through `successors`.\n\nA deprecated resource MAY be sunset (decommissioned/removed) in the future through setting a `Tombstone`.\nOnce the resource is sunset, its description MAY be removed from ORD, but could also be kept with `releaseStatus` set to `sunset`."
             },
             {
               "const": "sunset",
-              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the status is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
+              "description": "The resource has been decommissioned and is no longer available at runtime. This entry exists for historical reference only.\n\nIf the `releaseStatus` is set to `sunset`, a `Tombstone` MUST be set as well and a `sunsetDate` MUST be provided."
             }
           ],
           "examples": [
