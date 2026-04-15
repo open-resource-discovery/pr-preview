@@ -6187,7 +6187,7 @@
           ]
         },
         {
-          "acme.billing:cost-center": [
+          "foo.bar:cost-center": [
             "CC-12345",
             "CC-67890"
           ]
