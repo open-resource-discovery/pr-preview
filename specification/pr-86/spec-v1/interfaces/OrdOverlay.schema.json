@@ -74,15 +74,15 @@
     },
     "describedSystemType": {
       "$ref": "#/definitions/OverlaySystemType",
-      "description": "Information on the [system type](../../spec-v1/index.md#system-type) this overlay describes.\nThis object is identical to the ORD Document [`describedSystemType`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemtype) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nThis is the primary context object for `perspective: system-type`, and also the parent context\nfor more specific `system-version` and `system-instance` overlays.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
+      "description": "Information on the [system type](../../spec-v1/index.md#system-type) this overlay describes.\nThis object is identical to the ORD Document `describedSystemType` object; see [System Type](../../spec-v1/interfaces/Document.md#system-type).\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nThis is the primary context object for `perspective: system-type`, and also the parent context\nfor more specific `system-version` and `system-instance` overlays.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
     },
     "describedSystemVersion": {
       "$ref": "#/definitions/OverlaySystemVersion",
-      "description": "Information on the [system version](../../spec-v1/index.md#system-version) this overlay describes.\nThis object is identical to the ORD Document [`describedSystemVersion`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemversion) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUse this when the overlay should only patch metadata for one specific released system version.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
+      "description": "Information on the [system version](../../spec-v1/index.md#system-version) this overlay describes.\nThis object is identical to the ORD Document `describedSystemVersion` object; see [System Version](../../spec-v1/interfaces/Document.md#system-version).\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUse this when the overlay should only patch metadata for one specific released system version.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
     },
     "describedSystemInstance": {
       "$ref": "#/definitions/OverlaySystemInstance",
-      "description": "Information on the [system instance](../../spec-v1/index.md#system-instance) this overlay describes.\nThis object is identical to the ORD Document [`describedSystemInstance`](../../spec-v1/interfaces/Document.md#ord-document_describedsysteminstance) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUse this when the overlay should only patch metadata for one concrete tenant / runtime instance.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
+      "description": "Information on the [system instance](../../spec-v1/index.md#system-instance) this overlay describes.\nThis object is identical to the ORD Document `describedSystemInstance` object; see [System Instance](../../spec-v1/interfaces/Document.md#system-instance).\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUse this when the overlay should only patch metadata for one concrete tenant / runtime instance.\n\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID."
     },
     "visibility": {
       "type": "string",
@@ -167,7 +167,7 @@
           ]
         },
         "definitionType": {
-          "description": "Optional, but RECOMMENDED type of the target definition being patched.\nIf provided, this SHOULD match the `type` of the referenced metadata definition\n(as used in API/Event/Capability resource definitions).\nThis is especially useful when [`ordId`](#overlay-target_ordid) resolves to a resource with multiple attached definitions.\n\nThis can be used to disambiguate how selectors are interpreted for the target.\n\nMUST be either:\n- any valid [Specification ID](../../spec-v1/index.md#specification-id), or\n- one of the pre-defined values reused from:\n  - API Resource Definition `type`\n  - Event Resource Definition `type`\n  - Capability Definition `type`\n\nThe literal value `custom` is deprecated for `definitionType` and MUST NOT be used.\nIn such cases, use a concrete [Specification ID](../../spec-v1/index.md#specification-id) instead.",
+          "description": "Optional, but RECOMMENDED type of the target definition being patched.\nIf provided, this SHOULD match the `type` of the referenced metadata definition\n(as used in API/Event/Capability resource definitions).\nThis is especially useful when target `ordId` resolves to a resource with multiple attached definitions.\n\nThis can be used to disambiguate how selectors are interpreted for the target.\n\nMUST be either:\n- any valid [Specification ID](../../spec-v1/index.md#specification-id), or\n- one of the pre-defined values reused from:\n  - API Resource Definition `type`\n  - Event Resource Definition `type`\n  - Capability Definition `type`\n\nThe literal value `custom` is deprecated for `definitionType` and MUST NOT be used.\nIn such cases, use a concrete [Specification ID](../../spec-v1/index.md#specification-id) instead.",
           "type": "string",
           "title": "Overlay Definition Type",
           "x-ums-type": "ignore",
@@ -251,7 +251,7 @@
       "type": "object",
       "title": "Overlay Patch",
       "x-ums-type": "embedded",
-      "description": "A single patch action to apply to the element identified by the [`selector`](#overlay-patch_selector).",
+      "description": "A single patch action to apply to the element identified by the [Overlay Selector](#overlay-selector).",
       "required": [
         "action",
         "selector",
@@ -742,13 +742,13 @@
       ],
       "title": "Overlay Patch Value",
       "x-ums-type": "embedded",
-      "description": "The value used by the patch [`action`](#overlay-patch_action).\nStructure depends on the target being patched and the action type.\n\nFor OData targets (`edmx`, `csdl-json`), the value MUST be expressed in CSDL JSON\nannotation format. Annotation keys use the `@TermName` convention:\ne.g. `{ \"@Core.Description\": \"...\", \"@Core.Revisions\": [...] }`.\nWhen the target is EDMX XML, the merge implementation converts this to `<Annotation>` elements.\nSee: https://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html\n\nFor CSN Interop targets (`sap-csn-interop-effective-v1`), the value is plain CSN JSON\nmerged directly into the matched entity definition or element object.\nUse the CSN `doc` field for human-readable descriptions, and `@AnnotationName` keys\nfor vocabulary annotations (e.g. `@EndUserText.label`, `@Semantics.text`).\nSee: https://sap.github.io/csn-interop-specification/"
+      "description": "The value used by the patch `action`.\nStructure depends on the target being patched and the action type.\n\nFor OData targets (`edmx`, `csdl-json`), the value MUST be expressed in CSDL JSON\nannotation format. Annotation keys use the `@TermName` convention:\ne.g. `{ \"@Core.Description\": \"...\", \"@Core.Revisions\": [...] }`.\nWhen the target is EDMX XML, the merge implementation converts this to `<Annotation>` elements.\nSee: https://docs.oasis-open.org/odata/odata-csdl-json/v4.01/odata-csdl-json-v4.01.html\n\nFor CSN Interop targets (`sap-csn-interop-effective-v1`), the value is plain CSN JSON\nmerged directly into the matched entity definition or element object.\nUse the CSN `doc` field for human-readable descriptions, and `@AnnotationName` keys\nfor vocabulary annotations (e.g. `@EndUserText.label`, `@Semantics.text`).\nSee: https://sap.github.io/csn-interop-specification/"
     },
     "OverlaySystemInstance": {
       "type": "object",
       "title": "Overlay System Instance",
       "x-ums-type": "ignore",
-      "description": "A [system instance](../../spec-v1/index.md#system-instance) is a concrete, running instance of a system type.\nThis object is identical to the ORD Document [`describedSystemInstance`](../../spec-v1/interfaces/Document.md#ord-document_describedsysteminstance) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
+      "description": "A [system instance](../../spec-v1/index.md#system-instance) is a concrete, running instance of a system type.\nThis object is identical to the ORD Document `describedSystemInstance` object; see [System Instance](../../spec-v1/interfaces/Document.md#system-instance).\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
       "properties": {
         "baseUrl": {
           "type": "string",
@@ -793,7 +793,7 @@
       "type": "object",
       "title": "Overlay System Type",
       "x-ums-type": "ignore",
-      "description": "A [system type](../../spec-v1/index.md#system-type) is the abstract type of an application or service, from operational perspective.\nThis object is identical to the ORD Document [`describedSystemType`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemtype) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
+      "description": "A [system type](../../spec-v1/index.md#system-type) is the abstract type of an application or service, from operational perspective.\nThis object is identical to the ORD Document `describedSystemType` object; see [System Type](../../spec-v1/interfaces/Document.md#system-type).\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
       "properties": {
         "systemNamespace": {
           "type": "string",
@@ -831,7 +831,7 @@
       "type": "object",
       "title": "Overlay System Version",
       "x-ums-type": "ignore",
-      "description": "A [system version](../../spec-v1/index.md#system-version) describes a version/release of the system.\nThis object is identical to the ORD Document [`describedSystemVersion`](../../spec-v1/interfaces/Document.md#ord-document_describedsystemversion) object.\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
+      "description": "A [system version](../../spec-v1/index.md#system-version) describes a version/release of the system.\nThis object is identical to the ORD Document `describedSystemVersion` object; see [System Version](../../spec-v1/interfaces/Document.md#system-version).\n\nIts purpose is to link the overlay to the same system landscape model as ORD resources, if needed.\nUsually this is not necessary for static overlays if the patched resource is already selected via ORD ID.",
       "properties": {
         "version": {
           "type": "string",
