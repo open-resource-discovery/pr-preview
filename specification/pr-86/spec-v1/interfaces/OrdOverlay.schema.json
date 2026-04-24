@@ -256,9 +256,44 @@
       "description": "A single patch action to apply to the element identified by the [Overlay Selector](#overlay-selector).",
       "required": [
         "action",
-        "selector",
-        "data"
+        "selector"
       ],
+      "if": {
+        "properties": {
+          "action": {
+            "enum": [
+              "update",
+              "merge"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "data"
+        ]
+      },
+      "else": {
+        "properties": {
+          "data": {
+            "not": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "maxProperties": 0
+                },
+                {
+                  "type": "array",
+                  "maxItems": 0
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          }
+        }
+      },
       "properties": {
         "description": {
           "type": "string",
@@ -281,7 +316,7 @@
             },
             {
               "const": "remove",
-              "description": "Remove the selected element or specific fields within it.\n\n- When `data: {}` (empty object): remove the selected element from the document entirely.\n- When `data` contains properties with `null` values: remove only those specific fields (recursively).\n  This uses JSON Merge Patch-style delete semantics where `null` indicates deletion.\n  Nested `null` values remove nested fields as well."
+              "description": "Remove the selected element or specific fields within it.\n\n- When `data` is omitted: remove the selected element from the document entirely.\n- When `data` is provided: remove only the fields or array entries marked by the removal mask.\n  For object masks, properties with `null` values are removed recursively.\n  This uses JSON Merge Patch-style delete semantics where `null` indicates deletion.\n  Nested `null` values remove nested fields as well."
             },
             {
               "const": "merge",
