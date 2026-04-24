@@ -5,6 +5,7 @@
   "title": "ORD Overlay",
   "x-ums-type": "root",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
     "$schema": {
       "type": "string",
@@ -251,6 +252,7 @@
       "type": "object",
       "title": "Overlay Patch",
       "x-ums-type": "embedded",
+      "additionalProperties": false,
       "description": "A single patch action to apply to the element identified by the [Overlay Selector](#overlay-selector).",
       "required": [
         "action",
