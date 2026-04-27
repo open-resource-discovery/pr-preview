@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">ORD Specification | Open Resource Discovery</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://open-resource-discovery.org/pr-preview/specification/pr-117/spec-v1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="ORD Specification | Open Resource Discovery"><meta data-rh="true" name="description" content="Notational Conventions"><meta data-rh="true" property="og:description" content="Notational Conventions"><link data-rh="true" rel="icon" href="/pr-preview/specification/pr-117/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://open-resource-discovery.org/pr-preview/specification/pr-117/spec-v1"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-117/spec-v1" hreflang="en"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-117/spec-v1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORD Specification","item":"https://open-resource-discovery.org/pr-preview/specification/pr-117/spec-v1/"}]}</script><script>window.bannerServerBaseUrl=""</script>
 <script src="/pr-preview/specification/pr-117/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-117/assets/css/styles.bbc9cee1.css">
-<script src="/pr-preview/specification/pr-117/assets/js/runtime~main.9314b85e.js" defer="defer"></script>
+<script src="/pr-preview/specification/pr-117/assets/js/runtime~main.118c0af7.js" defer="defer"></script>
 <script src="/pr-preview/specification/pr-117/assets/js/main.0b5e9254.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -46,6 +46,7 @@ The aggregator itself MAY represent a <a href="#static-perspective" class="">sta
 <p>An ORD aggregator MUST ensure that information that has <code>visibility</code> of <code>private</code> or <code>internal</code> is not made available to consumers that don&#x27;t have the corresponding permissions to get such information (e.g. external consumers). If ORD consumers get private or internal information, they inherit the responsibility of protecting it.</p>
 <p>There are <a href="#aggregation-rules" class="">aggregation rules</a> and <a href="#validation-rules" class="">validation rules</a> that an ORD aggregator MUST implement and <a href="#ord-consumer" class="">ORD Consumers</a> MAY hold to.</p>
 <p>It MUST support all <a href="#ord-transport-modes" class="">ORD transport modes</a> that are used by the systems it aggregates.</p>
+<p>When serving static perspective requests (<code>system-type</code> or <code>system-version</code>), the aggregator SHOULD follow the <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/perspectives#static-perspective-resolution">static perspective resolution</a> algorithm.</p>
 <p>In case of an ORD aggregator that supports the <a href="#dynamic-perspective" class="">dynamic perspective</a>:</p>
 <ul>
 <li class="">the aggregator MUST support <a href="#system-instance-aware" class="">system-instance-aware</a> information and MAY support further <a href="#system-instance" class="">system instance</a> grouping concepts, such as accounts etc.</li>
@@ -53,9 +54,9 @@ The aggregator itself MAY represent a <a href="#static-perspective" class="">sta
 <li class="">In the ORD Discovery API for accessing <code>system-instance</code> perspective information, the aggregator MUST implement a fallback to the static perspective.<!-- -->
 <ul>
 <li class="">Concretely: If an ORD Provider describes an ORD resource only via perspective: <code>system-version</code> and not via <code>system-instance</code>, the aggregator still needs to return the static ORD resource description, even when the request was to learn about the state of a specific system instance. The reason is that the ORD Discovery consumer should not need to understand whether the information is currently static or system-instance-aware. Consumers should also not have to consult two APIs and ask for both the static and dynamic perspective and be forced to merge both together.</li>
-<li class="">See chapter on <a href="#perspectives" class="">perspectives</a>.</li>
 </ul>
 </li>
+<li class="">See chapter on <a href="#perspectives" class="">perspectives</a> and the <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/perspectives">perspectives concept page</a> for details.</li>
 <li class="">It SHOULD support the proposed optimizations for the transport modes, e.g. make use of <code>perspectives</code> (replaces deprecated <code>systemInstanceAware</code>), <code>lastUpdate</code> properties and support the proposed HTTP cache mechanisms. This has the potential to significantly reduce overall TCO.</li>
 </ul>
 <p><img decoding="async" loading="lazy" alt="ORD Aggregator Role" src="/pr-preview/specification/pr-117/assets/images/ord-role-aggregator-44449f97b43852cec0567191ba92bf27.svg" title="ORD Aggregator Role" width="3472" height="809" class="img_ev3q"></p>
@@ -140,7 +141,9 @@ It is therefore RECOMMENDED to use American English for human-readable titles an
 <p>The described information MUST not be duplicated within or across ORD documents of the same <a href="#system-type" class="">system type</a>.
 If some information like Package or Consumption Bundle is needed across multiple documents they can either be put in one of the documents or be moved to a separate document for shared information.
 This also applies across ORD Providers of the same system type, which is ensured through the correct use of namespaces and namespace ownerships.
-Resources using an <a href="#authority-namespace" class="">authority namespace</a> MAY be published by multiple system types. See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Resources</a>.</p>
+Shared ORD information MAY be published by multiple system types when the ORD ID identifies the same governed definition.
+This commonly uses an <a href="#authority-namespace" class="">authority namespace</a>, but can also reuse another system type&#x27;s namespace when that system type owns the definition.
+See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Taxonomy, Resources and Contracts</a>.</p>
 <p>The <a href="#validation-rules" class="">validation rules</a> MUST be considered.</p>
 <p>If the <a href="#resource" class="">resources</a> that are described through ORD are <a href="#system-instance-aware" class="">system-instance-aware</a> (they differ between system instances), the ORD document MUST reflect this.
 In that case, one ORD document MUST be provided for each system instance.
@@ -396,9 +399,10 @@ This happens if the <a href="#ord-id" class="">ORD ID</a> points to an ORD resou
 <li class="">The same ORD information or resource (identical ORD ID) MUST NOT be described multiple times within the same <a href="#system-type" class="">system type</a> or <a href="#system-version" class="">system version</a> scope.
 Please be aware that this could happen within an ORD Document or within the same ORD Provider on different ORD Documents.
 For migration transitions this rule MAY be violated temporarily.</li>
-<li class="">Resources with an <a href="#authority-namespace" class="">authority namespace</a> ORD ID MAY be published by multiple <a href="#system-type" class="">system types</a>, because the authority namespace indicates a shared contract.
-In this case, all publishers MUST describe the resource identically for the same <code>version</code>. The aggregator MUST validate consistency.
-See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Resources</a> for details.</li>
+<li class="">Shared ORD information MAY be published by multiple <a href="#system-type" class="">system types</a> when the ORD ID identifies the same governed definition.
+In this case, all publishers MUST describe the ORD information consistently for the same <code>version</code>. The aggregator MUST validate consistency.
+This commonly uses an <a href="#authority-namespace" class="">authority namespace</a>, but can also reuse another system type&#x27;s namespace when that system type owns the definition.
+See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Taxonomy, Resources and Contracts</a> for details.</li>
 </ul>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-discovery-api">ORD Discovery API<a href="#ord-discovery-api" class="hash-link" aria-label="Direct link to ORD Discovery API" title="Direct link to ORD Discovery API" translate="no">​</a></h3>
 <p>The ORD Discovery API is a higher quality API, provided by an <a href="#ord-aggregator" class="">ORD aggregator</a> that is optimized for easy consumption of ORD information.
@@ -444,6 +448,9 @@ It is explained in more detail in the <a class="" href="/pr-preview/specificatio
 <li class="">If both perspectives are provided, each MUST be described completely, until we introduce a more optimized <code>system-instance-delta</code> perspective.</li>
 <li class="">Content that is independent of systems (like Taxonomies, Products, Vendors) SHOULD use the <code>system-independent</code> perspective.</li>
 </ul>
+<blockquote>
+<p>⏩ For how aggregators resolve static perspective requests (e.g. which data to return when no version is specified), see the <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/perspectives#static-perspective-resolution">static perspective resolution</a> algorithm on the perspectives concept page.</p>
+</blockquote>
 <h2 class="anchor anchorTargetStickyNavbar_Vzrq" id="id-concepts">ID Concepts<a href="#id-concepts" class="hash-link" aria-label="Direct link to ID Concepts" title="Direct link to ID Concepts" translate="no">​</a></h2>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="namespaces">Namespaces<a href="#namespaces" class="hash-link" aria-label="Direct link to Namespaces" title="Direct link to Namespaces" translate="no">​</a></h3>
 <p>ORD makes use of namespaces to ensure we don&#x27;t have ID collisions between multiple, potentially independent sources of information.</p>
@@ -526,8 +533,8 @@ How this boundary is drawn depends on the technical decisions of the application
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="authority-namespace">Authority Namespace<a href="#authority-namespace" class="hash-link" aria-label="Direct link to Authority Namespace" title="Direct link to Authority Namespace" translate="no">​</a></h4>
 <p>An <dfn id="def-authority-namespace">authority namespace</dfn> is a stable and globally unique identifier namespace that corresponds to an <strong>organizational unit</strong> responsible for cross-alignment and governance.
 Authority namespaces are relevant when contracts, interfaces or taxonomy are owned and defined on a level that spans across individual applications or services.
-This includes shared API contracts, event definitions, and other resources that are provided by multiple <a href="#system-type" class="">system types</a> built from the same software components.
-See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Resources</a> for details on using authority namespaces for resources.</p>
+This includes shared API contracts, event definitions, data products, capabilities, integration dependencies, consumption bundles, and agents that are provided by multiple <a href="#system-type" class="">system types</a> built from the same software components.
+See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Taxonomy, Resources and Contracts</a> for details on namespace ownership and authority namespaces.</p>
 <p>An authority namespace MUST be constructed according to the following rules:</p>
 <p><code>&lt;authority&gt;</code> := <code>&lt;vendorNamespace&gt;.&lt;authorityIdentifier&gt;</code></p>
 <ul>
@@ -582,8 +589,8 @@ Therefore an ORD ID is not unique from a <a href="#system-instance" class="">sys
 The same resource (with the same ORD ID) can be exposed in different variations (e.g. customizations, extensions) by multiple system instances at run-time.</p>
 <p>To get a globally unique ID at run-time, a composite key is required.
 This can be achieved by either combining it with a system instance ID or a full version, depending on the use cases.</p>
-<p>When resources use an <a href="#authority-namespace" class="">authority namespace</a>, the same ORD ID can be published by multiple <a href="#system-type" class="">system types</a>.
-In this case, the ORD ID identifies the shared contract, and the system type or system instance provides the additional context for uniqueness.</p>
+<p>When the same shared ORD information is published or reused by multiple <a href="#system-type" class="">system types</a>, the ORD ID identifies the shared contract, taxonomy item, definition or governance model, and the system type or system instance provides the additional context for uniqueness.
+This commonly uses an <a href="#authority-namespace" class="">authority namespace</a>, but can also use a system namespace when that system type owns the reused definition.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-id-construction">ORD ID Construction<a href="#ord-id-construction" class="hash-link" aria-label="Direct link to ORD ID Construction" title="Direct link to ORD ID Construction" translate="no">​</a></h4>
 <p>The ORD ID consists of four fragments, separated by <code>:</code>.</p>
 <p>It MUST be constructed as defined here:</p>
@@ -591,24 +598,13 @@ In this case, the ORD ID identifies the shared contract, and the system type or 
 <ul>
 <li class="">
 <p><strong><code>&lt;namespace&gt;</code></strong> := an <a href="#namespaces" class="">ORD namespace</a>.
-The namespace MUST reflect the provider of the described resource.</p>
+The namespace MUST reflect the owner governing the described ORD information.</p>
 <ul>
-<li class="">For <code>Package</code>, <code>APIResource</code>, <code>EventResource</code>, <code>Capability</code>, <code>IntegrationDependency</code>, <code>DataProduct</code> and <code>Agent</code>:<!-- -->
+<li class="">For <code>Package</code>, <code>ConsumptionBundle</code>, <code>APIResource</code>, <code>EventResource</code>, <code>EntityType</code>, <code>Capability</code>, <code>IntegrationDependency</code>, <code>DataProduct</code> and <code>Agent</code>:<!-- -->
 <ul>
 <li class="">MUST be a valid <a href="#system-namespace" class="">system namespace</a>, <a href="#authority-namespace" class="">authority namespace</a> or <a href="#sub-context-namespace" class="">sub-context namespace</a> thereof</li>
-<li class="">An <a href="#authority-namespace" class="">authority namespace</a> SHOULD be used when the resource represents a shared contract across multiple <a href="#system-type" class="">system types</a>. See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Resources</a>.</li>
-<li class="">A <a href="#system-namespace" class="">system namespace</a> SHOULD be used when the resource is specific to a single system type.</li>
-</ul>
-</li>
-<li class="">For <code>Consumption Bundle</code>:<!-- -->
-<ul>
-<li class="">MUST be a valid <a href="#system-namespace" class="">system namespace</a> or <a href="#sub-context-namespace" class="">sub-context namespace</a> thereof</li>
-<li class="">Consumption Bundles describe system-type-specific access and therefore SHOULD use a system namespace.</li>
-</ul>
-</li>
-<li class="">For <code>EntityType</code>
-<ul>
-<li class="">MUST be a valid <a href="#system-namespace" class="">system namespace</a>, <a href="#authority-namespace" class="">authority namespace</a> or <a href="#sub-context-namespace" class="">sub-context namespace</a></li>
+<li class="">A <a href="#system-namespace" class="">system namespace</a> SHOULD be used when the resource, resource grouping, access grouping or taxonomy item is specific to a single system type.</li>
+<li class="">An <a href="#authority-namespace" class="">authority namespace</a> SHOULD be used when the resource, resource grouping, access grouping or taxonomy item represents a shared contract, definition or governance model across multiple <a href="#system-type" class="">system types</a>. See <a class="" href="/pr-preview/specification/pr-117/spec-v1/concepts/shared-resources">Shared Taxonomy, Resources and Contracts</a>.</li>
 </ul>
 </li>
 <li class="">For <code>Vendor</code> and <code>Product</code>:<!-- -->
@@ -616,13 +612,11 @@ The namespace MUST reflect the provider of the described resource.</p>
 <li class="">MUST be a valid <a href="#vendor-namespace" class="">vendor namespace</a> for <code>Vendor</code> and <code>Product</code></li>
 </ul>
 </li>
-<li class="">The provider is the system hosting the described resource.<!-- -->
-<ul>
-<li class="">In advanced cases, the provider could be an embedded system / sidecar with its own system namespace.
+<li class="">For system-namespaced ORD IDs, the provider is the system hosting the described resource.
+In advanced cases, the provider could be an embedded system / sidecar with its own system namespace.
 This can lead to multiple system namespaces within one system.
 In this case it needs to be taken care that static publishing does not create conflicts, e.g. through moving the publishing responsibility to the embedded system (and not by the parent system).</li>
-</ul>
-</li>
+<li class="">For authority-namespaced ORD IDs, the namespace identifies the organizational unit governing the shared contract, definition, taxonomy item or access grouping.</li>
 </ul>
 </li>
 <li class="">
@@ -658,7 +652,7 @@ In this case it needs to be taken care that static publishing does not create co
 <li class="">
 <p><strong><code>&lt;majorVersion&gt;</code></strong> := a version incrementor of the resource that increases on breaking changes.</p>
 <ul>
-<li class="">MUST be provided for <code>Package</code>, <code>Consumption Bundle</code>, <code>APIResource</code>, <code>EventResource</code>, <code>EntityType</code>, <code>Capability</code>, <code>IntegrationDependency</code></li>
+<li class="">MUST be provided for <code>Package</code>, <code>ConsumptionBundle</code>, <code>APIResource</code>, <code>EventResource</code>, <code>EntityType</code>, <code>Capability</code>, <code>IntegrationDependency</code>, <code>DataProduct</code> and <code>Agent</code></li>
 <li class="">MUST NOT be provided for <code>Product</code> and <code>Vendor</code></li>
 <li class="">If provided: MUST be an integer and MUST NOT contain leading zeroes.</li>
 <li class="">MUST be incremented if the resource introduced an incompatible API change. This correlates with a major version change in <a href="https://semver.org/" target="_blank" rel="noopener noreferrer" class="">Semantic Versioning</a>.<!-- -->
