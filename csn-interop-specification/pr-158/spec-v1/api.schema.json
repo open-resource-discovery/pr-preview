@@ -26,7 +26,8 @@
         }
       },
       "x-extension-targets": [
-        "Type"
+        "Type",
+        "Entity"
       ],
       "title": "@API.element"
     },
@@ -50,7 +51,8 @@
         }
       },
       "x-extension-targets": [
-        "Type"
+        "Type",
+        "Entity"
       ],
       "title": "@API.element.releaseState"
     }
