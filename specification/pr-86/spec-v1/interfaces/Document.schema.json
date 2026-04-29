@@ -3691,7 +3691,7 @@
             },
             {
               "const": "ord:overlay:v1",
-              "description": "ORD Overlay file for patching ORD resources and/or referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-extensions/models/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
+              "description": "ORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-extensions/models/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
               "const": "custom",
@@ -3796,7 +3796,7 @@
             },
             {
               "const": "ord:overlay:v1",
-              "description": "ORD Overlay file for patching ORD resources and/or referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-extensions/models/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
+              "description": "ORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-extensions/models/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
               "const": "custom",
