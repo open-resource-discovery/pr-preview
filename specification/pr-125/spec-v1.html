@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">ORD Specification | Open Resource Discovery</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="ORD Specification | Open Resource Discovery"><meta data-rh="true" name="description" content="Notational Conventions"><meta data-rh="true" property="og:description" content="Notational Conventions"><link data-rh="true" rel="icon" href="/pr-preview/specification/pr-125/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1" hreflang="en"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORD Specification","item":"https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1/"}]}</script><script>window.bannerServerBaseUrl=""</script>
 <script src="/pr-preview/specification/pr-125/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-125/assets/css/styles.b4d5aaa4.css">
-<script src="/pr-preview/specification/pr-125/assets/js/runtime~main.b3f177df.js" defer="defer"></script>
+<script src="/pr-preview/specification/pr-125/assets/js/runtime~main.58bff857.js" defer="defer"></script>
 <script src="/pr-preview/specification/pr-125/assets/js/main.9e634c87.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -197,15 +197,10 @@ In the common case where the provider <em>is</em> the described system, both bas
 <p>Metadata files such as resource definitions and document links are physically hosted by the <strong>ORD provider</strong> — the system that serves the ORD document.
 Their relative URLs are resolved against the provider base URL using the following order (applied by ORD aggregators):</p>
 <ol>
-<li class=""><strong>Document root <code>baseUrl</code></strong> — takes precedence when explicitly set in the document. This wins even over the fetch context URL (e.g., when the document is served via a CDN or reverse proxy where the fetch URL and the canonical serving URL differ).</li>
+<li class=""><strong>Document root <code>baseUrl</code></strong> — takes precedence when explicitly set in the document.</li>
 <li class=""><strong>Fetch context URL</strong> (pull scenarios only) — the URL the ORD document was fetched from.</li>
-<li class=""><strong>ORD Configuration <code>baseUrl</code></strong> — or its default derived from the well-known endpoint URL.</li>
-<li class=""><strong><code>describedSystemInstance.baseUrl</code></strong> — backward-compatibility fallback for documents predating version 1.15 that do not set the document root <code>baseUrl</code>. In the common case where provider and described system are the same, this yields the same result as rule 3.</li>
+<li class=""><strong><code>describedSystemInstance.baseUrl</code></strong> — backward-compatibility fallback for documents predating version 1.15 that do not set the document root <code>baseUrl</code>. In the common case where provider and described system are the same, this yields the same result.</li>
 </ol>
-<blockquote>
-<p><strong>Important:</strong> Unlike the described system base URL (see below), ORD aggregators generally do not hold independent authoritative knowledge of the provider base URL from their landscape configuration. The only context-derived knowledge is the fetch URL in pull scenarios.
-This is why setting the document root <code>baseUrl</code> explicitly is particularly important in <strong>push, offline, and self-contained document scenarios</strong>, and is <strong>REQUIRED when the provider and the described system differ</strong>.</p>
-</blockquote>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="described-system-base-url-entry-points">Described System Base URL (entry points)<a href="#described-system-base-url-entry-points" class="hash-link" aria-label="Direct link to Described System Base URL (entry points)" title="Direct link to Described System Base URL (entry points)" translate="no">​</a></h5>
 <p>Entry points are runtime endpoints on the <strong>described system</strong> — the system being documented.
 Their relative URLs are resolved against the described system base URL:</p>
@@ -398,7 +393,7 @@ See <a href="#relative-url-resolution" class="">Relative URL Resolution</a> for 
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="removal-of-resourcesinformation">Removal of Resources/Information<a href="#removal-of-resourcesinformation" class="hash-link" aria-label="Direct link to Removal of Resources/Information" title="Direct link to Removal of Resources/Information" translate="no">​</a></h5>
 <p>The removal of resources is indicated through setting a <a class="" href="/pr-preview/specification/pr-125/spec-v1/interfaces/Document#tombstone">Tombstone</a>.
 The ORD Aggregator MUST remove unpublished information that has been tombstoned within a grace period of 31 days.</p>
-<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="hosting-resource-definitions">Hosting Resource Definitions<a href="#hosting-resource-definitions" class="hash-link" aria-label="Direct link to Hosting Resource Definitions" title="Direct link to Hosting Resource Definitions" translate="no">​</a></h5>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="hosting-resource-definitions">Hosting Resource Definitions<a href="#hosting-resource-definitions" class="hash-link" aria-label="Direct link to Hosting Resource Definitions" title="Direct link to Hosting Resource Definitions" translate="no">  ​</a></h5>
 <p>The ORD aggregator MUST host all files that have been referenced in the <a href="#ord-resource" class="">ORD resources</a>, most notably the <a href="#resource-definition" class="">resource definitions</a>.
 The files MUST be stored, hosted, and made available by the ORD aggregator system itself.
 The URLs to the hosted files MUST be rewritten accordingly in the <a href="#ord-discovery-api" class="">ORD Discovery API</a> responses.
