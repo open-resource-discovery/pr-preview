@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.9.2">
 <title data-rh="true">ORD Specification | Open Resource Discovery</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:url" content="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="ORD Specification | Open Resource Discovery"><meta data-rh="true" name="description" content="Notational Conventions"><meta data-rh="true" property="og:description" content="Notational Conventions"><link data-rh="true" rel="icon" href="/pr-preview/specification/pr-125/img/favicon.svg"><link data-rh="true" rel="canonical" href="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1" hreflang="en"><link data-rh="true" rel="alternate" href="https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ORD Specification","item":"https://open-resource-discovery.org/pr-preview/specification/pr-125/spec-v1/"}]}</script><script>window.bannerServerBaseUrl=""</script>
 <script src="/pr-preview/specification/pr-125/js/custom.js"></script><link rel="stylesheet" href="/pr-preview/specification/pr-125/assets/css/styles.b4d5aaa4.css">
-<script src="/pr-preview/specification/pr-125/assets/js/runtime~main.58bff857.js" defer="defer"></script>
+<script src="/pr-preview/specification/pr-125/assets/js/runtime~main.ec9e68b1.js" defer="defer"></script>
 <script src="/pr-preview/specification/pr-125/assets/js/main.9e634c87.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -189,13 +189,26 @@ Please <a href="https://github.com/open-resource-discovery/specification/issues"
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id="relative-url-resolution">Relative URL Resolution<a href="#relative-url-resolution" class="hash-link" aria-label="Direct link to Relative URL Resolution" title="Direct link to Relative URL Resolution" translate="no">​</a></h4>
 <p>ORD documents may contain both absolute and relative URLs.
 ORD aggregators MUST resolve all relative URLs to absolute URLs before exposing them to ORD consumers.</p>
-<p>The base URL used for resolution depends on <strong>what</strong> the URL references, because two different systems may be involved:</p>
+<p>Relative URL resolution follows <a href="https://datatracker.ietf.org/doc/html/rfc3986#section-5" target="_blank" rel="noopener noreferrer" class="">RFC 3986 (Uniform Resource Identifier: Generic Syntax)</a>, with the base URI determined as described below.</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="url-reference-types">URL Reference Types<a href="#url-reference-types" class="hash-link" aria-label="Direct link to URL Reference Types" title="Direct link to URL Reference Types" translate="no">​</a></h5>
+<p>ORD recognizes three types of URL references:</p>
+<table><thead><tr><th>Pattern</th><th>Type</th><th>Resolved against</th></tr></thead><tbody><tr><td><code>https://example.com/path</code></td><td>Absolute URL</td><td>Used as-is — no resolution needed</td></tr><tr><td><code>/path/file.json</code></td><td>Root-relative (leading slash)</td><td>The applicable <strong>base URL</strong> (see below)</td></tr><tr><td><code>./path/file.json</code>, <code>../path/file.json</code>, <code>path/file.json</code></td><td>Document-relative</td><td>The URL/location of the <strong>current document</strong></td></tr></tbody></table>
+<p><strong>Root-relative URLs</strong> (leading slash) are resolved against the applicable base URL <em>including its path component</em>.
+For example, if <code>baseUrl</code> is <code>https://provider.com/api/v1</code>, then <code>/metadata/schema.json</code> resolves to <code>https://provider.com/api/v1/metadata/schema.json</code>.</p>
+<p><strong>Document-relative URLs</strong> (with <code>./</code>, <code>../</code>, or bare path without leading slash) are resolved relative to the URL from which the current document was retrieved, per <a href="https://datatracker.ietf.org/doc/html/rfc3986#section-5" target="_blank" rel="noopener noreferrer" class="">RFC 3986 Section 5</a>.
+For example, if a document was fetched from <code>https://provider.com/ord/v1/documents/apis.json</code>, then <code>./schemas.json</code> resolves to <code>https://provider.com/ord/v1/documents/schemas.json</code>.
+This pattern is particularly useful for static ORD providers serving files from a file system or git repository, where relative references remain valid regardless of where the directory tree is hosted.</p>
+<blockquote>
+<p><strong>Note:</strong> Per RFC 3986, <code>path/file.json</code> (no leading slash, no dot prefix) is equivalent to <code>./path/file.json</code> — both are document-relative.</p>
+</blockquote>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="base-url-for-root-relative-urls">Base URL for Root-Relative URLs<a href="#base-url-for-root-relative-urls" class="hash-link" aria-label="Direct link to Base URL for Root-Relative URLs" title="Direct link to Base URL for Root-Relative URLs" translate="no">​</a></h5>
+<p>The base URL used for resolving root-relative URLs (leading slash) depends on <strong>what</strong> the URL references, because two different systems may be involved:</p>
 <table><thead><tr><th>URL type</th><th>Resolved against</th><th>Declared via</th></tr></thead><tbody><tr><td><strong>Metadata files</strong>: <code>resourceDefinitions[].url</code>, <code>links[].url</code>, and similar file references</td><td>Provider base URL</td><td>Document root <code>baseUrl</code></td></tr><tr><td><strong>Entry points</strong>: <code>entryPoints[]</code></td><td>Described system base URL</td><td><code>describedSystemInstance.baseUrl</code></td></tr></tbody></table>
 <p>This distinction matters when the ORD provider and the described system differ (e.g., a central aggregator describing multiple systems on its behalf).
 In the common case where the provider <em>is</em> the described system, both base URLs are identical and the distinction has no practical effect.</p>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="provider-base-url-metadata-files">Provider Base URL (metadata files)<a href="#provider-base-url-metadata-files" class="hash-link" aria-label="Direct link to Provider Base URL (metadata files)" title="Direct link to Provider Base URL (metadata files)" translate="no">​</a></h5>
 <p>Metadata files such as resource definitions and document links are physically hosted by the <strong>ORD provider</strong> — the system that serves the ORD document.
-Their relative URLs are resolved against the provider base URL using the following order (applied by ORD aggregators):</p>
+Their root-relative URLs are resolved against the provider base URL using the following order (applied by ORD aggregators):</p>
 <ol>
 <li class=""><strong>Document root <code>baseUrl</code></strong> — takes precedence when explicitly set in the document.</li>
 <li class=""><strong>Fetch context URL</strong> (pull scenarios only) — the URL the ORD document was fetched from.</li>
@@ -203,7 +216,7 @@ Their relative URLs are resolved against the provider base URL using the followi
 </ol>
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="described-system-base-url-entry-points">Described System Base URL (entry points)<a href="#described-system-base-url-entry-points" class="hash-link" aria-label="Direct link to Described System Base URL (entry points)" title="Direct link to Described System Base URL (entry points)" translate="no">​</a></h5>
 <p>Entry points are runtime endpoints on the <strong>described system</strong> — the system being documented.
-Their relative URLs are resolved against the described system base URL:</p>
+Their root-relative URLs are resolved against the described system base URL:</p>
 <ol>
 <li class=""><strong>Aggregator-authoritative URL</strong> — ORD aggregators that hold authoritative knowledge of the described system&#x27;s base URL (e.g., from landscape configuration or service discovery) MAY prefer that over the document-provided value. This is an aggregator decision, appropriate when the aggregator has more reliable or up-to-date information than the provider.</li>
 <li class=""><strong><code>describedSystemInstance.baseUrl</code></strong> — the value declared in the document.</li>
@@ -211,6 +224,14 @@ Their relative URLs are resolved against the described system base URL:</p>
 <blockquote>
 <p><strong>The asymmetry is intentional.</strong> Aggregators commonly have landscape authority over the systems they describe (rule 1 above), but not over the system that merely <em>serves</em> ORD documents. For the described system, deferring to the aggregator&#x27;s landscape knowledge is appropriate; for the provider, the document is the authoritative source, especially in push scenarios where no fetch context exists.</p>
 </blockquote>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="resolution-examples">Resolution Examples<a href="#resolution-examples" class="hash-link" aria-label="Direct link to Resolution Examples" title="Direct link to Resolution Examples" translate="no">​</a></h5>
+<p>Given:</p>
+<ul>
+<li class="">Document root <code>baseUrl</code>: <code>https://provider.com/api/v1</code></li>
+<li class=""><code>describedSystemInstance.baseUrl</code>: <code>https://system.com</code></li>
+<li class="">Document fetched from: <code>https://provider.com/api/v1/ord/documents/apis.json</code></li>
+</ul>
+<table><thead><tr><th>Reference in document</th><th>Context</th><th>Resolves to</th></tr></thead><tbody><tr><td><code>https://cdn.example.com/schema.json</code></td><td>Any</td><td><code>https://cdn.example.com/schema.json</code></td></tr><tr><td><code>/metadata/schema.json</code></td><td>Metadata file</td><td><code>https://provider.com/api/v1/metadata/schema.json</code></td></tr><tr><td><code>/v1/orders</code></td><td>Entry point</td><td><code>https://system.com/v1/orders</code></td></tr><tr><td><code>./related/events.json</code></td><td>Any</td><td><code>https://provider.com/api/v1/ord/documents/related/events.json</code></td></tr><tr><td><code>../shared/types.json</code></td><td>Any</td><td><code>https://provider.com/api/v1/ord/shared/types.json</code></td></tr></tbody></table>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id="ord-provider-api">ORD Provider API<a href="#ord-provider-api" class="hash-link" aria-label="Direct link to ORD Provider API" title="Direct link to ORD Provider API" translate="no">​</a></h3>
 <p>This section details how an <a href="#ord-provider" class="">ORD Provider</a> exposes one or multiple <a href="#ord-document" class="">ORD documents</a> for the <a href="#pull-transport" class="">pull transport mode</a>.</p>
 <p>The ORD Provider MUST implement a RESTful API that provides an <a href="#ord-configuration-endpoint" class="">ORD configuration endpoint</a> and at least one <a href="#ord-document-endpoint" class="">ORD document endpoint</a>.</p>
@@ -393,7 +414,7 @@ See <a href="#relative-url-resolution" class="">Relative URL Resolution</a> for 
 <h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="removal-of-resourcesinformation">Removal of Resources/Information<a href="#removal-of-resourcesinformation" class="hash-link" aria-label="Direct link to Removal of Resources/Information" title="Direct link to Removal of Resources/Information" translate="no">​</a></h5>
 <p>The removal of resources is indicated through setting a <a class="" href="/pr-preview/specification/pr-125/spec-v1/interfaces/Document#tombstone">Tombstone</a>.
 The ORD Aggregator MUST remove unpublished information that has been tombstoned within a grace period of 31 days.</p>
-<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="hosting-resource-definitions">Hosting Resource Definitions<a href="#hosting-resource-definitions" class="hash-link" aria-label="Direct link to Hosting Resource Definitions" title="Direct link to Hosting Resource Definitions" translate="no">  ​</a></h5>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id="hosting-resource-definitions">Hosting Resource Definitions<a href="#hosting-resource-definitions" class="hash-link" aria-label="Direct link to Hosting Resource Definitions" title="Direct link to Hosting Resource Definitions" translate="no">​</a></h5>
 <p>The ORD aggregator MUST host all files that have been referenced in the <a href="#ord-resource" class="">ORD resources</a>, most notably the <a href="#resource-definition" class="">resource definitions</a>.
 The files MUST be stored, hosted, and made available by the ORD aggregator system itself.
 The URLs to the hosted files MUST be rewritten accordingly in the <a href="#ord-discovery-api" class="">ORD Discovery API</a> responses.
