@@ -295,7 +295,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "sap.businesshub:package:SAPS4HANACloudBusinessEvents"
             ]
           ]
         },
@@ -2891,7 +2891,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "sap.businesshub:package:SAPS4HANACloudBusinessEvents"
             ]
           ]
         },
@@ -3918,7 +3918,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "sap.businesshub:package:SAPS4HANACloudBusinessEvents"
             ]
           ]
         },
@@ -4565,7 +4565,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "sap.businesshub:package:SAPS4HANACloudBusinessEvents"
             ]
           ]
         },
@@ -4984,7 +4984,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "sap.businesshub:package:SAPS4HANACloudBusinessEvents"
             ]
           ]
         },
@@ -6251,7 +6251,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "sap.businesshub:package:SAPS4HANACloudBusinessEvents"
             ]
           ]
         },
@@ -6333,7 +6333,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "sap.businesshub:package:SAPS4HANACloudBusinessEvents"
             ]
           ]
         },
