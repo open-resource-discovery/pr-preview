@@ -297,6 +297,20 @@
             "91cd9972-c05d-4d29-8b6e-dbef2a2d48e9"
           ]
         },
+        "correlationIds": {
+          "type": "array",
+          "description": "Correlation IDs can be used to create a reference to related data in other repositories (especially to the system of record).\n\nThey express an \"identity\" / \"equals\" / \"mappable\" relationship to the target ID.\n\nIf a \"part of\" relationship needs to be expressed, use the `partOfGroups` assignment instead.\n\nMUST be a valid [Correlation ID](../index.md#correlation-id).",
+          "items": {
+            "type": "string",
+            "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+):([a-zA-Z0-9._\\-\\/]+)$",
+            "maxLength": 255
+          },
+          "examples": [
+            [
+              "foo.bar:conceptName:localIdentifier"
+            ]
+          ]
+        },
         "title": {
           "type": "string",
           "description": "Human-readable title.\n\nMUST NOT exceed 255 chars.\nMUST NOT contain line breaks.",
@@ -2889,7 +2903,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "foo.bar:conceptName:localIdentifier"
             ]
           ]
         },
@@ -3916,7 +3930,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "foo.bar:conceptName:localIdentifier"
             ]
           ]
         },
@@ -4563,7 +4577,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "foo.bar:conceptName:localIdentifier"
             ]
           ]
         },
@@ -4982,7 +4996,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "foo.bar:conceptName:localIdentifier"
             ]
           ]
         },
@@ -6249,7 +6263,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "foo.bar:conceptName:localIdentifier"
             ]
           ]
         },
@@ -6331,7 +6345,7 @@
           },
           "examples": [
             [
-              "sap.s4:communicationScenario:SAP_COM_0008"
+              "foo.bar:conceptName:localIdentifier"
             ]
           ]
         },
