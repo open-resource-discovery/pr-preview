@@ -3705,6 +3705,8 @@
             },
             {
               "const": "ord:overlay:v1",
+              "x-feature-status": "alpha",
+              "x-introduced-in-version": "1.15.0",
               "description": "ORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
@@ -3828,6 +3830,8 @@
             },
             {
               "const": "ord:overlay:v1",
+              "x-feature-status": "alpha",
+              "x-introduced-in-version": "1.15.0",
               "description": "ORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
