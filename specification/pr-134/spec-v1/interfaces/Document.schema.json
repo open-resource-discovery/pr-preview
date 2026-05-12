@@ -962,7 +962,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers."
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types)."
         },
         "partOfConsumptionBundles": {
           "type": "array",
@@ -1839,7 +1839,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers."
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types)."
         },
         "partOfConsumptionBundles": {
           "type": "array",
@@ -2579,7 +2579,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers."
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types)."
         },
         "partOfProducts": {
           "type": "array",
@@ -2942,7 +2942,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers.",
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types).",
           "x-feature-status": "beta"
         },
         "partOfProducts": {
@@ -3966,7 +3966,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers."
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types)."
         },
         "version": {
           "type": "string",
@@ -4644,7 +4644,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers."
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types)."
         },
         "version": {
           "type": "string",
@@ -5032,7 +5032,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers."
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types)."
         },
         "version": {
           "type": "string",
@@ -6268,7 +6268,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "Defines who is allowed to see and access this Group Type and its metadata.\n\nIf not given, the Group Type is assumed to be `public`.",
+          "description": "Defines who is allowed to discover and access this Group Type and its metadata.\nDefaults to `public` if not set.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types).",
           "oneOf": [
             {
               "const": "public",
@@ -6283,7 +6283,8 @@
               "description": "Metadata should not be discoverable outside the application / service's own deployment scope (e.g., outside of the provider application or the same system namespace / system type).\nUsed for metadata completeness when describing implementation details or dependencies.\n\nPrivate resources usually have no stability guarantees and can change or be removed at any time.\nThese are typically implementation details not meant for consumption by other services.\n\nExample: Services only used within a microservice architecture or APIs that are only used for the own UIs, not for general consumption.\n\nPrivate resources MUST NOT be made discoverable or accessible outside the application / service's own deployment scope."
             }
           ],
-          "x-introduced-in-version": "1.15.0"
+          "x-introduced-in-version": "1.15.0",
+          "default": "public"
         }
       },
       "required": [
@@ -6371,7 +6372,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "Defines who is allowed to see and access this Group and its metadata.\n\nIf not given, the Group is assumed to be `public`.",
+          "description": "Defines who is allowed to discover and access this Group and its metadata.\nDefaults to `public` if not set.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types).",
           "oneOf": [
             {
               "const": "public",
@@ -6386,7 +6387,8 @@
               "description": "Metadata should not be discoverable outside the application / service's own deployment scope (e.g., outside of the provider application or the same system namespace / system type).\nUsed for metadata completeness when describing implementation details or dependencies.\n\nPrivate resources usually have no stability guarantees and can change or be removed at any time.\nThese are typically implementation details not meant for consumption by other services.\n\nExample: Services only used within a microservice architecture or APIs that are only used for the own UIs, not for general consumption.\n\nPrivate resources MUST NOT be made discoverable or accessible outside the application / service's own deployment scope."
             }
           ],
-          "x-introduced-in-version": "1.15.0"
+          "x-introduced-in-version": "1.15.0",
+          "default": "public"
         }
       },
       "required": [
@@ -7059,7 +7061,7 @@
               "#/definitions/Group/groupId"
             ]
           },
-          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility notice:** Groups and Group Types may have a `visibility` that restricts who is allowed to see them.\nAggregators and consumers MUST NOT expose group assignments (`partOfGroups`) that reference `internal` or `private` Groups (or Group Types)\nto consumers whose visibility access level is more permissive than the referenced Group's (or Group Type's) visibility.\nFor example, an `internal` group assignment MUST NOT be made visible to `public` consumers.",
+          "description": "Defines which groups the resource is assigned to.\n\nThe property is optional, but if given the value MUST be an array of valid Group IDs.\n\nGroups are a lightweight custom taxonomy concept.\nThey express a \"part of\" relationship to the chosen group concept.\nIf an \"identity / equals\" relationship needs to be expressed, use the `correlationIds` instead.\n\nAll resources that share the same group ID assignment are effectively grouped together.\n\n**Visibility:** Groups and Group Types may carry a `visibility`. Aggregators and consumers MUST NOT expose\ngroup assignments to audiences whose access level exceeds the referenced Group's (or Group Type's) visibility.\nSee [Visibility of Groups and Group Types](../concepts/grouping-and-bundling#visibility-of-groups-and-group-types).",
           "examples": []
         },
         "version": {
