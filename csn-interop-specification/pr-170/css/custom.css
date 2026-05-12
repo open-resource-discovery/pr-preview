@@ -1,0 +1,282 @@
+:root {
+  /* Night Owl Colors - Muted Blue */
+  --ifm-color-primary: #5e89d6;
+  --ifm-color-primary-dark: #4b7bc9;
+  --ifm-color-primary-darker: #4273c5;
+  --ifm-color-primary-darkest: #3668b8;
+  --ifm-color-primary-light: #7ba0e4;
+  --ifm-color-primary-lighter: #8cafea;
+  --ifm-color-primary-lightest: #a8c1f0;
+  --docusaurus-highlighted-code-line-bg: rgba(199, 146, 234, 0.1);
+
+  --ifm-table-cell-padding: 0.5rem;
+  --ifm-hr-margin-vertical: 0.5rem;
+  --ifm-list-margin: 0.5rem;
+  --ifm-navbar-padding-vertical: 0;
+  --ifm-navbar-height: 3rem;
+  --ifm-blockquote-border-left-width: 6px;
+  --doc-sidebar-width: 265px !important;
+  --ifm-spacing-horizontal: 8px;
+  --ifm-list-left-padding: 1.5rem;
+  --prism-background-color: #011627;
+  --ifm-h1-font-size: 2.5rem;
+  --ifm-h2-font-size: 1.8rem;
+  --ifm-h4-font-size: 1.2rem;
+  --ifm-h6-font-size: 1rem;
+}
+
+@media (min-width: 997px) {
+  :root {
+    --ifm-navbar-padding-horizontal: 4px;
+  }
+}
+
+.navbar__brand,
+.navbar__logo {
+  margin-right: 0;
+}
+
+.navbar__logo img {
+  margin-left: -4px;
+  margin-top: -9px;
+  height: 49px;
+}
+
+.navbar__search {
+  margin-left: 0 !important;
+}
+.navbar__search-input {
+  border-radius: 8px;
+}
+
+article .card {
+  padding: 0px 16px 16px 16px !important;
+}
+.margin-bottom--lg {
+  margin-bottom: 1.5rem !important;
+}
+.markdown h1 {
+  font-size: 2.5rem;
+  margin: 0 0 8px 0 !important;
+}
+.markdown h2 {
+  font-size: 1.8rem;
+  margin: 20px 0 6px 0;
+}
+.markdown h3 {
+  margin: 16px 0 4px 0;
+}
+.markdown h4 {
+  margin-bottom: 6px;
+}
+.markdown h6 {
+  margin: 6px 0 6px 0;
+}
+.markdown hr {
+  border: 0.5px solid #cecece;
+  height: 0 !important;
+  margin: 6px 0 4px 0;
+}
+.markdown blockquote {
+  margin: 16px 0;
+  padding: 4px 8px;
+  background: rgba(130, 170, 255, 0.1); /* Night Owl Blue tint */
+}
+
+.markdown table {
+  font-size: 0.85em;
+}
+.markdown table td {
+  vertical-align: top;
+}
+.markdown table th,
+.markdown table td {
+  padding: 0.2rem 0.6rem;
+}
+
+.markdown code {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.markdown .highlight {
+  background: rgba(236, 196, 141, 0.5) !important; /* Night Owl Gold tint */
+  color: #011627 !important; /* Night Owl Background text */
+  border-radius: 3px;
+  padding: 0 5px;
+}
+
+.markdown > pre,
+.markdown > ul,
+.markdown > p {
+  margin-bottom: 8px;
+}
+
+.markdown li p {
+  margin: 0 0 4px 0;
+}
+
+.markdown dfn {
+  scroll-margin-top: 80px;
+  border-bottom: 1px dotted #ccc;
+}
+
+.markdown details {
+  padding: 4px 8px 4px 14px;
+}
+.markdown details .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+  margin: 4px 0 0 0;
+  padding: 8px 8px 0 8px;
+  font-size: 0.9em;
+}
+
+.markdown .mandatory,
+.markdown .recommended,
+.markdown .optional,
+.markdown .feature-status-draft,
+.markdown .feature-status-alpha,
+.markdown .feature-status-beta,
+.markdown .feature-status-stable {
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 3px 2px 3px;
+  font-size: 0.72em;
+  font-weight: bold;
+}
+.markdown .mandatory {
+  background-color: #ae2020;
+}
+.markdown .recommended {
+  background-color: #3a7fc0;
+}
+.markdown .optional {
+  background-color: #999;
+}
+.markdown .feature-status-draft {
+  background: #7f7f7f;
+}
+.markdown .feature-status-alpha {
+  background: #e469b1;
+}
+.markdown .feature-status-beta {
+  background: #9669e4;
+}
+.markdown .feature-status-stable {
+  background: #68cb4d;
+}
+
+.hidden {
+  display: none;
+}
+
+iframe {
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.markdown .container {
+  padding: 0;
+}
+
+.markdown .card {
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+.markdown .card__header {
+  padding: 0 0 4px 0;
+  margin: 0 0 4px 0;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.markdown .card__body {
+  padding: 4px 0 0 0;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: #011627;
+  border-top: 6px solid #82aaff;
+  padding: 16px;
+}
+.footer--dark .footer__copyright {
+  color: #8695a1;
+  font-size: 0.85em;
+}
+
+.footer--dark svg {
+  display: none;
+}
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: min(56.25%, 454px);
+}
+
+.videoIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+}
+
+.markdown .interface-property-name,
+.markdown .interface-property-type {
+  scroll-margin-top: 80px;
+  min-width: 120px;
+  max-width: 120px;
+}
+
+/* --- Modern Enhancements --- */
+
+/* 1. Custom Night Owl Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+:root[data-theme='dark'] ::-webkit-scrollbar-track {
+    background: #011627;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c3c8cf;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+:root[data-theme='dark'] ::-webkit-scrollbar-thumb {
+    background: #5f7e97;
+    border: 2px solid #011627;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #82aaff; /* Night Owl Blue */
+}
+
+/* 2. Signature Selection Color */
+::selection {
+  background: rgba(199, 146, 234, 0.3); /* Night Owl Purple weak */
+  color: inherit;
+}
+
+/* 3. Card Hover Effects - Micro-interaction */
+.markdown .card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.markdown .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(1, 22, 39, 0.1);
+  border-color: var(--ifm-color-primary);
+}
+
+/* 4. Smooth Link Transitions */
+a {
+  transition: color 0.2s ease-in-out;
+}
