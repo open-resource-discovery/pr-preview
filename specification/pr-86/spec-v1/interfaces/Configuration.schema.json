@@ -52,15 +52,6 @@
             "$ref": "#/definitions/V1DocumentDescription"
           }
         },
-        "overlays": {
-          "type": "array",
-          "x-feature-status": "alpha",
-          "x-introduced-in-version": "1.15.0",
-          "description": "List of all ORD Overlay documents that can be retrieved.\n\nOverlay documents can patch referenced resource definitions without changing the original source files.\nFor more details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).",
-          "items": {
-            "$ref": "#/definitions/V1OverlayDescription"
-          }
-        },
         "capabilities": {
           "$ref": "#/definitions/V1Capabilities"
         }
@@ -132,67 +123,6 @@
       },
       "additionalProperties": false,
       "required": [
-        "url",
-        "accessStrategies"
-      ]
-    },
-    "V1OverlayDescription": {
-      "type": "object",
-      "title": "Ord V1 Overlay Description",
-      "description": "Describes an ORD Overlay document that is available for pull transport consumption.",
-      "x-ums-type": "ignore",
-      "properties": {
-        "ordId": {
-          "type": "string",
-          "maxLength": 255,
-          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(overlay):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-          "description": "ORD ID of the overlay document.\n\nMUST be unique within the ORD Configuration.",
-          "examples": [
-            "sap.foo:overlay:astronomy-api-openapi:v1"
-          ]
-        },
-        "url": {
-          "type": "string",
-          "format": "uri-reference",
-          "description": "URL or relative URL to the ORD Overlay document.\n\nIt is RECOMMENDED to provide a relative URL (to `baseUrl`).\nIf a `baseUrl` is given, the relative URLs will be resolved with it.",
-          "examples": [
-            "/open-resource-discovery/v1/overlays/example1",
-            "../../overlays/example1",
-            "https://example.com/open-resource-discovery/v1/overlays/example1"
-          ]
-        },
-        "accessStrategies": {
-          "type": "array",
-          "description": "List of supported access strategies for retrieving the overlay document from the ORD provider.\n\nAn ORD Consumer/ORD Aggregator MAY freely choose any of the listed strategies.",
-          "items": {
-            "$ref": "#/definitions/AccessStrategy"
-          },
-          "minItems": 1
-        },
-        "purpose": {
-          "type": "string",
-          "x-feature-status": "alpha",
-          "x-introduced-in-version": "1.15.0",
-          "description": "Describes the intended purpose or role of this resource definition.\n\nWhile `type` specifies the format (e.g., OpenAPI, AsyncAPI), `purpose` indicates what the definition is used for.\nThis allows multiple definitions of the same type to coexist when they serve different purposes.\n\nFor example, an API Resource might have multiple OpenAPI definitions:\none for standard API documentation and another specifically enriched for AI/agent consumption.\n\nMUST be a valid [Concept ID](../index.md#concept-id).",
-          "anyOf": [
-            {
-              "type": "string",
-              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
-              "description": "Any valid [Concept ID](../index.md#concept-id)."
-            },
-            {
-              "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource."
-            }
-          ],
-          "examples": [
-            "ord:ai-enrichment"
-          ]
-        }
-      },
-      "additionalProperties": false,
-      "required": [
-        "ordId",
         "url",
         "accessStrategies"
       ]
