@@ -82,11 +82,11 @@
           "oneOf": [
             {
               "const": "system-type",
-              "description": "Describes a static [system-type](../index.md#def-system-type) perspective, which is version independent.\n\nIf a system is not versioned (continuous delivery) or resources are not tied to a system, the system-type perspective\nimplies that the information apply, no matter which system version or instance."
+              "description": "Describes a static [system-type](../index.md#system-type) perspective, which is version independent.\n\nIf a system is not versioned (continuous delivery) or resources are not tied to a system, the system-type perspective\nimplies that the information apply, no matter which system version or instance."
             },
             {
               "const": "system-version",
-              "description": "Describes the static [system-version](../index.md#system-version) perspective, usually known at deploy-time.\n\nIf chosen, `describedSystemVersion`.`version` MUST be provided, too.\n\nThis perspective describes how a system of a particular type and version generally look like.\nThe latest system-version MAY also be interpreted as the [system-type](../index.md#system-type) perspective."
+              "description": "Describes the static [system-version](../index.md#system-version) perspective, usually known at deploy-time.\n\nIf chosen, `describedSystemVersion`.`version` MUST be provided, too.\n\nThis perspective describes how a system of a particular type and version generally look like.\nIf no explicit `system-type` perspective is available, the latest system-version SHOULD be interpreted as the [system-type](../index.md#system-type) perspective (see [static perspective resolution](../concepts/perspectives#static-perspective-resolution))."
             },
             {
               "const": "system-instance",
@@ -94,7 +94,7 @@
             },
             {
               "const": "system-independent",
-              "description": "Describes content that is independent of [system-versions](../index.md#system-version) or [system-instances](../index.md#system-instance).\nThis content is always static and has independent visibility and lifecycle from the systems in a particular landscape.\nThe \"system-independent\" content MUST NOT be overridden via system-version or system-instance perspective metadata.\n\nExamples are: Vendors, products, globally aligned entity types, groups and group types (taxonomy), which are usually shared by multiple systems."
+              "description": "Describes content that is independent of [system-versions](../index.md#system-version) or [system-instances](../index.md#system-instance).\nThis content is always static and has independent visibility and lifecycle from the systems in a particular landscape.\nThe \"system-independent\" content MUST NOT be overridden via system-version or system-instance perspective metadata.\n\nExamples are: Vendors, products, globally aligned entity types, groups and group types (taxonomy), which are usually shared by multiple systems.\nFor the distinction between system-independent content and system-scoped shared publications, see [Shared Taxonomy, Resources and Contracts](../concepts/shared-resources)."
             }
           ],
           "default": "system-instance",
@@ -106,6 +106,8 @@
           "type": "boolean",
           "description": "Whether the information in the ORD document is **system-instance-aware**.\nThis is the case when the provided ORD document potentially differs between **system instances** (e.g. due to multi-tenancy, configuration or extensibility).\n\nIf a document is system-instance-aware, an ORD aggregator MUST fetch it for _each_ **system instance** (tenant), not just once per system type.\n\nThis concept is now **deprecated** in favor of the more explicit `perspective` attribute.\nIt is strongly RECOMMENDED to split metadata into separate documents for the different perspectives (static vs. dynamic).\n\nFor a detailed explanation, see [perspectives concept page](../concepts/perspectives.md) or the [specification section](../index.md#perspectives).",
           "default": false,
+          "x-deprecated-in-version": "1.12.0",
+          "x-deprecation-text": "Please use `perspective` instead and split content of different perspectives into different ORD documents.",
           "examples": [
             true
           ]
