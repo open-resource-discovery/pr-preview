@@ -4618,13 +4618,6 @@
             "$ref": "#/definitions/OverlayDefinition"
           }
         },
-        "links": {
-          "type": "array",
-          "description": "Generic Links with arbitrary meaning and content.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        },
         "tags": {
           "type": "array",
           "items": {
@@ -4642,9 +4635,6 @@
         },
         "labels": {
           "$ref": "#/definitions/Labels"
-        },
-        "documentationLabels": {
-          "$ref": "#/definitions/DocumentationLabels"
         }
       },
       "additionalProperties": false,
