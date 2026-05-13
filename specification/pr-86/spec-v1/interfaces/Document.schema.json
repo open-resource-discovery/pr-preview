@@ -194,11 +194,11 @@
     },
     "overlays": {
       "type": "array",
-      "description": "Array of all ORD Overlay resources described in this ORD document.\n\nAn ORD Overlay resource is a standalone, versioned resource that references an overlay document which patches\nresource definitions (e.g. OpenAPI, AsyncAPI, OData CSDL) without modifying the originals.\n\nFor overlays that are tightly coupled to a single API or Event resource, consider attaching them directly\nas a `resourceDefinitions` entry with `type: ord:overlay:v1` instead.",
+      "description": "Array of all metadata overlays described in this ORD document.\n\nAn ORD Overlay resource is a standalone, versioned resource that references an overlay document which patches\nresource definitions (e.g. OpenAPI, AsyncAPI, OData CSDL) without modifying the originals.\n\nFor overlays that are tightly coupled to a single API or Event resource, consider attaching them directly\nas a `resourceDefinitions` entry with `type: ord:overlay:v1` instead.",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
       "items": {
-        "$ref": "#/definitions/OrdOverlayResource"
+        "$ref": "#/definitions/Overlay"
       }
     },
     "integrationDependencies": {
@@ -3843,7 +3843,7 @@
               "const": "ord:overlay:v1",
               "x-feature-status": "alpha",
               "x-introduced-in-version": "1.15.0",
-              "description": "ORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
+              "description": "ORD Overlay file for patching metadata / resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
               "const": "custom",
@@ -4482,13 +4482,13 @@
         "lastUpdate"
       ]
     },
-    "OrdOverlayResource": {
+    "Overlay": {
       "type": "object",
-      "title": "ORD Overlay Resource",
+      "title": "Overlay",
       "x-ums-type": "root",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
-      "description": "An ORD Overlay Resource is a standalone, versioned resource that references an [ORD Overlay](../../spec-v1/interfaces/OrdOverlay) document.\nThe overlay document patches resource definitions (e.g. OpenAPI, AsyncAPI, OData CSDL) without modifying the originals.\n\nUse an ORD Overlay Resource for overlays that are cross-cutting, independently managed, or not tightly coupled to a single API or Event resource.\nFor producer-owned overlays that belong to a single resource, consider attaching them directly as a `resourceDefinitions` entry with `type: ord:overlay:v1`.",
+      "description": "An Overlay Resource is a standalone, versioned resource that references a metadata patch file.\nOverlays enrich or correct resource definition files (e.g. OpenAPI, AsyncAPI, OData CSDL) without modifying the originals — for example to add AI-optimized descriptions, apply governance annotations, or adapt definitions for a specific audience.\n\nUse an Overlay Resource for overlays that serve a different concern or audience than the original metadata — such as AI enrichment, governance annotations, or audience-specific adaptations — and are managed independently or applied across multiple resources.\nFor producer-owned overlays that belong to a single resource, they SHOULD instead be attached directly as a `resourceDefinitions` entry with `type: ord:overlay:v1`.",
       "properties": {
         "ordId": {
           "type": "string",
@@ -4615,7 +4615,7 @@
           "type": "array",
           "description": "List of overlay definition files referenced by this ORD Overlay Resource.\nEach entry points to an ORD Overlay document (`type: ord:overlay:v1`) that contains the actual patches.",
           "items": {
-            "$ref": "#/definitions/OrdOverlayDefinition"
+            "$ref": "#/definitions/OverlayDefinition"
           }
         },
         "links": {
@@ -4658,9 +4658,9 @@
         "lastUpdate"
       ]
     },
-    "OrdOverlayDefinition": {
+    "OverlayDefinition": {
       "type": "object",
-      "title": "ORD Overlay Definition",
+      "title": "Overlay Definition",
       "x-ums-type": "custom",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
