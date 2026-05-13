@@ -224,9 +224,6 @@
             },
             {
               "const": "sap.mdo:mdi-capability-definition:v1"
-            },
-            {
-              "const": "ord:overlay:v1"
             }
           ],
           "examples": [
