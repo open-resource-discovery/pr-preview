@@ -1841,7 +1841,7 @@
           "minLength": 1,
           "description": "Hint for AI consumers (LLMs, agent orchestrators) on how to use or interpret this resource.\nIntentionally separate from human-facing `description` so both can evolve independently.\nSHOULD be written in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nFor guidance and best practices, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols#ai-hints-on-ord-resources).",
           "examples": [
-            "Subscribe to this event to react when an invoice is cancelled. Filter by `companyCode` to narrow to relevant tenants."
+            "Use this API to **retrieve** and **manage** dispute cases. Prefer structured JSON payloads over free-text fields when invoking tools."
           ]
         },
         "partOfPackage": {
@@ -2589,7 +2589,7 @@
           "minLength": 1,
           "description": "Hint for AI consumers (LLMs, agent orchestrators) on how to use or interpret this resource.\nIntentionally separate from human-facing `description` so both can evolve independently.\nSHOULD be written in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nFor guidance and best practices, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols#ai-hints-on-ord-resources).",
           "examples": [
-            "A **BusinessPartner** can be an individual or organization. Prefer `type: Organization` for B2B contexts. Use the `roles` array to filter by supplier, customer, or bank."
+            "Use this API to **retrieve** and **manage** dispute cases. Prefer structured JSON payloads over free-text fields when invoking tools."
           ]
         },
         "partOfPackage": {
@@ -2960,7 +2960,7 @@
           "minLength": 1,
           "description": "Hint for AI consumers (LLMs, agent orchestrators) on how to use or interpret this resource.\nIntentionally separate from human-facing `description` so both can evolve independently.\nSHOULD be written in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nFor guidance and best practices, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols#ai-hints-on-ord-resources).",
           "examples": [
-            "Use this data product to access **customer order** data. Filter by `customerId` and `orderDate` for targeted queries. Output port `customerOrderItems` provides line-item detail."
+            "Use this API to **retrieve** and **manage** dispute cases. Prefer structured JSON payloads over free-text fields when invoking tools."
           ]
         },
         "partOfPackage": {
