@@ -3894,7 +3894,7 @@
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#baseurl) (the ORD provider base URL).",
+          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl) (the ORD provider base URL).",
           "examples": [
             "/api/openApi.yaml",
             "https://example.com/api/API_RFQ_PROCESS_SRV/$metadata"
@@ -4021,7 +4021,7 @@
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#baseurl) (the ORD provider base URL).",
+          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl) (the ORD provider base URL).",
           "examples": [
             "/some/url/events/eventCatalog.json"
           ]
@@ -4841,7 +4841,7 @@
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#baseurl) (the ORD provider base URL).",
+          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl) (the ORD provider base URL).",
           "examples": [
             "/open-resource-discovery/v1/overlays/ai-enrichment.overlay.json"
           ]
@@ -5395,7 +5395,7 @@
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#baseurl) (the ORD provider base URL).",
+          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the resource definition file.\n\nIt is RECOMMENDED to provide a relative URL.\nIf relative, it is resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl) (the ORD provider base URL).",
           "examples": [
             "/capabilities/someCapability/someDocument.json"
           ]
@@ -6129,7 +6129,7 @@
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "[URL](https://tools.ietf.org/html/rfc3986) of the link.\n\nThe file target MAY be relative or absolute.\nIf a relative URL is given, it is resolved against the ORD Document's root [`baseUrl`](#baseurl) (the ORD provider base URL).\nIf an absolute URL is given, then it MUST be openly accessible.",
+          "description": "[URL](https://tools.ietf.org/html/rfc3986) of the link.\n\nThe file target MAY be relative or absolute.\nIf a relative URL is given, it is resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl) (the ORD provider base URL).\nIf an absolute URL is given, then it MUST be openly accessible.",
           "examples": [
             "/ord/v1/Ariba/Files/DeveloperPortal/SAP-Ariba-developer-portal.pdf"
           ]
@@ -6311,7 +6311,7 @@
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the API or Event Resource Link.\n\nThe link target SHOULD be absolute and SHOULD be openly accessible.\nIf a relative link is given, it is resolved against the ORD Document's root [`baseUrl`](#baseurl) (the ORD provider base URL).",
+          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the API or Event Resource Link.\n\nThe link target SHOULD be absolute and SHOULD be openly accessible.\nIf a relative link is given, it is resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl) (the ORD provider base URL).",
           "examples": [
             "https://example.com/some/absolute/url",
             "/some/relative/url"
@@ -6381,7 +6381,7 @@
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the Data Product Link.\n\nThe link target SHOULD be absolute and SHOULD be openly accessible.\nIf a relative link is given, it is resolved against the ORD Document's root [`baseUrl`](#baseurl) (the ORD provider base URL).",
+          "description": "[URL reference](https://tools.ietf.org/html/rfc3986#section-4.1) (URL or relative reference) to the Data Product Link.\n\nThe link target SHOULD be absolute and SHOULD be openly accessible.\nIf a relative link is given, it is resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl) (the ORD provider base URL).",
           "examples": [
             "https://example.com/some/absolute/url"
           ]
@@ -6408,7 +6408,7 @@
         "baseUrl": {
           "type": "string",
           "format": "uri-reference",
-          "description": "Optional [base URL](../index.md#base-url) of the **described system instance**.\n\nUsed to resolve relative [entry point](../index.md#entry-point) URLs within this document.\nRelative URLs to metadata files (e.g., `resourceDefinitions[].url`) are resolved against\nthe document root `baseUrl` instead — see [Relative URL Resolution](../index.md#relative-url-resolution).\n\nORD aggregators that hold authoritative knowledge of the described system's base URL\n(e.g., from landscape configuration or service discovery) MAY prefer that over this value.\n\nThe `baseUrl` MUST NOT contain a trailing slash.\n\nMUST be provided if the base URL is not known to the ORD aggregators.\nMUST be provided when the document needs to be fully self contained, e.g. when used for manual imports.",
+          "description": "Optional [base URL](../index.md#base-url) of the **described system instance**.\n\nUsed to resolve relative [entry point](../index.md#described-system-base-url-entry-points) URLs within this document.\nRelative URLs to metadata files (e.g., `resourceDefinitions[].url`) are resolved against\nthe document root `baseUrl` instead — see [Relative URL Resolution](../index.md#relative-url-resolution).\n\nORD aggregators that hold authoritative knowledge of the described system's base URL\n(e.g., from landscape configuration or service discovery) MAY prefer that over this value.\n\nThe `baseUrl` MUST NOT contain a trailing slash.\n\nMUST be provided if the base URL is not known to the ORD aggregators.\nMUST be provided when the document needs to be fully self contained, e.g. when used for manual imports.",
           "pattern": "^http[s]?:\\/\\/[^:\\/\\s]+\\.[^:\\/\\s\\.]+(:\\d+)?(\\/[a-zA-Z0-9-\\._~]+)*$",
           "examples": [
             "https://example-sap-system.com",
@@ -7326,7 +7326,7 @@
             {
               "const": "ord:patches",
               "x-introduced-in-version": "1.15.0",
-              "description": "The source resource patches one or more definition files of the target resource.\nUsed on [ORD Overlay Resources](#ord-overlay-resource) to declare which API or Event resource they patch."
+              "description": "The source resource patches one or more definition files of the target resource.\nUsed on [ORD Overlay Resources](#overlay) to declare which API or Event resource they patch."
             }
           ],
           "examples": [
@@ -7370,7 +7370,7 @@
             {
               "const": "ord:patches",
               "x-introduced-in-version": "1.15.0",
-              "description": "The source resource patches one or more definition files of the target resource.\nUsed on [ORD Overlay Resources](#ord-overlay-resource) to declare which API or Event resource they patch."
+              "description": "The source resource patches one or more definition files of the target resource.\nUsed on [ORD Overlay Resources](#overlay) to declare which API or Event resource they patch."
             }
           ],
           "examples": [
