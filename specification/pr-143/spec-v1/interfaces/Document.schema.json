@@ -1843,9 +1843,7 @@
           "type": "string",
           "minLength": 1,
           "description": "Hint for AI consumers (LLMs, agent orchestrators) on how to use or interpret this resource.\nIntentionally separate from human-facing `description` so both can evolve independently.\nSHOULD be written in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nFor guidance and best practices, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols#ai-hints-on-ord-resources).",
-          "examples": [
-            "Use this API to **retrieve** and **manage** dispute cases. Prefer structured JSON payloads over free-text fields when invoking tools."
-          ]
+          "examples": []
         },
         "partOfPackage": {
           "type": "string",
@@ -2591,9 +2589,7 @@
           "type": "string",
           "minLength": 1,
           "description": "Hint for AI consumers (LLMs, agent orchestrators) on how to use or interpret this resource.\nIntentionally separate from human-facing `description` so both can evolve independently.\nSHOULD be written in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nFor guidance and best practices, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols#ai-hints-on-ord-resources).",
-          "examples": [
-            "Use this API to **retrieve** and **manage** dispute cases. Prefer structured JSON payloads over free-text fields when invoking tools."
-          ]
+          "examples": []
         },
         "partOfPackage": {
           "type": "string",
@@ -5003,9 +4999,7 @@
           "type": "string",
           "minLength": 1,
           "description": "Hint for AI consumers (LLMs, agent orchestrators) on how to use or interpret this resource.\nIntentionally separate from human-facing `description` so both can evolve independently.\nSHOULD be written in [CommonMark](https://spec.commonmark.org/) (Markdown).\n\nFor guidance and best practices, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols#ai-hints-on-ord-resources).",
-          "examples": [
-            "Use this API to **retrieve** and **manage** dispute cases. Prefer structured JSON payloads over free-text fields when invoking tools."
-          ]
+          "examples": []
         },
         "partOfPackage": {
           "type": "string",
