@@ -2794,7 +2794,7 @@
         },
         "definitions": {
           "type": "array",
-          "x-introduced-in-version": "1.15.0",
+          "x-introduced-in-version": "1.16.0",
           "x-feature-status": "beta",
           "description": "List of available machine-readable definitions that describe the entity type's internal model in detail.",
           "items": {
@@ -2912,7 +2912,7 @@
     "EntityTypeDefinition": {
       "type": "object",
       "title": "Entity Type Definition",
-      "x-introduced-in-version": "1.15.0",
+      "x-introduced-in-version": "1.16.0",
       "x-feature-status": "beta",
       "x-ums-type": "custom",
       "description": "Machine-readable definition that describes the entity type's internal model structure.\n\nEntity Type definitions represent an internal implementation detail - the underlying domain model of your application.\nThis can be used to describe a shared internal model multiple APIs and Events are based on.\nHowever, interaction with the actual data happens through API Resources or Event Resources that expose these entity types with a defined interface and contract.\n\nEach definition is an alternative description format for the same entity type.\nThe same definition type MUST NOT be provided more than once, except with different `visibility` or `mediaType`.\n\n**Why Entity Types are private by default**: Since entity type definitions are internal implementation details, they SHOULD be marked as `private` visibility by default.\n\n**Finding related APIs**: To discover which APIs expose a particular Entity Type, check the API Resource's `relatedEntityTypes` property.",
