@@ -1,7 +1,0 @@
-import{i as e,s as t}from"./preload-helper-BMGke09Z.js";import{D as n,i as r}from"./iframe-BGnzxjsf.js";import{n as i,t as a}from"./code-editor-kIiBSQnz.js";function o(e){let[t,n]=(0,s.useState)(u);return(0,c.jsx)(i,{value:t,onChange:n,defaultValue:u,minHeight:`350px`,...e})}var s,c,l,u,d,f,p,m;e((()=>{s=t(n(),1),a(),c=r(),l={title:`Components/CodeEditor`,component:i,parameters:{layout:`centered`},tags:[`autodocs`],decorators:[e=>(0,c.jsx)(`div`,{style:{width:`100%`,maxWidth:600,height:400},children:(0,c.jsx)(e,{})})]},u=JSON.stringify({name:`get_weather`,description:`Fetches current weather data for a given city.`,inputSchema:{type:`object`,properties:{city:{type:`string`,description:`City name`},units:{type:`string`,enum:[`metric`,`imperial`],default:`metric`}},required:[`city`]}},null,2),d={render:()=>(0,c.jsx)(o,{})},f={render:()=>(0,c.jsx)(o,{readOnly:!0})},p={render:()=>(0,c.jsx)(o,{showToolbar:!1})},d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
-  render: () => <ControlledEditor />
-}`,...d.parameters?.docs?.source}}},f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
-  render: () => <ControlledEditor readOnly />
-}`,...f.parameters?.docs?.source}}},p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`{
-  render: () => <ControlledEditor showToolbar={false} />
-}`,...p.parameters?.docs?.source}}},m=[`Default`,`ReadOnly`,`NoToolbar`]}))();export{d as Default,p as NoToolbar,f as ReadOnly,m as __namedExportsOrder,l as default};
