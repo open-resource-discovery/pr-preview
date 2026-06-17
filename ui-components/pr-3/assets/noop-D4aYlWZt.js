@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-BMGke09Z.js";import{f as t}from"./useRenderElement-CpObfvhD.js";var n=e((()=>{t()}));export{n as t};
