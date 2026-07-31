@@ -1477,18 +1477,19 @@
             ]
           ]
         },
-        "exposedSchemas": {
+        "relatedSchemas": {
           "type": "array",
           "x-introduced-in-version": "1.17.0",
           "x-feature-status": "beta",
-          "description": "Optional list of [Schemas](#schema) that are exposed (contained) by this resource.\n\nAn API contract typically exposes (contains) many Schemas as its request/response or payload structures.\n\nMUST be a valid reference to a [Schema](#schema) ORD ID.",
+          "description": "Optional list of related [Schemas](#schema).\n\nAn API contract typically exposes (contains) many Schemas as its request/response or payload structures.\nUse the `relationType` (e.g. `ord:exposes`) to qualify the relationship.",
           "items": {
-            "$ref": "#/definitions/ExposedSchema"
+            "$ref": "#/definitions/RelatedSchema"
           },
           "examples": [
             [
               {
-                "ordId": "sap.foo:schema:BusinessPartner:v1"
+                "ordId": "sap.foo:schema:BusinessPartner:v1",
+                "relationType": "ord:exposes"
               }
             ]
           ]
@@ -2222,18 +2223,19 @@
             ]
           ]
         },
-        "exposedSchemas": {
+        "relatedSchemas": {
           "type": "array",
           "x-introduced-in-version": "1.17.0",
           "x-feature-status": "beta",
-          "description": "Optional list of [Schemas](#schema) that are exposed by this Event resource.\n\nEach event typically references one payload Schema (often published in a schema registry).\n\nMUST be a valid reference to a [Schema](#schema) ORD ID.",
+          "description": "Optional list of related [Schemas](#schema).\n\nAn Event resource typically references one payload Schema per event (often published in a schema registry).\nUse the `relationType` (e.g. `ord:payload`) to qualify the relationship.",
           "items": {
-            "$ref": "#/definitions/ExposedSchema"
+            "$ref": "#/definitions/RelatedSchema"
           },
           "examples": [
             [
               {
-                "ordId": "sap.foo:schema:BusinessPartner:v1"
+                "ordId": "sap.foo:schema:BusinessPartnerCreated:v1",
+                "relationType": "ord:payload"
               }
             ]
           ]
@@ -5348,17 +5350,16 @@
           "type": "array",
           "x-introduced-in-version": "1.17.0",
           "x-feature-status": "beta",
-          "description": "Optional list of related [Schemas](#schema).\n\nMUST be a valid reference to a [Schema](#schema) ORD ID.",
+          "description": "Optional list of related [Schemas](#schema).\n\nAn API contract typically exposes (contains) many Schemas as its request/response or payload structures.\nUse the `relationType` (e.g. `ord:exposes`) to qualify the relationship.",
           "items": {
-            "type": "string",
-            "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(schema):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-            "x-association-target": [
-              "#/definitions/Schema/ordId"
-            ]
+            "$ref": "#/definitions/RelatedSchema"
           },
           "examples": [
             [
-              "sap.foo:schema:BusinessPartnerCreated:v1"
+              {
+                "ordId": "sap.foo:schema:BusinessPartner:v1",
+                "relationType": "ord:exposes"
+              }
             ]
           ]
         },
@@ -5831,7 +5832,7 @@
             },
             {
               "const": "sap-csn-interop-effective-v1",
-              "description": "[CSN Interop Effective](https://sap.github.io/csn-interop-specification/) is a standardized and interoperable [CSN](https://cap.cloud.sap/docs/cds/csn) export, used to describe [CDS](https://cap.cloud.sap/docs/cds/) models.\n\nThe `mediaType` MUST be set to `application/json`."
+              "description": "[CSN Interop Effective](https://sap.github.io/csn-interop-specification/) is a standardized and interoperable [CSN](https://cap.cloud.sap/docs/cds/csn) export, used to describe [CDS](https://cap.cloud.sap/docs/cds/) models.\n\nIt is usually used to describe conceptual models (Entity Types), but with a known mapping, it can double as a description of the actual data / interface schema as well.\n\nThe `mediaType` MUST be set to `application/json`."
             },
             {
               "const": "custom",
@@ -7982,13 +7983,13 @@
       ],
       "additionalProperties": false
     },
-    "ExposedSchema": {
-      "title": "Exposed Schema",
-      "type": "object",
-      "description": "Defines which [Schema](#schema) is exposed (contained) by a resource (via its ORD ID).",
+    "RelatedSchema": {
+      "title": "Related Schema",
       "x-introduced-in-version": "1.17.0",
       "x-feature-status": "beta",
       "x-ums-type": "embedded",
+      "type": "object",
+      "description": "Defines a relationship from a resource (e.g. an API Resource, Event Resource, or Capability) to a\n[Schema](#schema) (via its ORD ID).\n\nUse `relationType` to qualify the nature of the relationship, e.g. whether the Schema is exposed\n(contained) by the resource or referenced as an event payload.",
       "properties": {
         "ordId": {
           "type": "string",
@@ -7996,10 +7997,32 @@
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(schema):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
           "maxLength": 255,
           "examples": [
-            "sap.foo:schema:BusinessPartnerCreated:v1"
+            "sap.foo:schema:BusinessPartner:v1"
           ],
           "x-association-target": [
             "#/definitions/Schema/ordId"
+          ]
+        },
+        "relationType": {
+          "type": "string",
+          "description": "Optional type of the relationship, which defines a stricter semantic of what the relationship implies.\n\nIf not provided, the relationship type has no specific semantics; the Schema is \"related somehow\"\nto the resource.\n\nMUST be a valid [Concept ID](../index.md#concept-id).",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../index.md#concept-id)."
+            },
+            {
+              "const": "ord:exposes",
+              "description": "The resource exposes (contains) the referenced Schema, e.g. as a request/response structure.\nAn API contract typically exposes many Schemas."
+            },
+            {
+              "const": "ord:payload",
+              "description": "The resource references the Schema as its payload, e.g. an Event resource referencing the\npayload Schema of its events (often published in a schema registry)."
+            }
+          ],
+          "examples": [
+            "ord:exposes"
           ]
         }
       },

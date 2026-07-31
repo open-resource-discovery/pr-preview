@@ -106,10 +106,6 @@ spec:
       type: 'guid'
       array: true
       description: "Optional list of related EntityType Resources.\nMUST be a valid reference to an [EntityType Resource](#entity-type) ORD ID."
-    - name: 'relatedSchemas_ID'
-      type: 'guid'
-      array: true
-      description: "Optional list of related [Schemas](#schema).\n\nMUST be a valid reference to a [Schema](#schema) ORD ID."
     - name: 'definitions'
       type: 'custom'
       customTypeName: 'CapabilityDefinition'
@@ -254,13 +250,9 @@ spec:
       relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
       description: "Optional list of related Capabilities.\n\nUse this to indicate dependencies, extensions, or other relationships between capabilities."
     - propertyName: 'relatedSchemas'
-      relatedTypeName: 'Schema'
+      relatedTypeName: 'RelatedSchema'
       relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
-      propertyBased: true
-      managedByProperty: 'relatedSchemas_ID'
-      description: "Optional list of related [Schemas](#schema).\n\nMUST be a valid reference to a [Schema](#schema) ORD ID."
-      reverseRelation:
-        relationPropertyName: 'capabilities'
+      description: "Optional list of related [Schemas](#schema).\n\nAn API contract typically exposes (contains) many Schemas as its request/response or payload structures.\nUse the `relationType` (e.g. `ord:exposes`) to qualify the relationship."
     - propertyName: 'inverseRelatedCapabilities'
       relatedTypeName: 'RelatedCapability'
       relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'

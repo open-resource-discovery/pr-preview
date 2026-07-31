@@ -212,13 +212,8 @@ spec:
       relatedTypeName: 'SchemaEntityTypeRelation'
       relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
       description: "Optional list of [Entity Type](#entity-type) Resources that this Schema represents / serializes.\n\nA Schema is a concrete, physical data contract (representation) for an Entity Type.\nThe same Entity Type MAY have several Schemas as representations, depending on the API,\nprotocol, or serialization format that exposes it. Use `relationType` to further qualify\nthe relationship where useful."
-    - propertyName: 'capabilities'
-      relatedTypeName: 'Capability'
+    - propertyName: 'relatedFromResources'
+      relatedTypeName: 'RelatedSchema'
       relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
-      description: 'Capabilities associated to the Schema.'
-      mandatory: false
-    - propertyName: 'exposedByResources'
-      relatedTypeName: 'ExposedSchema'
-      relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
-      description: 'The resources that expose the given Schema.'
+      description: 'The resources that declare a relationship to the given Schema.'
       mandatory: false
