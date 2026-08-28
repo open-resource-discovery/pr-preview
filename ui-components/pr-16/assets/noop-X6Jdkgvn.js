@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-CgjUTLen.js";import{f as t}from"./useRenderElement-CDsjD5ZP.js";var n=e((()=>{t()}));export{n as t};
