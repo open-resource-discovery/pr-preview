@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-BomdTRmp.js";import{f as t}from"./useRenderElement-JAzrTGRO.js";var n=e((()=>{t()}));export{n as t};

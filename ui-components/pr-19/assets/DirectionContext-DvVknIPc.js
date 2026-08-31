@@ -1,0 +1,1 @@
+import{i as e,s as t}from"./preload-helper-BomdTRmp.js";import{O as n}from"./iframe-DINST_ia.js";function r(){return i.useContext(a)?.direction??`ltr`}var i,a,o=e((()=>{i=t(n()),a=i.createContext(void 0)}));export{r as n,o as t};
