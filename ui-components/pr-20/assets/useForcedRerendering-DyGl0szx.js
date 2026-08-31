@@ -1,0 +1,1 @@
+import{i as e,s as t}from"./preload-helper-C0cXD3nJ.js";import{O as n}from"./iframe-DdisFCvF.js";function r(){let[,e]=i.useState({});return i.useCallback(()=>{e({})},[])}var i,a=e((()=>{i=t(n())}));export{r as n,a as t};

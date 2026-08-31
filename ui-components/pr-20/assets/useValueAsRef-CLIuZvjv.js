@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-C0cXD3nJ.js";import{_ as t,v as n}from"./useRenderElement-DxdVRymm.js";import{n as r,t as i}from"./useIsoLayoutEffect-CyHDQKKa.js";function a(e){let t=n(o,e).current;return t.next=e,r(t.effect),t}function o(e){let t={current:e,next:e,effect:()=>{t.current=t.next}};return t}var s=e((()=>{i(),t()}));export{a as n,s as t};
