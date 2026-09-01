@@ -315,7 +315,7 @@
             },
             {
               "const": "remove",
-              "description": "Remove the selected element or specific fields within it.\n\n- When `data` is omitted: remove the selected element from the document entirely.\n  When the selector resolves to the document root (`root`, or `jsonPath: \"$\"`),\n  the result is an empty document (`{}`).\n- When `data` is provided: remove only the fields or array entries marked by the removal mask.\n  For object masks, properties with `null` values are removed recursively.\n  This uses JSON Merge Patch-style delete semantics where `null` indicates deletion.\n  Nested `null` values remove nested fields as well.\n- When the selector matches nothing: the patch is a no-op (it MUST NOT error and MUST NOT create anything)."
+              "description": "Remove the selected element or specific fields within it.\n\n- When `data` is omitted: remove the selected element from the document entirely.\n  The document root cannot be removed: when the selector resolves to the root\n  (`root`, or `jsonPath: \"$\"`), the patch MUST error. Use `update` to replace the\n  complete document explicitly.\n- When `data` is provided: remove only the fields or array entries marked by the removal mask.\n  For object masks, properties with `null` values are removed recursively.\n  This uses JSON Merge Patch-style delete semantics where `null` indicates deletion.\n  Nested `null` values remove nested fields as well.\n- When the selector matches nothing: the patch is a no-op (it MUST NOT error and MUST NOT create anything)."
             },
             {
               "const": "merge",
