@@ -1,0 +1,310 @@
+:root {
+  --ifm-color-primary: #172554;
+  --ifm-color-primary-dark: #141f49;
+  --ifm-color-primary-darker: #111b41;
+  --ifm-color-primary-darkest: #0b112b;
+  --ifm-color-primary-light: #21336c;
+  --ifm-color-primary-lighter: #294080;
+  --ifm-color-primary-lightest: #36529d;
+  --ifm-link-color: #172554;
+  --ifm-background-color: #fff;
+  --ifm-card-background-color: #fff;
+  --ifm-color-emphasis-100: #f5f3f1;
+  --ifm-color-emphasis-200: #e9e5e2;
+  --ifm-color-emphasis-300: #d8d2cd;
+  --ifm-navbar-background-color: #faf9f5;
+  --ifm-footer-background-color: #f4f1ee;
+  --ifm-font-family-base: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --ifm-table-cell-padding: 0.5rem;
+  --ifm-hr-margin-vertical: 0.5rem;
+  --ifm-list-margin: 0.5rem;
+  --ifm-navbar-padding-vertical: 0;
+  --ifm-navbar-height: 3rem;
+  --ifm-blockquote-border-left-width: 6px;
+  --doc-sidebar-width: 265px;
+  --ifm-spacing-horizontal: 8px;
+  --ifm-list-left-padding: 1.5rem;
+  --prism-background-color: #222222;
+  --ifm-h1-font-size: 2.5rem;
+  --ifm-h2-font-size: 1.8rem;
+  --ifm-h4-font-size: 1.2rem;
+  --ifm-h6-font-size: 1rem;
+  --toolkit-page-background: #faf9f5;
+  --toolkit-heading: #172554;
+  --toolkit-text: #0b1120;
+  --toolkit-body-text: #475569;
+  --toolkit-muted-text: #64748b;
+  --toolkit-accent: #c85f43;
+  --toolkit-accent-light: #f2a68f;
+  --toolkit-border-color: #e2ddd9;
+  --toolkit-border-strong: #d3cbc5;
+}
+
+@media (min-width: 997px) {
+  :root {
+    --ifm-navbar-padding-horizontal: 4px;
+  }
+}
+
+.navbar__brand,
+.navbar__logo {
+  margin-right: 0.55rem;
+}
+
+.navbar__logo img {
+  height: 30px;
+}
+
+.navbar {
+  border-bottom: 1px solid var(--toolkit-border-color);
+  box-shadow: none;
+}
+
+.navbar__brand {
+  color: var(--toolkit-heading);
+  font-weight: 750;
+}
+
+.navbar__link:hover,
+.navbar__link--active {
+  color: var(--toolkit-heading);
+}
+
+.navbar__item.header-start-pill {
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  background: var(--toolkit-heading);
+  color: #fff;
+}
+
+.navbar__item.header-start-pill:hover {
+  background: #0b1120;
+}
+
+.header-github-link svg[class*="iconExternalLink"] {
+  display: none;
+}
+
+.navbar__search {
+  margin-left: 0;
+}
+.navbar__search-input {
+  border-radius: 8px;
+}
+
+article .card {
+  padding: 0px 16px 16px 16px;
+}
+.margin-bottom--lg {
+  margin-bottom: 1.5rem;
+}
+.markdown h1 {
+  font-size: 2.5rem;
+  margin: 0 0 8px 0;
+}
+.markdown h2 {
+  font-size: 1.8rem;
+  margin: 20px 0 6px 0;
+}
+.markdown h3 {
+  margin: 16px 0 4px 0;
+}
+.markdown h4 {
+  margin-bottom: 6px;
+}
+.markdown h6 {
+  margin: 6px 0 6px 0;
+}
+.markdown hr {
+  border: 0.5px solid #cecece;
+  height: 0;
+  margin: 6px 0 4px 0;
+}
+.markdown blockquote {
+  margin: 16px 0;
+  padding: 4px 8px;
+  background: #eee;
+}
+
+.markdown table {
+  font-size: 0.85em;
+}
+.markdown table td {
+  vertical-align: top;
+}
+.markdown table th,
+.markdown table td {
+  padding: 0.2rem 0.6rem;
+}
+
+.markdown code {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.markdown .highlight {
+  background: #f3f38d;
+  color: #000;
+  border-radius: 3px;
+  padding: 0 5px;
+}
+
+.markdown > pre,
+.markdown > ul,
+.markdown > p {
+  margin-bottom: 8px;
+}
+
+.markdown li p {
+  margin: 0 0 4px 0;
+}
+
+.markdown dfn {
+  scroll-margin-top: 80px;
+  border-bottom: 1px dotted #ccc;
+}
+
+.markdown details {
+  padding: 4px 8px 4px 14px;
+}
+.markdown details .collapsibleContent_node_modules-\@docusaurus-theme-common-lib-components-Details-styles-module {
+  margin: 4px 0 0 0;
+  padding: 8px 8px 0 8px;
+  font-size: 0.9em;
+}
+
+.markdown .mandatory,
+.markdown .recommended,
+.markdown .optional,
+.markdown .deprecated,
+.markdown .feature-status-draft,
+.markdown .feature-status-proposed,
+.markdown .feature-status-alpha,
+.markdown .feature-status-beta,
+.markdown .feature-status-stable {
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 3px 2px 3px;
+  font-size: 0.72em;
+  font-weight: bold;
+}
+.markdown .mandatory {
+  background-color: #ae2020;
+}
+.markdown .recommended {
+  background-color: #3a7fc0;
+}
+.markdown .optional {
+  background-color: #999;
+}
+.markdown .deprecated {
+  background-color: #9c6649;
+}
+.markdown .feature-status-draft {
+  background: #7f7f7f;
+}
+.markdown .feature-status-proposed {
+  background: #d98a1f;
+}
+.markdown .feature-status-alpha {
+  background: #e469b1;
+}
+.markdown .feature-status-beta {
+  background: #9669e4;
+}
+.markdown .feature-status-stable {
+  background: #68cb4d;
+}
+
+.hidden {
+  display: none;
+}
+
+iframe {
+  border: 1px solid #e7e7e7;
+  border-radius: 8px;
+  padding: 3px;
+}
+
+.markdown .container {
+  padding: 0;
+}
+
+.markdown .card {
+  border: 1px solid #e2e2e2;
+  border-radius: 8px;
+  font-size: 0.9em;
+}
+
+.markdown .card__header {
+  padding: 0 0 4px 0;
+  margin: 0 0 4px 0;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.markdown .card__body {
+  padding: 4px 0 0 0;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: #f4f1ee;
+  --ifm-footer-color: var(--toolkit-body-text);
+  --ifm-footer-link-color: var(--toolkit-body-text);
+  --ifm-footer-link-hover-color: var(--toolkit-accent);
+  --ifm-footer-title-color: var(--toolkit-heading);
+  padding: 2.5rem max(1.5rem, calc((100vw - 1132px) / 2));
+  border-top: 1px solid var(--toolkit-border-color);
+  background: #f4f1ee;
+}
+.footer--dark .footer__copyright {
+  color: var(--toolkit-muted-text);
+  font-size: 0.85em;
+}
+
+.footer--dark svg {
+  display: none;
+}
+.videoContainer {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: min(56.25%, 454px);
+}
+
+.videoIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-width: 800px;
+}
+
+.markdown .interface-property-name,
+.markdown .interface-property-type {
+  scroll-margin-top: 80px;
+  min-width: 120px;
+  max-width: 120px;
+}
+
+.theme-doc-markdown.markdown h1 {
+  color: var(--toolkit-heading);
+  letter-spacing: -0.03em;
+}
+
+.theme-doc-markdown.markdown h2,
+.theme-doc-markdown.markdown h3 {
+  color: var(--toolkit-heading);
+}
+
+.menu__link--active:not(.menu__link--sublist),
+.table-of-contents__link--active {
+  color: var(--toolkit-accent);
+}
+
+@media (max-width: 996px) {
+  .navbar__items--right > .header-start-pill,
+  .navbar__items--right > .header-github-link {
+    display: none;
+  }
+}
