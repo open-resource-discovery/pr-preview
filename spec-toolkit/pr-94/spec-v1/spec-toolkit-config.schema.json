@@ -140,11 +140,6 @@
           "type": "string",
           "description": "The path to the source file of the JSON Schema specification.\nThis is used to generate the documentation for the specification.\n\nIt can be a `.yaml` or `.json` file.\n\nThe JSON Schema specification MUST NOT contain objects nested in objects.\nExample:\n  <code>type: object\n    properties:\n     &nbsp;&nbsp;fullName:\n        &nbsp;&nbsp;&nbsp;&nbsp;type: object\n        &nbsp;&nbsp;&nbsp;&nbsp;properties:\n          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;firstName:\n            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string\n          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;lastName:\n            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type: string\n      &nbsp;&nbsp;age:\n        &nbsp;&nbsp;&nbsp;&nbsp;type: integer\n  </code>\nMUST be replaced by:\n  <code>type: object\n    properties:\n     &nbsp;&nbsp;fullName:\n        &nbsp;&nbsp;&nbsp;&nbsp;$ref: \"#/definitions/FullName\"\n      &nbsp;&nbsp;age:\n        &nbsp;&nbsp;&nbsp;&nbsp;type: integer\n  </code>\n"
         },
-        "resolveReferences": {
-          "type": "boolean",
-          "default": false,
-          "description": "Resolve local and remote $ref targets and bundle them into the generated JSON Schema.\nThe generated artifact retains only local $ref values.\n"
-        },
         "sourceIntroFilePath": {
           "type": "string",
           "description": "The path to the source intro file of the specification.\nThis is used to generate the documentation for the specification and will be appended at the beginning.\n"
@@ -181,11 +176,6 @@
         "sourceFilePath": {
           "type": "string",
           "description": "The path to the source file of the specification.\nThis is used to generate the documentation for the specification.\n"
-        },
-        "resolveReferences": {
-          "type": "boolean",
-          "default": false,
-          "description": "Resolve local and remote $ref targets and bundle them into the generated JSON Schema.\nThe generated artifact retains only local $ref values.\n"
         },
         "sourceIntroFilePath": {
           "type": "string",
