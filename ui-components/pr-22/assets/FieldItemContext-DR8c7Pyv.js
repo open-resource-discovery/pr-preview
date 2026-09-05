@@ -1,0 +1,1 @@
+import{i as e,s as t}from"./preload-helper-BVa-Uda8.js";import{O as n}from"./iframe-dGDflqKT.js";function r(){return i.useContext(a)}var i,a,o=e((()=>{i=t(n(),1),a=i.createContext({disabled:!1})}));export{r as n,o as t};

@@ -1,0 +1,1 @@
+import{i as e,s as t}from"./preload-helper-BVa-Uda8.js";import{O as n}from"./iframe-dGDflqKT.js";function r(){let[,e]=i.useState({});return i.useCallback(()=>{e({})},[])}var i,a=e((()=>{i=t(n(),1)}));export{r as n,a as t};

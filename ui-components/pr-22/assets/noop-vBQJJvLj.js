@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-BVa-Uda8.js";import{f as t}from"./useRenderElement-Cabo-F-i.js";var n=e((()=>{t()}));export{n as t};

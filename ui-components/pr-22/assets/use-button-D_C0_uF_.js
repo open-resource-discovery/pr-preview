@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-BVa-Uda8.js";import{t}from"./useButton--tf_LMTe.js";var n=e((()=>{t()}));export{n as t};
