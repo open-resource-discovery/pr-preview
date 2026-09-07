@@ -1,0 +1,468 @@
+openapi: 3.1.0
+info:
+  title: Open Resource Discovery Aggregator Push API
+  version: 0.1.0
+  description: |-
+    Receives ORD documents and their referenced resource definitions as independent uploads.
+    The API is eventually consistent: accepting an upload does not imply that every reference
+    has been resolved or that semantic validation has completed.
+
+    Every operation requires authentication. An authenticated principal represents exactly one
+    publication subject: either one described system type or one system-independent publisher.
+    The concrete security scheme and API base URL are chosen and communicated by the aggregator.
+
+    This contract defines the mandatory minimum. Optional capabilities such as staged publication
+    or `multipart/related` batching are outside this contract and must be advertised before use.
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+externalDocs:
+  description: Open Resource Discovery Specification
+  url: https://open-resource-discovery.org/spec-v1/#push-transport
+servers:
+  - url: https://aggregator.example.org/ord-push/v1
+    description: Example base URL; each aggregator communicates its actual base URL.
+security:
+  - OAuth2ClientCredentials: [ord.push]
+  - MutualTLS: []
+tags:
+  - name: Documents
+    description: Submit identity-less ORD Document envelopes.
+  - name: ResourceDefinitions
+    description: Publish resource-definition associations.
+  - name: Operations
+    description: Read the status and validation issues of asynchronous operations.
+paths:
+  /documents:
+    post:
+      operationId: postOrdDocument
+      summary: Submit an ORD Document envelope
+      description: |-
+        Accepts one complete standard ORD Document. The document is an identity-less transport
+        envelope: this operation does not create or replace a document resource. The authenticated
+        principal and the document content provide the publication context. Omission from a later
+        envelope does not remove previously published resources; ORD tombstones express removal.
+        A `200 OK` response means that document-level and per-item validation against currently
+        available content has completed. It reports the outcome of every top-level item. When
+        processing is accepted but not yet complete, the operation returns `202 Accepted` with a
+        `Location` header pointing to a durable operation resource.
+
+        A pushed document must not contain document-relative URLs (`./`, `../`, or bare relative
+        paths), because it has no retrieval URL. It can use absolute URLs or the existing ORD
+        base-URL-relative form when the document provides the required base URL context.
+
+        Implementations must accept documents up to and including 2 MB (2,000,000 bytes) and may
+        define a higher documented limit. Providers should keep documents within 2 MB.
+      tags: [Documents]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "./Document.schema.json"
+      responses:
+        "200":
+          $ref: "#/components/responses/Processed"
+        "202":
+          $ref: "#/components/responses/Accepted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "413":
+          $ref: "#/components/responses/ContentTooLarge"
+        "415":
+          $ref: "#/components/responses/UnsupportedMediaType"
+        "422":
+          $ref: "#/components/responses/UnprocessableContent"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+
+  /resource-definitions:
+    parameters:
+      - $ref: "#/components/parameters/Perspective"
+      - $ref: "#/components/parameters/OrdId"
+      - $ref: "#/components/parameters/DefinitionUrl"
+      - $ref: "#/components/parameters/SystemVersion"
+      - $ref: "#/components/parameters/SystemInstanceId"
+    put:
+      operationId: putResourceDefinition
+      summary: Create or replace a resource-definition association
+      description: |-
+        Stores native definition bytes for the identified ORD resource and publication context.
+        `systemVersion` is required when `perspective` is `system-version` and must equal the ORD
+        Document's `describedSystemVersion.version`. `systemInstanceId` is only applicable to
+        `system-instance` and is an optional identifier issued by the aggregator. If it is omitted,
+        the aggregator binds the upload only when the matching instance context is unambiguous.
+
+        The aggregator verifies that the ORD resource in that context references `url` and declares
+        a compatible media type. A definition-first upload can remain pending until this relationship
+        can be verified. The request is idempotent for the complete association.
+
+        When processing completes synchronously, a newly stored association returns `201 Created` and
+        a replacement of an existing association returns `200 OK`; both carry the current `ETag`.
+        When processing is accepted but not yet complete, the request returns `202 Accepted`.
+
+        ORD defines no size limit for resource definitions. An implementation may define and must
+        document its own limit.
+      tags: [ResourceDefinitions]
+      parameters:
+        - $ref: "#/components/parameters/IfMatch"
+        - $ref: "#/components/parameters/IfNoneMatch"
+        - $ref: "#/components/parameters/ContentDigest"
+      requestBody:
+        required: true
+        content:
+          "*/*":
+            schema:
+              type: string
+              format: binary
+      responses:
+        "200":
+          $ref: "#/components/responses/Updated"
+        "201":
+          $ref: "#/components/responses/Created"
+        "202":
+          $ref: "#/components/responses/Accepted"
+        "400":
+          $ref: "#/components/responses/BadRequest"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "412":
+          $ref: "#/components/responses/PreconditionFailed"
+        "413":
+          $ref: "#/components/responses/ContentTooLarge"
+        "415":
+          $ref: "#/components/responses/UnsupportedMediaType"
+        "422":
+          $ref: "#/components/responses/UnprocessableContent"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+
+  /operations/{operationId}:
+    get:
+      operationId: getPushOperation
+      summary: Get asynchronous validation and publication status
+      tags: [Operations]
+      parameters:
+        - name: operationId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Current operation status.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Operation"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+        "403":
+          $ref: "#/components/responses/Forbidden"
+        "404":
+          $ref: "#/components/responses/NotFound"
+        default:
+          $ref: "#/components/responses/UnexpectedError"
+
+components:
+  securitySchemes:
+    OAuth2ClientCredentials:
+      type: oauth2
+      description: Example OAuth 2.0 client-credentials scheme.
+      flows:
+        clientCredentials:
+          tokenUrl: https://aggregator.example.org/oauth2/token
+          scopes:
+            ord.push: Publish ORD content.
+    MutualTLS:
+      type: mutualTLS
+      description: Example mutual TLS scheme.
+
+  parameters:
+    Perspective:
+      name: perspective
+      in: query
+      required: true
+      description: Perspective of the ORD resource that declares the definition.
+      schema:
+        type: string
+        enum: [system-type, system-version, system-instance, system-independent]
+    OrdId:
+      name: ordId
+      in: query
+      required: true
+      description: ORD ID of the resource that declares the definition URL.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+    DefinitionUrl:
+      name: url
+      in: query
+      required: true
+      description: |-
+        Fully resolved absolute URL from the resource-definition reference. Clients apply normal
+        query-parameter percent encoding when constructing the request URI.
+      schema:
+        type: string
+        format: uri
+        minLength: 1
+    SystemVersion:
+      name: systemVersion
+      in: query
+      required: false
+      description: |-
+        System version from `describedSystemVersion.version`. Required for `system-version` and
+        not used for other perspectives.
+      schema:
+        type: string
+        minLength: 1
+    SystemInstanceId:
+      name: systemInstanceId
+      in: query
+      required: false
+      description: |-
+        Optional aggregator-issued identifier that disambiguates a `system-instance` association.
+        It is not used for other perspectives.
+      schema:
+        type: string
+        minLength: 1
+        maxLength: 255
+    ContentDigest:
+      name: Content-Digest
+      in: header
+      required: false
+      description: Optional representation digest as defined by RFC 9530.
+      schema:
+        type: string
+    IfMatch:
+      name: If-Match
+      in: header
+      required: false
+      description: Strong ETag of the association to replace.
+      schema:
+        type: string
+    IfNoneMatch:
+      name: If-None-Match
+      in: header
+      required: false
+      description: Use `*` for a create-only request.
+      schema:
+        type: string
+
+  headers:
+    ETag:
+      description: Strong validator for the stored association.
+      schema:
+        type: string
+    Location:
+      description: URI of the asynchronous operation.
+      schema:
+        type: string
+        format: uri-reference
+
+  responses:
+    Processed:
+      description: Document processing completed synchronously.
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProcessingResult"
+    Created:
+      description: Definition association created and processing completed synchronously.
+      headers:
+        ETag:
+          $ref: "#/components/headers/ETag"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProcessingResult"
+    Updated:
+      description: Definition association replaced and processing completed synchronously.
+      headers:
+        ETag:
+          $ref: "#/components/headers/ETag"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ProcessingResult"
+    Accepted:
+      description: Request accepted; validation or publication continues asynchronously.
+      headers:
+        Location:
+          $ref: "#/components/headers/Location"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/Operation"
+    BadRequest:
+      description: Malformed request or invalid parameter combination.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    Unauthorized:
+      description: Authentication is missing or invalid.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    Forbidden:
+      description: The authenticated principal is not authorized for the operation or content.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    NotFound:
+      description: The requested association or operation does not exist.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    PreconditionFailed:
+      description: An `If-Match` or `If-None-Match` precondition failed.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    ContentTooLarge:
+      description: The request exceeds a documented implementation limit.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    UnsupportedMediaType:
+      description: The request media type or content encoding is unsupported.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    UnprocessableContent:
+      description: |-
+        The request as a whole cannot be processed, or an individual definition is invalid.
+        Validation errors limited to individual items in an otherwise processable ORD Document
+        are returned in its processing result.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+    UnexpectedError:
+      description: Other request or server failure.
+      content:
+        application/problem+json:
+          schema:
+            $ref: "#/components/schemas/Problem"
+
+  schemas:
+    ProcessingResult:
+      type: object
+      description: |-
+        Final result of synchronous or asynchronous processing. A document result contains one
+        item for every top-level ORD item. A resource-definition result contains one item for the
+        definition association. Warnings, including dangling references, can be reported on an
+        applied item. Aggregators can add extension members for validator-specific output. Clients
+        must ignore extension members they do not recognize.
+      required: [items]
+      additionalProperties: true
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ItemResult"
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationIssue"
+    ItemResult:
+      type: object
+      description: Publication outcome for one top-level ORD item or definition association.
+      required: [target, status]
+      additionalProperties: true
+      properties:
+        target:
+          type: string
+          description: ORD ID, JSON Pointer, or resolved definition URL identifying the item.
+        status:
+          type: string
+          enum: [applied, stale, rejected]
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationIssue"
+    Operation:
+      type: object
+      description: |-
+        Status of asynchronous processing. A completed operation contains the same result returned
+        for synchronous processing. A failed operation can contain an RFC 9457 problem detected
+        after the original request was accepted.
+      required: [id, status]
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+          enum: [pending, validating, completed, failed]
+        requestTarget:
+          type: string
+          format: uri-reference
+          description: Request target associated with the operation.
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationIssue"
+        result:
+          $ref: "#/components/schemas/ProcessingResult"
+        problem:
+          $ref: "#/components/schemas/Problem"
+    ValidationIssue:
+      type: object
+      description: |-
+        Portable fields for one validation message. Aggregators can add extension members to
+        preserve validator-specific data such as rule identifiers, locations, or documentation
+        links. Clients must ignore extension members they do not recognize.
+      required: [severity, message]
+      additionalProperties: true
+      properties:
+        severity:
+          type: string
+          enum: [error, warning, information]
+        code:
+          type: string
+        message:
+          type: string
+        target:
+          type: string
+          description: JSON Pointer, ORD ID, or resolved definition URL associated with the issue.
+    Problem:
+      type: object
+      description: |-
+        Problem Details object as defined by RFC 9457. `issues` is the ORD validation-message
+        extension. Aggregators can add further extension members, including an unmodified report
+        from a validator. Clients must ignore extension members they do not recognize.
+      required: [type, title]
+      additionalProperties: true
+      properties:
+        type:
+          type: string
+          format: uri-reference
+        title:
+          type: string
+        status:
+          type: integer
+          minimum: 100
+          maximum: 599
+        detail:
+          type: string
+        instance:
+          type: string
+          format: uri-reference
+        issues:
+          type: array
+          items:
+            $ref: "#/components/schemas/ValidationIssue"
