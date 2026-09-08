@@ -443,7 +443,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of the resources that are part of the `Package`.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nMUST be set to `customer:vendor:Customer:` if the contents of the Package are created by the customer / user.\n\nMUST be set to a registered partner vendor, if the contents of the Package are created by a partner / third party.\n\nAn ORD Aggregator SHOULD inherit `vendor` to every ORD resource contained in the Package\nwhen the resource does not declare `vendor` directly.\n\nThe Package assignment remains the shared source for inheritance to contained resources.",
+          "description": "Vendor / organization that is the creator (or responsible party) of the resources that are part of the `Package`.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nMUST be set to `customer:vendor:Customer:` if the contents of the Package are created by the customer / user.\n\nMUST be set to a registered partner vendor, if the contents of the Package are created by a partner / third party.\n\nAn ORD Aggregator SHOULD inherit `vendor` to every ORD resource contained in the Package\nwhen the resource does not declare `vendor` directly.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.\n\nThe Package assignment remains the shared source for inheritance to contained resources.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -978,7 +978,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -1876,7 +1876,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -2637,7 +2637,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -3119,7 +3119,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -4230,7 +4230,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -4751,7 +4751,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -5220,7 +5220,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -5648,7 +5648,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
@@ -7726,7 +7726,7 @@
         },
         "vendor": {
           "type": "string",
-          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.",
+          "description": "Vendor / organization that is the creator (or responsible party) of this resource.\n\nMUST be a valid reference to a [Vendor](#vendor) ORD ID.\n\nWhen omitted, an ORD Aggregator SHOULD inherit `vendor` from the resource's [Package](#package)\nreferenced via `partOfPackage`.\nIf both are present, the resource-level `vendor` SHOULD match the Package `vendor`.\nIf they differ, the explicitly assigned resource value takes precedence during aggregation.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(vendor):([a-zA-Z0-9._\\-]+):()$",
           "maxLength": 256,
           "x-association-target": [
