@@ -1,0 +1,13 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{t}from"./react-BZJXY1be.js";import{a as n}from"./iframe-f7ZUfOUw.js";import{n as r,t as i}from"./cn-Dm4OyE3Q.js";var a,o,s;function c(){return(c=e((()=>{a=t(),r(),o=n(),s=(0,a.forwardRef)(({autoScroll:e=!1,className:t,children:n,...r},s)=>{let c=(0,a.useRef)(null),l=s??c;return(0,a.useEffect)(()=>{if(!e)return;let t=l.current;if(!t)return;let n=new MutationObserver(()=>{t.scrollTo({top:t.scrollHeight,behavior:`smooth`})});return n.observe(t,{childList:!0,subtree:!0}),()=>{n.disconnect()}},[e,l]),(0,o.jsx)(`div`,{ref:l,className:i(`flex-1 overflow-y-auto`,t),...r,children:n})}),s.displayName=`ScrollArea`,s.__docgenInfo={description:``,methods:[],displayName:`ScrollArea`,props:{autoScroll:{required:!1,tsType:{name:`boolean`},description:``,defaultValue:{value:`false`,computed:!1}}}}})))()}function l(){let[e,t]=(0,u.useState)([`Item 1`,`Item 2`,`Item 3`]),n=(0,u.useCallback)(()=>{t(e=>[...e,`Item ${e.length+1}`])},[]);return(0,d.jsxs)(`div`,{className:`flex flex-col h-full`,children:[(0,d.jsx)(s,{className:`flex-1 border border-border rounded-md p-3`,autoScroll:!0,children:(0,d.jsx)(`div`,{className:`flex flex-col gap-2`,children:e.map((e,t)=>(0,d.jsx)(`p`,{className:`text-sm`,children:e},t))})}),(0,d.jsx)(`button`,{onClick:n,className:`mt-2 px-3 py-1 text-xs bg-primary text-primary-foreground rounded-md`,children:`Add Item (auto-scrolls)`})]})}var u,d,f,p,m,h;function g(){return(g=e((()=>{u=t(),c(),d=n(),f={title:`Components/ScrollArea`,component:s,parameters:{layout:`centered`},tags:[`autodocs`],decorators:[e=>(0,d.jsx)(`div`,{style:{width:`100%`,maxWidth:300,height:200},children:(0,d.jsx)(e,{})})]},p={render:()=>(0,d.jsx)(s,{className:`h-full border border-border rounded-md p-3`,children:(0,d.jsx)(`div`,{className:`flex flex-col gap-2`,children:Array.from({length:20},(e,t)=>(0,d.jsxs)(`p`,{className:`text-sm`,children:[`Message `,t+1,`: This is a scrollable item.`]},t))})})},m={render:()=>(0,d.jsx)(l,{})},p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`{
+  render: () => <ScrollArea className="h-full border border-border rounded-md p-3">
+      <div className="flex flex-col gap-2">
+        {Array.from({
+        length: 20
+      }, (_, i) => <p key={i} className="text-sm">
+            Message {i + 1}: This is a scrollable item.
+          </p>)}
+      </div>
+    </ScrollArea>
+}`,...p.parameters?.docs?.source}}},m.parameters={...m.parameters,docs:{...m.parameters?.docs,source:{originalSource:`{
+  render: () => <AutoScrollDemo />
+}`,...m.parameters?.docs?.source}}},h=[`Default`,`AutoScroll`]})))()}g();export{m as AutoScroll,p as Default,h as __namedExportsOrder,f as default};
