@@ -1,1 +1,0 @@
-(globalThis.webpackChunk_open_resource_discovery_spec_toolkit=globalThis.webpackChunk_open_resource_discovery_spec_toolkit||[]).push([[9833],{9833(){}}]);
