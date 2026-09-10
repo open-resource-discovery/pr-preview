@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-DIG3doan.js";import{t}from"./useButton-CralQvYm.js";var n=e((()=>{t()}));export{n as t};
