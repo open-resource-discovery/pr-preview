@@ -1,0 +1,1 @@
+import{i as e,s as t}from"./preload-helper-DhqEXTy3.js";import{N as n}from"./iframe-Bec9184-.js";import{i as r,n as i,r as a,t as o}from"./useIsoLayoutEffect-2CP97vDK.js";function s(e,t){let n=c.useRef(e),a=r(t);i(()=>{n.current!==e&&a(n.current),n.current=e},[e,a])}var c,l=e((()=>{c=t(n(),1),o(),a()}));export{s as n,l as t};
