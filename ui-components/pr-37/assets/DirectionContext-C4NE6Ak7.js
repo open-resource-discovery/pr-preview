@@ -1,0 +1,1 @@
+import{c as e,i as t}from"./preload-helper-DJdpBFGP.js";import{N as n}from"./iframe-D9IMJdrs.js";function r(){return i.useContext(a)?.direction??`ltr`}var i,a,o=t((()=>{i=e(n(),1),a=i.createContext(void 0)}));export{r as n,o as t};
