@@ -1,0 +1,1 @@
+import{i as e}from"./preload-helper-DKomiK-G.js";import{f as t}from"./useRenderElement-BoJiGMy5.js";var n=e((()=>{t()}));export{n as t};
