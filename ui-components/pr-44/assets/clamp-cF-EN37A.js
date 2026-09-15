@@ -1,1 +1,0 @@
-import{n as e}from"./rolldown-runtime-DkW27tQK.js";function t(e,t=-(2**53-1),n=2**53-1){return Math.max(t,Math.min(e,n))}function n(){return(n=e((()=>{})))()}export{n,t};
