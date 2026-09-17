@@ -1,0 +1,14 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{a as t}from"./iframe-CMim4uUJ.js";import{n,t as r}from"./PasswordInput-KXR68AIk.js";var i,a,o,s,c,l;function u(){return(u=e((()=>{n(),i=t(),a={title:`Components/PasswordInput`,component:r,parameters:{layout:`centered`},tags:[`autodocs`],decorators:[e=>(0,i.jsx)(`div`,{className:`w-full max-w-[320px]`,children:(0,i.jsx)(e,{})})]},o={args:{placeholder:`Enter password...`}},s={args:{defaultValue:`supersecret123`}},c={args:{placeholder:`Disabled`,disabled:!0}},l=[`Default`,`WithValue`,`Disabled`],o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  args: {
+    placeholder: 'Enter password...'
+  }
+}`,...o.parameters?.docs?.source}}},s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  args: {
+    defaultValue: 'supersecret123'
+  }
+}`,...s.parameters?.docs?.source}}},c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{
+  args: {
+    placeholder: 'Disabled',
+    disabled: true
+  }
+}`,...c.parameters?.docs?.source}}}})))()}u();export{o as Default,c as Disabled,s as WithValue,l as __namedExportsOrder,a as default};
