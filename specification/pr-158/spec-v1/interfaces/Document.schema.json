@@ -3865,7 +3865,7 @@
             },
             {
               "const": "arazzo-v1",
-              "x-introduced-in-version": "1.16.4",
+              "x-introduced-in-version": "1.17.0",
               "description": "[Arazzo Specification v1.0.0](https://spec.openapis.org/arazzo/v1.0.0.html) workflow document\ndescribing multi-step API interactions.\nThe `mediaType` MUST be set to `application/json` or `application/yaml`.\n\nAttaching an Arazzo definition to a single API Resource is ONLY appropriate when the\nworkflow is scoped to that specific API. For workflows that span multiple APIs, publish\na [Capability](#capability) with `type: \"workflow\"` and a definition of `type: \"arazzo-v1\"` instead,\nand list every covered API via [`relatedApiResources`](#capability_relatedapiresources) with\n`relationType: \"ord:orchestrates\"`."
             },
             {
@@ -5093,7 +5093,7 @@
             },
             {
               "const": "workflow",
-              "x-introduced-in-version": "1.16.4",
+              "x-introduced-in-version": "1.17.0",
               "description": "Standardized capability representing an executable, multi-step workflow that orchestrates\none or more APIs. Typically defined via an [Arazzo](https://spec.openapis.org/arazzo/v1.0.0.html)\ndocument attached as a capability definition with `type: \"arazzo-v1\"`.\n\nWorkflow capabilities SHOULD list every API Resource they interact with in\n[`relatedApiResources`](#capability_relatedapiresources), each with\n`relationType: \"ord:orchestrates\"`."
             },
             {
@@ -5394,7 +5394,7 @@
             },
             {
               "const": "arazzo-v1",
-              "x-introduced-in-version": "1.16.4",
+              "x-introduced-in-version": "1.17.0",
               "description": "[Arazzo Specification v1.0.0](https://spec.openapis.org/arazzo/v1.0.0.html) workflow document\ndescribing multi-step API interactions.\n\nThe `mediaType` MUST be set to `application/json` or `application/yaml`.\nThe capability `type` SHOULD be set to `workflow` when the Arazzo workflow spans multiple APIs."
             },
             {
@@ -7381,7 +7381,7 @@
             },
             {
               "const": "ord:orchestrates",
-              "x-introduced-in-version": "1.16.4",
+              "x-introduced-in-version": "1.17.0",
               "description": "The source resource orchestrates the target API Resource as part of a multi-step workflow.\nTypically used on [Capabilities](#capability) of `type: \"workflow\"` (e.g. defined via an\n[Arazzo](https://spec.openapis.org/arazzo/v1.0.0.html) document) to declare which APIs\nthe workflow invokes."
             }
           ],
