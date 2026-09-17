@@ -1309,7 +1309,7 @@
         },
         "resourceDefinitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST be unique within the list.\n\nA definition without a `purpose` is considered the primary/default definition for its type.\nAdditional definitions of the same type MAY be provided if they have a distinct `purpose` (e.g., `ord:ai-enrichment` for AI-optimized definitions).\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. overlays, AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/ApiResourceDefinition"
           }
@@ -2089,7 +2089,7 @@
         },
         "resourceDefinitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST be unique within the list.\n\nA definition without a `purpose` is considered the primary/default definition for its type.\nAdditional definitions of the same type MAY be provided if they have a distinct `purpose` (e.g., `ord:ai-enrichment` for AI-optimized definitions).\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. overlays, AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/EventResourceDefinition"
           }
@@ -3937,7 +3937,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Describes the intended purpose or role of this resource definition.\n\nWhile `type` specifies the format (e.g., OpenAPI, AsyncAPI), `purpose` indicates what the definition is used for.\nThis allows multiple definitions of the same type to coexist when they serve different purposes.\n\nFor example, an API Resource might have multiple OpenAPI definitions:\none for standard API documentation and another specifically enriched for AI/agent consumption.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the `resourceDefinitions` list — no two entries on the same resource\nmay share the same combination.\n\nMUST be a valid [Concept ID](../index.md#concept-id).",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../index.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -3946,7 +3946,13 @@
             },
             {
               "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource."
+              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
+              "x-introduced-in-version": "1.15.0"
+            },
+            {
+              "const": "ord:agent-security-permissions",
+              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
+              "x-introduced-in-version": "1.16.2"
             }
           ],
           "examples": [
@@ -4063,7 +4069,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Describes the intended purpose or role of this resource definition.\n\nWhile `type` specifies the format (e.g., OpenAPI, AsyncAPI), `purpose` indicates what the definition is used for.\nThis allows multiple definitions of the same type to coexist when they serve different purposes.\n\nFor example, an API Resource might have multiple OpenAPI definitions:\none for standard API documentation and another specifically enriched for AI/agent consumption.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the `resourceDefinitions` list — no two entries on the same resource\nmay share the same combination.\n\nMUST be a valid [Concept ID](../index.md#concept-id).",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../index.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -4072,7 +4078,13 @@
             },
             {
               "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource."
+              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
+              "x-introduced-in-version": "1.15.0"
+            },
+            {
+              "const": "ord:agent-security-permissions",
+              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
+              "x-introduced-in-version": "1.16.2"
             }
           ],
           "examples": [
@@ -4883,7 +4895,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Describes the intended purpose or role of this resource definition.\n\nWhile `type` specifies the format (e.g., OpenAPI, AsyncAPI), `purpose` indicates what the definition is used for.\nThis allows multiple definitions of the same type to coexist when they serve different purposes.\n\nFor example, an API Resource might have multiple OpenAPI definitions:\none for standard API documentation and another specifically enriched for AI/agent consumption.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the `resourceDefinitions` list — no two entries on the same resource\nmay share the same combination.\n\nMUST be a valid [Concept ID](../index.md#concept-id).",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../index.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -4892,7 +4904,13 @@
             },
             {
               "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource."
+              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
+              "x-introduced-in-version": "1.15.0"
+            },
+            {
+              "const": "ord:agent-security-permissions",
+              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
+              "x-introduced-in-version": "1.16.2"
             }
           ],
           "examples": [
@@ -5067,7 +5085,12 @@
             {
               "const": "agent-skill",
               "x-introduced-in-version": "1.17.0",
-              "description": "An [agent skill](https://agentskills.io/home) is a discrete, reusable capability that an agent can perform.\nAgent skills can be invoked by agents or other systems and represent\na well-defined task or function that the agent is capable of executing.\n\nFor the capability definitions: `type` SHOULD be set to `agent-skill-zip`."
+              "description": "An [agent skill](https://agentskills.io/home) is a discrete, reusable capability that an agent can perform.\nAgent skills can be invoked by agents or other systems and represent\na well-defined task or function that the agent is capable of executing."
+            },
+            {
+              "const": "agent-plugin",
+              "x-introduced-in-version": "1.17.0",
+              "description": "An agent plugin bundles multiple agent resources (such as one or more agent skills) into a single, distributable package.\nWhere an `agent-skill` describes a single discrete capability, an `agent-plugin` groups related agent resources together\nso they can be discovered, versioned, and installed as one unit."
             },
             {
               "const": "sap.mdo:mdi-capability:v1",
@@ -5292,7 +5315,7 @@
         "integrationDependencies": {
           "type": "array",
           "x-introduced-in-version": "1.17.0",
-          "description": "Optional list of integration dependencies that the capability relies on.\n\nThis is particularly useful for capabilities of type `agent-skill`, which may require access to APIs, MCP tools, other agents, or other skills to function.\nThe mechanism is the same as for [Agents](#agent), and the direct analogue of `inputPorts` on [Data Products](#data-product): the artifact itself declares what it needs to run.\n\nMUST be a valid reference to an [Integration Dependency](#integration-dependency) ORD ID.",
+          "description": "Optional list of integration dependencies that the capability relies on.\n\nThis is particularly useful for capabilities of type `agent-skill` or `agent-plugin`, which may require access to API Resources, Event Resources, or other Capabilities to function.\nThe mechanism is the same as for [Agents](#agent), and the direct analogue of `inputPorts` on [Data Products](#data-product): the artifact itself declares what it needs to run.\n\nMUST be a valid reference to an [Integration Dependency](#integration-dependency) ORD ID.",
           "items": {
             "type": "string",
             "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(integrationDependency):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
@@ -5309,7 +5332,7 @@
         },
         "definitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource or capability in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEach definition is to be understood as an alternative description format, describing the same resource / capability.\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST be unique within the list.\n\nA definition without a `purpose` is considered the primary/default definition for its type.\nAdditional definitions of the same type MAY be provided if they have a distinct `purpose` (e.g., `ord:ai-enrichment` for AI-optimized definitions).\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. overlays, AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/CapabilityDefinition"
           }
@@ -5386,7 +5409,12 @@
             {
               "const": "agent-skill-zip",
               "x-introduced-in-version": "1.17.0",
-              "description": "A ZIP archive containing the definition of an agent skill following the [agent skill standard](https://agentskills.io/home), \nincluding all relevant assets such as configuration and schema files.\n\nThe `mediaType` MUST be set to `application/zip`.\nThe capability `type` SHOULD be set to `agent-skill`."
+              "description": "A ZIP archive containing the definition of an agent skill following the [agent skill standard](https://agentskills.io/home),\nincluding all relevant assets such as configuration and schema files.\n\nThe `mediaType` SHOULD be set to `application/zip`.\nThe capability `type` SHOULD be set to `agent-skill`."
+            },
+            {
+              "const": "agent-plugin-zip",
+              "x-introduced-in-version": "1.17.0",
+              "description": "A ZIP archive that bundles multiple agent resources (such as one or more agent skills) into a single agent plugin package,\nincluding all relevant assets such as configuration and schema files.\n\nThe `mediaType` SHOULD be set to `application/zip`.\nThe capability `type` SHOULD be set to `agent-plugin`."
             },
             {
               "const": "sap.mdo:mdi-capability-definition:v1",
@@ -5465,7 +5493,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Describes the intended purpose or role of this resource definition.\n\nWhile `type` specifies the format (e.g., OpenAPI, AsyncAPI), `purpose` indicates what the definition is used for.\nThis allows multiple definitions of the same type to coexist when they serve different purposes.\n\nFor example, an API Resource might have multiple OpenAPI definitions:\none for standard API documentation and another specifically enriched for AI/agent consumption.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the `resourceDefinitions` list — no two entries on the same resource\nmay share the same combination.\n\nMUST be a valid [Concept ID](../index.md#concept-id).",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../index.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -5474,7 +5502,13 @@
             },
             {
               "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource."
+              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
+              "x-introduced-in-version": "1.15.0"
+            },
+            {
+              "const": "ord:agent-security-permissions",
+              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
+              "x-introduced-in-version": "1.16.2"
             }
           ],
           "examples": [
@@ -5956,6 +5990,14 @@
             "1.0.0-alpha.1"
           ]
         },
+        "subset": {
+          "type": "array",
+          "x-introduced-in-version": "1.17.0",
+          "description": "List of skills within the referenced capability that are required.\n\nThis is primarily intended for bundling capabilities such as `agent-plugin`, which package multiple agent skills.\nIf `subset` is not provided, the dependency implies the whole capability (e.g. the consumer installs the entire plugin).\nIf `subset` is provided, only the listed skills are required, letting consumers load only the minimal surface area into the harness / context.",
+          "items": {
+            "$ref": "#/definitions/CapabilityIntegrationAspectSubset"
+          }
+        },
         "labels": {
           "$ref": "#/definitions/Labels"
         }
@@ -5963,6 +6005,27 @@
       "additionalProperties": false,
       "required": [
         "ordId"
+      ]
+    },
+    "CapabilityIntegrationAspectSubset": {
+      "type": "object",
+      "title": "Capability Integration Aspect Subset",
+      "x-introduced-in-version": "1.17.0",
+      "x-ums-type": "custom",
+      "description": "Defines that the Capability Integration Aspect only requires a subset of the referenced capability.\n\nFor bundling capabilities such as `agent-plugin`, this is the list of contained skills that need to be available to make the integration work.\nWithout a `subset`, the dependency implies the whole capability (e.g. the entire plugin).\nWith a `subset`, only the listed skills are required, allowing consumers to understand / load only the minimal surface area needed.",
+      "properties": {
+        "skillName": {
+          "type": "string",
+          "description": "The name of the individual skill within the referenced capability.\n\nThis MUST be a name that is understood within the referenced capability's definition (e.g. the skill `name` inside an `agent-plugin` bundle).",
+          "examples": [
+            "disputeSummarization",
+            "disputeResolution"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "skillName"
       ]
     },
     "Vendor": {
