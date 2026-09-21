@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from '../../node_modules/react';
+import { AriaAttributes, ReactElement, ReactNode } from '../../node_modules/react';
 /**
  * Props a component hands to a caller-supplied link renderer.
  *
@@ -13,7 +13,9 @@ export interface LinkRenderProps {
     /** The link's visible content. */
     "children": ReactNode;
     /** Set on the current item so assistive tech can announce it. */
-    "aria-current"?: "page";
+    "aria-current"?: AriaAttributes["aria-current"];
+    /** Any additional DOM attributes the component forwards (e.g. `data-testid`, `aria-label`). */
+    [attr: string]: unknown;
 }
 /**
  * Caller-supplied link renderer.

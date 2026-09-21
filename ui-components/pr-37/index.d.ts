@@ -71,7 +71,7 @@ export type { EmptyStateProps } from './components/empty-state';
 export { MetricCard } from './components/metric-card';
 export type { MetricCardProps, MetricTrend, TrendDirection, TrendTone } from './components/metric-card';
 export { EntityCard } from './components/entity-card';
-export type { EntityCardProps, EntityCardModel, EntityStatus, EntityMetric } from './components/entity-card';
+export type { EntityCardProps, EntityCardModel, EntityCardSize, EntityStatus, EntityMetric, } from './components/entity-card';
 export { EntityGrid } from './components/entity-grid';
 export type { EntityGridProps } from './components/entity-grid';
 export { MarkdownText } from './components/markdown-text';
