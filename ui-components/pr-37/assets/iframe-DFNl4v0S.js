@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-BoAKF5Px.js";e();
