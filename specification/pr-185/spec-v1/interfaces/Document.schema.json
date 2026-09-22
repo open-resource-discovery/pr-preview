@@ -6594,7 +6594,7 @@
         },
         "aliases": {
           "type": "array",
-          "description": "Optional movable aliases assigned to this concrete system version.\n\nThe `latest` alias identifies the default system version for an unversioned static request.\nAt most one version of a system type MUST carry the `latest` alias at a time.\nIf no version carries it, an ORD aggregator SHOULD derive `latest` from the greatest available version according to Semantic Versioning precedence.\nAliases MUST only be published for the `system-version` perspective by the ORD Provider responsible for the described system identity.\nThe alias does not affect requests for a concrete version or resolution of a system instance with a known version.",
+          "description": "Optional explicit aliases assigned to this concrete system version.\n\nProviders normally omit this property, in which case an ORD aggregator SHOULD automatically select the greatest available version according to Semantic Versioning precedence.\nThe `latest` alias explicitly overrides that default for an unversioned static request.\nAt most one version of a system type MUST carry the `latest` alias at a time.\nAliases MUST only be published for the `system-version` perspective by the ORD Provider responsible for the described system identity.\nThe alias does not affect requests for a concrete version or resolution of a system instance with a known version.",
           "items": {
             "type": "string",
             "enum": [
