@@ -24,7 +24,8 @@ export interface CopyButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonEle
 /**
  * A clipboard-copy button with transient success/error feedback and an `aria-live`
  * status region. Requires `navigator.clipboard`; when it is unavailable or denied,
- * the button enters the `error` state.
+ * the button enters the `error` state. The copy state machine lives here; the button
+ * surface is delegated to `IconButton`.
  */
 declare const CopyButton: ForwardRefExoticComponent<CopyButtonProps & RefAttributes<HTMLButtonElement>>;
 export { CopyButton };
