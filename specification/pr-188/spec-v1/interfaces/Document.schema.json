@@ -3370,7 +3370,7 @@
             [
               {
                 "ordId": "sap.foo.bar:dataProduct:Product:v1",
-                "relationType": "foo.bar:relationName"
+                "relationType": "ord:references"
               }
             ]
           ]
@@ -7457,9 +7457,20 @@
         "relationType": {
           "type": "string",
           "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
-          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../index.md#concept-id)."
+            },
+            {
+              "const": "ord:references",
+              "x-introduced-in-version": "1.17.0",
+              "description": "Data represented by the source Data Product contains references to data represented by the target Data Product.\nThis relationship is directional."
+            }
+          ],
           "examples": [
-            "foo.bar:relationName"
+            "ord:references"
           ]
         }
       },
