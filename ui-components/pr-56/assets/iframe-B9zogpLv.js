@@ -1,1 +1,0 @@
-import{t as e}from"./iframe-DtQL2UIa.js";e();
