@@ -78,11 +78,11 @@
           "type": "string",
           "x-introduced-in-version": "1.12.0",
           "x-feature-status": "beta",
-          "description": "With ORD it's possible to describe a system from a static or a dynamic [perspective](../index.md#perspectives) (for more details, follow the link).\n\nStatic ORD documents MUST use the `system-version` perspective for version-specific metadata and the `system-type` perspective for version-independent metadata.\nA system type MAY publish both static perspectives when it has resources with different version applicability.\n\nIt is RECOMMENDED to describe systems with dynamic metadata in the applicable static perspectives and additionally in the system-instance perspective.\n\nIf not provided, this defaults to `system-instance`, which is the most precise description but also the most costly to replicate.\n\nPlease read the [article on perspectives](../concepts/perspectives) for more explanations.",
+          "description": "With ORD it's possible to describe a system from a static or a dynamic [perspective](../index.md#perspectives) (for more details, follow the link).\n\nStatic ORD documents MUST use the `system-version` perspective for version-specific metadata and the `system-type` perspective for version-independent metadata.\nStatic ORD documents MUST NOT contain tenant context or tenant-specific customizations.\nA system type MAY publish both static perspectives when it has resources with different version applicability.\n\nIt is RECOMMENDED to describe systems with dynamic metadata in the applicable static perspectives and additionally in the system-instance perspective.\n\nIf not provided, this defaults to `system-instance`, which is the most precise description but also the most costly to replicate.\n\nPlease read the [article on perspectives](../concepts/perspectives) for more explanations.",
           "oneOf": [
             {
               "const": "system-type",
-              "description": "Describes a static [system-type](../index.md#system-type) perspective, which is version independent.\n\nIf a system is not versioned (continuous delivery) or resources are not tied to a system, the system-type perspective\nimplies that the information apply, no matter which system version or instance."
+              "description": "Describes a static [system-type](../index.md#system-type) perspective, which is version independent.\n\nIf a system is not versioned (continuous delivery) or resources are not tied to a system version, the system-type perspective\nimplies that the information apply, no matter which system version or instance."
             },
             {
               "const": "system-version",
@@ -90,11 +90,11 @@
             },
             {
               "const": "system-instance",
-              "description": "Describes the complete dynamic [system-instance](../index.md#system-instance) (tenant) perspective as known at run-time.\nThis allows to also reflect tenant specific extensions, customizations and runtime configuration.\n\nIf declared for a tenant, it completely replaces the effective static view when metadata about that system instance is requested.\nA resource omitted from the complete tenant view MUST NOT be inherited from a static perspective."
+              "description": "Describes the complete dynamic [system-instance](../index.md#system-instance) (tenant) perspective as known at run-time.\nThis allows to also reflect tenant specific extensions, customizations and runtime configuration.\n\nIf declared for a tenant, it completely replaces the effective static view when metadata about that system instance is requested.\nDeclaration, availability, and completeness MUST be determined independently for each tenant.\nA resource omitted from the complete tenant view MUST NOT be inherited from a static perspective."
             },
             {
               "const": "system-independent",
-              "description": "Describes content that is independent of [system-versions](../index.md#system-version) or [system-instances](../index.md#system-instance).\nThis content is always static and has independent visibility and lifecycle from the systems in a particular landscape.\nThe \"system-independent\" content MUST NOT be overridden via system-version or system-instance perspective metadata.\n\nExamples are: Vendors, products, globally aligned entity types, groups and group types (taxonomy), which are usually shared by multiple systems.\nFor the distinction between system-independent content and system-scoped shared publications, see [Shared Taxonomy, Resources and Contracts](../concepts/shared-resources)."
+              "description": "Describes content that is independent of [system-versions](../index.md#system-version) or [system-instances](../index.md#system-instance).\nThis content is always static and has independent visibility and lifecycle from the systems in a particular landscape.\nIt MUST NOT contain system or tenant context or system-specific or tenant-specific customizations.\nThe \"system-independent\" content MUST NOT be overridden via system-version or system-instance perspective metadata.\n\nExamples are: Vendors, products, globally aligned entity types, groups and group types (taxonomy), which are usually shared by multiple systems.\nFor the distinction between system-independent content and system-scoped shared publications, see [Shared Taxonomy, Resources and Contracts](../concepts/shared-resources)."
             }
           ],
           "default": "system-instance",
