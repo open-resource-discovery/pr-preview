@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="610" viewBox="0 0 920 610" role="img" aria-labelledby="title description">
+  <title id="title">ORD perspective resolution</title>
+  <desc id="description">Resolution paths for tenant, specific system-version, and system-type metadata requests.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto" markerUnits="strokeWidth">
+      <path d="M0 0 8 4 0 8z" class="arrow-head"/>
+    </marker>
+    <style>
+      svg { color-scheme: light dark; font-family: Arial, Helvetica, sans-serif; }
+      .entry { fill: light-dark(#dae8fc, #1e3a5f); stroke: light-dark(#6c8ebf, #8ab4f8); stroke-width: 2; }
+      .decision { fill: light-dark(#f5f5f5, #2b2d31); stroke: light-dark(#666, #c5c7ca); stroke-width: 1.5; }
+      .success { fill: light-dark(#d5e8d4, #1f4328); stroke: light-dark(#82b366, #88cf8c); stroke-width: 2; }
+      .failure { fill: light-dark(#f8cecc, #572727); stroke: light-dark(#b85450, #ef8b87); stroke-width: 2; }
+      .edge { fill: none; stroke: light-dark(#4d4d4d, #d4d4d4); stroke-width: 1.5; marker-end: url(#arrow); }
+      .arrow-head { fill: context-stroke; }
+      text { fill: light-dark(#1f2328, #f2f3f5); font-size: 13px; text-anchor: middle; dominant-baseline: middle; }
+      .label { font-size: 12px; paint-order: stroke; stroke: light-dark(#fff, #1b1b1b); stroke-width: 4px; stroke-linejoin: round; }
+    </style>
+  </defs>
+
+  <!-- Tenant request -->
+  <rect class="entry" x="10" y="20" width="165" height="48" rx="7"/>
+  <text x="92.5" y="44">Tenant metadata request</text>
+  <polygon class="decision" points="240,2 300,44 240,86 180,44"/>
+  <text x="240" y="38"><tspan x="240">Tenant view</tspan><tspan x="240" dy="16">declared?</tspan></text>
+  <path class="edge" d="M175 44h5"/>
+  <rect class="success" x="335" y="22" width="205" height="44" rx="7"/>
+  <text x="437.5" y="38"><tspan x="437.5">Use only the complete</tspan><tspan x="437.5" dy="16">system-instance view</tspan></text>
+  <path class="edge" d="M300 44h35"/>
+  <text class="label" x="317" y="34">Yes</text>
+
+  <polygon class="decision" points="240,98 300,140 240,182 180,140"/>
+  <text x="240" y="134"><tspan x="240">Tenant version</tspan><tspan x="240" dy="16">known?</tspan></text>
+  <path class="edge" d="M240 86v12"/>
+  <text class="label" x="254" y="92">No</text>
+
+  <polygon class="decision" points="405,98 465,140 405,182 345,140"/>
+  <text x="405" y="126"><tspan x="405">Exact version view</tspan><tspan x="405" dy="16">declared?</tspan></text>
+  <path class="edge" d="M300 140h45"/>
+  <text class="label" x="322" y="130">Yes</text>
+  <rect class="success" x="500" y="105" width="230" height="54" rx="7"/>
+  <text x="615" y="124"><tspan x="615">Resolve each ORD ID from exact</tspan><tspan x="615" dy="16">system-version, then system-type</tspan></text>
+  <path class="edge" d="M465 140h35"/>
+  <text class="label" x="482" y="130">Yes</text>
+  <rect class="success" x="500" y="175" width="230" height="44" rx="7"/>
+  <text x="615" y="197">Use system-type alone</text>
+  <path class="edge" d="M405 182v15h95"/>
+  <text class="label" x="419" y="191">No</text>
+
+  <polygon class="decision" points="405,238 465,280 405,322 345,280"/>
+  <text x="405" y="266"><tspan x="405">Stable version views</tspan><tspan x="405" dy="16">available?</tspan></text>
+  <path class="edge" d="M240 182v98h105"/>
+  <text class="label" x="254" y="198">No</text>
+  <rect class="success" x="500" y="245" width="230" height="54" rx="7"/>
+  <text x="615" y="264"><tspan x="615">Resolve each ORD ID from latest</tspan><tspan x="615" dy="16">system-version, then system-type</tspan></text>
+  <path class="edge" d="M465 280h35"/>
+  <text class="label" x="482" y="270">Yes</text>
+  <rect class="success" x="500" y="315" width="230" height="44" rx="7"/>
+  <text x="615" y="337">Use system-type alone</text>
+  <path class="edge" d="M405 322v15h95"/>
+  <text class="label" x="419" y="331">No</text>
+
+  <!-- Explicit version request -->
+  <rect class="entry" x="10" y="385" width="165" height="54" rx="7"/>
+  <text x="92.5" y="404"><tspan x="92.5">Specific system-version</tspan><tspan x="92.5" dy="16">metadata request</tspan></text>
+  <polygon class="decision" points="405,370 465,412 405,454 345,412"/>
+  <text x="405" y="398"><tspan x="405">Requested version</tspan><tspan x="405" dy="16">view available?</tspan></text>
+  <path class="edge" d="M175 412h170"/>
+  <rect class="success" x="500" y="385" width="230" height="54" rx="7"/>
+  <text x="615" y="404"><tspan x="615">Resolve each ORD ID from exact</tspan><tspan x="615" dy="16">system-version, then system-type</tspan></text>
+  <path class="edge" d="M465 412h35"/>
+  <text class="label" x="482" y="402">Yes</text>
+  <rect class="failure" x="740" y="390" width="170" height="44" rx="7"/>
+  <text x="825" y="404"><tspan x="825">Report version view</tspan><tspan x="825" dy="16">unavailable</tspan></text>
+  <path class="edge" d="M405 454v15h420v-35"/>
+  <text class="label" x="419" y="463">No</text>
+
+  <!-- System-type request -->
+  <rect class="entry" x="10" y="515" width="165" height="48" rx="7"/>
+  <text x="92.5" y="531"><tspan x="92.5">System-type metadata</tspan><tspan x="92.5" dy="16">request</tspan></text>
+  <polygon class="decision" points="405,497 465,539 405,581 345,539"/>
+  <text x="405" y="525"><tspan x="405">Stable version views</tspan><tspan x="405" dy="16">available?</tspan></text>
+  <path class="edge" d="M175 539h170"/>
+  <rect class="success" x="500" y="500" width="230" height="54" rx="7"/>
+  <text x="615" y="519"><tspan x="615">Resolve each ORD ID from latest</tspan><tspan x="615" dy="16">system-version, then system-type</tspan></text>
+  <path class="edge" d="M465 539h35"/>
+  <text class="label" x="482" y="529">Yes</text>
+  <rect class="success" x="740" y="515" width="170" height="44" rx="7"/>
+  <text x="825" y="537">Use system-type alone</text>
+  <path class="edge" d="M405 581v7h420v-29"/>
+  <text class="label" x="419" y="580">No</text>
+</svg>
