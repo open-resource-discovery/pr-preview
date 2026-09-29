@@ -90,7 +90,7 @@
             },
             {
               "const": "system-instance",
-              "description": "Describes the complete dynamic [system-instance](../index.md#system-instance) (tenant) perspective as known at run-time.\nThis allows to also reflect tenant specific extensions, customizations and runtime configuration.\n\nIf declared for a tenant, it completely replaces the effective static view when metadata about that system instance is requested.\nDeclaration, availability, and completeness MUST be determined independently for each tenant.\nA resource omitted from the complete tenant view MUST NOT be inherited from a static perspective."
+              "description": "Describes the complete dynamic [system-instance](../index.md#system-instance) (tenant) perspective as known at run-time.\nThis allows to also reflect tenant specific extensions, customizations and runtime configuration.\n\nIf published for a tenant, it completely replaces the effective static view when metadata about that system instance is requested.\nPublication, availability, and completeness MUST be determined independently for each tenant.\nA resource omitted from the complete tenant view MUST NOT be inherited from a static perspective."
             },
             {
               "const": "system-independent",
