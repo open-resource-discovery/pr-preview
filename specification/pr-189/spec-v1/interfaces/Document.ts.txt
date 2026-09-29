@@ -4099,7 +4099,7 @@ export interface Package {
    * MUST be set to `customer:vendor:Customer:` if the contents of the Package are created by the customer / user.
    *
    * SHOULD be set to a registered partner vendor if the contents of the Package are created by a partner / third party.
-   * If no registered partner vendor is available and the partner content runs in a customer context under a `customer.*` namespace, `customer:vendor:Customer:` MAY be used until the partner vendor is registered.
+   * If no registered partner vendor is available and the partner content runs in a customer context under a `customer.*` or `c.*` namespace, `customer:vendor:Customer:` MAY be used until the partner vendor is registered.
    */
   vendor: string;
   /**
