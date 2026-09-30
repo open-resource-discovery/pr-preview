@@ -70,7 +70,7 @@
       "type": "string",
       "x-introduced-in-version": "1.12.0",
       "x-feature-status": "beta",
-      "description": "With ORD it's possible to describe a system from a static or a dynamic [perspective](../index.md#perspectives) (for more details, follow the link).\n\nAn ORD provider that describes a system MUST publish static metadata using `system-type`, `system-version`, or both.\nStatic ORD documents MUST NOT contain tenant context or tenant-specific customizations.\nDistinct `system-version` values MUST be used when multiple system versions can be active at the same time and resolving every system instance against only the latest static metadata could produce incorrect results.\nA continuously delivered system MAY instead publish all static metadata through `system-type` or through `system-version` with a fixed `describedSystemVersion.version`.\nWhen using the fixed-version approach, the version MUST remain unchanged so each release replaces the previously published view.\nVersion-independent content MAY be published once under `system-type` as an optimization, but publishing that content under `system-version` is also valid.\n\nSystems with dynamic metadata MUST be described in at least one static perspective and additionally in the system-instance perspective.\n\nIf not provided, this defaults to `system-instance`, which is the most precise description but also the most costly to replicate.\n\nPlease read the [article on perspectives](../concepts/perspectives) for more explanations.",
+      "description": "With ORD it's possible to describe a system from a static or a dynamic [perspective](../index.md#perspectives) (for more details, follow the link).\n\nAn ORD provider that describes a system MUST publish static metadata using `system-type`, `system-version`, or both.\nStatic ORD documents MUST NOT contain tenant context or tenant-specific customizations.\nProviders SHOULD prefer `system-type` unless consumers need version-accurate lookup or a history of versioned metadata.\nDistinct `system-version` values MUST be used when multiple versions of the same application are deployed at the same time in one environment tier, such as production.\nA continuously delivered system MAY instead publish all static metadata through `system-type` or through `system-version` with a fixed `describedSystemVersion.version`.\nWhen using the fixed-version approach, the version MUST remain unchanged so each release replaces the previously published view.\nEach published static perspective MUST completely describe its scope.\nA resource omitted from a selected `system-version` perspective MUST NOT be inherited from `system-type` or another system version.\n\nSystems with dynamic metadata MUST be described in at least one static perspective and additionally in the system-instance perspective.\n\nIf not provided, this defaults to `system-instance`, which is the most precise description but also the most costly to replicate.\n\nPlease read the [article on perspectives](../concepts/perspectives) for more explanations.",
       "oneOf": [
         {
           "const": "system-type",
@@ -78,7 +78,7 @@
         },
         {
           "const": "system-version",
-          "description": "Describes the static [system-version](../index.md#system-version) perspective, usually known at deploy-time.\n\nIf chosen, `describedSystemVersion`.`version` MUST be provided, too.\n\nThis perspective describes how a system of a particular type and version generally look like.\nWhen no specific version is requested, the latest stable system-version MUST be composed with version-independent `system-type` metadata (see [static perspective resolution](../concepts/perspectives#static-perspective-resolution)).\nAutomatic latest selection MUST exclude Semantic Versioning prereleases, which may be selected only when explicitly requested."
+          "description": "Describes the static [system-version](../index.md#system-version) perspective, usually known at deploy-time.\n\nIf chosen, `describedSystemVersion`.`version` MUST be provided, too.\n\nThis perspective describes how a system of a particular type and version generally look like.\nWhen no specific version is requested, the latest stable system-version MUST be selected when available (see [static perspective resolution](../concepts/perspectives#static-perspective-resolution)).\nThe selected system-version is a complete view; a missing ORD ID MUST be returned as not found without falling through to `system-type` or another system version.\nAutomatic latest selection MUST exclude Semantic Versioning prereleases, which may be selected only when explicitly requested."
         },
         {
           "const": "system-instance",
@@ -269,7 +269,7 @@
     },
     "tombstones": {
       "type": "array",
-      "description": "List of ORD information (resources or taxonomy) that have been \"tombstoned\", indicating removal or archival.\nThis MUST be indicated explicitly, just removing the ORD information itself is not sufficient.\n\nA tombstone entry MAY be removed after a grace period of 31 days, unless it suppresses an ORD ID inherited from a less-specific static perspective.\nA tombstone used for static perspective composition MUST remain published for as long as the less-specific perspective continues to publish that ORD ID.",
+      "description": "List of ORD information (resources or taxonomy) that have been \"tombstoned\", indicating removal or archival.\nThis MUST be indicated explicitly, just removing the ORD information itself is not sufficient.\n\nA tombstone entry MAY be removed after a grace period of 31 days.",
       "items": {
         "$ref": "#/definitions/Tombstone"
       }
@@ -7487,7 +7487,7 @@
       "type": "object",
       "title": "Tombstone",
       "x-ums-type": "ignore",
-      "description": "A tombstone indicates that a previously published ORD resource or taxonomy has been removed / decommissioned / archived.\nThis MUST be indicated explicitly, so ORD aggregators and consumers can learn about the removal.\n\nExactly one of the IDs MUST be provided to state which ORD resource or taxonomy item the Tombstone addresses.\n\nThe tombstone MUST be kept sufficiently long (at least 31 days) so that all ORD aggregators can learn about the tombstone.\nIf it suppresses an ORD ID inherited from a less-specific static perspective, it MUST remain published for as long as that perspective continues to publish the ORD ID.",
+      "description": "A tombstone indicates that a previously published ORD resource or taxonomy has been removed / decommissioned / archived.\nThis MUST be indicated explicitly, so ORD aggregators and consumers can learn about the removal.\n\nExactly one of the IDs MUST be provided to state which ORD resource or taxonomy item the Tombstone addresses.\n\nThe tombstone MUST be kept sufficiently long (at least 31 days) so that all ORD aggregators can learn about the tombstone.",
       "properties": {
         "ordId": {
           "type": "string",
