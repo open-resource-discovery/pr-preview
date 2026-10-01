@@ -39,14 +39,15 @@ export interface EntityCardProps extends EntityCardModel, Omit<HTMLAttributes<HT
     iconClassName?: string;
     /** How metrics render: inline count chips (default) or a two-column definition list. */
     metricsVariant?: "chips" | "grid";
-    /** Header trailing affordance, pinned to the right (e.g. a chevron). */
-    action?: ReactNode;
     /** Free-form tag row rendered after `statuses` (for app-specific pills the tones can't express). */
     pills?: ReactNode;
     /** Footer content on the left (e.g. version · owner, or an id + copy button). */
     footer?: ReactNode;
-    /** Footer content pinned to the right (e.g. an "Explore ›" affordance). */
-    footerAction?: ReactNode;
+    /**
+     * Footer affordance pinned to the right (e.g. an "Explore ›"). When set, `onClick`/`href`/`render`
+     * wire this button instead of the whole card.
+     */
+    action?: ReactNode;
     /** Draw the top divider above the footer (default true). */
     footerDivider?: boolean;
     /** Dim the card and disable pointer interaction. */
@@ -57,17 +58,18 @@ export interface EntityCardProps extends EntityCardModel, Omit<HTMLAttributes<HT
     render?: LinkRender;
     /** Click handler; renders a `<button>` when there is no `href`/`render`. */
     onClick?: MouseEventHandler<HTMLElement>;
-    /** Accessible name when the whole card is interactive (no default text). */
+    /** Accessible name for the interactive element (the whole card, or `action` when set). No default text. */
     ariaLabel?: string;
 }
 /**
  * A semantic card for a typed entity (title, subtitle, statuses, metrics, footer). Its default
- * look matches the Equilibrium prototype card; slots (`icon`/`iconClassName`, `action`, `pills`,
- * `footer`/`footerAction`) plus the `--ord-entitycard-*` token layer let callers retheme it or bend
- * it to another app's card (e.g. Explorer). Renders as a native `<a>` when `href` is set, a
- * `<button>` when only `onClick` is set, or an `<article>` otherwise; a caller `render` slot (a
- * router `<Link>`) takes precedence, keeping the library router-agnostic. Statuses reuse
- * {@link StatusBadge}.
+ * look matches the Equilibrium prototype card; slots (`icon`/`iconClassName`, `pills`,
+ * `footer`/`action`) plus the `--ord-entitycard-*` token layer let callers retheme it or bend
+ * it to another app's card (e.g. Explorer). When `action` is set it becomes the interactive element —
+ * `onClick`/`href`/`render` wire the action button; otherwise they make the whole card interactive.
+ * Renders as a native `<a>` when `href` is set, a `<button>` when only `onClick` is set, or an
+ * `<article>` otherwise; a caller `render` slot (a router `<Link>`) takes precedence, keeping the
+ * library router-agnostic. Statuses reuse {@link StatusBadge}.
  */
 declare const EntityCard: ForwardRefExoticComponent<EntityCardProps & RefAttributes<HTMLElement>>;
 export { EntityCard };
