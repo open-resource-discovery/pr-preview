@@ -3005,7 +3005,7 @@
       "title": "Data Product",
       "x-ums-type": "root",
       "x-introduced-in-version": "1.8.0",
-      "description": "A [Data Product](../concepts/data-product) is a data set exposed for consumption outside the boundaries of the producing application via APIs and described by high quality metadata that can be accessed through the [ORD Aggregator](../../spec-v1/#ord-aggregator).\n\nPlease note that this concept is in beta, see [Data Product - Current Status](../concepts/data-product#current-status).",
+      "description": "A [Data Product](../concepts/data-product) is a data set exposed for consumption outside the boundaries of the producing application via APIs and described by high quality metadata that can be accessed through the [ORD Aggregator](../../spec-v1/index.md#ord-aggregator).\n\nPlease note that this concept is in beta, see [Data Product - Current Status](../concepts/data-product#current-status).",
       "properties": {
         "ordId": {
           "type": "string",
@@ -3820,7 +3820,7 @@
             },
             {
               "const": "edmx",
-              "description": "[OData](https://www.odata.org/documentation/) APIs can be described via edmx XML files.\nFor OData V2 APIs, this is standardized through the [Common Schema Definition Language (CSDL) V2](https://www.odata.org/documentation/odata-version-2-0/overview/#ServiceMetadataDocument).\nFor OData V4 APIs, this is standardized through the [CSDL XML Representation](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html)\nThe `mediaType` MUST be be set to `application/xml`.\nThe `apiProtocol` MUST be set to `odata-v2` or `odata-v4`."
+              "description": "[OData](https://www.odata.org/documentation/) APIs can be described via edmx XML files.\nFor OData V2 APIs, this is standardized through the [Common Schema Definition Language (CSDL) V2](https://www.odata.org/documentation/odata-version-2-0/overview/).\nFor OData V4 APIs, this is standardized through the [CSDL XML Representation](https://docs.oasis-open.org/odata/odata-csdl-xml/v4.01/odata-csdl-xml-v4.01.html)\nThe `mediaType` MUST be be set to `application/xml`.\nThe `apiProtocol` MUST be set to `odata-v2` or `odata-v4`."
             },
             {
               "const": "csdl-json",
@@ -3840,7 +3840,7 @@
             },
             {
               "const": "a2a-agent-card",
-              "description": "[A2A Agent Card](https://a2a-protocol.org/topics/agent-discovery/) is a machine-readable description of an A2A Agent.\nThe `mediaType` MUST be be set to `application/json`.\nThe `apiProtocol` MUST be set to `a2a`.",
+              "description": "[A2A Agent Card](https://a2a-protocol.org/latest/specification/#8-agent-discovery-the-agent-card) is a machine-readable description of an A2A Agent.\nThe `mediaType` MUST be be set to `application/json`.\nThe `apiProtocol` MUST be set to `a2a`.",
               "x-introduced-in-version": "1.12.2"
             },
             {
@@ -3984,7 +3984,7 @@
             },
             {
               "const": "asyncapi-v2",
-              "description": "[AsyncAPI 2](https://www.asyncapi.com/docs/specifications/2.0.0) API definition for events.\nThe SAP Event Catalog Specification also falls under this category, as it is a valid AsyncAPI definition."
+              "description": "[AsyncAPI 2](https://www.asyncapi.com/docs/reference/specification/v2.0.0) API definition for events.\nThe SAP Event Catalog Specification also falls under this category, as it is a valid AsyncAPI definition."
             },
             {
               "const": "sap-csn-interop-effective-v1",
@@ -6291,7 +6291,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "See also: [WADG0001 WebAPI type extension](https://webapi-discovery.github.io/rfcs/rfc0001.html#webapiactions)",
+          "description": "See also: [WADG0001 WebAPI type extension](https://webapi-discovery.github.io/rfcs/rfc0001.html)",
           "anyOf": [
             {
               "type": "string",
@@ -6464,7 +6464,7 @@
         "globalId": {
           "type": "string",
           "x-introduced-in-version": "1.17.0",
-          "description": "Optional globally unique ID of the system instance (tenant), as assigned and decided by the ORD aggregator.\nThe scope of uniqueness is within the connected ORD aggregator.\n\nUnlike `localId`, which is only unique within the described system, the `globalId` is created and owned by\nthe ORD aggregator, not by the provider. It is the same identity that can be passed as the `Global-Tenant-Id`\nheader in the [`open`](../../spec-extensions/access-strategies/open.md#global-tenant-id) and\n[`basic-auth`](../../spec-extensions/access-strategies/basic-auth.md#global-tenant-id) access strategies.\n\nThe provider does not decide this value; it MAY receive it from the aggregator (e.g. during onboarding) and\ninclude it to correlate the described system instance with the aggregator's authoritative state.",
+          "description": "Optional globally unique and stable ID of the system instance (tenant), assigned by the authority responsible\nfor that tenant identity.\n\nUnlike `localId`, which is only unique within the described system, `globalId` is intended for correlation\nacross participating systems. It is the same identity that can be passed as the `Global-Tenant-Id`\nheader in the [`open`](../../spec-extensions/access-strategies/open.md#global-tenant-id) and\n[`basic-auth`](../../spec-extensions/access-strategies/basic-auth.md#global-tenant-id) access strategies.\n\nThe provider MUST NOT invent this value. It MAY receive the value from an authoritative tenant or landscape\nservice, including through aggregator onboarding, and include it when it can reliably correlate the described\nsystem instance with that authority's record.",
           "maxLength": 255,
           "examples": [
             "c6c80b52-ecc1-47f8-9303-0d55fb67fd41"
