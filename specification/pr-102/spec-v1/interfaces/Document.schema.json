@@ -5414,7 +5414,7 @@
             {
               "const": "agent-plugin-zip",
               "x-introduced-in-version": "1.17.0",
-              "description": "A ZIP archive that bundles multiple agent resources (such as one or more agent skills) into a single agent plugin package,\nincluding all relevant assets such as configuration and schema files.\n\nThe `mediaType` SHOULD be set to `application/zip`.\nThe capability `type` SHOULD be set to `agent-plugin`."
+              "description": "A ZIP archive that bundles multiple agent resources (such as one or more agent skills) into a single agent plugin package,\nincluding all relevant assets such as configuration and schema files.\nORD treats the archive as opaque and does not prescribe its internal layout or format version.\nPackage-format identification and versioning remain outside this definition type.\n\nThe `mediaType` SHOULD be set to `application/zip`.\nThe capability `type` SHOULD be set to `agent-plugin`."
             },
             {
               "const": "sap.mdo:mdi-capability-definition:v1",
