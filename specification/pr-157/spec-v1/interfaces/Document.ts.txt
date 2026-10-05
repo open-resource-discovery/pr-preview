@@ -72,9 +72,17 @@ export interface OrdDocument {
   /**
    * With ORD it's possible to describe a system from a static or a dynamic [perspective](../index.md#perspectives) (for more details, follow the link).
    *
-   * It is strongly RECOMMENDED to mark all static ORD documents with perspective `system-version`.
+   * An ORD provider that describes a system SHOULD publish static metadata using `system-type`, `system-version`, or both.
+   * Static ORD documents MUST NOT contain tenant context or tenant-specific customizations.
+   * Providers SHOULD publish version-independent metadata through `system-type` and metadata that differs between versions through `system-version`.
+   * Distinct `system-version` values MUST be used when multiple versions of the same application are deployed at the same time in one environment tier, such as production.
+   * A continuously delivered system MAY instead publish all static metadata through `system-type` or through `system-version` with a fixed `describedSystemVersion.version`.
+   * When using the fixed-version approach, the version MUST remain unchanged so each release replaces the previously published `system-version` perspective.
+   * Each ORD ID published in a static perspective MUST have a complete representation.
+   * The effective static view looks up an ORD ID in the applicable `system-version` layer first and then in `system-type`.
+   * If both contain the ORD ID, the complete `system-version` representation takes precedence and properties MUST NOT be merged across the layers.
    *
-   * It is RECOMMENDED to describe dynamic metadata in both static system-version perspective and additionally describe the system-instance perspective where it diverges from the static metadata.
+   * Systems with dynamic metadata MUST be described in a complete system-instance perspective and SHOULD additionally be described in at least one static perspective.
    *
    * If not provided, this defaults to `system-instance`, which is the most precise description but also the most costly to replicate.
    *
@@ -3417,7 +3425,7 @@ export interface Overlay {
   relatedEventResources?: RelatedEventResource[];
   /**
    * List of overlay definition files referenced by this ORD Overlay Resource.
-   * Each entry points to an ORD Overlay document (`type: ord:overlay:v1`) that contains the actual patches.
+   * Each entry points to an overlay document that contains the actual patches.
    */
   definitions?: OverlayDefinition[];
   /**
@@ -3436,7 +3444,7 @@ export interface OverlayDefinition {
   /**
    * Type of the overlay definition
    */
-  type: ("ord:overlay:v1" | string) & string;
+  type: ("ord:overlay:v1" | "oas-overlay-v1" | string) & string;
   /**
    * The [Media Type](https://www.iana.org/assignments/media-types/media-types.xhtml) of the definition serialization format.
    * A consuming application can use this information to know which file format parser it needs to use.
@@ -3842,10 +3850,11 @@ export interface CapabilityIntegrationAspect {
 /**
  * The vendor of a product or a package, usually a corporation or a customer / user.
  *
- * The vendor of a `Package` is the owner or creator of the content of the package.
+ * The vendor of a `Package` is the authoritative statement of the current ownership attribution for the content of the Package.
+ * It is independent of the namespaces of the resource ORD IDs and MUST NOT be derived from them.
  * The vendor of a `Product` is the owner of the product.
  *
- * If the resources are created by the customer / user of the described system, `customer:vendor:Customer:` MUST be used as vendor.
+ * If ownership of the Package contents is attributed to the customer / user of the described system, `customer:vendor:Customer:` MUST be used as vendor.
  *
  * Both have already a [vendor namespace](../index.md#vendor-namespace) within their ORD ID.
  * The `Vendor` entity is giving more details on the vendor namespace.
@@ -4093,13 +4102,15 @@ export interface Package {
    */
   supportInfo?: string;
   /**
-   * Vendor / organization that is the creator (or responsible party) of the resources that are part of the `Package`.
+   * Vendor / organization to which ownership of the resources in the `Package` is currently attributed.
+   * This value is authoritative for current ownership attribution and is independent of the namespaces of the resource ORD IDs.
+   * It MUST NOT be derived from those namespaces.
    *
    * MUST be a valid reference to a [Vendor](#vendor) ORD ID.
    *
-   * MUST be set to `customer:vendor:Customer:` if the contents of the Package are created by the customer / user.
+   * MUST be set to `customer:vendor:Customer:` if ownership of the Package contents is attributed to the customer / user.
    *
-   * MUST be set to a registered partner vendor, if the contents of the Package are created by a partner / third party.
+   * MUST be set to a registered partner vendor if ownership of the Package contents is attributed to a partner / third party.
    */
   vendor: string;
   /**
