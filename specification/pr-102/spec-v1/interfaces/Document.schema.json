@@ -5085,7 +5085,7 @@
             {
               "const": "agent-skill",
               "x-introduced-in-version": "1.17.0",
-              "description": "An [agent skill](https://agentskills.io/home) is a discrete, reusable capability that an agent can perform.\nAgent skills can be invoked by agents or other systems and represent\na well-defined task or function that the agent is capable of executing."
+              "description": "An agent skill is a discrete, reusable capability that an agent can perform.\nAgent skills can be invoked by agents or other systems and represent\na well-defined task or function that the agent is capable of executing."
             },
             {
               "const": "agent-plugin",
@@ -5409,7 +5409,7 @@
             {
               "const": "agent-skill-zip",
               "x-introduced-in-version": "1.17.0",
-              "description": "A ZIP archive containing the definition of an agent skill following the [agent skill standard](https://agentskills.io/home),\nincluding all relevant assets such as configuration and schema files.\n\nThe `mediaType` SHOULD be set to `application/zip`.\nThe capability `type` SHOULD be set to `agent-skill`."
+              "description": "A ZIP archive containing an agent skill and its relevant assets, such as instructions, configuration, schemas, or scripts.\nORD treats the archive as opaque and does not prescribe its internal layout or format version.\nPackage-format identification and versioning remain outside this definition type.\n\nThe `mediaType` SHOULD be set to `application/zip`.\nThe capability `type` SHOULD be set to `agent-skill`."
             },
             {
               "const": "agent-plugin-zip",
