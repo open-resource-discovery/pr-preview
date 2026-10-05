@@ -7358,7 +7358,7 @@
         },
         "relationType": {
           "type": "string",
-          "x-introduced-in-version": "1.14.3",
+          "x-introduced-in-version": "1.14.2",
           "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
           "anyOf": [
             {
@@ -7409,7 +7409,7 @@
         },
         "relationType": {
           "type": "string",
-          "x-introduced-in-version": "1.14.3",
+          "x-introduced-in-version": "1.14.2",
           "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
           "anyOf": [
             {
@@ -7460,7 +7460,7 @@
         },
         "relationType": {
           "type": "string",
-          "x-introduced-in-version": "1.14.3",
+          "x-introduced-in-version": "1.14.2",
           "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
           "anyOf": [
             {
