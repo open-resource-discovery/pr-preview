@@ -3864,11 +3864,6 @@
               "description": "ORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
-              "const": "arazzo-v1",
-              "x-introduced-in-version": "1.17.0",
-              "description": "[Arazzo Specification v1.0.0](https://spec.openapis.org/arazzo/v1.0.0.html) workflow document\ndescribing multi-step API interactions.\nThe `mediaType` MUST be set to `application/json` or `application/yaml`.\n\nAttaching an Arazzo definition to a single API Resource is ONLY appropriate when the\nworkflow is scoped to that specific API. For workflows that span multiple APIs, publish\na [Capability](#capability) with `type: \"workflow\"` and a definition of `type: \"arazzo-v1\"` instead,\nand list every covered API via [`relatedApiResources`](#capability_relatedapiresources) with\n`relationType: \"ord:orchestrates\"`."
-            },
-            {
               "const": "custom",
               "description": "If chosen, `customType` MUST be provided."
             }
@@ -5395,7 +5390,7 @@
             {
               "const": "arazzo-v1",
               "x-introduced-in-version": "1.17.0",
-              "description": "[Arazzo Specification v1.0.0](https://spec.openapis.org/arazzo/v1.0.0.html) workflow document\ndescribing multi-step API interactions.\n\nThe `mediaType` MUST be set to `application/json` or `application/yaml`.\nThe capability `type` SHOULD be set to `workflow` when the Arazzo workflow spans multiple APIs."
+              "description": "[Arazzo Specification v1.0.0](https://spec.openapis.org/arazzo/v1.0.0.html) workflow document\ndescribing multi-step API interactions.\n\nThe `mediaType` MUST be set to `application/json` or `application/yaml`.\nThe capability `type` SHOULD be set to `workflow`."
             },
             {
               "const": "custom",
