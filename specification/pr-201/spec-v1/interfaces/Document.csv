@@ -277,10 +277,10 @@ Overlay Definition,url,true,string
 Overlay Definition,accessStrategies,false,array<AccessStrategy>
 Overlay Definition,visibility,false,string
 Overlay Definition,purpose,false,string
-Overlay Definition,target,false,OverlayTarget
-Overlay Target,url,false,string
-Overlay Target,correlationIds,false,array<string>
-Overlay Target,definitionType,false,string
+Overlay Definition,target,false,OverlayDefinitionTarget
+Overlay Definition Target,url,false,string
+Overlay Definition Target,correlationIds,false,array<string>
+Overlay Definition Target,definitionType,false,string
 Product,ordId,true,string
 Product,correlationIds,false,array<string>
 Product,title,true,string

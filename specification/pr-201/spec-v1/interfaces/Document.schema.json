@@ -4918,7 +4918,7 @@
           ]
         },
         "target": {
-          "$ref": "#/definitions/OverlayTarget"
+          "$ref": "#/definitions/OverlayDefinitionTarget"
         }
       },
       "additionalProperties": false,
@@ -4928,17 +4928,19 @@
         "url"
       ]
     },
-    "OverlayTarget": {
+    "OverlayDefinitionTarget": {
       "type": "object",
-      "title": "Overlay Target",
+      "title": "Overlay Definition Target",
       "x-ums-type": "embedded",
+      "x-introduced-in-version": "1.17.0",
       "description": "Optional context about the target being patched.\nThe target can refer to a resource definition file by its URL, correlation IDs, or definition type.\n\nWhen this object is present, at least one of `url`, `correlationIds`, or `definitionType`\nMUST be provided so that consumers can identify what is being patched.\nUse `url` and/or `definitionType` to disambiguate which definition file to target.\n\nExample: one OData API resource can have both `edmx` and `openapi-v3` definitions attached.\nIn such cases, provide `definitionType` and/or `url` to make the concrete patch target explicit.\n\nMultiple identifiers, if provided, are treated as all pointing to the same resource.",
       "additionalProperties": false,
+      "minProperties": 1,
       "properties": {
         "url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "URL or URI pointing directly to the file being patched.\nThis is typically a resource definition file (e.g. OpenAPI, AsyncAPI, OData CSDL),\nbut can also point to any JSON/YAML-based target document.",
+          "description": "URL or URI pointing directly to the file being patched.\nThis is typically a resource definition file (e.g. OpenAPI, AsyncAPI, OData CSDL),\nbut can also point to any JSON/YAML-based target document.\nRelative references are resolved against the ORD Document's root [`baseUrl`](#ord-document_baseurl).",
           "examples": [
             "https://example.com/api/openapi.json",
             "./openapi.yaml"
@@ -4962,7 +4964,7 @@
         "definitionType": {
           "description": "Optional, but RECOMMENDED type of the target definition being patched.\nIf provided, this SHOULD match the `type` of the referenced metadata definition\n(as used in API/Event/Capability resource definitions).\nThis is especially useful when a resource has multiple attached definitions.\n\nThis can be used to disambiguate how selectors are interpreted for the target.\n\nMUST be either:\n- any valid [Specification ID](../../spec-v1/index.md#specification-id), or\n- one of the pre-defined values reused from:\n  - API Resource Definition `type`\n  - Event Resource Definition `type`\n  - Capability Definition `type`\n\nThe literal value `custom` is deprecated for `definitionType` and MUST NOT be used.\nIn such cases, use a concrete [Specification ID](../../spec-v1/index.md#specification-id) instead.",
           "type": "string",
-          "title": "Overlay Definition Type",
+          "title": "Overlay Target Definition Type",
           "x-ums-type": "ignore",
           "anyOf": [
             {
