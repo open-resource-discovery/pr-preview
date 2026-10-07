@@ -4933,7 +4933,7 @@
       "title": "Overlay Definition Target",
       "x-ums-type": "embedded",
       "x-introduced-in-version": "1.17.0",
-      "description": "Optional context identifying the resource definition being patched without relying on its provider URL, which an ORD Aggregator rewrites when it hosts the definition.\n\nThe target resource is identified by the Overlay Resource's `relatedApiResources` or `relatedEventResources` relationships and can additionally be identified through `correlationIds`.\n`definitionType`, `definitionPurpose`, and `definitionVisibility` select the attached definition using the resource definition uniqueness key.\n\nExample: one OData API resource can have both `edmx` and `openapi-v3` definitions attached.\nIn such cases, `definitionType` makes the concrete patch target explicit.\n\nMultiple identifiers, if provided, are treated as all pointing to the same resource.",
+      "description": "Optional context identifying the resource definition being patched without relying on its provider URL, which an ORD Aggregator rewrites when it hosts the definition.\n\nThe target resource is identified by the Overlay Resource's `relatedApiResources` or `relatedEventResources` relationships and can additionally be identified through `correlationIds`.\n`definitionType`, `definitionPurpose`, and `definitionVisibility` select the attached definition using the resource definition uniqueness key.\nWhen multiple resources are related, the remaining target metadata or application context MUST make the intended resource or resources unambiguous.\nThe relationship list alone does not imply that every overlay definition patches every related resource.\n\nExample: one OData API resource can have both `edmx` and `openapi-v3` definitions attached.\nIn such cases, `definitionType` makes the concrete patch target explicit.\n\nMultiple identifiers, if provided, are treated as all pointing to the same resource.",
       "additionalProperties": false,
       "properties": {
         "correlationIds": {
@@ -4952,7 +4952,7 @@
           ]
         },
         "definitionType": {
-          "description": "Type of the target definition being patched.\nThis MUST match the `type` of the referenced metadata definition (as used in API/Event/Capability resource definitions).\nThis is especially useful when a resource has multiple attached definitions.\n\nThis can be used to disambiguate how selectors are interpreted for the target.\n\nMUST be either:\n- any valid [Specification ID](../../spec-v1/index.md#specification-id), or\n- one of the pre-defined values reused from:\n  - API Resource Definition `type`\n  - Event Resource Definition `type`\n  - Capability Definition `type`\n\nThe literal value `custom` is deprecated for `definitionType` and MUST NOT be used.\nIn such cases, use a concrete [Specification ID](../../spec-v1/index.md#specification-id) instead.",
+          "description": "Type of the target definition being patched.\nThis MUST match the referenced metadata definition's `type` or, when provided, its `customType` (as used in API/Event/Capability resource definitions).\nThis is especially useful when a resource has multiple attached definitions.\n\nThis can be used to disambiguate how selectors are interpreted for the target.\n\nMUST be either:\n- any valid [Specification ID](../../spec-v1/index.md#specification-id), or\n- one of the pre-defined values reused from:\n  - API Resource Definition `type`\n  - Event Resource Definition `type`\n  - Capability Definition `type`\n\nThe literal value `custom` is deprecated for `definitionType` and MUST NOT be used.\nIn such cases, use a concrete [Specification ID](../../spec-v1/index.md#specification-id) instead.",
           "type": "string",
           "title": "Overlay Target Definition Type",
           "x-ums-type": "ignore",
@@ -5006,6 +5006,10 @@
             },
             {
               "const": "sap.mdo:mdi-capability-definition:v1"
+            },
+            {
+              "const": "oas-overlay-v1",
+              "x-introduced-in-version": "1.17.0"
             }
           ],
           "examples": [
