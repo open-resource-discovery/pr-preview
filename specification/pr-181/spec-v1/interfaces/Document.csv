@@ -346,7 +346,7 @@ Aspect,title,false,string
 Aspect,description,false,string
 Aspect,mandatory,true,boolean
 Aspect,supportMultipleProviders,false,boolean
-Aspect,systemTypes,false,array<string>
+Aspect,systemTypes,false,array<SystemTypeIntegrationAspect>
 Aspect,apiResources,false,array<ApiResourceIntegrationAspect>
 Aspect,eventResources,false,array<EventResourceIntegrationAspect>
 Aspect,capabilities,false,array<CapabilityIntegrationAspect>
@@ -365,6 +365,8 @@ API Resource Integration Aspect Subset,operationId,true,string
 Capability Integration Aspect,ordId,true,string
 Capability Integration Aspect,minVersion,false,string
 Capability Integration Aspect,labels,false,Labels
+System Type Integration Aspect,systemNamespace,true,string
+System Type Integration Aspect,minVersion,false,string
 Vendor,ordId,true,string
 Vendor,title,true,string
 Vendor,partners,false,array<string>

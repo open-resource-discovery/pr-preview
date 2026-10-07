@@ -5761,17 +5761,17 @@
         "systemTypes": {
           "type": "array",
           "x-introduced-in-version": "1.17.0",
-          "description": "List of alternative system types that can fulfill this aspect without requiring a specific API resource, event resource or capability (OR condition).\n\nEach entry MUST be a valid [system namespace](../index.md#system-namespace).\nUse separate aspects when multiple system types are required (AND condition).\nSystem-type aspects can be combined with more detailed resource or capability aspects in the same Integration Dependency.",
+          "description": "List of alternative system types that can fulfill this aspect without requiring a specific API resource, event resource or capability (OR condition).\n\nEach entry identifies a [system type](../index.md#system-type) by its system namespace and can optionally require a minimum system version.\nUse separate aspects when multiple system types are required (AND condition).\nSystem-type aspects can be combined with more detailed resource or capability aspects in the same Integration Dependency.",
           "items": {
-            "type": "string",
-            "pattern": "^[a-z0-9]+(?:[.][a-z0-9]+){1}$",
-            "maxLength": 32
+            "$ref": "#/definitions/SystemTypeIntegrationAspect"
           },
           "minItems": 1,
           "uniqueItems": true,
           "examples": [
             [
-              "sap.billing"
+              {
+                "systemNamespace": "sap.billing"
+              }
             ]
           ]
         },
@@ -5975,6 +5975,37 @@
       "additionalProperties": false,
       "required": [
         "ordId"
+      ]
+    },
+    "SystemTypeIntegrationAspect": {
+      "type": "object",
+      "title": "System Type Integration Aspect",
+      "x-introduced-in-version": "1.17.0",
+      "x-ums-type": "custom",
+      "description": "System-type related integration aspect.",
+      "properties": {
+        "systemNamespace": {
+          "type": "string",
+          "description": "The [system namespace](../index.md#system-namespace) that identifies the required system type.",
+          "pattern": "^[a-z0-9]+(?:[.][a-z0-9]+){1}$",
+          "maxLength": 32,
+          "examples": [
+            "sap.s4"
+          ]
+        },
+        "minVersion": {
+          "type": "string",
+          "description": "Minimum [system version](../index.md#system-version) that the integration requires.\nThe target system version MUST be greater than or equal to this value according to Semantic Versioning precedence.",
+          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
+          "examples": [
+            "1.2.3",
+            "1.0.0-alpha.1"
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "systemNamespace"
       ]
     },
     "Vendor": {
