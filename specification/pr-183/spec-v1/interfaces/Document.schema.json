@@ -3419,9 +3419,6 @@
             "$ref": "#/definitions/Link"
           }
         },
-        "extensible": {
-          "$ref": "#/definitions/Extensible"
-        },
         "industry": {
           "x-feature-status": "beta",
           "type": "array",
@@ -4615,9 +4612,6 @@
           "items": {
             "$ref": "#/definitions/Link"
           }
-        },
-        "extensible": {
-          "$ref": "#/definitions/Extensible"
         },
         "tags": {
           "type": "array",

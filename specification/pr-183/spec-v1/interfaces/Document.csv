@@ -201,7 +201,6 @@ Data Product,outputPorts,true,array<DataProductOutputPort>
 Data Product,responsible,true,string
 Data Product,dataProductLinks,false,array<DataProductLink>
 Data Product,links,false,array<Link>
-Data Product,extensible,false,Extensible
 Data Product,industry,false,array<string>
 Data Product,lineOfBusiness,false,array<string>
 Data Product,countries,false,array<string>
@@ -257,7 +256,6 @@ Agent,relatedEntityTypes,false,array<string>
 Agent,exposedApiResources,false,array<ExposedApiResourcesTarget>
 Agent,integrationDependencies,false,array<string>
 Agent,links,false,array<Link>
-Agent,extensible,false,Extensible
 Agent,tags,false,array<string>
 Agent,labels,false,Labels
 Agent,documentationLabels,false,DocumentationLabels
