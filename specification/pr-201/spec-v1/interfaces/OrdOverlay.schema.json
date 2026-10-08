@@ -226,6 +226,10 @@
               "const": "sap.mdo:mdi-capability-definition:v1"
             },
             {
+              "const": "arazzo-v1",
+              "x-introduced-in-version": "1.17.0"
+            },
+            {
               "const": "oas-overlay-v1",
               "x-introduced-in-version": "1.17.0"
             }
@@ -815,7 +819,7 @@
       "properties": {
         "systemNamespace": {
           "type": "string",
-          "description": "The [system namespace](../../spec-v1/index.md#system-namespace) is a unique identifier for the system type.",
+          "description": "The [system namespace](../concepts/identifiers.md#system-namespace) is a unique identifier for the system type.",
           "pattern": "^[a-z0-9]+(?:[.][a-z0-9]+){1}$",
           "maxLength": 32,
           "examples": [
