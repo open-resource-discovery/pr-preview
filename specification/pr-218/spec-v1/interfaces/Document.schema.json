@@ -223,14 +223,6 @@
         "$ref": "#/definitions/IntegrationDependency"
       }
     },
-    "relationships": {
-      "type": "array",
-      "x-feature-status": "beta",
-      "description": "⚠️ DRAFT / BETA: Generic, directed assertions between ORD resources, elements of\ntheir authoritative definitions, and externally identified metadata concepts.\n\nEach assertion is owned by the publisher of this ORD Document. A publisher MAY\ndescribe its own resources or publish independently curated cross-system assertions.\nThis does not transfer ownership of the referenced resources or modify their definitions.\n\nAggregators MUST retain the document's publisher, customer scope, perspective and\ndescribed-system context with each assertion. An ORD ID alone is not a deployment\nidentity, and a relationship MUST NOT be interpreted as runtime authorization.\n\nExisting specialized associations retain their semantics. See\n[Generic Relationships](../concepts/generic-relationships.md) for resolution,\npublication, and the proposed relationship vocabulary.",
-      "items": {
-        "$ref": "#/definitions/Relationship"
-      }
-    },
     "vendors": {
       "type": "array",
       "description": "Array of all Vendors that are described in this ORD document.",
@@ -4113,7 +4105,7 @@
       "x-ums-type": "root",
       "x-introduced-in-version": "1.14.0",
       "x-feature-status": "beta",
-      "description": "An **Agent** provides a high-level description of an AI-powered autonomous system that can perform tasks, make decisions, and interact with users or other systems to achieve specific business goals.\n\nAn Agent can relate to specific entity types it works with, declare integration dependencies on external systems it requires, and expose its capabilities through APIs using protocols like A2A (Agent-to-Agent).\n\nAgents enable intelligent automation and decision-making within business processes by providing semantic understanding and context-aware capabilities beyond traditional API-based integrations.\n\nFor more details, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols.md).",
+      "description": "An **Agent** provides a high-level description of an AI-powered autonomous system that can perform tasks, make decisions, and interact with users or other systems to achieve specific business goals.\n\nAn Agent can relate to specific entity types it works with, declare integration dependencies on external systems it requires, and expose its capabilities through APIs using protocols like A2A (Agent-to-Agent).\n\nAgents enable intelligent automation and decision-making within business processes by providing semantic understanding and context-aware capabilities beyond traditional API-based integrations.\n\nAn Agent can also declare which Capabilities it implements and which other Agents it delegates tasks to through typed, agent-owned relationships.\n\nFor more details, see [AI Agents and Protocols](../concepts/ai-agents-and-protocols.md).",
       "properties": {
         "ordId": {
           "type": "string",
@@ -4593,6 +4585,38 @@
             [
               {
                 "ordId": "sap.foo:apiResource:DisputeResolutionAgent:v1"
+              }
+            ]
+          ]
+        },
+        "relatedCapabilities": {
+          "type": "array",
+          "x-feature-status": "beta",
+          "description": "Optional list of Capability Resources related to the described Agent.\n\nUse `ord:implementsCapability` to identify a Capability whose ability or feature the Agent implements.\nThe publisher of the described Agent owns this declaration. Consumers MAY derive inverse navigation without a reciprocal property on the Capability.\n\nCapabilities consumed or required by the Agent MUST be described through `integrationDependencies` instead of duplicating that requirement here.\nIf `relationType` is omitted, the reference does not imply implementation or consumption.",
+          "items": {
+            "$ref": "#/definitions/RelatedCapability"
+          },
+          "examples": [
+            [
+              {
+                "ordId": "example.procurement:capability:OrderResolution:v1",
+                "relationType": "ord:implementsCapability"
+              }
+            ]
+          ]
+        },
+        "relatedAgents": {
+          "type": "array",
+          "x-feature-status": "beta",
+          "description": "Optional list of Agent Resources related to the described Agent.\n\nUse `ord:delegatesTo` to declare that the described Agent delegates tasks or subtasks to the referenced Agent.\nThe publisher of the described Agent owns this declaration. Consumers MAY derive inverse navigation without requiring the referenced Agent to publish a matching relationship.\n\nRequirements on the referenced Agent's interaction APIs MUST be described through `integrationDependencies`.\nThis property identifies an agent-level role in the source Agent's behavior, not a duplicate list of required APIs or an assertion that a runtime connection exists.\nIf `relationType` is omitted, the reference does not imply delegation.",
+          "items": {
+            "$ref": "#/definitions/RelatedAgent"
+          },
+          "examples": [
+            [
+              {
+                "ordId": "example.risk:agent:SupplierRisk:v1",
+                "relationType": "ord:delegatesTo"
               }
             ]
           ]
@@ -7289,273 +7313,6 @@
       ],
       "additionalProperties": false
     },
-    "Relationship": {
-      "title": "Generic Relationship",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "description": "A publisher-owned, directed metadata assertion: source → relationType → target.\n\nThe assertion identity is its localId within the publishing document and its\npublisher/customer/perspective context. A relationship is not a new operation\nresource and does not reproduce an operation's inputs, outputs, or execution contract.\nPublishers MUST use distinct localIds within one document.",
-      "properties": {
-        "localId": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 255,
-          "description": "Stable identifier for this assertion within the publishing document.\nConsumers MUST NOT compare localIds across publisher or document contexts."
-        },
-        "source": {
-          "$ref": "#/definitions/RelationshipEndpoint"
-        },
-        "relationType": {
-          "type": "string",
-          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
-          "description": "Directed relationship predicate, identified by a [Concept ID](../concepts/identifiers.md#concept-id).\n\nThe `ord:` namespace is reserved. The following values are proposed for standardization;\ncustom predicates MUST use a namespace controlled by their definition owner.\nConsumers MUST preserve unknown predicates and MUST NOT invent semantics for them.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "const": "ord:implementsCapability",
-              "description": "The source resource or definition element realizes the ability or feature\ndescribed by the target ORD Capability. This is not a declaration of\ncompatibility, dependency, or permission to invoke it."
-            },
-            {
-              "const": "ord:readsEntityType",
-              "description": "The source interface element declares read access to instances of the target\nEntity Type. This does not promise complete representation, caller access,\nfreshness, or absence of other effects."
-            },
-            {
-              "const": "ord:modifiesEntityType",
-              "description": "The source interface element declares that it can create, update, delete,\nor cause a state transition of instances of the target Entity Type.\nThis does not specify the complete effect, transaction, or authorization rules."
-            },
-            {
-              "const": "ord:representsConcept",
-              "description": "The source definition element represents the concept identified by the target\nEntity Type or external concept URI. This does not imply identical schemas,\nrecord identity, lossless transformation, or equivalent domain rules."
-            }
-          ],
-          "examples": [
-            "ord:implementsCapability",
-            "example.architecture:automatesProcessStep"
-          ]
-        },
-        "target": {
-          "$ref": "#/definitions/RelationshipEndpoint"
-        },
-        "visibility": {
-          "type": "string",
-          "description": "Intended visibility of the assertion itself. Providers and aggregators MUST\nenforce metadata access restrictions; this property does not grant access.\nPublishing an assertion MUST NOT disclose restricted endpoint metadata or\na restricted relationship to an audience that is not allowed to see it.",
-          "oneOf": [
-            {
-              "const": "public",
-              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and formal API lifecycle management. For more details see [Versioning and Lifecycle](../concepts/versioning-and-lifecycle.md).\n\nExample: A REST API that customers use to integrate with your SaaS product."
-            },
-            {
-              "const": "internal",
-              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
-            },
-            {
-              "const": "private",
-              "description": "Metadata should not be discoverable outside the application / service's own deployment scope (e.g., outside of the provider application or the same system namespace / system type).\nUsed for metadata completeness when describing implementation details or dependencies.\n\nPrivate resources usually have no stability guarantees and can change or be removed at any time.\nThese are typically implementation details not meant for consumption by other services.\n\nExample: Services only used within a microservice architecture or APIs that are only used for the own UIs, not for general consumption.\n\nPrivate resources MUST NOT be made discoverable or accessible outside the application / service's own deployment scope."
-            }
-          ]
-        },
-        "description": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Optional explanation of the assertion, including scope and relevant limitations.\nNotated in CommonMark. Machine-readable predicate semantics remain authoritative."
-        },
-        "links": {
-          "type": "array",
-          "description": "Optional links to the predicate definition, mapping documentation, or evidence.\nLinks are references, not authorization or a guarantee of trustworthiness.",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        }
-      },
-      "additionalProperties": false,
-      "required": [
-        "localId",
-        "source",
-        "relationType",
-        "target",
-        "visibility"
-      ]
-    },
-    "RelationshipEndpoint": {
-      "title": "Relationship Endpoint",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "description": "An ORD resource/taxonomy identifier, an exact element of a linked definition,\nor an absolute URI identifying an external metadata concept or model element.\n\nEndpoints describe metadata, not business-instance records. Resource identity is\nresolved in the assertion's publication/customer/perspective context. Consumers\nMUST preserve unresolved, inaccessible, ambiguous, and version-mismatched references\nwithout presenting them as successfully resolved relationships.",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/RelationshipOrdEndpoint"
-        },
-        {
-          "$ref": "#/definitions/RelationshipExternalEndpoint"
-        }
-      ]
-    },
-    "RelationshipOrdEndpoint": {
-      "title": "Relationship ORD Endpoint",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "description": "An ORD resource or taxonomy item, optionally selecting one exact element of\nits authoritative definition. An element requires resourceVersion and definition.",
-      "properties": {
-        "ordId": {
-          "type": "string",
-          "maxLength": 255,
-          "pattern": "^(([a-z0-9]+(?:[.][a-z0-9]+)*):((apiResource|eventResource|entityType|capability|dataProduct|agent|integrationDependency|overlay|package|consumptionBundle):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)|product:([a-zA-Z0-9._\\-]+):)|[a-z0-9]+:vendor:([a-zA-Z0-9._\\-]+):)$",
-          "description": "[ORD ID](../concepts/identifiers.md#ord-id) of the referenced resource or taxonomy item.\nCustomer-scoped identifiers MUST retain their customer scope during resolution."
-        },
-        "resourceVersion": {
-          "type": "string",
-          "description": "Exact version of the referenced ORD resource. REQUIRED when element is supplied.\nMUST equal the version of the authoritative resource used for resolution.",
-          "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$",
-          "examples": [
-            "1.2.3",
-            "1.0.0-alpha.1"
-          ]
-        },
-        "definition": {
-          "$ref": "#/definitions/RelationshipDefinitionReference"
-        },
-        "element": {
-          "$ref": "#/definitions/RelationshipElementSelector"
-        }
-      },
-      "required": [
-        "ordId"
-      ],
-      "dependencies": {
-        "element": [
-          "ordId",
-          "resourceVersion",
-          "definition"
-        ],
-        "definition": [
-          "element"
-        ],
-        "resourceVersion": [
-          "ordId"
-        ]
-      },
-      "additionalProperties": false
-    },
-    "RelationshipExternalEndpoint": {
-      "title": "Relationship External Endpoint",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "description": "An externally identified metadata concept or model element.",
-      "properties": {
-        "uri": {
-          "type": "string",
-          "format": "uri",
-          "description": "Absolute URI identifying an external metadata concept or model element,\nfor example a vocabulary concept or a BPMN task. URI identity does not\nrequire an HTTP retrieval and MUST NOT trigger unrestricted network access."
-        }
-      },
-      "required": [
-        "uri"
-      ],
-      "additionalProperties": false
-    },
-    "RelationshipDefinitionReference": {
-      "title": "Relationship Definition Reference",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "description": "Identifies one authoritative definition linked by the referenced ORD resource.\nIt MUST match a published definition by type and effective absolute URL.\nRelative provider URLs MUST be resolved against that provider document's base URL\nbefore publication here, not against the relationship publisher's base URL.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "minLength": 1,
-          "description": "The definition type as published on the referenced ORD resource."
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Effective absolute URL of the exact definition to inspect."
-        },
-        "sha256": {
-          "type": "string",
-          "pattern": "^[a-fA-F0-9]{64}$",
-          "description": "Optional SHA-256 digest of the authoritative definition file's bytes.\nIf supplied, consumers MUST verify it before reporting an element as resolved.\nThis guards against mutable URLs; it is not a signature or a trust assertion."
-        }
-      },
-      "required": [
-        "type",
-        "url"
-      ],
-      "additionalProperties": false
-    },
-    "RelationshipElementSelector": {
-      "title": "Relationship Element Selector",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "description": "Identifies exactly one native definition element. The native contract remains\nauthoritative. Zero matches are unresolved; more than one match is ambiguous.\nConsumers MUST NOT silently select one candidate or treat selectors as wildcards.",
-      "oneOf": [
-        {
-          "$ref": "#/definitions/RelationshipElementByOperation"
-        },
-        {
-          "$ref": "#/definitions/RelationshipElementByJsonPointer"
-        },
-        {
-          "$ref": "#/definitions/RelationshipElementByNativeId"
-        }
-      ]
-    },
-    "RelationshipElementByOperation": {
-      "title": "Relationship Element By Operation",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Exact native operation identifier, aligned with ORD Overlay operation selectors:\nOpenAPI operationId, MCP tool name, A2A skill ID, or namespace-qualified\nOData Action/Function name or signature. A2A skills are advertised abilities,\nnot proof of a directly callable operation. OData overloads require a signature\nwhen a qualified name alone is ambiguous.\nFor MCP this selects a provider-published definition snapshot; live tools/list\naddressing needs a runtime-definition profile (not supplied by this draft)."
-        }
-      },
-      "required": [
-        "operation"
-      ],
-      "additionalProperties": false
-    },
-    "RelationshipElementByJsonPointer": {
-      "title": "Relationship Element By JSON Pointer",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "properties": {
-        "jsonPointer": {
-          "type": "string",
-          "pattern": "^(/([^\\u007e]|\\u007e[01])*)+$",
-          "description": "Exact non-root JSON Pointer (RFC 6901) into a JSON/YAML definition.\nFor an OpenAPI operation without operationId, select the HTTP method object\ninside the appropriate path item. This is not JSONPath."
-        }
-      },
-      "required": [
-        "jsonPointer"
-      ],
-      "additionalProperties": false
-    },
-    "RelationshipElementByNativeId": {
-      "title": "Relationship Element By Native ID",
-      "type": "object",
-      "x-ums-type": "custom",
-      "x-feature-status": "beta",
-      "properties": {
-        "nativeId": {
-          "type": "string",
-          "minLength": 1,
-          "description": "Exact identifier defined by the native format, for example a CSN entity name,\nBPMN task ID, DMN decision ID, or Arazzo workflowId. A format-specific resolver\nMUST define its scope and matching rules. Unsupported formats remain unresolved."
-        }
-      },
-      "required": [
-        "nativeId"
-      ],
-      "additionalProperties": false
-    },
     "RelatedEntityType": {
       "title": "Related Entity Type",
       "x-introduced-in-version": "1.9.0",
@@ -7699,7 +7456,7 @@
       "x-introduced-in-version": "1.14.2",
       "x-ums-type": "embedded",
       "type": "object",
-      "description": "Defines a relation to another Capability (via its ORD ID).",
+      "description": "Defines a relation to a Capability (via its ORD ID), published by the source Capability or Agent.",
       "properties": {
         "ordId": {
           "type": "string",
@@ -7721,9 +7478,60 @@
               "type": "string",
               "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
               "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
+            },
+            {
+              "const": "ord:implementsCapability",
+              "x-feature-status": "beta",
+              "description": "The source Agent or Capability implements the ability or feature described by the referenced Capability.\n\nMUST ONLY be used on `Agent.relatedCapabilities` or `Capability.relatedCapabilities`.\nThis is a declaration of implementation, not a requirement to consume the target Capability, an invocation contract, or a runtime authorization grant."
             }
           ],
           "examples": [
+            "ord:implementsCapability",
+            "foo.bar:relationName"
+          ]
+        }
+      },
+      "required": [
+        "ordId"
+      ],
+      "additionalProperties": false
+    },
+    "RelatedAgent": {
+      "title": "Related Agent",
+      "x-feature-status": "beta",
+      "x-ums-type": "embedded",
+      "type": "object",
+      "description": "Defines a relation to an Agent (via its ORD ID), published by the source Agent.",
+      "properties": {
+        "ordId": {
+          "type": "string",
+          "description": "The ORD ID is a stable, globally unique ID for ORD resources or taxonomy.\n\nIt MUST be a valid [ORD ID](../concepts/identifiers.md#ord-id) of the appropriate ORD type.",
+          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):(agent):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
+          "maxLength": 255,
+          "examples": [
+            "example.risk:agent:SupplierRisk:v1"
+          ],
+          "x-association-target": [
+            "#/definitions/Agent/ordId"
+          ]
+        },
+        "relationType": {
+          "type": "string",
+          "description": "Optional type of the relationship as a [Concept ID](../concepts/identifiers.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
+            },
+            {
+              "const": "ord:delegatesTo",
+              "x-feature-status": "beta",
+              "description": "The source Agent delegates tasks or subtasks to the referenced Agent.\n\nMUST ONLY be used on `Agent.relatedAgents`. Its direction is from the delegating Agent to the delegate.\nIt does not imply a reciprocal delegation, identify a protocol or operation, or assert that a task has executed.\nTechnical integration requirements are described separately through `integrationDependencies`."
+            }
+          ],
+          "examples": [
+            "ord:delegatesTo",
             "foo.bar:relationName"
           ]
         }

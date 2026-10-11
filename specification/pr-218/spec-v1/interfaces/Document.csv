@@ -254,6 +254,8 @@ Agent,lineOfBusiness,false,array<string>
 Agent,industry,false,array<string>
 Agent,relatedEntityTypes,false,array<string>
 Agent,exposedApiResources,false,array<ExposedApiResourcesTarget>
+Agent,relatedCapabilities,false,array<RelatedCapability>
+Agent,relatedAgents,false,array<RelatedAgent>
 Agent,integrationDependencies,false,array<string>
 Agent,links,false,array<Link>
 Agent,tags,false,array<string>
@@ -445,24 +447,6 @@ Api Model Selector (Json Pointer),jsonPointer,true,string
 Exposed API Resource,ordId,true,string
 Entity Type Target (ORD ID),ordId,true,string
 Entity Type Target (Correlation Id),correlationId,true,string
-Generic Relationship,localId,true,string
-Generic Relationship,source,true,RelationshipEndpoint
-Generic Relationship,relationType,true,string
-Generic Relationship,target,true,RelationshipEndpoint
-Generic Relationship,visibility,true,string
-Generic Relationship,description,false,string
-Generic Relationship,links,false,array<Link>
-Relationship ORD Endpoint,ordId,true,string
-Relationship ORD Endpoint,resourceVersion,false,string
-Relationship ORD Endpoint,definition,false,RelationshipDefinitionReference
-Relationship ORD Endpoint,element,false,RelationshipElementSelector
-Relationship External Endpoint,uri,true,string
-Relationship Definition Reference,type,true,string
-Relationship Definition Reference,url,true,string
-Relationship Definition Reference,sha256,false,string
-Relationship Element By Operation,operation,true,string
-Relationship Element By JSON Pointer,jsonPointer,true,string
-Relationship Element By Native ID,nativeId,true,string
 Related Entity Type,ordId,true,string
 Related Entity Type,relationType,false,string
 Related API Resource,ordId,true,string
@@ -471,6 +455,8 @@ Related Event Resource,ordId,true,string
 Related Event Resource,relationType,false,string
 Related Capability,ordId,true,string
 Related Capability,relationType,false,string
+Related Agent,ordId,true,string
+Related Agent,relationType,false,string
 Exposed Entity Type,ordId,true,string
 Tombstone,ordId,false,string
 Tombstone,groupId,false,string
