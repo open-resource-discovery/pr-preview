@@ -13,20 +13,21 @@ info:
     A provider can opt into strict validation, in which any error publishes nothing and leaves
     the submission available for correction until it expires.
     During onboarding, the aggregator associates each publisher with exactly one registered ORD
-    namespace and zero or more directly granted Group IDs. A registered namespace can have zero
-    or more publishers. Namespace authorization uses exact equality and does not include parent,
+    namespace and zero or more Group IDs. A registered namespace can have zero or more publishers.
+    These associations grant each publisher ownership rights to the matching ORD information.
+    Publisher ownership uses exact namespace equality and does not include parent,
     child, or otherwise related namespaces. For ORD information objects that support `partOfGroups`,
-    resources without a direct group assignment are authorized in the publisher's registered namespace; grouped
-    resources require at least one matching direct grant. Group grants use union semantics and are
-    not transitive. A new resource is authorized from staged membership; an update requires
-    both retained and staged membership to be authorized. Objects without `partOfGroups` are
-    independently authorized from their own identifier namespace: the substring before the first
+    resources without a direct group assignment are owned in the publisher's registered namespace; grouped
+    resources require at least one matching group association. Multiple group associations use union
+    semantics and ownership is not transitive. A new resource is evaluated from staged membership;
+    an update requires both retained and staged membership to be inside the publisher's ownership scope.
+    Objects without `partOfGroups` are owned according to their own identifier namespace: the substring before the first
     `:` in `ordId`, the namespace in `groupTypeId` for a Group Type, or the group-instance
     namespace (the third colon-delimited component of `groupId`) for a Group. A referenced Group
-    Type is authorized independently from its own `groupTypeId`.
+    Type is evaluated independently from its own `groupTypeId`.
     The replacement and removal boundary is the publication context intersected with the
-    publisher's current namespace and direct-group authorization. Publisher-of-origin attribution
-    is not required. Publishers with overlapping authorization can update or remove the same ORD
+    publisher's current ownership scope. Publisher-of-origin attribution
+    is not required. Publishers with overlapping ownership can update or remove the same ORD
     information regardless of which publisher submitted it previously.
 
     Every operation requires authentication.
@@ -62,8 +63,8 @@ paths:
       description: |-
         Opens an isolated staging area for one authenticated publisher and one publication
         context.
-        The aggregator verifies that the authenticated publisher is onboarded and authorized for
-        the requested publication context. Resource authorization is evaluated asynchronously
+        The aggregator verifies that the authenticated publisher is onboarded and permitted to use
+        the requested publication context. Publisher ownership is evaluated asynchronously
         from the staged content during commit, not when the empty submission is opened.
         Publication defaults to `merge`; destructive `replace` behavior must be selected explicitly.
         Validation defaults to partial acceptance of valid publication units; strict
@@ -79,12 +80,12 @@ paths:
               $ref: "#/components/schemas/CreateSubmissionRequest"
             examples:
               merge:
-                summary: Merge authorized ORD information
+                summary: Merge owned ORD information
                 value:
                   context:
                     perspective: system-type
               replace:
-                summary: Replace authorized ORD information in this context
+                summary: Replace owned ORD information in this context
                 value:
                   publicationMode: replace
                   context:
@@ -379,21 +380,21 @@ paths:
         staging at least one valid ORD Document that contains no ORD information to retain.
         A staged unit skipped because of an error is not considered omitted for replacement and
         does not remove its previously published state.
-        Tombstones apply only inside the publisher's current authorization boundary and publication context.
+        Tombstones apply only inside the publisher's current ownership scope and publication context.
         During asynchronous validation, the aggregator verifies again that the authenticated
-        publisher is authorized for the publication context and checks every staged resource
-        against the publisher's exact registered namespace and direct group grants.
-        New resources are checked from staged membership. Updates require both the retained
-        resource and staged replacement to be authorized, so a membership change cannot grant
-        access to an existing resource. Before applying accepted units, the aggregator rechecks
-        current authorization as part of the atomic publication decision.
-        An unauthorized publication unit is reported as a validation issue and is skipped in
+        publisher can use the publication context and checks every staged resource against the
+        publisher's exact registered namespace and group associations.
+        New resources are checked from staged membership. Updates require both the retained resource
+        and staged replacement to be inside the publisher's ownership scope, so a membership change
+        cannot establish ownership of an existing resource. Before applying accepted units, the
+        aggregator rechecks the current associations as part of the atomic publication decision.
+        A publication unit outside the publisher's ownership scope is reported as a validation issue and is skipped in
         default mode; in strict mode, it fails the complete commit. Objects without
-        `partOfGroups` are independently authorized by their own identifier namespace and do not
-        become group-authorized by a resource's grant.
+        `partOfGroups` are owned according to their own identifier namespace and do not become
+        owned through a resource's group association.
         Replacement omission and tombstones can remove any retained ORD information in the
-        publication context that remains within the publisher's current authorization. This
-        includes information submitted by another publisher with overlapping authorization; the
+        publication context that remains within the publisher's current ownership scope. This
+        includes information submitted by another publisher with overlapping ownership; the
         aggregator does not need publisher-of-origin attribution to evaluate removal.
         Repeating this request while the same revision is validating returns its current state.
         Accepted publication units are applied atomically.
@@ -548,7 +549,7 @@ components:
           schema:
             $ref: "#/components/schemas/Problem"
     Forbidden:
-      description: The publisher is not onboarded or is not authorized for the requested operation or publication context. Staged-content authorization failures discovered during asynchronous commit processing are reported as validation issues instead.
+      description: The publisher is not onboarded or is not permitted to use the requested operation or publication context. Ownership-scope failures discovered during asynchronous commit processing are reported as validation issues instead.
       content:
         application/problem+json:
           schema:
@@ -612,7 +613,7 @@ components:
       properties:
         publicationMode:
           type: string
-          description: Whether omission removes prior ORD information in this publication context that remains within the authenticated publisher's current authorization, regardless of which publisher submitted it. Defaults to the non-destructive `merge` mode.
+          description: Whether omission removes prior ORD information in this publication context that remains within the authenticated publisher's current ownership scope, regardless of which publisher submitted it. Defaults to the non-destructive `merge` mode.
           enum: [replace, merge]
           default: merge
         strict:
@@ -628,7 +629,7 @@ components:
     PublicationContext:
       type: object
       description: |-
-        Context that must resolve to exactly one authorized publication target.
+        Context that must resolve to exactly one permitted publication target.
         `systemVersion` applies only to `system-version`, and `systemInstanceId` applies only to
         `system-instance`.
       required: [perspective]
