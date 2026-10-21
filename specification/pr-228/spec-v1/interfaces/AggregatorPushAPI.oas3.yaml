@@ -15,15 +15,19 @@ info:
     During onboarding, the aggregator associates each publisher with exactly one registered ORD
     namespace and zero or more Group IDs. A registered namespace can have zero or more publishers.
     These associations define the publisher's publication scope. Namespace and Group ID matching
-    are exact. Within its namespace, a publisher has publication privileges for every Group object,
+    are exact. The registered namespace is the outer boundary of that scope; Group IDs cannot extend
+    publication privileges beyond it. Within its namespace, a publisher has publication privileges for every Group object,
     every ORD entity without a group association, and every resource associated with at least one
     of the publisher's Group IDs. Group matching is direct and non-transitive. A new resource is
     evaluated from its staged state; an update requires both its retained and staged states to be
     inside the publisher's publication scope.
     A replace submission declares one or more target Group IDs. Its replacement boundary is the
-    publication context intersected with resources directly associated with at least one target
-    Group ID. Every target Group ID must remain associated with the publisher. Ungrouped information
-    is outside the replacement boundary. The tombstone removal boundary is the publication context
+    publication context intersected with the publisher's exact registered namespace and resources
+    directly associated with at least one target Group ID. Every target Group ID must remain associated with the publisher.
+    A resource associated with multiple groups enters the replacement boundary when any direct group
+    association matches a target Group ID. Omitting it removes the complete resource even if it also
+    belongs to non-target groups.
+    Ungrouped information is outside the replacement boundary. The tombstone removal boundary is the publication context
     intersected with the publisher's current publication scope. Publisher-of-origin attribution
     is not required. Publishers with overlapping publication scopes can update or remove the same ORD
     information regardless of which publisher submitted it previously.
@@ -391,9 +395,12 @@ paths:
         If a replacement target is no longer associated with the publisher, the complete commit fails.
         A publication unit outside the publisher's publication scope is reported as a validation
         issue and is skipped in default mode; in strict mode, it fails the complete commit.
-        Replacement omission can remove only retained resources whose direct `partOfGroups` value
-        contains at least one target Group ID that remains associated with the publisher. Ungrouped
-        information and resources associated only with other Group IDs remain untouched. Tombstones
+        Replacement omission can remove only retained resources inside the publisher's exact registered
+        namespace whose direct `partOfGroups` value
+        contains at least one target Group ID that remains associated with the publisher.
+        A resource associated with multiple groups is removed in full when it is omitted and any one
+        of its direct group associations matches a target Group ID.
+        Ungrouped information and resources associated only with other Group IDs remain untouched. Tombstones
         can remove retained ORD information in the publication context that remains within the
         publisher's current publication scope. Removal can include information submitted by another
         publisher with overlapping publication scope; the aggregator does not need
@@ -640,8 +647,11 @@ components:
           description: |-
             Direct Group IDs whose resources form the complete replacement set. Required for
             `replace` and not allowed for `merge`. Every value must be associated with the
-            authenticated publisher. Matching is exact and non-transitive. Ungrouped information
-            and resources associated only with other Group IDs are outside the replacement boundary.
+            authenticated publisher. The publisher's exact registered namespace remains the outer
+            boundary. Matching is exact and non-transitive.
+            A resource associated with multiple groups is inside the replacement boundary when any
+            direct group association matches; omission removes the complete resource.
+            Ungrouped information and resources associated only with other Group IDs are outside the replacement boundary.
           items:
             type: string
             pattern: ^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-\/]+):([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-\/]+)$
