@@ -25,8 +25,11 @@ info:
     `:` in `ordId`, the namespace in `groupTypeId` for a Group Type, or the group-instance
     namespace (the third colon-delimited component of `groupId`) for a Group. A referenced Group
     Type is evaluated independently from its own `groupTypeId`.
-    The replacement and removal boundary is the publication context intersected with the
-    publisher's current ownership scope. Publisher-of-origin attribution
+    A replace submission declares one or more target Group IDs. Its replacement boundary is the
+    publication context intersected with resources directly associated with at least one target
+    Group ID. Every target Group ID must remain associated with the publisher. Ungrouped information
+    is outside the replacement boundary. The tombstone removal boundary is the publication context
+    intersected with the publisher's current ownership scope. Publisher-of-origin attribution
     is not required. Publishers with overlapping ownership can update or remove the same ORD
     information regardless of which publisher submitted it previously.
 
@@ -66,7 +69,9 @@ paths:
         The aggregator verifies that the authenticated publisher is onboarded and permitted to use
         the requested publication context. Publisher ownership is evaluated asynchronously
         from the staged content during commit, not when the empty submission is opened.
-        Publication defaults to `merge`; destructive `replace` behavior must be selected explicitly.
+        Publication defaults to `merge`; destructive `replace` behavior must be selected explicitly
+        together with one or more target Group IDs associated with the publisher.
+        The aggregator rejects a target Group ID that is not currently associated with the publisher.
         Validation defaults to partial acceptance of valid publication units; strict
         all-or-nothing validation must be selected explicitly.
         The response identifies when the submission expires unless its staged content changes.
@@ -85,9 +90,11 @@ paths:
                   context:
                     perspective: system-type
               replace:
-                summary: Replace owned ORD information in this context
+                summary: Replace resources in selected groups in this context
                 value:
                   publicationMode: replace
+                  replacementGroupIds:
+                    - sap.cap:service:customer.incidents:incidents.IncidentsService
                   context:
                     perspective: system-type
               strictMerge:
@@ -376,8 +383,8 @@ paths:
         The aggregator publishes all remaining valid units together and reports every issue.
         An error that prevents publication units from being isolated safely fails the entire commit.
         When `strict` is `true`, any error fails the entire commit.
-        A replace submission can remove all prior ORD information in its replacement boundary by
-        staging at least one valid ORD Document that contains no ORD information to retain.
+        A replace submission can remove all prior resources in its replacement boundary by
+        staging at least one valid ORD Document that contains no resources to retain.
         A staged unit skipped because of an error is not considered omitted for replacement and
         does not remove its previously published state.
         Tombstones apply only inside the publisher's current ownership scope and publication context.
@@ -388,14 +395,18 @@ paths:
         and staged replacement to be inside the publisher's ownership scope, so a membership change
         cannot establish ownership of an existing resource. Before applying accepted units, the
         aggregator rechecks the current associations as part of the atomic publication decision.
+        If a replacement target is no longer associated with the publisher, the complete commit fails.
         A publication unit outside the publisher's ownership scope is reported as a validation issue and is skipped in
         default mode; in strict mode, it fails the complete commit. Objects without
         `partOfGroups` are owned according to their own identifier namespace and do not become
         owned through a resource's group association.
-        Replacement omission and tombstones can remove any retained ORD information in the
-        publication context that remains within the publisher's current ownership scope. This
-        includes information submitted by another publisher with overlapping ownership; the
-        aggregator does not need publisher-of-origin attribution to evaluate removal.
+        Replacement omission can remove only retained resources whose direct `partOfGroups` value
+        contains at least one target Group ID that remains associated with the publisher. Ungrouped
+        information and resources associated only with other Group IDs remain untouched. Tombstones
+        can remove retained ORD information in the publication context that remains within the
+        publisher's current ownership scope. Removal can include information submitted by another
+        publisher with overlapping publication scope; the aggregator does not need
+        publisher-of-origin attribution to evaluate it.
         Repeating this request while the same revision is validating returns its current state.
         Accepted publication units are applied atomically.
         A submission-wide error, or any error in strict mode, moves the submission to `failed`,
@@ -549,7 +560,7 @@ components:
           schema:
             $ref: "#/components/schemas/Problem"
     Forbidden:
-      description: The publisher is not onboarded or is not permitted to use the requested operation or publication context. Ownership-scope failures discovered during asynchronous commit processing are reported as validation issues instead.
+      description: The publisher is not onboarded, a replacement target Group ID is not associated with the publisher, or the publisher is not permitted to use the requested operation or publication context. Ownership-scope failures discovered during asynchronous commit processing are reported as validation issues instead.
       content:
         application/problem+json:
           schema:
@@ -610,12 +621,39 @@ components:
       type: object
       required: [context]
       additionalProperties: false
+      allOf:
+        - if:
+            properties:
+              publicationMode:
+                const: replace
+            required: [publicationMode]
+          then:
+            required: [replacementGroupIds]
+        - if:
+            required: [replacementGroupIds]
+          then:
+            properties:
+              publicationMode:
+                const: replace
+            required: [publicationMode]
       properties:
         publicationMode:
           type: string
-          description: Whether omission removes prior ORD information in this publication context that remains within the authenticated publisher's current ownership scope, regardless of which publisher submitted it. Defaults to the non-destructive `merge` mode.
+          description: Whether omission removes prior resources in the declared replacement Group IDs and publication context. Defaults to the non-destructive `merge` mode.
           enum: [replace, merge]
           default: merge
+        replacementGroupIds:
+          type: array
+          minItems: 1
+          uniqueItems: true
+          description: |-
+            Direct Group IDs whose resources form the complete replacement set. Required for
+            `replace` and not allowed for `merge`. Every value must be associated with the
+            authenticated publisher. Matching is exact and non-transitive. Ungrouped information
+            and resources associated only with other Group IDs are outside the replacement boundary.
+          items:
+            type: string
+            pattern: ^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-\/]+):([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-\/]+)$
         strict:
           type: boolean
           default: false
@@ -667,6 +705,13 @@ components:
         publicationMode:
           type: string
           enum: [replace, merge]
+        replacementGroupIds:
+          type: array
+          uniqueItems: true
+          description: Target Group IDs for a `replace` submission. Absent for `merge`.
+          items:
+            type: string
+            pattern: ^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-\/]+):([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-\/]+)$
         strict:
           type: boolean
           description: Whether validation errors prevent publication of the entire submission.
