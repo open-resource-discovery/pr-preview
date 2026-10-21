@@ -13,8 +13,8 @@ info:
     A provider can opt into strict validation, in which any error publishes nothing and leaves
     the submission available for correction until it expires.
     During onboarding, the aggregator associates each publisher with exactly one registered ORD
-    namespace and zero or more directly granted Group IDs. A registered namespace can have
-    multiple publishers. For ORD information objects that support `partOfGroups`, resources without
+    namespace and zero or more directly granted Group IDs. A registered namespace can have zero
+    or more publishers. For ORD information objects that support `partOfGroups`, resources without
     a direct group assignment are authorized within the publisher's namespace hierarchy; grouped
     resources require at least one matching direct grant. Group grants use union semantics and are
     not transitive. A new resource is authorized from staged membership; an update requires
