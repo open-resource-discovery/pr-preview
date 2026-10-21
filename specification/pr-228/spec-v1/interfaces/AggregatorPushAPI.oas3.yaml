@@ -93,7 +93,7 @@ paths:
                 summary: Replace resources in selected groups in this context
                 value:
                   publicationMode: replace
-                  replacementGroupIds:
+                  scope:
                     - sap.cap:service:customer.incidents:incidents.IncidentsService
                   context:
                     perspective: system-type
@@ -628,9 +628,9 @@ components:
                 const: replace
             required: [publicationMode]
           then:
-            required: [replacementGroupIds]
+            required: [scope]
         - if:
-            required: [replacementGroupIds]
+            required: [scope]
           then:
             properties:
               publicationMode:
@@ -642,7 +642,7 @@ components:
           description: Whether omission removes prior resources in the declared replacement Group IDs and publication context. Defaults to the non-destructive `merge` mode.
           enum: [replace, merge]
           default: merge
-        replacementGroupIds:
+        scope:
           type: array
           minItems: 1
           uniqueItems: true
@@ -705,7 +705,7 @@ components:
         publicationMode:
           type: string
           enum: [replace, merge]
-        replacementGroupIds:
+        scope:
           type: array
           uniqueItems: true
           description: Target Group IDs for a `replace` submission. Absent for `merge`.
