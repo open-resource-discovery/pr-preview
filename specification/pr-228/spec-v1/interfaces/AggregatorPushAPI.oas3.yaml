@@ -14,23 +14,18 @@ info:
     the submission available for correction until it expires.
     During onboarding, the aggregator associates each publisher with exactly one registered ORD
     namespace and zero or more Group IDs. A registered namespace can have zero or more publishers.
-    These associations grant each publisher ownership rights to the matching ORD information.
-    Publisher ownership uses exact namespace equality and does not include parent,
-    child, or otherwise related namespaces. For ORD information objects that support `partOfGroups`,
-    resources without a direct group assignment are owned in the publisher's registered namespace; grouped
-    resources require at least one matching group association. Multiple group associations use union
-    semantics and ownership is not transitive. A new resource is evaluated from staged membership;
-    an update requires both retained and staged membership to be inside the publisher's ownership scope.
-    Objects without `partOfGroups` are owned according to their own identifier namespace: the substring before the first
-    `:` in `ordId`, the namespace in `groupTypeId` for a Group Type, or the group-instance
-    namespace (the third colon-delimited component of `groupId`) for a Group. A referenced Group
-    Type is evaluated independently from its own `groupTypeId`.
+    These associations define the publisher's publication scope. Namespace and Group ID matching
+    are exact. Within its namespace, a publisher has publication privileges for every Group object,
+    every ORD entity without a group association, and every resource associated with at least one
+    of the publisher's Group IDs. Group matching is direct and non-transitive. A new resource is
+    evaluated from its staged state; an update requires both its retained and staged states to be
+    inside the publisher's publication scope.
     A replace submission declares one or more target Group IDs. Its replacement boundary is the
     publication context intersected with resources directly associated with at least one target
     Group ID. Every target Group ID must remain associated with the publisher. Ungrouped information
     is outside the replacement boundary. The tombstone removal boundary is the publication context
-    intersected with the publisher's current ownership scope. Publisher-of-origin attribution
-    is not required. Publishers with overlapping ownership can update or remove the same ORD
+    intersected with the publisher's current publication scope. Publisher-of-origin attribution
+    is not required. Publishers with overlapping publication scopes can update or remove the same ORD
     information regardless of which publisher submitted it previously.
 
     Every operation requires authentication.
@@ -66,8 +61,8 @@ paths:
       description: |-
         Opens an isolated staging area for one authenticated publisher and one publication
         context.
-        The aggregator verifies that the authenticated publisher is onboarded and permitted to use
-        the requested publication context. Publisher ownership is evaluated asynchronously
+        The aggregator verifies that the authenticated publisher is onboarded and that the requested
+        publication context is valid. Publication privileges are evaluated asynchronously
         from the staged content during commit, not when the empty submission is opened.
         Publication defaults to `merge`; destructive `replace` behavior must be selected explicitly
         together with one or more target Group IDs associated with the publisher.
@@ -85,7 +80,7 @@ paths:
               $ref: "#/components/schemas/CreateSubmissionRequest"
             examples:
               merge:
-                summary: Merge owned ORD information
+                summary: Merge ORD information inside the publisher's publication scope
                 value:
                   context:
                     perspective: system-type
@@ -387,24 +382,20 @@ paths:
         staging at least one valid ORD Document that contains no resources to retain.
         A staged unit skipped because of an error is not considered omitted for replacement and
         does not remove its previously published state.
-        Tombstones apply only inside the publisher's current ownership scope and publication context.
-        During asynchronous validation, the aggregator verifies again that the authenticated
-        publisher can use the publication context and checks every staged resource against the
-        publisher's exact registered namespace and group associations.
-        New resources are checked from staged membership. Updates require both the retained resource
-        and staged replacement to be inside the publisher's ownership scope, so a membership change
-        cannot establish ownership of an existing resource. Before applying accepted units, the
+        Tombstones apply only inside the publisher's current publication scope and publication context.
+        During asynchronous validation, the aggregator verifies the publication context and checks
+        every staged publication unit against the publisher's exact registered namespace and group
+        associations. New resources are checked from staged state. Updates require both the retained
+        and staged states to be inside the publisher's publication scope. Before applying accepted units, the
         aggregator rechecks the current associations as part of the atomic publication decision.
         If a replacement target is no longer associated with the publisher, the complete commit fails.
-        A publication unit outside the publisher's ownership scope is reported as a validation issue and is skipped in
-        default mode; in strict mode, it fails the complete commit. Objects without
-        `partOfGroups` are owned according to their own identifier namespace and do not become
-        owned through a resource's group association.
+        A publication unit outside the publisher's publication scope is reported as a validation
+        issue and is skipped in default mode; in strict mode, it fails the complete commit.
         Replacement omission can remove only retained resources whose direct `partOfGroups` value
         contains at least one target Group ID that remains associated with the publisher. Ungrouped
         information and resources associated only with other Group IDs remain untouched. Tombstones
         can remove retained ORD information in the publication context that remains within the
-        publisher's current ownership scope. Removal can include information submitted by another
+        publisher's current publication scope. Removal can include information submitted by another
         publisher with overlapping publication scope; the aggregator does not need
         publisher-of-origin attribution to evaluate it.
         Repeating this request while the same revision is validating returns its current state.
@@ -560,7 +551,7 @@ components:
           schema:
             $ref: "#/components/schemas/Problem"
     Forbidden:
-      description: The publisher is not onboarded, a replacement target Group ID is not associated with the publisher, or the publisher is not permitted to use the requested operation or publication context. Ownership-scope failures discovered during asynchronous commit processing are reported as validation issues instead.
+      description: The publisher is not onboarded or a replacement target Group ID is not associated with the publisher. Publication-scope failures discovered during asynchronous commit processing are reported as validation issues instead.
       content:
         application/problem+json:
           schema:
@@ -667,11 +658,36 @@ components:
     PublicationContext:
       type: object
       description: |-
-        Context that must resolve to exactly one permitted publication target.
+        Context that must resolve to exactly one publication target.
         `systemVersion` applies only to `system-version`, and `systemInstanceId` applies only to
         `system-instance`.
       required: [perspective]
       additionalProperties: false
+      allOf:
+        - if:
+            properties:
+              perspective:
+                const: system-version
+          then:
+            required: [systemVersion]
+        - if:
+            required: [systemVersion]
+          then:
+            properties:
+              perspective:
+                const: system-version
+        - if:
+            properties:
+              perspective:
+                const: system-instance
+          then:
+            required: [systemInstanceId]
+        - if:
+            required: [systemInstanceId]
+          then:
+            properties:
+              perspective:
+                const: system-instance
       properties:
         perspective:
           type: string
@@ -679,12 +695,12 @@ components:
         systemVersion:
           type: string
           minLength: 1
-          description: Required for `system-version` unless the credential identifies exactly one version.
+          description: Required for `system-version`.
         systemInstanceId:
           type: string
           minLength: 1
           maxLength: 255
-          description: Aggregator-issued identifier required for `system-instance` unless the credential identifies exactly one instance.
+          description: Aggregator-issued identifier required for `system-instance`.
     Submission:
       type: object
       required:
@@ -697,6 +713,19 @@ components:
         - artifactCounts
         - issueCounts
       additionalProperties: true
+      allOf:
+        - if:
+            properties:
+              publicationMode:
+                const: replace
+          then:
+            required: [scope]
+        - if:
+            required: [scope]
+          then:
+            properties:
+              publicationMode:
+                const: replace
       properties:
         id:
           type: string
@@ -707,6 +736,7 @@ components:
           enum: [replace, merge]
         scope:
           type: array
+          minItems: 1
           uniqueItems: true
           description: Target Group IDs for a `replace` submission. Absent for `merge`.
           items:
