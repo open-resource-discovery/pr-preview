@@ -17,15 +17,16 @@ info:
     multiple publishers. For ORD information objects that support `partOfGroups`, resources without
     a direct group assignment are authorized within the publisher's namespace hierarchy; grouped
     resources require at least one matching direct grant. Group grants use union semantics and are
-    not transitive. A new contribution is authorized from staged membership; an update requires
+    not transitive. A new resource is authorized from staged membership; an update requires
     both retained and staged membership to be authorized. Objects without `partOfGroups` are
     independently authorized from their own identifier namespace: the substring before the first
     `:` in `ordId`, the namespace in `groupTypeId` for a Group Type, or the group-instance
     namespace (the third colon-delimited component of `groupId`) for a Group. A referenced Group
     Type is authorized independently from its own `groupTypeId`.
-    The contribution and replacement boundary is the authenticated publisher and publication
-    context. The aggregator retains that provenance so replacement never removes another
-    publisher's contribution, even when permissions overlap.
+    The replacement and removal boundary is the publication context intersected with the
+    publisher's current namespace and direct-group authorization. Publisher-of-origin attribution
+    is not required. Publishers with overlapping authorization can update or remove the same ORD
+    information regardless of which publisher submitted it previously.
 
     Every operation requires authentication.
     The aggregator chooses the machine-to-machine authentication mechanism and communicates
@@ -77,12 +78,12 @@ paths:
               $ref: "#/components/schemas/CreateSubmissionRequest"
             examples:
               merge:
-                summary: Merge into the publisher's contribution
+                summary: Merge authorized ORD information
                 value:
                   context:
                     perspective: system-type
               replace:
-                summary: Replace the publisher's contribution in this context
+                summary: Replace authorized ORD information in this context
                 value:
                   publicationMode: replace
                   context:
@@ -373,25 +374,26 @@ paths:
         The aggregator publishes all remaining valid units together and reports every issue.
         An error that prevents publication units from being isolated safely fails the entire commit.
         When `strict` is `true`, any error fails the entire commit.
-        A replace submission can remove every prior contribution in its replacement boundary by
+        A replace submission can remove all prior ORD information in its replacement boundary by
         staging at least one valid ORD Document that contains no ORD information to retain.
         A staged unit skipped because of an error is not considered omitted for replacement and
-        does not remove its previously published contribution.
-        Tombstones apply only inside the authenticated publisher and publication-context boundary.
+        does not remove its previously published state.
+        Tombstones apply only inside the publisher's current authorization boundary and publication context.
         During asynchronous validation, the aggregator verifies again that the authenticated
         publisher is authorized for the publication context and checks every staged resource
         against the publisher's currently registered namespace hierarchy and direct group grants.
-        New contributions are checked from staged membership. Updates require both the retained
+        New resources are checked from staged membership. Updates require both the retained
         resource and staged replacement to be authorized, so a membership change cannot grant
-        access to an existing contribution. Before applying accepted units, the aggregator rechecks
+        access to an existing resource. Before applying accepted units, the aggregator rechecks
         current authorization as part of the atomic publication decision.
         An unauthorized publication unit is reported as a validation issue and is skipped in
         default mode; in strict mode, it fails the complete commit. Objects without
         `partOfGroups` are independently authorized by their own identifier namespace and do not
         become group-authorized by a resource's grant.
-        Replacement omission and tombstones can remove only contributions attributed to that
-        publisher and context that remain within its current authorization; they never remove a
-        contribution attributed to another publisher.
+        Replacement omission and tombstones can remove any retained ORD information in the
+        publication context that remains within the publisher's current authorization. This
+        includes information submitted by another publisher with overlapping authorization; the
+        aggregator does not need publisher-of-origin attribution to evaluate removal.
         Repeating this request while the same revision is validating returns its current state.
         Accepted publication units are applied atomically.
         A submission-wide error, or any error in strict mode, moves the submission to `failed`,
@@ -609,7 +611,7 @@ components:
       properties:
         publicationMode:
           type: string
-          description: Whether omission removes the authenticated publisher's prior contributions in this publication context that remain within its current authorization. Defaults to the non-destructive `merge` mode.
+          description: Whether omission removes prior ORD information in this publication context that remains within the authenticated publisher's current authorization, regardless of which publisher submitted it. Defaults to the non-destructive `merge` mode.
           enum: [replace, merge]
           default: merge
         strict:
