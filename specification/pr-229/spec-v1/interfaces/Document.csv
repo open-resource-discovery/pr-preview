@@ -292,6 +292,7 @@ Capability,ordId,true,string
 Capability,localId,false,string
 Capability,correlationIds,false,array<string>
 Capability,type,true,string
+Capability,ontologyLayers,false,array<string>
 Capability,customType,false,string
 Capability,title,true,string
 Capability,shortDescription,false,string
