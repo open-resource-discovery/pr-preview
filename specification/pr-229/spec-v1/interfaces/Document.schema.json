@@ -5131,7 +5131,7 @@
             {
               "const": "ontology",
               "x-introduced-in-version": "1.18.0",
-              "description": "Standardized capability representing a machine-readable ontology.\nAn ontology can describe a conceptual domain model, a data model, an API model, or more than one of these layers.\nAn ontology capability SHOULD provide at least one definition.\nIts definitions SHOULD use `rdf-v1.1`, `rdfs-v1.1`, `owl-v2`, `shacl-v1.0`,\n`sap-csn-interop-effective-v1`, or an appropriate Specification ID.\n\nRDF-based definitions can publish the same logical ontology in multiple serialization formats,\nsuch as JSON-LD and Turtle, by using separate definition entries with different `mediaType` values.\nSee [Ontologies](../concepts/ontologies.md) for publication guidance."
+              "description": "Standardized capability representing a machine-readable ontology.\nAn ontology can describe a conceptual domain model, a data model, an API model, or more than one of these layers.\nA Capability with `type: \"ontology\"` SHOULD provide at least one definition.\nIts definitions SHOULD use `rdf-v1.1`, `rdfs-v1.1`, `owl-v2`, `shacl-v1.0`,\n`sap-csn-interop-effective-v1`, or an appropriate Specification ID.\n\nRDF-based definitions can publish the same logical ontology in multiple serialization formats,\nsuch as JSON-LD and Turtle, by using separate definition entries with different `mediaType` values.\nSee [Ontologies](../concepts/ontologies.md) for publication guidance."
             },
             {
               "const": "custom",
@@ -5148,7 +5148,7 @@
           "uniqueItems": true,
           "minItems": 1,
           "x-introduced-in-version": "1.18.0",
-          "description": "Optional list of model layers described by an ontology Capability.\nThis property SHOULD only be used when `type` is `ontology`.\n\nA single ontology can span more than one layer.\nThe layer MUST NOT be inferred from the definition language alone.\nFor example, SHACL shapes can constrain either a conceptual RDF graph or a concrete data representation.",
+          "description": "Optional list of model layers described by an ontology published as a Capability.\nThis property SHOULD only be used when `type` is `ontology`.\n\nA single ontology can span more than one layer.\nThe layer MUST NOT be inferred from the definition language alone.\nFor example, SHACL shapes can constrain either a conceptual RDF graph or a concrete data representation.",
           "items": {
             "type": "string",
             "oneOf": [
