@@ -12,11 +12,9 @@ info:
     unit, so a resource is never published without all of its valid definitions.
     A provider can opt into strict validation, in which any error publishes nothing and leaves
     the submission available for correction until it expires.
-    A scope ID lets independently operated providers replace only their own contribution set
-    within one publication context and is required for every replacement.
-    Providers should register scope IDs with the aggregator during onboarding before using them.
-    The aggregator authorizes the authenticated push client for both the publication context and
-    the selected scope when a submission is opened and before it is published.
+    In `replace` mode, omission removes the authenticated ORD provider's prior contributions in the
+    publication context. An ORD provider can have at most one active submission per publication
+    context.
 
     Every operation requires authentication.
     The aggregator chooses the machine-to-machine authentication mechanism and communicates
@@ -49,13 +47,15 @@ paths:
       operationId: createSubmission
       summary: Open a submission
       description: |-
-        Opens an isolated staging area for one authenticated publisher and one publication
+        Opens an isolated staging area for one authenticated ORD provider and one publication
         context.
-        A scope ID is required for `replace` and limits removal to one contribution set that
-        should already be registered with the aggregator.
-        It remains optional for `merge`.
-        When a scope ID is supplied, the aggregator verifies that it is registered and that the
-        authenticated push client is authorized for both the publication context and the scope.
+        In `replace` mode, omission removes prior contributions from this ORD provider in the
+        publication context.
+        An ORD provider can have at most one active (`open`, `validating`, or `failed`) submission
+        per publication context. Another creation request for that context is rejected with
+        `409 Conflict`, and `activeSubmissionId` in the problem details identifies the active
+        submission. A repeated request with the same `Idempotency-Key` returns the original
+        submission instead.
         Publication defaults to `merge`; destructive `replace` behavior must be selected explicitly.
         Validation defaults to partial acceptance of valid publication units; strict
         all-or-nothing validation must be selected explicitly.
@@ -70,15 +70,14 @@ paths:
               $ref: "#/components/schemas/CreateSubmissionRequest"
             examples:
               merge:
-                summary: Merge into the publisher's contribution
+                summary: Merge into the ORD provider's contribution
                 value:
                   context:
                     perspective: system-type
-              scopedReplace:
-                summary: Replace one onboarded contribution scope
+              replace:
+                summary: Replace the ORD provider's contribution in this context
                 value:
                   publicationMode: replace
-                  scopeId: sap.s4.beh
                   context:
                     perspective: system-type
               strictMerge:
@@ -104,7 +103,14 @@ paths:
         "403":
           $ref: "#/components/responses/Forbidden"
         "409":
-          $ref: "#/components/responses/Conflict"
+          description: |-
+            Another submission is active for this ORD provider and publication context, or the
+            idempotency key was reused with different content. For an active submission,
+            `activeSubmissionId` identifies it.
+          content:
+            application/problem+json:
+              schema:
+                $ref: "#/components/schemas/Problem"
         "410":
           $ref: "#/components/responses/Gone"
         "429":
@@ -367,15 +373,18 @@ paths:
         The aggregator publishes all remaining valid units together and reports every issue.
         An error that prevents publication units from being isolated safely fails the entire commit.
         When `strict` is `true`, any error fails the entire commit.
-        A replace submission can remove every prior contribution in its replacement boundary by
-        staging at least one valid ORD Document that contains no ORD information to retain.
+        A replace submission can remove every prior contribution of the ORD provider in the
+        publication context by staging at least one valid ORD Document that contains no ORD
+        information to retain.
         A staged unit skipped because of an error is not considered omitted for replacement and
         does not remove its previously published contribution.
-        Tombstones apply only inside the submission's contribution boundary, and unscoped
-        tombstones require provider-wide removal authorization.
+        Tombstones apply only to contributions from this ORD provider in the submission's
+        publication context and require authorization for that contribution.
         Before publishing, the aggregator verifies again that the authenticated push client is
-        authorized for the publication context and any selected scope.
+        authorized for the publication context.
         Repeating this request while the same revision is validating returns its current state.
+        Committing a `failed` submission without changes validates the same staged revision again,
+        for example after authorization or a conflicting contribution outside the submission changed.
         Accepted publication units are applied atomically.
         A submission-wide error, or any error in strict mode, moves the submission to `failed`,
         publishes nothing, and preserves the staged artifacts so the provider can replace or
@@ -528,13 +537,13 @@ components:
           schema:
             $ref: "#/components/schemas/Problem"
     Forbidden:
-      description: The selected scope is not registered, or the publisher is not authorized for the operation, publication context, or selected scope.
+      description: The ORD provider is not authorized for the operation or publication context.
       content:
         application/problem+json:
           schema:
             $ref: "#/components/schemas/Problem"
     NotFound:
-      description: The submission identifier is unknown or is not visible to this publisher. This also applies after the aggregator removes an expired submission's marker.
+      description: The submission identifier is unknown or is not visible to this ORD provider. This also applies after the aggregator removes the marker of an expired submission or of a published submission whose retention period ended.
       content:
         application/problem+json:
           schema:
@@ -546,7 +555,11 @@ components:
           schema:
             $ref: "#/components/schemas/Problem"
     Gone:
-      description: The submission expired and its staged content is no longer available. The aggregator returns this while it retains an expiry marker for the submission.
+      description: |-
+        The submission is no longer available. The aggregator returns this while it retains a marker
+        for the submission, either after an `open` or `failed` submission expired without being
+        published, or after the retention period of a `published` submission ended.
+        The `outcome` member of the problem details states which case applies.
       content:
         application/problem+json:
           schema:
@@ -570,7 +583,7 @@ components:
           schema:
             $ref: "#/components/schemas/Problem"
     RateLimited:
-      description: The publisher exceeded a rate or concurrency limit and may retry later.
+      description: The ORD provider exceeded a rate or concurrency limit and may retry later.
       headers:
         Retry-After:
           $ref: "#/components/headers/RetryAfter"
@@ -589,18 +602,10 @@ components:
       type: object
       required: [context]
       additionalProperties: false
-      allOf:
-        - if:
-            required: [publicationMode]
-            properties:
-              publicationMode:
-                const: replace
-          then:
-            required: [scopeId]
       properties:
         publicationMode:
           type: string
-          description: Whether omission removes prior contributions inside the selected replacement boundary. Defaults to the non-destructive `merge` mode.
+          description: Whether omission removes prior contributions from this ORD provider in the publication context. Defaults to the non-destructive `merge` mode.
           enum: [replace, merge]
           default: merge
         strict:
@@ -613,18 +618,6 @@ components:
             Submission-wide errors always fail the commit.
         context:
           $ref: "#/components/schemas/PublicationContext"
-        scopeId:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: |-
-            Stable identifier for a contribution set that should be registered with the aggregator
-            during onboarding before use.
-            It should be a registered ORD namespace that reflects the component or team responsible
-            for the publishing scope.
-            Using a namespace as the scope ID does not grant authority to publish ORD IDs in that namespace.
-            It is required for `replace` and limits removal to that scope in the publication context.
-            For `merge`, it records provenance for a later scoped replacement.
     PublicationContext:
       type: object
       description: |-
@@ -658,13 +651,6 @@ components:
         - artifactCounts
         - issueCounts
       additionalProperties: true
-      allOf:
-        - if:
-            properties:
-              publicationMode:
-                const: replace
-          then:
-            required: [scopeId]
       properties:
         id:
           type: string
@@ -678,15 +664,16 @@ components:
           description: Whether validation errors prevent publication of the entire submission.
         context:
           $ref: "#/components/schemas/PublicationContext"
-        scopeId:
-          type: string
-          minLength: 1
-          maxLength: 255
-          description: Selected contribution scope. Required for `replace` and optional for `merge`.
         expiresAt:
           type: string
           format: date-time
-          description: Current inactivity deadline after which an `open` or `failed` submission and its staged artifacts are discarded. Successful staging changes extend this value; status and issue retrieval do not. Expiry is suspended during validation, and a failed validation receives a new inactivity deadline. Aggregators define and communicate the timeout, with 15 minutes as the recommended default.
+          description: |-
+            For an `open` or `failed` submission, the current inactivity deadline after which the submission and its staged artifacts are discarded.
+            Successful staging changes extend this value; status and issue retrieval do not.
+            Expiry is suspended during validation, and a failed validation receives a new inactivity deadline.
+            Aggregators define and communicate the timeout, with 15 minutes as the recommended default.
+            For a `published` submission, the end of its retention period, after which its status and issues are no longer available.
+            Aggregators choose and communicate the retention period, with at least 24 hours recommended.
         artifactCounts:
           $ref: "#/components/schemas/ArtifactCounts"
         issueCounts:
@@ -787,6 +774,16 @@ components:
         instance:
           type: string
           format: uri-reference
+        outcome:
+          type: string
+          enum: [expired, published]
+          description: |-
+            Present in `410 Gone` responses.
+            `expired` means the submission was discarded after inactivity without being published.
+            `published` means the submission was published and its retention period ended; its published ORD information is unaffected.
+        activeSubmissionId:
+          type: string
+          description: Identifier of the active submission that prevents creating another submission for the same ORD provider and publication context.
         issues:
           type: array
           items:

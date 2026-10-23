@@ -196,6 +196,7 @@ Data Product,changelogEntries,false,array<ChangelogEntry>
 Data Product,type,true,string
 Data Product,category,true,string
 Data Product,entityTypes,false,array<string>
+Data Product,relatedDataProducts,false,array<RelatedDataProduct>
 Data Product,inputPorts,false,array<DataProductInputPort>
 Data Product,outputPorts,true,array<DataProductOutputPort>
 Data Product,responsible,true,string
@@ -298,21 +299,33 @@ Capability,description,false,string
 Capability,aiHint,false,string
 Capability,partOfPackage,true,string
 Capability,partOfGroups,false,array<string>
+Capability,partOfProducts,false,array<string>
 Capability,version,true,string
 Capability,lastUpdate,false,string
 Capability,visibility,true,string
 Capability,releaseStatus,true,string
 Capability,disabled,false,boolean
 Capability,minSystemVersion,false,string
+Capability,responsible,false,string
+Capability,deprecationDate,false,string
+Capability,sunsetDate,false,string
+Capability,successors,false,array<string>
+Capability,changelogEntries,false,array<ChangelogEntry>
 Capability,relatedEntityTypes,false,array<string>
 Capability,relatedApiResources,false,array<RelatedApiResource>
 Capability,relatedEventResources,false,array<RelatedEventResource>
 Capability,relatedCapabilities,false,array<RelatedCapability>
+Capability,integrationDependencies,false,array<string>
 Capability,definitions,false,array<CapabilityDefinition>
 Capability,links,false,array<Link>
+Capability,extensible,false,Extensible
+Capability,countries,false,array<string>
+Capability,lineOfBusiness,false,array<string>
+Capability,industry,false,array<string>
 Capability,tags,false,array<string>
 Capability,labels,false,Labels
 Capability,documentationLabels,false,DocumentationLabels
+Capability,policyLevels,false,array<string>
 Capability,systemInstanceAware,false,boolean
 Capability Definition,type,true,string
 Capability Definition,customType,false,string
@@ -342,13 +355,14 @@ Integration Dependency,links,false,array<Link>
 Integration Dependency,tags,false,array<string>
 Integration Dependency,labels,false,Labels
 Integration Dependency,documentationLabels,false,DocumentationLabels
-Aspect,title,true,string
+Aspect,title,false,string
 Aspect,description,false,string
 Aspect,mandatory,true,boolean
 Aspect,supportMultipleProviders,false,boolean
 Aspect,apiResources,false,array<ApiResourceIntegrationAspect>
 Aspect,eventResources,false,array<EventResourceIntegrationAspect>
 Aspect,capabilities,false,array<CapabilityIntegrationAspect>
+Aspect,systemTypes,false,array<SystemTypeIntegrationAspect>
 Aspect,labels,false,Labels
 Api Resource Integration Aspect,ordId,true,string
 Api Resource Integration Aspect,minVersion,false,string
@@ -363,7 +377,11 @@ Event Resource Integration Aspect Subset,eventType,true,string
 API Resource Integration Aspect Subset,operationId,true,string
 Capability Integration Aspect,ordId,true,string
 Capability Integration Aspect,minVersion,false,string
+Capability Integration Aspect,subset,false,array<CapabilityIntegrationAspectSubset>
 Capability Integration Aspect,labels,false,Labels
+System Type Integration Aspect,systemNamespace,true,string
+System Type Integration Aspect,minSystemVersion,false,string
+Capability Integration Aspect Subset,skillName,true,string
 Vendor,ordId,true,string
 Vendor,title,true,string
 Vendor,partners,false,array<string>
@@ -393,6 +411,7 @@ Data Product Link,customType,false,string
 Data Product Link,url,true,string
 System Instance,baseUrl,false,string
 System Instance,localId,false,string
+System Instance,globalId,false,string
 System Instance,correlationIds,false,array<string>
 System Instance,labels,false,Labels
 System Instance,documentationLabels,false,DocumentationLabels
@@ -451,6 +470,8 @@ Related API Resource,ordId,true,string
 Related API Resource,relationType,false,string
 Related Event Resource,ordId,true,string
 Related Event Resource,relationType,false,string
+Related Data Product,ordId,true,string
+Related Data Product,relationType,false,string
 Related Capability,ordId,true,string
 Related Capability,relationType,false,string
 Exposed Entity Type,ordId,true,string

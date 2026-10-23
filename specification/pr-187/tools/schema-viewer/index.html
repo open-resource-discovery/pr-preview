@@ -12,8 +12,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ORD Document Schema Viewer</title>
-    <meta name="description" content="Interactive visualization of the Open Resource Discovery (ORD) Document JSON Schema as a force-directed graph">
+    <title>ORD Schema Explorer</title>
+    <meta name="description" content="Interactive visualization of the Open Resource Discovery JSON Schemas as force-directed graphs">
     <link rel="stylesheet" href="styles.css">
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
@@ -26,7 +26,7 @@
         <header class="header">
             <div class="header-content">
                 <div style="display: flex; align-items: center;">
-                    <a href="/" class="logo logo-link">
+                    <a href="../../" class="logo logo-link">
                         <img src="../../img/logo/ORD_Icon_Color_Logo.svg" alt="ORD Logo">
                         <span class="logo-text">ORD Spec Explorer</span>
                     </a>
@@ -48,6 +48,7 @@
                         <select id="schema-select" class="select-input">
                             <option value="Document" selected>ORD Document</option>
                             <option value="Configuration">ORD Configuration</option>
+                            <option value="OrdOverlay">ORD Overlay</option>
                         </select>
                     </div>
                     <div class="control-group">
