@@ -2801,7 +2801,7 @@
           "type": "array",
           "x-introduced-in-version": "1.16.0",
           "x-feature-status": "beta",
-          "description": "List of available machine-readable definitions that describe the entity type's internal model in detail.\n\nEvery entry MUST describe the *same* underlying entity type. Allowed variations are alternative\nrepresentation formats and complementary artifacts distinguished by `purpose`\n(e.g. an AI-enriched variant, an agent-security-permissions view).\n\nThe entry without a `purpose` value is the default definition for its `(type, visibility, mediaType)`.\nProviding such a default is optional: definitions may all specify distinct purposes.\nThe absence of a purpose-less entry does NOT warrant a validation error, warning, or informational finding.\n\nThe combination of `type`, `visibility`, `mediaType`, and `purpose` MUST be unique within the list.\nTwo entries that are otherwise identical but differ only in `url` are still considered duplicates.\nMissing `purpose` counts as the same absence for the uniqueness comparison —\ntwo entries with the same `(type, visibility, mediaType)` and no `purpose` are duplicates.",
+          "description": "List of available machine-readable definitions that describe the entity type's internal model in detail.\n\nEvery entry MUST describe the *same* underlying entity type. Allowed variations are alternative\nrepresentation formats and complementary artifacts distinguished by `purpose`\n(e.g. an AI-enriched variant, an agent-security-permissions view).\n\nThe entry without a `purpose` value is the default definition for its `(type, visibility, mediaType)`.\nThere SHOULD be exactly one such default per `(type, visibility, mediaType)` combination.\n\nThe combination of `type`, `visibility`, `mediaType`, and `purpose` MUST be unique within the list.\nTwo entries that are otherwise identical but differ only in `url` are still considered duplicates.\nMissing `purpose` counts as the same absence for the uniqueness comparison —\ntwo entries with the same `(type, visibility, mediaType)` and no `purpose` are duplicates.",
           "items": {
             "$ref": "#/definitions/EntityTypeDefinition"
           }
@@ -2920,7 +2920,7 @@
       "x-introduced-in-version": "1.16.0",
       "x-feature-status": "beta",
       "x-ums-type": "custom",
-      "description": "Machine-readable definition that describes the entity type's internal model structure.\n\nEntity Type definitions represent an internal implementation detail - the underlying domain model of your application.\nThis can be used to describe a shared internal model multiple APIs and Events are based on.\nHowever, interaction with the actual data happens through API Resources or Event Resources that expose these entity types with a defined interface and contract.\n\nEach definition is an alternative description format or complementary artifact for the same entity type.\nThe combination of `type`, `visibility`, `mediaType`, and `purpose` MUST be unique within the `definitions` list.\nTwo entries that are otherwise identical but differ only in `url` are still considered duplicates.\n\nOmitting `purpose` identifies the default definition for its `(type, visibility, mediaType)` combination.\nProviding such a default is optional: all definitions may specify distinct purposes.\nThe absence of a purpose-less entry does NOT warrant a validation error, warning, or informational finding.\n\n**Why Entity Types are private by default**: Since entity type definitions are internal implementation details, they SHOULD be marked as `private` visibility by default.\n\n**Finding related APIs**: To discover which APIs expose a particular Entity Type, check the API Resource's `relatedEntityTypes` property.",
+      "description": "Machine-readable definition that describes the entity type's internal model structure.\n\nEntity Type definitions represent an internal implementation detail - the underlying domain model of your application.\nThis can be used to describe a shared internal model multiple APIs and Events are based on.\nHowever, interaction with the actual data happens through API Resources or Event Resources that expose these entity types with a defined interface and contract.\n\nEach definition is an alternative description format or complementary artifact for the same entity type.\nThe combination of `type`, `visibility`, `mediaType`, and `purpose` MUST be unique within the `definitions` list.\nTwo entries that are otherwise identical but differ only in `url` are still considered duplicates.\n\nOmitting `purpose` identifies the default definition for its `(type, visibility, mediaType)` combination.\nThere SHOULD be exactly one such default per `(type, visibility, mediaType)` combination.\n\n**Why Entity Types are private by default**: Since entity type definitions are internal implementation details, they SHOULD be marked as `private` visibility by default.\n\n**Finding related APIs**: To discover which APIs expose a particular Entity Type, check the API Resource's `relatedEntityTypes` property.",
       "properties": {
         "type": {
           "description": "Type of the entity type resource definition.\n\nMUST be either:\n- any valid [Specification ID](../concepts/identifiers.md#specification-id), or\n- one of the pre-defined values listed below.",
@@ -2993,10 +2993,10 @@
           "default": "private"
         },
         "purpose": {
-          "x-introduced-in-version": "1.18.0",
-          "x-feature-status": "alpha",
           "type": "string",
-          "description": "Marks an entity type definition as a *complementary* variant for the same entity type,\nfor example an AI-enriched model description or an agent-security-permissions view.\nAll entries in the `definitions` list, with or without `purpose`, MUST describe the same\nunderlying entity type; this list MUST NOT bundle different entity types.\n\nTogether with `type`, `visibility`, and `mediaType`, `purpose` forms the uniqueness\nkey for entries in the `definitions` list.\n\nOmitting `purpose` identifies the default definition for its `(type, visibility, mediaType)`\ncombination. Providing such a default is optional; definitions may all carry distinct purposes.\nThe absence of a purpose-less entry does NOT warrant a validation error, warning, or informational finding.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "x-feature-status": "alpha",
+          "x-introduced-in-version": "1.18.0",
+          "description": "Marks a definition entry as a *complementary* variant for the same resource,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nThe default and uniqueness rules are defined by the containing definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -3005,13 +3005,13 @@
             },
             {
               "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the entity type model.",
-              "x-introduced-in-version": "1.18.0"
+              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
+              "x-introduced-in-version": "1.15.0"
             },
             {
               "const": "ord:agent-security-permissions",
-              "description": "The definition describes the security permissions an AI agent requires to access the entity type.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent accesses the entity type data.",
-              "x-introduced-in-version": "1.18.0"
+              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
+              "x-introduced-in-version": "1.16.2"
             }
           ],
           "examples": [
@@ -3985,7 +3985,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "description": "Marks a definition entry as a *complementary* variant for the same resource,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nThe default and uniqueness rules are defined by the containing definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -4117,7 +4117,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "description": "Marks a definition entry as a *complementary* variant for the same resource,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nThe default and uniqueness rules are defined by the containing definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -4948,7 +4948,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "description": "Marks a definition entry as a *complementary* variant for the same resource,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nThe default and uniqueness rules are defined by the containing definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -5855,7 +5855,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "description": "Marks a definition entry as a *complementary* variant for the same resource,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nThe default and uniqueness rules are defined by the containing definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
