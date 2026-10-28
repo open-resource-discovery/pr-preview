@@ -7780,13 +7780,13 @@
               "description": "The related entity types can potentially share the same identity in their instance data / be ID mapped.\n\nE.g. a `BusinessPartner` can share the same identity as a `NaturalPerson`."
             },
             {
-              "const": "same-as",
+              "const": "ord:alias",
               "x-introduced-in-version": "1.17.1",
               "description": "The source and target resource are the same or equivalent.\nThis is useful when the same resource is described by different ORD providers or in different contexts,\nand the relationship expresses that they refer to the same underlying resource."
             }
           ],
           "examples": [
-            "same-as",
+            "ord:alias",
             "can-share-identity",
             "foo.bar:relationName"
           ]
@@ -7837,13 +7837,13 @@
               "description": "The source resource orchestrates the target API Resource as part of a multi-step workflow.\nTypically used on [Capabilities](#capability) of `type: \"workflow\"` (e.g. defined via an\n[Arazzo](https://spec.openapis.org/arazzo/v1.0.0.html) document) to declare which APIs\nthe workflow invokes."
             },
             {
-              "const": "same-as",
+              "const": "ord:alias",
               "x-introduced-in-version": "1.17.1",
               "description": "The source and target resource are the same or equivalent.\nThis is useful when the same resource is described by different ORD providers or in different contexts,\nand the relationship expresses that they refer to the same underlying resource."
             }
           ],
           "examples": [
-            "same-as",
+            "ord:alias",
             "foo.bar:relationName"
           ]
         }
@@ -7888,13 +7888,13 @@
               "description": "The source resource patches one or more definition files of the target resource.\nUsed on [ORD Overlay Resources](#overlay) to declare which API or Event resource they patch."
             },
             {
-              "const": "same-as",
+              "const": "ord:alias",
               "x-introduced-in-version": "1.17.1",
               "description": "The source and target resource are the same or equivalent.\nThis is useful when the same resource is described by different ORD providers or in different contexts,\nand the relationship expresses that they refer to the same underlying resource."
             }
           ],
           "examples": [
-            "same-as",
+            "ord:alias",
             "foo.bar:relationName"
           ]
         }
@@ -7967,13 +7967,13 @@
               "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
             },
             {
-              "const": "same-as",
+              "const": "ord:alias",
               "x-introduced-in-version": "1.17.1",
               "description": "The source and target resource are the same or equivalent.\nThis is useful when the same resource is described by different ORD providers or in different contexts,\nand the relationship expresses that they refer to the same underlying resource."
             }
           ],
           "examples": [
-            "same-as",
+            "ord:alias",
             "foo.bar:relationName"
           ]
         }
