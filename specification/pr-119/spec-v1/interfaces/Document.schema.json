@@ -7927,7 +7927,20 @@
           "type": "string",
           "description": "Optional type of the relationship as a [Concept ID](../index.md#concept-id).\n\nDefines the semantic meaning of the relationship.\nIf not provided, the relationship has no specific semantics (\"related somehow\").",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
+            },
+            {
+              "const": "ord:alias",
+              "x-introduced-in-version": "1.17.1",
+              "description": "The source and target resource are the same or equivalent.\nThis is useful when the same resource is described by different ORD providers or in different contexts,\nand the relationship expresses that they refer to the same underlying resource."
+            }
+          ],
           "examples": [
+            "ord:alias",
             "foo.bar:relationName"
           ]
         }
