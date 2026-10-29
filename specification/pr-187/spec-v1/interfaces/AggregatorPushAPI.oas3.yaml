@@ -800,10 +800,11 @@ components:
                 - required: [ordId]
                 - required: [groupId]
                 - required: [groupTypeId]
-        # Unit-local issues identify their staged artifact and either name exactly one
-        # publication unit, or, when the error cannot be attributed to one unit (an object
-        # missing its identifier, or a definition matching no staged resource), carry a
-        # jsonPointer instead of a unit identity.
+        # Unit-local issues identify their staged artifact and carry at most one unit identity.
+        # An issue that names a publication unit uses exactly one of ordId/groupId/groupTypeId; an
+        # artifact-level error (for example invalid JSON) or an error that cannot be attributed to
+        # one unit (an object missing its identifier, or a definition matching no staged resource)
+        # carries none, optionally with a jsonPointer.
         - if:
             properties:
               artifactKind:
@@ -811,28 +812,11 @@ components:
             required: [artifactKind]
           then:
             required: [artifactId]
-            oneOf:
-              - required: [ordId]
-                not:
-                  anyOf:
-                    - required: [groupId]
-                    - required: [groupTypeId]
-              - required: [groupId]
-                not:
-                  anyOf:
-                    - required: [ordId]
-                    - required: [groupTypeId]
-              - required: [groupTypeId]
-                not:
-                  anyOf:
-                    - required: [ordId]
-                    - required: [groupId]
-              - required: [jsonPointer]
-                not:
-                  anyOf:
-                    - required: [ordId]
-                    - required: [groupId]
-                    - required: [groupTypeId]
+            not:
+              anyOf:
+                - required: [ordId, groupId]
+                - required: [ordId, groupTypeId]
+                - required: [groupId, groupTypeId]
         # A resource-definition issue that names its unit MUST also carry the definition URL.
         - if:
             properties:
