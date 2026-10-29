@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-ChEMul_7.js";e();
