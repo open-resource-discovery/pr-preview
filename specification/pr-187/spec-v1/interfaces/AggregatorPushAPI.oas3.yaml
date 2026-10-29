@@ -411,7 +411,9 @@ paths:
               schema:
                 $ref: "#/components/schemas/Submission"
         "200":
-          description: The same staged revision was already processed.
+          description: |-
+            The submission was already processed. The commit is not reprocessed; this returns the
+            existing outcome so a repeated commit request is idempotent.
           content:
             application/json:
               schema:
@@ -705,7 +707,7 @@ components:
         `open` accepts artifact changes.
         `validating` is an immutable staged revision undergoing commit validation.
         `rejected` retains artifacts for correction after a submission-wide error or any error in strict mode.
-        `processed` is a final state: commit processing completed, all accepted publication units were applied atomically, and the submission can no longer be edited or committed again.
+        `processed` is a final state: commit processing completed, all accepted publication units were applied atomically, and the submission can no longer be edited or reprocessed. A repeated commit request returns its existing outcome.
         A `processed` non-strict submission can have errors for skipped publication units, so a provider MUST read its issues.
       enum: [open, validating, rejected, processed]
     ArtifactCounts:
@@ -748,7 +750,7 @@ components:
           type: string
     ValidationIssue:
       type: object
-      required: [severity, message]
+      required: [severity, message, artifactKind]
       additionalProperties: true
       properties:
         severity:
@@ -760,6 +762,9 @@ components:
           type: string
         artifactKind:
           type: string
+          description: |-
+            Which kind of staged artifact the issue applies to, or `submission` for a submission-wide
+            issue. Always present, so the identity requirements below always apply.
           enum: [document, resource-definition, submission]
         artifactId:
           type: string
@@ -817,12 +822,12 @@ components:
                 - required: [ordId, groupId]
                 - required: [ordId, groupTypeId]
                 - required: [groupId, groupTypeId]
-        # A resource-definition issue that names its unit MUST also carry the definition URL.
+        # A resource-definition issue is always about a definition, so it MUST carry the definition URL.
         - if:
             properties:
               artifactKind:
                 const: resource-definition
-            required: [artifactKind, ordId]
+            required: [artifactKind]
           then:
             required: [definitionUrl]
     Problem:
