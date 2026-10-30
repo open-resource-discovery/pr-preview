@@ -8049,6 +8049,26 @@
       "required": [
         "removalDate"
       ],
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "ordId"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "groupId"
+          ]
+        },
+        {
+          "type": "object",
+          "required": [
+            "groupTypeId"
+          ]
+        }
+      ],
       "examples": [
         {
           "ordId": "sap.s4:apiResource:API_RFQ_PROCESS_SRV:v2",
