@@ -1,4 +1,4 @@
-<!doctype html><html lang=en dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-spec-v1/index" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.2"><title data-rh=true>ORD Specification | Open Resource Discovery</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:url content=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 /><meta data-rh=true property=og:locale content=en /><meta data-rh=true name=docusaurus_locale content=en /><meta data-rh=true name=docsearch:language content=en /><meta data-rh=true name=docusaurus_version content=current /><meta data-rh=true name=docusaurus_tag content=docs-default-current /><meta data-rh=true name=docsearch:version content=current /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-current /><meta data-rh=true property=og:title content="ORD Specification | Open Resource Discovery"/><meta data-rh=true name=description content="Open Resource Discovery (ORD) is an open protocol that enables applications and services to publish a machine-readable description of their resources and capabilities."/><meta data-rh=true property=og:description content="Open Resource Discovery (ORD) is an open protocol that enables applications and services to publish a machine-readable description of their resources and capabilities."/><link data-rh=true rel=icon href=/pr-preview/specification/pr-187/img/favicon.svg /><link data-rh=true rel=canonical href=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 /><link data-rh=true rel=alternate href=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 hreflang=en /><link data-rh=true rel=alternate href=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 hreflang=x-default /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1/","name":"ORD Specification","position":1}]}</script><script>window.bannerServerBaseUrl=""</script><script src=/pr-preview/specification/pr-187/js/custom.js></script><link rel=stylesheet href=/pr-preview/specification/pr-187/assets/css/styles.1a3933a8.css /><script src=/pr-preview/specification/pr-187/assets/js/runtime~main.8143f18f.js defer></script><script src=/pr-preview/specification/pr-187/assets/js/main.5f6ada49.js defer></script></head><body><svg style="display: none;"><defs>
+<!doctype html><html lang=en dir=ltr class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-spec-v1/index" data-has-hydrated=false><head><meta charset=UTF-8><meta name=generator content="Docusaurus v3.10.2"><title data-rh=true>ORD Specification | Open Resource Discovery</title><meta data-rh=true name=viewport content="width=device-width, initial-scale=1.0"/><meta data-rh=true name=twitter:card content=summary_large_image /><meta data-rh=true property=og:url content=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 /><meta data-rh=true property=og:locale content=en /><meta data-rh=true name=docusaurus_locale content=en /><meta data-rh=true name=docsearch:language content=en /><meta data-rh=true name=docusaurus_version content=current /><meta data-rh=true name=docusaurus_tag content=docs-default-current /><meta data-rh=true name=docsearch:version content=current /><meta data-rh=true name=docsearch:docusaurus_tag content=docs-default-current /><meta data-rh=true property=og:title content="ORD Specification | Open Resource Discovery"/><meta data-rh=true name=description content="Open Resource Discovery (ORD) is an open protocol that enables applications and services to publish a machine-readable description of their resources and capabilities."/><meta data-rh=true property=og:description content="Open Resource Discovery (ORD) is an open protocol that enables applications and services to publish a machine-readable description of their resources and capabilities."/><link data-rh=true rel=icon href=/pr-preview/specification/pr-187/img/favicon.svg /><link data-rh=true rel=canonical href=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 /><link data-rh=true rel=alternate href=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 hreflang=en /><link data-rh=true rel=alternate href=https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1 hreflang=x-default /><script data-rh=true type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://open-resource-discovery.org/pr-preview/specification/pr-187/spec-v1/","name":"ORD Specification","position":1}]}</script><script>window.bannerServerBaseUrl=""</script><script src=/pr-preview/specification/pr-187/js/custom.js></script><link rel=stylesheet href=/pr-preview/specification/pr-187/assets/css/styles.1a3933a8.css /><script src=/pr-preview/specification/pr-187/assets/js/runtime~main.ca507f4f.js defer></script><script src=/pr-preview/specification/pr-187/assets/js/main.5f6ada49.js defer></script></head><body><svg style="display: none;"><defs>
 <symbol id=theme-svg-external-link viewBox="0 0 24 24"><path fill=currentColor d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
 </defs></svg>
 <script>!function(){var t=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme-5ea")}catch(t){}}();document.documentElement.setAttribute("data-theme",t||"light"),document.documentElement.setAttribute("data-theme-choice",t||"light")}(),function(){try{for(var[t,e]of new URLSearchParams(window.location.search).entries())if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}(),document.documentElement.setAttribute("data-announcement-bar-initially-dismissed",function(){try{return"true"===localStorage.getItem("docusaurus.announcement.dismiss-5ea")}catch(t){}return!1}())</script><div id=__docusaurus><link rel=preload as=image href=/pr-preview/specification/pr-187/img/logo/ORD_Icon_Color_Logo.svg /><div role=region aria-label="Skip to main content"><a class=skipToContent_fXgn href=#__docusaurus_skipToContent_fallback>Skip to main content</a></div><div class="theme-announcement-bar announcementBar_mb4j" style=background-color:#e65050ff;color:#fff role=banner><div class="content_knG7 announcementBarContent_xLdY"><b>This is a preview version of the website for <a href=https://github.com/open-resource-discovery/specification/pull/187 target=_blank>PR #187</a></b></div></div><nav aria-label=Main class="theme-layout-navbar navbar navbar--fixed-top"><div class=navbar__inner><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded=false class="navbar__toggle clean-btn" type=button><svg width=30 height=30 viewBox="0 0 30 30" aria-hidden=true><path stroke=currentColor stroke-linecap=round stroke-miterlimit=10 stroke-width=2 d="M4 7h22M4 15h22M4 23h22"/></svg></button><a class=navbar__brand href=/pr-preview/specification/pr-187/><div class=navbar__logo><img src=/pr-preview/specification/pr-187/img/logo/ORD_Icon_Color_Logo.svg alt="Open Resource Discovery" class="themedComponent_mlkZ themedComponent--light_NVdE"/><img src=/pr-preview/specification/pr-187/img/logo/ORD_Icon_Color_Logo.svg alt="Open Resource Discovery" class="themedComponent_mlkZ themedComponent--dark_xIcU"/></div><b class="navbar__title text--truncate">Open Resource Discovery</b></a><a class="navbar__item navbar__link" href=/pr-preview/specification/pr-187/introduction>Introduction</a><div class="navbar__item dropdown dropdown--hoverable"><a aria-current=page class="navbar__link active" aria-haspopup=true aria-expanded=false role=button href=/pr-preview/specification/pr-187/spec-v1>Specification</a><ul class=dropdown__menu><li><a aria-current=page class="dropdown__link dropdown__link--active" href=/pr-preview/specification/pr-187/spec-v1>ORD Specification</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-v1/interfaces/Configuration>ORD Configuration Interface</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-v1/interfaces/Document>ORD Document Interface</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-v1/interfaces/OrdOverlay>ORD Overlay Interface</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-v1/concepts>Concepts</a><li class=""><hr style="margin: 0.1rem 0.1rem; border: none; border-top: 1px solid var(--ifm-color-emphasis-300);"><li><a href="/pr-preview/specification/pr-187/tools/schema-viewer/index.html?schema=Document" class=dropdown__link target=_blank>Schema Explorer</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-v1/examples>Example Files</a><li><a href=https://github.com/open-resource-discovery/specification/blob/main/CHANGELOG.md target=_blank rel="noopener noreferrer" class=dropdown__link>Changelog</a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a class=navbar__link aria-haspopup=true aria-expanded=false role=button href=/pr-preview/specification/pr-187/spec-extensions>Extensions</a><ul class=dropdown__menu><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-extensions/access-strategies>Access Strategies</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-extensions/policy-levels>Policy Levels</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-extensions/group-types>Global Group Types</a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a class=navbar__link aria-haspopup=true aria-expanded=false role=button href=/pr-preview/specification/pr-187/ecosystem>Ecosystem</a><ul class=dropdown__menu><li><a href=https://ord-reference-application.cfapps.sap.hana.ondemand.com/ target=_blank rel="noopener noreferrer" class=dropdown__link>ORD Reference Application<svg width=12 height=12 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a></ul></div><div class="navbar__item dropdown dropdown--hoverable"><a class=navbar__link aria-haspopup=true aria-expanded=false role=button href=/pr-preview/specification/pr-187/help>Help</a><ul class=dropdown__menu><li><a class=dropdown__link href=/pr-preview/specification/pr-187/help/videos>Videos</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/help/faq>FAQ</a><li><a class=dropdown__link href=/pr-preview/specification/pr-187/spec-v1/guides>Guides</a><li><a href=https://open-resource-discovery.github.io/presentation/ target=_blank rel="noopener noreferrer" class=dropdown__link>ORD Presentation<svg width=12 height=12 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><li><a href=https://notebooklm.google.com/notebook/f57d6c36-a0b0-4baa-898b-efede2521382 target=_blank rel="noopener noreferrer" class=dropdown__link>Ask AI (NotebookLM)<svg width=12 height=12 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><a href=https://notebooklm.google.com/notebook/f57d6c36-a0b0-4baa-898b-efede2521382 target=_blank rel="noopener noreferrer" class="navbar__item navbar__link header-notebooklm-pill">Ask AI<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><a href=https://github.com/open-resource-discovery/specification target=_blank rel="noopener noreferrer" class="navbar__item navbar__link header-github-pill">GitHub<svg width=13.5 height=13.5 aria-label="(opens in new tab)" class=iconExternalLink_nPIU><use href=#theme-svg-external-link /></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type=button disabled title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP lightToggleIcon_pyhR"><path fill=currentColor d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP darkToggleIcon_wfgR"><path fill=currentColor d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"/></svg><svg viewBox="0 0 24 24" width=24 height=24 aria-hidden=true class="toggleIcon_g3eP systemToggleIcon_QzmC"><path fill=currentColor d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"/></svg></button></div><div class=navbarSearchContainer_Bca1><div class="navbar__search searchBarContainer_NW3z" dir=ltr><svg aria-hidden=true class=searchIcon_T3tP focusable=false viewBox="0 0 16 16"><path fill=currentColor d="M6.02945 10.20327a4.17382 4.17382 0 1 1 4.17382-4.17382 4.15609 4.15609 0 0 1-4.17382 4.17382Zm9.69195 4.2199-4.8225-4.82338A5.88021 5.88021 0 0 0 12.058 6.02856 6.00467 6.00467 0 1 0 9.59979 10.8989l4.82338 4.82338a.89729.89729 0 0 0 1.29912 0 .89749.89749 0 0 0-.00087-1.29909Z"/></svg><input placeholder=Search aria-label=Search class="navbar__search-input searchInput_YFbd" value="" /><div class="loadingRing_RJI3 searchBarLoadingRing_YnHq"><div></div><div></div><div></div><div></div></div></div></div></div></div><div role=presentation class=navbar-sidebar__backdrop></div></nav><div id=__docusaurus_skipToContent_fallback class="theme-layout-main main-wrapper mainWrapper_z2l0"><div class=docsWrapper_hBAB><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type=button></button><div class=docRoot_UBD9><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class=sidebarViewport_aRkj><div class=sidebar_njMd><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG menuWithAnnouncementBar_GW3s"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible menu__list-item-collapsible--active"><a class="categoryLink_byQd menu__link menu__link--active" aria-current=page href=/pr-preview/specification/pr-187/spec-v1><span class=categoryLinkLabel_W154>ORD Specification</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link" tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts><span class=categoryLinkLabel_W154>Concepts</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/identifiers><span class=linkLabel_WmDU>Identifiers</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/versioning-and-lifecycle><span class=linkLabel_WmDU>Versioning and Lifecycle</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/grouping-and-bundling><span class=linkLabel_WmDU>Grouping and Bundling</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/system-landscape-model><span class=linkLabel_WmDU>System Landscape Model</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/perspectives><span class=linkLabel_WmDU>Perspectives</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/data-product><span class=linkLabel_WmDU>Data Product</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/integration-dependency><span class=linkLabel_WmDU>Integration Dependency</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/ai-agents-and-protocols><span class=linkLabel_WmDU>AI Agents and Protocols</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/concepts/shared-resources><span class=linkLabel_WmDU>Shared Taxonomy, Resources and Contracts</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-2 menu__list-item"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link" tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/interfaces><span class=categoryLinkLabel_W154>Interfaces and Schemas</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/interfaces/Configuration><span class=linkLabel_WmDU>ORD Configuration Interface</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/interfaces/Document><span class=linkLabel_WmDU>ORD Document Interface</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/interfaces/OrdOverlay><span class=linkLabel_WmDU>ORD Overlay Interface</span></a><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-3 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/interfaces/document-api><span class=linkLabel_WmDU>ORD Document API</span></a></ul></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item sidebar-guides"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link" href=/pr-preview/specification/pr-187/spec-v1/guides><span class=categoryLinkLabel_W154>Guides</span></a></div><ul class=menu__list><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class=menu__link tabindex=0 href=/pr-preview/specification/pr-187/spec-v1/guides/implementing-ord-natively><span class=linkLabel_WmDU>Native Implementation</span></a></ul><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class=menu__list-item-collapsible><a class="categoryLink_byQd menu__link menu__link--sublist" href=/pr-preview/specification/pr-187/spec-v1/examples><span class=categoryLinkLabel_W154>Example Files</span></a><button aria-label="Expand sidebar category 'Example Files'" aria-expanded=false type=button class="clean-btn menu__caret"></button></div></ul></nav></div></div></aside><main class=docMainContainer_TBSr><div class="container padding-top--md padding-bottom--lg"><div class=row><div class="col docItemCol_VOVn"><div class=docItemContainer_Djhp><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label=Breadcrumbs><ul class=breadcrumbs><li class=breadcrumbs__item><a aria-label="Home page" class=breadcrumbs__link href=/pr-preview/specification/pr-187/><svg viewBox="0 0 24 24" class=breadcrumbHomeIcon_YNFT><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill=currentColor /></svg></a><li class="breadcrumbs__item breadcrumbs__item--active"><span class=breadcrumbs__link>ORD Specification</span></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type=button class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Open Resource Discovery Specification 1.17</h1></header>
@@ -104,168 +104,203 @@ If the ORD information is <a href=#system-instance-aware class="">system-instanc
 <figure class="ord-diagram ord-pull-sequence"><svg viewBox="0 0 1120 470" role=img aria-labelledby="ord-pull-title ord-pull-desc"><title id=ord-pull-title>ORD pull transport sequence</title><desc id=ord-pull-desc>A provider registers with service discovery. An aggregator discovers system instances, then requests the configuration, ORD documents, and linked definitions.</desc><defs><marker id=ord-pull-arrow viewBox="0 0 10 10" refX=10 refY=5 markerWidth=7 markerHeight=7 orient=auto-start-reverse><path d="M0 0L10 5L0 10Z"/></marker></defs><g class="participant aggregator"><rect x=55 y=16 width=220 height=52 rx=7 /><text x=165 y=49>ORD Aggregator</text></g><g class="participant provider"><rect x=450 y=16 width=220 height=52 rx=7 /><text x=560 y=49>ORD Provider</text></g><g class="participant service-discovery"><rect x=845 y=16 width=220 height=52 rx=7 /><text x=955 y=49>Service Discovery</text></g><g class=lifelines><path d="M165 68V458M560 68V458M955 68V458"/></g><g class=message><text x=760 y=96>Register system instance</text><path d="M560 106H955" marker-end=url(#ord-pull-arrow) /></g><g class=message><text x=560 y=139>1 · Discover system instances</text><path d="M165 149H955" marker-end=url(#ord-pull-arrow) /><path class=response d="M955 167H165" marker-end=url(#ord-pull-arrow) /></g><g class=loop><rect x=95 y=185 width=580 height=258 rx=8 /><path d="M95 185H285L269 209H95Z"/><text x=108 y=202>per system instance</text></g><g class=message><text x=365 y=229>2 · GET well-known configuration</text><path d="M165 239H560" marker-end=url(#ord-pull-arrow) /><path class=response d="M560 257H165" marker-end=url(#ord-pull-arrow) /></g><g class="loop inner"><rect x=111 y=272 width=548 height=155 rx=7 /><path d="M111 272H285L269 296H111Z"/><text x=124 y=289>per ORD document</text></g><g class=message><text x=365 y=313>3 · GET ORD document</text><path d="M165 323H560" marker-end=url(#ord-pull-arrow) /><path class=response d="M560 341H165" marker-end=url(#ord-pull-arrow) /></g><g class="loop inner"><rect x=127 y=352 width=516 height=63 rx=7 /><path d="M127 352H332L316 376H127Z"/><text x=140 y=369>per resource definition</text></g><g class=message><text x=385 y=389>4 · GET linked definition</text><path d="M165 399H560" marker-end=url(#ord-pull-arrow) /><path class=response d="M560 410H165" marker-end=url(#ord-pull-arrow) /></g></svg><figcaption><span>Pull transport</span><strong>HTTP GET · honor advertised access strategies</strong><small>Definition files may be hosted elsewhere.</small></figcaption></figure>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=push-transport>Push Transport<a href=#push-transport class=hash-link aria-label="Direct link to Push Transport" title="Direct link to Push Transport" translate=no>​</a></h3>
 <blockquote>
-<p>🚧 Push transport and the <a class="" href=/pr-preview/specification/pr-187/spec-v1/interfaces/aggregator-push-api>ORD Aggregator Push API</a> are an <span class=feature-status-alpha>ALPHA</span> feature proposed in <a href=https://github.com/open-resource-discovery/specification/pull/187 target=_blank rel="noopener noreferrer" class="">specification PR #187</a>. The contract may still change in breaking ways.</p>
+<p>🚧 Push transport and the <a class="" href=/pr-preview/specification/pr-187/spec-v1/interfaces/aggregator-push-api>ORD Aggregator Push API</a> are an <span class=feature-status-alpha>ALPHA</span> feature. The contract may still change in breaking ways.</p>
 </blockquote>
 <p>In push transport mode, an <a href=#ord-provider class="">ORD provider</a> publishes ORD information to an <a href=#ord-aggregator class="">ORD aggregator</a> through the <a class="" href=/pr-preview/specification/pr-187/spec-v1/interfaces/aggregator-push-api>ORD Aggregator Push API</a>.
-Push is optional for providers and aggregators.
-For static metadata publishing, we recommend push when the aggregator supports it, because publication can run from a CI/CD pipeline or CLI without a continuously running provider server.
-This avoids dedicated provider-side hosting, inbound endpoint protection, patching, and monitoring, reducing TCO, security effort, and maintenance.
-Push is also useful when a provider can publish runtime metadata on change.</p>
-<p>Push uses the standard <a href=#ord-document class="">ORD Document</a> without transport-specific properties.
+Push transport is optional for both ORD providers and ORD aggregators.</p>
+<p>For static metadata, we recommend push transport when the aggregator supports it, because the provider can publish from a CI/CD pipeline without a continuously reachable provider API.
+Push transport is also useful when a provider can publish runtime metadata as soon as it changes.</p>
+<p>Push transport uses the standard <a href=#ord-document class="">ORD Document</a> without transport-specific properties.
 Resource definitions are uploaded separately in their native media types.
-Their <code>url</code> values identify their associations within the submission and are not fetched from the provider.
-See <a class="" href=/pr-preview/specification/pr-187/spec-v1/concepts/push-transport>Push Transport Guidance</a> for operational examples, complete removal, and capacity planning.</p>
+In this section, a <strong>definition entry</strong> is an entry in a resource's <code>resourceDefinitions</code> array, or in its <code>definitions</code> array for Entity Types and Capabilities.
+Within a submission, the <code>url</code> of a definition entry only associates the uploaded definition with the resource that declares it; the aggregator does not fetch it from the provider.
+See <a class="" href=/pr-preview/specification/pr-187/spec-v1/concepts/push-transport>Push Transport Guidance</a> for publication patterns, removing a complete contribution, and capacity planning.</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=push-transport---pros>Push Transport - Pros<a href=#push-transport---pros class=hash-link aria-label="Direct link to Push Transport - Pros" title="Direct link to Push Transport - Pros" translate=no>​</a></h5>
+<ul>
+<li class="">No provider API has to be hosted, protected, patched, and monitored, which reduces TCO and maintenance</li>
+<li class="">Changes can be published as soon as they occur</li>
+<li class="">Direct feedback on validation errors through submission issues</li>
+<li class="">Accepted publication units from several ORD Documents become discoverable atomically</li>
+<li class=""><code>replace</code> mode lets the aggregator derive removals without tombstones</li>
+</ul>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=push-transport---cons>Push Transport - Cons<a href=#push-transport---cons class=hash-link aria-label="Direct link to Push Transport - Cons" title="Direct link to Push Transport - Cons" translate=no>​</a></h5>
+<ul>
+<li class="">The ORD provider must be onboarded to every ORD aggregator it publishes to</li>
+<li class="">The aggregator must store staged content and manage the submission lifecycle</li>
+<li class="">The provider must poll for the commit result and handle retries</li>
+<li class="">Commits of one ORD provider to one publication context are serialized, and a complete replacement must fit within the aggregator's limits</li>
+</ul>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=transactional-submission>Transactional Submission<a href=#transactional-submission class=hash-link aria-label="Direct link to Transactional Submission" title="Direct link to Transactional Submission" translate=no>​</a></h4>
-<p>A push publication is assembled as a stateful submission:</p>
+<p>A provider publishes through a submission that collects ORD Documents and resource definitions for joint validation and publication:</p>
 <ol>
-<li class="">The provider opens a submission for one publication context, and can choose <code>replace</code> publication instead of the default <code>merge</code> mode.</li>
+<li class="">The provider opens a submission for one <a href=#publication-context-and-removal class="">publication context</a>, using the default <code>merge</code> publication mode or selecting <code>replace</code>.</li>
 <li class="">The provider stages one or more ORD Documents and their resource definitions through separate, idempotent requests.</li>
-<li class="">The provider commits the submission.</li>
-<li class="">The aggregator validates the staged set asynchronously and determines which publication units can be accepted.</li>
-<li class="">The provider polls the submission and its issues until validation finishes.</li>
+<li class="">The provider commits the submission, which freezes the staged content as the staged revision.</li>
+<li class="">The aggregator validates the staged revision asynchronously and decides which publication units it accepts.</li>
+<li class="">The provider polls the submission status and reads its issues until validation finishes.</li>
 </ol>
-<p>When staging an ORD Document through <code>PUT</code>, the aggregator MUST parse the request body as JSON and MUST perform JSON Schema validation at least against those parts of the ORD specification that push aggregation relies upon, before creating or replacing the staged artifact.
-Those parts are:</p>
+<p>Staged content MUST NOT be discoverable.</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=staging>Staging<a href=#staging class=hash-link aria-label="Direct link to Staging" title="Direct link to Staging" translate=no>​</a></h5>
+<p>The provider assigns each staged artifact an ID that is unique within its collection (documents or resource definitions) and matches the <code>artifactId</code> pattern of the <a class="" href=/pr-preview/specification/pr-187/spec-v1/interfaces/aggregator-push-api>OpenAPI definition</a>.
+Staging an artifact with an existing ID replaces it.
+Any ID scheme works, including UUIDs, as long as the provider reuses the same ID when it retries or replaces an artifact.</p>
+<p>When the provider stages an ORD Document through <code>PUT</code>, the aggregator MUST parse the request body as JSON before creating or replacing the staged artifact.
+It MUST also perform JSON Schema validation of at least the parts of the ORD specification that push transport relies on:</p>
 <ol>
-<li class="">the request body is a valid JSON object;</li>
-<li class=""><code>openResourceDiscovery</code> (the document is an ORD Document) and <code>perspective</code> (the aggregator matches it to the submission context) are present;</li>
-<li class="">each processed collection is an array, and each contained item has its identity (<code>ordId</code>, <code>groupId</code>, or <code>groupTypeId</code>);</li>
-<li class="">resource-definition association fields: for a resource that declares <code>resourceDefinitions</code>, each entry's <code>url</code> and <code>mediaType</code> is a string.</li>
+<li class="">The request body is a JSON object.</li>
+<li class=""><code>openResourceDiscovery</code> and <code>perspective</code> are present, so the body is recognized as an ORD Document and can be matched to the submission's publication context.</li>
+<li class="">Each processed collection is an array, and each of its items has an identifier (<code>ordId</code>, <code>groupId</code>, or <code>groupTypeId</code>).</li>
+<li class="">For each definition entry, <code>url</code> and <code>mediaType</code> are strings.</li>
 </ol>
-<p>This ensures every successfully staged publication unit has its required identifier and that the aggregator can process it.
-PUT validates only the parts needed to establish identity and make the push transport work; it does not decide whether the content is valid ORD.
-Whether a staged item is valid is decided at commit, when the complete staged set is validated in bulk, and that validation MAY go beyond JSON Schema (for example semantic rules, reference resolution, and registry checks).
-A staged item, including a Package, can therefore pass <code>PUT</code> yet fail at commit.
-The aggregator MAY also validate more of the document against the <a href=#ord-document class="">ORD Document JSON Schema</a> at <code>PUT</code>, but is not required to.
-Complete content validation is the provider's responsibility, and requiring the aggregator to enforce the full schema at <code>PUT</code> would couple every aggregator to each ORD Document schema revision.
-Malformed JSON MUST be rejected with <code>400 Bad Request</code>.
-A document that does not pass validation of the parts listed above MUST be rejected with <code>422 Unprocessable Content</code>.
+<p>This ensures that every staged publication unit has an identifier and can be processed.
+<code>PUT</code> does not decide whether the content is valid ORD.
+The aggregator MAY validate more of the document against the <a href=#ord-document class="">ORD Document JSON Schema</a>, but it is not required to.
+Complete content validation is the provider's responsibility.</p>
+<p>Each <code>ordId</code>, <code>groupId</code>, and <code>groupTypeId</code> of ORD information MUST occur only once per submission, compared within its own kind; tombstones are not counted.
+If an uploaded ORD Document repeats an identifier, or contains one that another staged ORD Document already contains, the aggregator MUST reject the upload with <code>422 Unprocessable Content</code>.
+In <code>merge</code> mode, a tombstone MUST NOT have the same identifier as ORD information staged in the same submission, and an upload that would create such a conflict MUST also be rejected with <code>422 Unprocessable Content</code>.
+The response identifies the other artifact, or, for a conflict within the uploaded document, points to one of the occurrences with a JSON Pointer.
+To move ORD information to another staged document, the provider first stages the source document without it.
+For push transport, this is stricter than the general <a href=#ord-id-uniqueness-and-aggregation class="">ORD ID uniqueness</a> rule, which lets an aggregator retain one of two equivalent descriptions.</p>
+<p>Malformed JSON MUST be rejected with <code>400 Bad Request</code>.
+A document that fails the validation listed above MUST be rejected with <code>422 Unprocessable Content</code>.
 The response SHOULD identify failures through JSON Pointers into the request body.
-A failed PUT MUST NOT change the staged content, submission state, or expiry time.
-The provider MUST correct or remove the offending objects before staging that document.
-Submission commit MUST perform complete validation of the staged set, including resource-definition completeness, reference resolution, semantic rules, publication context, and current authorization.
-Successful staging does not guarantee successful commit.</p>
-<p>Staged content MUST NOT be discoverable.
-Commit validation MUST accept every valid publication unit and skip each unit that has an error.
-Warnings and information messages MUST NOT prevent publication.
-A commit with only unit-local errors MUST publish the accepted units and report the skipped units through issues.
-In a <code>processed</code> submission, a staged publication unit was skipped if and only if an issue of severity <code>error</code> identifies it after all issue pages are read, and was accepted otherwise.
-A <code>rejected</code> submission applies nothing: no staged unit is accepted, and the previously published state is unchanged, regardless of which units carry errors.
-An <code>error</code> that cannot be confined to one staged item MUST fail the entire commit, as stated below.
-This lets a provider read per-unit outcomes from the issues endpoint without a separate outcome list.
-All accepted units from one commit MUST become discoverable atomically, so consumers cannot observe an intermediate state.
-A validation or authorization error that cannot be confined safely to one publication unit MUST fail the entire commit.
-This includes a document-level semantic error that prevents its contained units from being isolated reliably.
-A <code>rejected</code> submission remains editable, so the provider can replace or remove staged artifacts and commit it again.
-The provider MAY also commit a <code>rejected</code> submission without changes, and the aggregator MUST then validate the same staged revision again.
-This helps when the failure depends on state outside the submission, such as authorization, ORD ID namespace permissions, or a conflicting contribution from another ORD provider.
-A submission that publishes with skipped units is <code>processed</code> and cannot be edited or reprocessed, so the provider MUST use a new submission to correct those units.
-A repeated commit request for a <code>processed</code> submission does not reprocess it and returns its existing outcome.
-The provider corrects only the skipped units by staging them, identified by the <code>ordId</code>, <code>groupId</code>, or <code>groupTypeId</code> reported for each, together with the definitions those units declare, and committing in <code>merge</code> mode.
-A <code>merge</code> submission upserts those units by identity and leaves the already accepted units unchanged.
-A follow-up <code>replace</code> submission MUST instead contain the ORD provider's complete intended contribution, because omission in <code>replace</code> removes the accepted units.
-The aggregator does not perform automatic selective retry.
-The provider MUST retain the submission ID and its submission-local artifact IDs while a submission is editable.
-If that state is lost, the provider MUST discard the submission and start a new one rather than risk publishing obsolete staged artifacts.</p>
-<p>Each top-level ORD information object in a staged ORD Document is one publication unit.
-Document-level properties inherited by that object are part of its validation.
-Because ORD resources inherit properties from their Package, a staged Package with an error is skipped like any other publication unit, and every resource whose <code>partOfPackage</code> points at that skipped Package is also skipped.
-The <code>partOfPackage</code> assignment of a staged ORD resource MUST resolve to a valid Package that is staged in the same submission or already published in the same perspective.
-Otherwise, the resource has an error and its publication unit is skipped, with an error identifying the Package as the reason.
-For an ORD resource that declares resource definitions, its publication unit also contains all of those definitions.
-Every resource-definition entry declared by a staged ORD resource MUST have exactly one matching staged resource-definition artifact in the same submission.
-Every staged resource-definition artifact MUST match exactly one staged resource by ORD ID and the exact declared <code>url</code> value.
-If the resource or any declared definition has an error, the aggregator MUST skip the complete publication unit.
-The aggregator MUST NOT publish the resource, any of its definitions, or an update to either independently.
-If the resource or one of its definitions changes, the provider MUST stage the resource and all of its declared definitions, including unchanged definitions.
-In <code>merge</code> mode, unrelated ORD resources MAY be omitted and remain published.
-Previously published artifacts MUST NOT be used to satisfy the completeness requirements for a staged resource.
-The aggregator MUST NOT fetch the declared URL to complete a push submission.</p>
-<p>A provider MAY include <code>Content-Digest</code> when uploading a resource definition.
-As defined by RFC 9530, it covers the HTTP message content after applying any content coding, such as gzip, and before the aggregator decodes that content coding.
+A failed <code>PUT</code> MUST NOT change the staged content, the submission state, or the expiry time.
+The provider MUST correct or remove the failing objects before staging the document again.</p>
+<p>A provider MAY include a <code>Content-Digest</code> header when it uploads a resource definition.
+As defined by <a href=https://www.rfc-editor.org/rfc/rfc9530.html target=_blank rel="noopener noreferrer" class="">RFC 9530</a>, the digest covers the HTTP message content after any content coding, such as gzip, is applied and before the aggregator decodes it.
 When present, the header MUST contain exactly one <code>sha-256</code> digest.
 The aggregator MUST verify it and reject a malformed or mismatching digest with <code>400 Bad Request</code>.
-<code>Content-Digest</code> provides integrity for one HTTP message and MUST NOT be interpreted as a persistent artifact identifier or as permission to reuse stored content.</p>
-<p>The aggregator defines and communicates an inactivity timeout for editable submissions and returns the current expiry time when it creates or retrieves a submission.
-The recommended default timeout is 15 minutes.
-The expiry time starts when the submission is created and is extended whenever a successful staging operation changes its content.
-Status and issue retrieval MUST NOT extend it.
+<code>Content-Digest</code> only protects the integrity of one HTTP message and MUST NOT be interpreted as a persistent artifact identifier or as permission to reuse stored content.</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=publication-units>Publication Units<a href=#publication-units class=hash-link aria-label="Direct link to Publication Units" title="Direct link to Publication Units" translate=no>​</a></h5>
+<p>Each top-level ORD information object in a staged ORD Document is one <strong>publication unit</strong>.
+Document-level properties that the object inherits are validated as part of it.
+For an ORD resource with definition entries, the publication unit also contains all of their definitions:</p>
+<ul>
+<li class="">Every definition entry of a staged ORD resource MUST have exactly one matching staged resource-definition artifact in the same submission.</li>
+<li class="">Every staged resource-definition artifact MUST match exactly one staged resource by ORD ID and the exact <code>url</code> of a definition entry.</li>
+<li class="">Previously published artifacts MUST NOT be used to complete a staged resource, and the aggregator MUST NOT fetch the declared URL to complete a submission.</li>
+</ul>
+<p>If a resource or one of its definitions changes, the provider MUST stage the resource together with all of its declared definitions, including unchanged ones.
+In <code>merge</code> mode, the provider MAY omit unrelated ORD resources, which then remain published.</p>
+<p>ORD resources inherit properties from their Package.
+The <code>partOfPackage</code> assignment of a staged ORD resource MUST therefore resolve to a valid Package that is staged in the same submission, also in <code>merge</code> mode; a previously published Package does not satisfy this requirement.
+Because a <a class="" href=/pr-preview/specification/pr-187/spec-v1/concepts/grouping-and-bundling#package>Package</a> cannot be shared across ORD providers, the ORD provider can always stage it.
+If the Package is not staged, or is staged but skipped because of its own error, the resource has an error that names the Package, and its publication unit is skipped.</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=commit-validation-and-outcome>Commit Validation and Outcome<a href=#commit-validation-and-outcome class=hash-link aria-label="Direct link to Commit Validation and Outcome" title="Direct link to Commit Validation and Outcome" translate=no>​</a></h5>
+<p>Validity is decided at commit, which MUST validate the complete staged revision, including resource-definition completeness, reference resolution, semantic rules, the publication context, and current authorization.
+This validation MAY go beyond JSON Schema, for example with registry checks.
+A staged item, including a Package, can therefore pass <code>PUT</code> and still fail at commit.</p>
+<p>The aggregator MUST accept every valid publication unit, skip every unit that has an error, and report the skipped units through issues.
+If a resource or any of its declared definitions has an error, the aggregator MUST skip the complete publication unit and MUST NOT publish the resource, any of its definitions, or an update to either on its own.
+Warnings and information messages MUST NOT prevent publication.
+All accepted units of one commit MUST become discoverable atomically, so consumers never observe an intermediate state.</p>
+<p>An error that cannot be confined to one publication unit is a <strong>submission-wide error</strong> and MUST fail the entire commit.
+This applies to validation and authorization errors alike, for example a document-level semantic error that prevents the units of that document from being validated independently.</p>
+<p>A commit ends in one of two states:</p>
+<ul>
+<li class=""><code>processed</code>: The accepted units are published.
+After all issue pages are read, a staged publication unit was skipped if, and only if, an issue with severity <code>error</code> identifies it; otherwise it was accepted.
+There is no separate outcome list.</li>
+<li class=""><code>rejected</code>: A submission-wide error occurred.
+The aggregator applies nothing: no staged unit is accepted, and the previously published state is unchanged.</li>
+</ul>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=correcting-a-submission>Correcting a Submission<a href=#correcting-a-submission class=hash-link aria-label="Direct link to Correcting a Submission" title="Direct link to Correcting a Submission" translate=no>​</a></h5>
+<p>A <code>rejected</code> submission remains editable.
+The provider can replace or remove staged artifacts and commit the submission again.
+The provider MAY also commit a <code>rejected</code> submission without changes, and the aggregator MUST then validate the same staged revision again.
+This helps when the failure depends on state outside the submission, such as authorization, ORD ID namespace permissions, or a conflicting contribution from another ORD provider.</p>
+<p>A <code>processed</code> submission cannot be edited or processed again, so the provider MUST use a new submission to correct skipped units.
+A repeated commit request for a <code>processed</code> submission returns its existing outcome.
+The aggregator does not retry skipped units automatically.
+In a new <code>merge</code> submission, the provider stages only the skipped units, which it identifies by the <code>ordId</code>, <code>groupId</code>, or <code>groupTypeId</code> reported for each, together with the definitions and Packages of those units.
+The <code>merge</code> commit updates these units by their identifiers and leaves the already accepted units unchanged.
+A follow-up <code>replace</code> submission MUST instead contain the ORD provider's complete intended contribution, because omitting the accepted units in <code>replace</code> mode would remove them.</p>
+<p>The provider MUST keep the submission ID and the artifact IDs it assigned while the submission is editable.
+If it loses this state, it MUST discard the submission and start a new one rather than risk publishing outdated staged artifacts.</p>
+<h5 class="anchor anchorTargetStickyNavbar_Vzrq" id=expiry-and-retention>Expiry and Retention<a href=#expiry-and-retention class=hash-link aria-label="Direct link to Expiry and Retention" title="Direct link to Expiry and Retention" translate=no>​</a></h5>
+<p>The aggregator defines and communicates an inactivity timeout for editable submissions, with a recommended default of 15 minutes.
+It returns the current expiry time whenever it creates or returns a submission.
+The expiry time starts when the submission is created and is extended whenever a successful staging operation changes the submission content.
+Reading the status or the issues MUST NOT extend it.
 Expiry is suspended while a submission is <code>validating</code>.
-If validation fails, the aggregator MUST communicate a new expiry time for the resulting <code>rejected</code> submission.
-The aggregator MUST automatically discard the staged content of an <code>open</code> or <code>rejected</code> submission that remains inactive until its expiry time.
-A provider MAY discard such a submission explicitly.
-While the aggregator retains an expiry marker, every operation targeting the expired submission MUST return <code>410 Gone</code>.
-If the aggregator later removes that marker completely, subsequent requests return <code>404 Not Found</code>, as they do for any unknown or inaccessible submission identifier.</p>
-<p>A <code>processed</code> submission is retained for a period chosen by the aggregator, so the provider can read its final status and issues, including errors for skipped publication units.
-The aggregator communicates the retention period during onboarding and returns its end as the expiry time of the <code>processed</code> submission.
+If validation results in a <code>rejected</code> submission, the aggregator MUST communicate a new expiry time for it.
+When an <code>open</code> or <code>rejected</code> submission reaches its expiry time without further changes, the aggregator MUST discard its staged content.
+The provider MAY also discard such a submission explicitly.</p>
+<p>The aggregator retains a <code>processed</code> submission for a period it chooses, so that the provider can read the final status and issues, including the errors of skipped units.
+The aggregator communicates this retention period during onboarding and returns its end as the expiry time of the <code>processed</code> submission.
 The retention period is RECOMMENDED to be at least 24 hours.
-When it ends, the aggregator discards the submission record, while the published ORD information remains unchanged.
-Requests for that submission then return <code>410 Gone</code> while the aggregator retains a marker, and <code>404 Not Found</code> afterwards.
-A <code>410 Gone</code> response MUST state the outcome in its problem details: <code>expired</code> when the submission was discarded without being published, or <code>processed</code> when its retention period ended after publication.</p>
+When it ends, the aggregator discards the submission; the published ORD information is not affected.</p>
+<p>After an <code>open</code> or <code>rejected</code> submission expires, or the retention period of a <code>processed</code> submission ends, every operation on it MUST return <code>410 Gone</code> while the aggregator keeps a marker for it.
+After the aggregator removes that marker, requests return <code>404 Not Found</code>, as they do for any unknown or inaccessible submission ID.
+The problem details of a <code>410 Gone</code> response MUST state the reason: <code>expired</code> when the submission was discarded without being published, or <code>processed</code> when its retention period ended.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=publication-context-and-removal>Publication Context and Removal<a href=#publication-context-and-removal class=hash-link aria-label="Direct link to Publication Context and Removal" title="Direct link to Publication Context and Removal" translate=no>​</a></h4>
-<p>Each submission belongs to the ORD provider established by its authenticated credential and to exactly one publication context.
-The aggregator identifies the ORD provider as the technical integration behind the authenticated client, as agreed during onboarding.
-The publication context identifies one authorized publication target and one <a href=#perspectives class="">perspective</a>, including any required system version or aggregator-issued system instance identifier.
-The aggregator resolves the target from authoritative onboarding and authentication information; it is not an additional field in the request's <code>context</code> object.
-An ORD provider MAY publish for multiple separately onboarded applications or services, but each submission MUST resolve to exactly one authorized target.
-The provider MUST supply <code>perspective</code> explicitly when creating a submission, even when the authenticated credential is restricted to one perspective.
-The provider MAY omit <code>systemVersion</code> for <code>system-version</code> or <code>systemInstanceId</code> for <code>system-instance</code> only when the credential unambiguously identifies the required version or instance.
-The aggregator MUST verify that the staged ORD Documents describe the same authorized context.
+<p>Each submission belongs to one ORD provider, which the aggregator determines from the authenticated credential, and to exactly one publication context.
+The ORD provider is the technical integration behind the authenticated client, as agreed during onboarding.</p>
+<p>The <strong>publication context</strong> consists of one authorized publication target and one <a href=#perspectives class="">perspective</a>, including any required system version or aggregator-issued system instance ID.
+The aggregator resolves the target from authoritative onboarding and authentication information, so the request's <code>context</code> object has no field for it.
+An ORD provider MAY publish for multiple separately onboarded applications or services, but each submission MUST resolve to exactly one authorized target.</p>
+<p>The provider MUST specify <code>perspective</code> when it creates a submission, even if its credential is restricted to one perspective.
+It MAY omit <code>systemVersion</code> (for <code>system-version</code>) or <code>systemInstanceId</code> (for <code>system-instance</code>) only if the credential identifies the required version or instance unambiguously.
 All staged ORD Documents MUST describe the submission's perspective and target; a submission MUST NOT mix perspectives or targets.
-The same ORD ID can legitimately occur in different perspectives.
-Keeping each submission scoped to one perspective and target makes validation, replacement, and deletion unambiguous.</p>
+The aggregator MUST verify that the staged ORD Documents match the authorized publication context.
+Because the same ORD ID can legitimately occur in different perspectives, scoping each submission to one perspective and one target keeps validation, replacement, and removal unambiguous.</p>
 <p>Several ORD providers can together describe one application or service, and each of them can use push or <a href=#pull-transport class="">pull transport</a>.
 Their contributions MUST NOT overlap, as already required by <a href=#ord-id-uniqueness-and-aggregation class="">ORD ID uniqueness</a> within a perspective.
-Push submissions only change the contribution of the submitting ORD provider.
-They never change information retrieved through pull transport or submitted by another ORD provider.</p>
-<p>The aggregator MUST retain the ORD provider and resolved publication context, including its target, as provenance for published contributions.
+A push submission changes only the submitting ORD provider's contribution, never information retrieved through pull transport or submitted by another ORD provider.
+This specification does not define how ORD information is handed over from one ORD provider to another; an aggregator may allow a takeover or require a dedicated handover.</p>
+<p>For every published contribution, the aggregator MUST record the ORD provider and the resolved publication context, including its target.
 This lets it associate later <code>merge</code> updates and tombstones with the ORD provider that submitted them.</p>
-<p><code>merge</code> is the default publication mode when no mode is specified.
-In <code>replace</code> mode, the staged set is the complete current contribution of the ORD provider in the publication context.
+<p><code>merge</code> is the default publication mode.
+In <code>merge</code> mode, accepted units are added or updated, and omitted information remains published.
+In <code>replace</code> mode, the staged revision is the ORD provider's complete current contribution in the publication context.
 After successful validation, the aggregator MUST remove that ORD provider's prior contributions in the context that are absent from the submission.
 This removal by omission is an exception to the general rule that <a href=#removal-of-resourcesinformation class="">removals are indicated through tombstones</a>.
-To remove every prior contribution in the context, the provider stages at least one valid ORD Document for the publication context that contains no ORD information to retain and commits it in <code>replace</code> mode.
-An empty replacement MUST NOT remove contributions from another ORD provider or publication context.
-In <code>merge</code> mode, omission does not remove prior contributions.
-Tombstones remain available for explicit removals in <code>merge</code> mode and other transport modes.
-In push transport, a tombstone MUST affect only matching contributions from the ORD provider in the submission's publication context.
-The aggregator MUST authorize a tombstone against that ORD provider's contributions.
-In partial <code>replace</code> processing, a staged publication unit that is skipped because of an error MUST NOT be treated as omitted and MUST NOT remove its previously published contribution.
-The accepted changes and removals in either publication mode MUST be applied atomically.</p>
-<p>This API does not define finer-grained replacement boundaries within the contribution of one ORD provider in one publication context.
-Request data MUST NOT establish authority to change a contribution; authorization is decided by the aggregator.</p>
+A staged publication unit that is skipped because of an error MUST NOT be treated as omitted and MUST NOT remove its previously published contribution.
+To remove its entire contribution in a publication context, the provider commits a <code>replace</code> submission with at least one valid ORD Document for that context that contains no ORD resources or taxonomy.
+Such an empty replacement MUST NOT remove contributions of another ORD provider or in another publication context.</p>
+<p>Tombstones remain available for explicit removals in <code>merge</code> mode and in other transport modes.
+In <code>merge</code> mode, a tombstone MUST affect only matching contributions of the submitting ORD provider in the submission's publication context, and the aggregator MUST authorize each tombstone against these contributions.
+In <code>replace</code> mode, the aggregator MUST NOT process tombstones: they have no effect and are neither authorized nor validated, because omission alone determines removal.
+In both publication modes, the accepted changes and removals MUST be applied atomically.</p>
+<p>This API does not define finer-grained replacement boundaries within one ORD provider's contribution to one publication context.
+Request data MUST NOT establish authority to change a contribution; the aggregator decides authorization.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=concurrent-submissions>Concurrent Submissions<a href=#concurrent-submissions class=hash-link aria-label="Direct link to Concurrent Submissions" title="Direct link to Concurrent Submissions" translate=no>​</a></h4>
 <p>An ORD provider MUST NOT have more than one active submission for the same publication context.
-The active-submission boundary is the ORD provider together with the resolved target, perspective, and any required system version or system instance identifier.
-The same ORD provider MAY have active submissions for different onboarded targets at the same time.
 A submission is active while it is <code>open</code>, <code>validating</code>, or <code>rejected</code>.
-If the ORD provider requests another submission for that context, the aggregator MUST reject it with <code>409 Conflict</code> and identify the active submission in the problem details.
+Because the publication context includes the resolved target, perspective, and any required system version or system instance ID, the same ORD provider MAY have active submissions for different onboarded targets at the same time.
+If the ORD provider requests another submission for a context that already has an active one, the aggregator MUST reject the request with <code>409 Conflict</code> and identify the active submission in the problem details.
 The provider can then continue, commit, or discard the active submission.
 A repeated creation request with the same <code>Idempotency-Key</code> returns the original submission instead.</p>
-<p>This ensures that commits from one ORD provider to one publication context are applied in order.
-For example, a <code>replace</code> submission cannot be opened before a <code>merge</code> hot fix and then committed after it, which would remove that hot fix.
-Submissions for different publication contexts, or from different ORD providers, do not conflict because their contributions do not overlap.</p>
+<p>This rule ensures that an ORD provider's commits to one publication context are applied in order.
+Without it, a <code>replace</code> submission opened before a <code>merge</code> hot fix and committed after it would remove that hot fix.
+Submissions for different publication contexts, or from different ORD providers, do not conflict, because their contributions do not overlap.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=status-and-issues>Status and Issues<a href=#status-and-issues class=hash-link aria-label="Direct link to Status and Issues" title="Direct link to Status and Issues" translate=no>​</a></h4>
 <p>A submission has one of the following states:</p>
 <ul>
-<li class=""><code>open</code>: artifacts can be staged, replaced, or removed.</li>
-<li class=""><code>validating</code>: the committed revision is immutable while validation runs.</li>
-<li class=""><code>rejected</code>: a submission-wide error occurred. The staged artifacts can be corrected, or the submission can be committed again unchanged.</li>
-<li class=""><code>processed</code>: commit processing completed and the accepted publication units were applied atomically. A <code>processed</code> submission can contain errors for skipped units, so the provider MUST read its issues.</li>
+<li class=""><code>open</code>: Artifacts can be staged, replaced, or removed.</li>
+<li class=""><code>validating</code>: The staged revision cannot be changed while validation runs.</li>
+<li class=""><code>rejected</code>: A submission-wide error occurred. The staged artifacts can be corrected, or the submission can be committed again unchanged.</li>
+<li class=""><code>processed</code>: Commit processing completed and the accepted publication units were applied atomically. A <code>processed</code> submission can contain errors for skipped units, so the provider MUST read its issues.</li>
 </ul>
 <!-- -->
 <p>The status endpoint reports the state, artifact counts, issue counts, and expiry time.
 The issues endpoint reports all errors, warnings, and information messages for the current staged revision.
-Each issue that applies to one publication unit MUST identify its staged artifact through <code>artifactId</code>, the ID the provider assigned when staging that artifact, and the unit through exactly one of <code>ordId</code>, <code>groupId</code>, or <code>groupTypeId</code>.
-An issue about a resource definition MUST additionally carry the exact declared <code>definitionUrl</code>, so that two resources referencing the same URL produce distinguishable issues.
-An issue MAY include a <code>jsonPointer</code> for a precise location within the staged artifact.
-An issue that applies to a whole staged artifact rather than one unit, such as a document-level publication context error, uses the artifact's <code>artifactId</code> and carries no unit identity.
-A submission-wide issue that cannot be confined to one publication unit MUST use <code>artifactKind: submission</code> and carries no unit identity.
-A staged resource definition whose declared <code>ordId</code> and <code>url</code> match no staged resource is reported with its <code>artifactId</code> and <code>definitionUrl</code> and no unit identity; such an error cannot be attributed to an accepted unit, so it never denotes a per-unit accepted or skipped outcome.</p>
+Each issue identifies what it applies to:</p>
+<ul>
+<li class="">An issue about one publication unit MUST identify the staged artifact through <code>artifactId</code>, the ID the provider assigned when staging it, and the unit through exactly one of <code>ordId</code>, <code>groupId</code>, or <code>groupTypeId</code>.</li>
+<li class="">An issue about a resource definition MUST also carry the exact declared <code>definitionUrl</code>, so that issues for two resources that declare the same URL can be told apart.</li>
+<li class="">An issue about a whole staged artifact rather than one unit, such as a document-level publication context error, carries the <code>artifactId</code> but no unit identifier.</li>
+<li class="">A staged resource definition whose <code>ordId</code> and <code>url</code> match no staged resource is not published.
+It is reported as a <code>warning</code> with its <code>artifactId</code> and <code>definitionUrl</code> but no unit identifier, so it does not mark any unit as skipped.
+The resource it was meant for is usually skipped anyway, because one of its definition entries has no matching artifact.</li>
+<li class="">A submission-wide issue MUST use <code>artifactKind: submission</code> and carries no unit identifier.</li>
+</ul>
+<p>An issue MAY include a <code>jsonPointer</code> to the exact location within the staged artifact.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=operational-limits-timeouts-retries-and-rate-limiting>Operational Limits, Timeouts, Retries, and Rate Limiting<a href=#operational-limits-timeouts-retries-and-rate-limiting class=hash-link aria-label="Direct link to Operational Limits, Timeouts, Retries, and Rate Limiting" title="Direct link to Operational Limits, Timeouts, Retries, and Rate Limiting" translate=no>​</a></h4>
-<p>An aggregator MAY rate limit any push API operation and MAY apply different limits by ORD provider, operation, submission, or service capacity.
+<p>An aggregator MAY rate limit any push API operation and MAY apply different limits per ORD provider, operation, or submission, or depending on service capacity.
 A rate-limited operation MUST return <code>429 Too Many Requests</code> with a <code>Retry-After</code> header.
-The aggregator MUST document the supported request <code>Content-Encoding</code> values and the following limits during onboarding:</p>
+During onboarding, the aggregator MUST document the supported request <code>Content-Encoding</code> values and the following limits:</p>
 <ul>
 <li class="">maximum encoded request-body size</li>
 <li class="">maximum decoded size of one ORD Document or resource definition</li>
@@ -274,35 +309,34 @@ The aggregator MUST document the supported request <code>Content-Encoding</code>
 <li class="">maximum number of active submissions per ORD provider across publication contexts</li>
 <li class="">request-rate and concurrent-request limits</li>
 </ul>
-<p>The aggregator MAY change capacity-dependent limits dynamically, and a provider MUST NOT assume that documented limits guarantee acceptance.</p>
+<p>The aggregator MAY change capacity-dependent limits dynamically, so a provider MUST NOT assume that staying within the documented limits guarantees acceptance.</p>
 <p>A provider is not required to retry a rate-limited or temporarily failed operation.
-If it retries a <code>429</code> response, it MUST NOT send that retry before the time indicated by <code>Retry-After</code>.
+If it retries after a <code>429</code> response, it MUST NOT send the retry before the time indicated by <code>Retry-After</code>.
 If a retriable response does not include <code>Retry-After</code>, the provider SHOULD use bounded exponential backoff with jitter.
-The provider SHOULD also respect <code>Retry-After</code> on a successful submission status response while its state is <code>validating</code>.
-Providers SHOULD bound their number of retries and maximum delay so that prolonged failures are surfaced to their operators.</p>
-<p>Providers SHOULD set a finite timeout for every request and treat a timeout or network failure as an indeterminate outcome.
+The provider SHOULD also respect <code>Retry-After</code> on a successful status response for a <code>validating</code> submission.
+Providers SHOULD limit the number of retries and the maximum delay so that prolonged failures are reported to their operators.</p>
+<p>Providers SHOULD set a finite timeout for every request.
+A timeout or network failure leaves the outcome unknown: it does not mean that the aggregator cancelled the request.
 Artifact <code>PUT</code> and <code>DELETE</code> operations are idempotent when repeated with the same request content for the same staged artifact.
-Providers MAY retry such an operation while the submission remains editable, provided no conflicting change to that artifact has been issued.
-Idempotence does not prevent a delayed <code>PUT</code> from overwriting a later replacement or a delayed <code>DELETE</code> from removing a recreated artifact.
-Providers MUST serialize conflicting staging operations and MUST NOT commit while a staging request or retry might still change the intended staged content.
-A request timeout does not establish that the aggregator cancelled the request.
-If a provider cannot ensure that the submission contains its intended staged revision, it MUST discard the submission and start a new one.
-Providers MAY retry commit for the same unchanged staged revision to retrieve its current state or validate a rejected revision again.
-To retry submission creation safely, a provider MUST send the same <code>Idempotency-Key</code> value on every attempt.
-An aggregator MUST return the original submission for a repeated key with the same ORD provider and request content, and MUST reject reuse of that key with different request content.</p>
+Providers MAY retry them while the submission is editable, as long as no conflicting change to that artifact has been sent since.
+Idempotence does not protect against reordering: a delayed <code>PUT</code> can overwrite a later replacement, and a delayed <code>DELETE</code> can remove a recreated artifact.
+Providers MUST therefore serialize conflicting staging operations and MUST NOT commit while a staging request or retry might still change the staged content.
+If a provider cannot ensure that the submission contains the intended staged content, it MUST discard the submission and start a new one.
+Providers MAY retry commit for the same unchanged staged revision, either to retrieve its current state or to validate a <code>rejected</code> revision again.</p>
+<p>To retry submission creation safely, a provider MUST send the same <code>Idempotency-Key</code> value on every attempt.
+For a repeated key with the same ORD provider and request content, the aggregator MUST return the original submission.
+It MUST reject reuse of the key with different request content.</p>
 <h4 class="anchor anchorTargetStickyNavbar_Vzrq" id=authentication-and-api-location>Authentication and API Location<a href=#authentication-and-api-location class=hash-link aria-label="Direct link to Authentication and API Location" title="Direct link to Authentication and API Location" translate=no>​</a></h4>
 <p>The push API MUST use HTTPS and authenticate every operation.
 Each credential MUST identify exactly one ORD provider in authoritative aggregator state.
-An ORD provider MAY publish for multiple onboarded applications or services.
-The aggregator MUST resolve each submission to exactly one authorized publication target and perspective using authoritative onboarding and authentication information.
-If that target cannot be resolved unambiguously, the aggregator MUST reject submission creation.
+The aggregator MUST resolve each submission to exactly one authorized publication target and perspective, as described in <a href=#publication-context-and-removal class="">Publication Context and Removal</a>, and MUST reject the submission creation if the target is ambiguous.
 An aggregator MAY further restrict a credential to particular publication targets, perspectives, system versions, system instances, or ORD ID namespaces.
-The aggregator MUST authorize each operation against the ORD provider, publication context, and any additional restrictions configured for the credential.
-Identifiers supplied by a request MUST NOT establish authority by themselves.</p>
-<p>ORD does not mandate one credential technology.
+The aggregator MUST authorize each operation against the ORD provider, the publication context, and any additional restrictions configured for the credential.
+Identifiers supplied in a request MUST NOT establish authority by themselves.</p>
+<p>ORD does not mandate a specific credential technology.
 The aggregator communicates its API base URL, authentication mechanism, credentials, and implementation limits during onboarding.
-The relative <code>/v1</code> paths and behavior are standardized by the <a class="" href=/pr-preview/specification/pr-187/spec-v1/interfaces/aggregator-push-api>OpenAPI definition</a>.</p>
-<p>The rationale and rejected stateless design are recorded in <a href=https://github.com/open-resource-discovery/specification/blob/main/adrs/001-use-transactional-submissions-for-push-transport.md target=_blank rel="noopener noreferrer" class="">ADR 001</a>.</p>
+The relative <code>/v1</code> paths and their behavior are standardized by the <a class="" href=/pr-preview/specification/pr-187/spec-v1/interfaces/aggregator-push-api>OpenAPI definition</a>.</p>
+<p><a href=https://github.com/open-resource-discovery/specification/blob/main/adrs/001-use-transactional-submissions-for-push-transport.md target=_blank rel="noopener noreferrer" class="">ADR 001</a> records the rationale for this design and the alternatives that were considered.</p>
 <h3 class="anchor anchorTargetStickyNavbar_Vzrq" id=other-modes-of-transport>Other Modes of Transport<a href=#other-modes-of-transport class=hash-link aria-label="Direct link to Other Modes of Transport" title="Direct link to Other Modes of Transport" translate=no>​</a></h3>
 <p>Other modes of transport have not yet been standardized/specified.
 They are only listed here to outline potential modes that we anticipate.</p>

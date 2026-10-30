@@ -270,7 +270,7 @@
     },
     "tombstones": {
       "type": "array",
-      "description": "List of ORD information (resources or taxonomy) that have been \"tombstoned\", indicating removal or archival.\nThis MUST be indicated explicitly, just removing the ORD information itself is not sufficient.\nThe only exception is a [push transport](../index.md#push-transport) submission in `replace` mode, which removes information omitted from the ORD provider's complete contribution.\n\nA tombstone entry MAY be removed after a grace period of 31 days.",
+      "description": "List of ORD information (resources or taxonomy) that have been \"tombstoned\", indicating removal or archival.\nThis MUST be indicated explicitly, just removing the ORD information itself is not sufficient.\nThe only exception is a [push transport](../index.md#push-transport) submission in `replace` mode, which removes information omitted from the ORD provider's complete contribution and does not process tombstones.\n\nA tombstone entry MAY be removed after a grace period of 31 days.",
       "items": {
         "$ref": "#/definitions/Tombstone"
       }
@@ -288,7 +288,7 @@
       "type": "object",
       "title": "Package",
       "x-ums-type": "root",
-      "description": "A [**Package**](../concepts/grouping-and-bundling#package) organizes a set of related resources together, by publishing and catalog presentation concerns.\n\nThe Package can also indicate which vendor owns the packaged resources and which products they are part of.\nFor partner or customer content, the Package indicates current ownership attribution through `vendor`.\nThe independent `partOfProducts` assignment indicates the associated product offerings.\n\nA Package SHOULD contain at least one resource. Avoid empty Packages.\n\nThe Package assignment of a resource MAY change, so consumers MUST not rely on this to be stable.\n\nA Package does not have a `visibility` property.\nWhether it is displayed is decided by the fact, whether it contains any visible resources according to the visibility role of the aggregator.\n\nTo learn more about the concept and further guidance, see [Package](../concepts/grouping-and-bundling#package).",
+      "description": "A [**Package**](../concepts/grouping-and-bundling#package) organizes a set of related resources together, by publishing and catalog presentation concerns.\n\nThe Package can also indicate which vendor owns the packaged resources and which products they are part of.\nFor partner or customer content, the Package indicates current ownership attribution through `vendor`.\nThe independent `partOfProducts` assignment indicates the associated product offerings.\n\nA Package SHOULD contain at least one resource. Avoid empty Packages.\n\nA Package and all resources assigned to it MUST be described by the same [ORD provider](../index.md#ord-provider).\nA Package MUST NOT be shared across multiple ORD providers.\n\nThe Package assignment of a resource MAY change, so consumers MUST not rely on this to be stable.\n\nA Package does not have a `visibility` property.\nWhether it is displayed is decided by the fact, whether it contains any visible resources according to the visibility role of the aggregator.\n\nTo learn more about the concept and further guidance, see [Package](../concepts/grouping-and-bundling#package).",
       "properties": {
         "ordId": {
           "type": "string",
@@ -7985,7 +7985,7 @@
       "type": "object",
       "title": "Tombstone",
       "x-ums-type": "ignore",
-      "description": "A tombstone indicates that a previously published ORD resource or taxonomy has been removed / decommissioned / archived.\nThis MUST be indicated explicitly, so ORD aggregators and consumers can learn about the removal.\nInformation omitted from a [push transport](../index.md#push-transport) submission in `replace` mode is an exception and is removed without a tombstone.\n\nExactly one of the IDs MUST be provided to state which ORD resource or taxonomy item the Tombstone addresses.\n\nThe tombstone MUST be kept sufficiently long (at least 31 days) so that all ORD aggregators can learn about the tombstone.",
+      "description": "A tombstone indicates that a previously published ORD resource or taxonomy has been removed / decommissioned / archived.\nThis MUST be indicated explicitly, so ORD aggregators and consumers can learn about the removal.\nInformation omitted from a [push transport](../index.md#push-transport) submission in `replace` mode is an exception and is removed without a tombstone; tombstones in such a submission are not processed.\n\nExactly one of the IDs MUST be provided to state which ORD resource or taxonomy item the Tombstone addresses.\n\nThe tombstone MUST be kept sufficiently long (at least 31 days) so that all ORD aggregators can learn about the tombstone.",
       "properties": {
         "ordId": {
           "type": "string",
@@ -8048,26 +8048,6 @@
       },
       "required": [
         "removalDate"
-      ],
-      "oneOf": [
-        {
-          "type": "object",
-          "required": [
-            "ordId"
-          ]
-        },
-        {
-          "type": "object",
-          "required": [
-            "groupId"
-          ]
-        },
-        {
-          "type": "object",
-          "required": [
-            "groupTypeId"
-          ]
-        }
       ],
       "examples": [
         {
