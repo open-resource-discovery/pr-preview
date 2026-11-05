@@ -84,7 +84,7 @@
         {
           "const": "system-deployment",
           "x-feature-status": "alpha",
-          "description": "ALPHA: Describes the complete dynamic [system-deployment](../index.md#system-deployment) perspective shared by all tenants of one running deployment.\nMetadata MAY differ between deployments of the same system type and version, but MUST NOT contain tenant-specific context or customizations.\nAll documents for one deployment MUST collectively form a complete valid perspective, including when it is empty.\nWhen no system-instance perspective is published for a tenant, an aggregator MUST use its deployment perspective before considering static metadata.\nAn ORD ID absent from a selected deployment perspective MUST NOT fall through to static metadata.\nDeployment identity and tenant membership MUST be resolved from authoritative onboarding or landscape information; ambiguous membership MUST NOT be guessed.\nProviders MUST establish that the receiving aggregator supports deployment-aware resolution before publishing this alpha perspective."
+          "description": "ALPHA: Describes complete runtime metadata shared by all tenants of one [system deployment](../index.md#system-deployment), while allowing differences between deployments of the same system type and version.\nMUST NOT contain tenant-specific context or customizations.\nWhen no system-instance perspective is published, its deployment perspective MUST be used before static metadata; absent ORD IDs MUST NOT fall through, including when empty.\nRequires authoritative deployment identity, tenant membership, and receiving aggregator support; see [deployment requirements](../concepts/perspectives#system-deployment-perspective-alpha)."
         },
         {
           "const": "system-instance",
@@ -3219,7 +3219,7 @@
         },
         "lifecycleStatus": {
           "type": "string",
-          "description": "Lifecycle status of the Data Product as a whole.\n\nMUST be provided when describing either dynamic (system-instance or alpha system-deployment) perspective.\nSHOULD NOT be provided in static (design-time) perspective. Static aggregators MUST ignore this property.",
+          "description": "Lifecycle status of the Data Product as a whole.\n\nMUST be provided when describing the system-instance-aware (run-time) perspective.\nSHOULD NOT be provided in static (design-time) perspective. Static aggregators MUST ignore this property.",
           "oneOf": [
             {
               "const": "inactive",
