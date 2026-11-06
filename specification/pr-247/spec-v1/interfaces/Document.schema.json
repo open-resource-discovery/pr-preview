@@ -209,7 +209,7 @@
     },
     "overlays": {
       "type": "array",
-      "description": "Array of all metadata overlays described in this ORD document.\n\nAn ORD Overlay resource is a standalone, versioned resource that references an overlay document which patches\nresource definitions (e.g. OpenAPI, AsyncAPI, OData CSDL) or ORD resource metadata without modifying the originals.\n\nFor overlays that are tightly coupled to a single API or Event resource, consider attaching them directly\nas a `resourceDefinitions` entry with `type: ord:overlay:v1` instead.",
+      "description": "Array of all metadata overlays described in this ORD document.\n\nAn ORD Overlay resource is a standalone, versioned resource that references an overlay document which patches\nresource definitions (e.g. OpenAPI, AsyncAPI, OData CSDL) or ORD metadata without modifying the originals.\n\nFor overlays that are tightly coupled to a single API or Event resource, consider attaching them directly\nas a `resourceDefinitions` entry with `type: ord:overlay:v1` instead.",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
       "items": {
@@ -4721,7 +4721,7 @@
       "x-ums-type": "root",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
-      "description": "An Overlay Resource is a standalone, versioned resource that references a metadata patch file.\nOverlays enrich / patch resource definition files (e.g. OpenAPI) or ORD resource metadata without modifying the originals, e.g. to add AI-optimized descriptions, apply governance annotations, or adapt definitions for a specific audience / purpose.\n\nUse an Overlay Resource for overlays that serve a different concern or audience than the original metadata — such as AI enrichment, governance annotations, or audience-specific adaptations — and are managed independently or applied across multiple resources.\nFor producer-owned overlays that belong to a single resource, they SHOULD instead be attached directly as a `resourceDefinitions` entry with `type: ord:overlay:v1`.",
+      "description": "An Overlay Resource is a standalone, versioned resource that references a metadata patch file.\nOverlays enrich / patch resource definition files (e.g. OpenAPI) or ORD metadata without modifying the originals, e.g. to add AI-optimized descriptions, apply governance annotations, or adapt definitions for a specific audience / purpose.\n\nUse an Overlay Resource for overlays that serve a different concern or audience than the original metadata — such as AI enrichment, governance annotations, or audience-specific adaptations — and are managed independently or applied across multiple resources.\nFor producer-owned overlays that belong to a single resource, they SHOULD instead be attached directly as a `resourceDefinitions` entry with `type: ord:overlay:v1`.",
       "properties": {
         "ordId": {
           "type": "string",
