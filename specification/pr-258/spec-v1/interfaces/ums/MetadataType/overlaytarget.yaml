@@ -10,7 +10,7 @@ spec:
     - 'id'
   visibility: 'public'
   embedded: true
-  description: "Selects one ORD resource and one concrete input resource definition.\nMatching is performed in the applicability context of the containing Overlay Resource.\nResolution MUST identify exactly one input definition; zero or multiple matches MUST error.\nRelationships to the patched resource are derived from `ordId` and MUST NOT be duplicated in related-resource lists."
+  description: "Selects one ORD resource and one concrete input resource definition.\nMatching is performed in the ORD aggregation context.\nResolution MUST identify exactly one input definition; zero or multiple matches MUST error.\nRelationships to the patched resource are derived from `ordId` and MUST NOT be duplicated in related-resource lists."
   metadataProperties:
     - name: 'id'
       type: 'guid'

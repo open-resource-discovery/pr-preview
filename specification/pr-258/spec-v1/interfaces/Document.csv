@@ -269,7 +269,6 @@ Overlay,visibility,true,string
 Overlay,releaseStatus,true,string
 Overlay,purpose,false,string
 Overlay,target,true,OverlayTarget
-Overlay,perspective,false,string
 Overlay,definitions,true,array<OverlayDefinition>
 Overlay,tags,false,array<string>
 Overlay,labels,false,Labels
@@ -281,7 +280,6 @@ Overlay Target,ordId,true,string
 Overlay Target,resourceDefinition,true,OverlayTargetResourceDefinition
 Overlay Target Resource Definition,type,true,string
 Overlay Target Resource Definition,mediaType,true,string
-Overlay Target Resource Definition,customType,false,string
 Overlay Target Resource Definition,visibility,true,string
 Overlay Target Resource Definition,purpose,false,string
 Product,ordId,true,string

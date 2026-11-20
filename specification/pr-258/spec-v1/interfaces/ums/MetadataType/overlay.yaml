@@ -55,9 +55,6 @@ spec:
     - name: 'purpose'
       type: 'string'
       description: "Purpose of this Overlay Resource and of the projected resource definition produced by applying it.\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id).\nWhen omitted, the projected definition also has no purpose."
-    - name: 'perspective'
-      type: 'string'
-      description: "Overlay-specific [perspective](../../spec-v1/index.md#perspectives) that scopes where this overlay should be applied.\n\nDeclares whether the overlay applies at system-type, system-version, or system-instance level.\nThe target ORD resource is resolved in the corresponding ORD aggregation context."
     - name: 'definitions'
       type: 'custom'
       customTypeName: 'OverlayDefinition'

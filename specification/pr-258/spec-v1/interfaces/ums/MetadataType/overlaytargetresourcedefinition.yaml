@@ -10,7 +10,7 @@ spec:
     - 'id'
   visibility: 'public'
   embedded: true
-  description: "Matching criteria for the input resource definition, independent of the output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition exactly.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select a primary definition without a purpose; omission is not a wildcard.\nFor `type: custom`, `customType` MUST be provided and match the input's custom type.\nOtherwise `customType` MUST NOT be provided. Resolution MUST identify exactly one input definition."
+  description: "Matching criteria for the input resource definition, independent of the output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition exactly.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select a primary definition without a purpose; omission is not a wildcard.\nCustom formats MUST be identified directly by a Specification ID in `type`.\nResolution MUST identify exactly one input definition."
   metadataProperties:
     - name: 'id'
       type: 'guid'
@@ -27,12 +27,6 @@ spec:
       mandatory: true
       constraints:
         pattern: '^(application|text)\/[a-zA-Z0-9][a-zA-Z0-9.+\-]*$'
-    - name: 'customType'
-      type: 'string'
-      description: "If the fixed `type` enum values need to be extended, an arbitrary `customType` can be provided.\n\nMUST be a valid [Specification ID](../concepts/identifiers.md#specification-id).\n\nMUST only be provided if `type` is set to `custom`."
-      constraints:
-        maxLength: 255
-        pattern: '^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-]+):(v0|v[1-9][0-9]*)$'
     - name: 'visibility'
       type: 'string'
       description: 'Effective visibility of the input definition to select, including inheritance from its resource.'

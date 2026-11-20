@@ -4847,31 +4847,6 @@
         "target": {
           "$ref": "#/definitions/OverlayTarget"
         },
-        "perspective": {
-          "description": "Overlay-specific [perspective](../../spec-v1/index.md#perspectives) that scopes where this overlay should be applied.\n\nDeclares whether the overlay applies at system-type, system-version, or system-instance level.\nThe target ORD resource is resolved in the corresponding ORD aggregation context.",
-          "type": "string",
-          "title": "Overlay Perspective",
-          "x-ums-type": "ignore",
-          "oneOf": [
-            {
-              "const": "system-type",
-              "description": "Applies the overlay at system-type level.\n\nUse this when the overlay should patch the same targeted resource across versions and instances\nof the same system type, typically for the same ORD resource major version.\nThe target ORD resource and aggregation context identify the applicable system type."
-            },
-            {
-              "const": "system-version",
-              "description": "Applies the overlay to one concrete system version.\n\nUse this when metadata differs between released versions and the patch should only affect\na specific version of the target resource.\nThe applicable system version is determined from the target ORD resource and aggregation context."
-            },
-            {
-              "const": "system-instance",
-              "description": "Applies the overlay to one concrete system instance / tenant.\n\nUse this when the patch reflects tenant-specific configuration, extensions, or runtime differences\nin the target metadata.\nThe applicable system instance is determined from the target ORD resource and aggregation context."
-            }
-          ],
-          "examples": [
-            "system-type",
-            "system-version",
-            "system-instance"
-          ]
-        },
         "definitions": {
           "type": "array",
           "minItems": 1,
@@ -4988,7 +4963,7 @@
       "type": "object",
       "title": "Overlay Target",
       "x-ums-type": "embedded",
-      "description": "Selects one ORD resource and one concrete input resource definition.\nMatching is performed in the applicability context of the containing Overlay Resource.\nResolution MUST identify exactly one input definition; zero or multiple matches MUST error.\nRelationships to the patched resource are derived from `ordId` and MUST NOT be duplicated in related-resource lists.",
+      "description": "Selects one ORD resource and one concrete input resource definition.\nMatching is performed in the ORD aggregation context.\nResolution MUST identify exactly one input definition; zero or multiple matches MUST error.\nRelationships to the patched resource are derived from `ordId` and MUST NOT be duplicated in related-resource lists.",
       "additionalProperties": false,
       "required": [
         "ordId",
@@ -5013,35 +4988,13 @@
       "type": "object",
       "title": "Overlay Target Resource Definition",
       "x-ums-type": "embedded",
-      "description": "Matching criteria for the input resource definition, independent of the output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition exactly.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select a primary definition without a purpose; omission is not a wildcard.\nFor `type: custom`, `customType` MUST be provided and match the input's custom type.\nOtherwise `customType` MUST NOT be provided. Resolution MUST identify exactly one input definition.",
+      "description": "Matching criteria for the input resource definition, independent of the output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition exactly.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select a primary definition without a purpose; omission is not a wildcard.\nCustom formats MUST be identified directly by a Specification ID in `type`.\nResolution MUST identify exactly one input definition.",
       "additionalProperties": false,
       "required": [
         "type",
         "mediaType",
         "visibility"
       ],
-      "if": {
-        "properties": {
-          "type": {
-            "const": "custom"
-          }
-        },
-        "required": [
-          "type"
-        ]
-      },
-      "then": {
-        "required": [
-          "customType"
-        ]
-      },
-      "else": {
-        "not": {
-          "required": [
-            "customType"
-          ]
-        }
-      },
       "properties": {
         "type": {
           "type": "string",
@@ -5104,9 +5057,6 @@
             {
               "const": "arazzo-v1",
               "x-introduced-in-version": "1.17.0"
-            },
-            {
-              "const": "custom"
             }
           ]
         },
@@ -5118,15 +5068,6 @@
             "application/json",
             "text/plain",
             "application/xml"
-          ]
-        },
-        "customType": {
-          "type": "string",
-          "description": "If the fixed `type` enum values need to be extended, an arbitrary `customType` can be provided.\n\nMUST be a valid [Specification ID](../concepts/identifiers.md#specification-id).\n\nMUST only be provided if `type` is set to `custom`.",
-          "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-          "maxLength": 255,
-          "examples": [
-            "sap:custom-definition-format:v1"
           ]
         },
         "visibility": {
