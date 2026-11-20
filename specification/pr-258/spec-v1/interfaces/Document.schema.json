@@ -4848,22 +4848,22 @@
           "$ref": "#/definitions/OverlayTarget"
         },
         "perspective": {
-          "description": "Overlay-specific [perspective](../../spec-v1/index.md#perspectives) that scopes where this overlay should be applied.\n\nUse this together with `describedSystemType`, `describedSystemVersion`, and `describedSystemInstance`\nto describe whether the overlay applies broadly to a system type, to one released system version,\nor only to a specific system instance.",
+          "description": "Overlay-specific [perspective](../../spec-v1/index.md#perspectives) that scopes where this overlay should be applied.\n\nDeclares whether the overlay applies at system-type, system-version, or system-instance level.\nThe target ORD resource is resolved in the corresponding ORD aggregation context.",
           "type": "string",
           "title": "Overlay Perspective",
           "x-ums-type": "ignore",
           "oneOf": [
             {
               "const": "system-type",
-              "description": "Applies the overlay at system-type level.\n\nUse this when the overlay should patch the same targeted resource across versions and instances\nof the same system type, typically for the same ORD resource major version.\n`describedSystemType` SHOULD be provided as the identifying context."
+              "description": "Applies the overlay at system-type level.\n\nUse this when the overlay should patch the same targeted resource across versions and instances\nof the same system type, typically for the same ORD resource major version.\nThe target ORD resource and aggregation context identify the applicable system type."
             },
             {
               "const": "system-version",
-              "description": "Applies the overlay to one concrete system version.\n\nUse this when metadata differs between released versions and the patch should only affect\na specific version of the target resource.\n`describedSystemVersion` SHOULD be provided, and `describedSystemType` SHOULD also be provided as parent context."
+              "description": "Applies the overlay to one concrete system version.\n\nUse this when metadata differs between released versions and the patch should only affect\na specific version of the target resource.\nThe applicable system version is determined from the target ORD resource and aggregation context."
             },
             {
               "const": "system-instance",
-              "description": "Applies the overlay to one concrete system instance / tenant.\n\nUse this when the patch reflects tenant-specific configuration, extensions, or runtime differences\nin the target metadata.\n`describedSystemInstance` SHOULD be provided."
+              "description": "Applies the overlay to one concrete system instance / tenant.\n\nUse this when the patch reflects tenant-specific configuration, extensions, or runtime differences\nin the target metadata.\nThe applicable system instance is determined from the target ORD resource and aggregation context."
             }
           ],
           "examples": [
@@ -4871,15 +4871,6 @@
             "system-version",
             "system-instance"
           ]
-        },
-        "describedSystemType": {
-          "$ref": "#/definitions/SystemType"
-        },
-        "describedSystemVersion": {
-          "$ref": "#/definitions/SystemVersion"
-        },
-        "describedSystemInstance": {
-          "$ref": "#/definitions/SystemInstance"
         },
         "definitions": {
           "type": "array",

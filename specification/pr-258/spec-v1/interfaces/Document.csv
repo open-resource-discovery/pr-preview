@@ -270,9 +270,6 @@ Overlay,releaseStatus,true,string
 Overlay,purpose,false,string
 Overlay,target,true,OverlayTarget
 Overlay,perspective,false,string
-Overlay,describedSystemType,false,SystemType
-Overlay,describedSystemVersion,false,SystemVersion
-Overlay,describedSystemInstance,false,SystemInstance
 Overlay,definitions,true,array<OverlayDefinition>
 Overlay,tags,false,array<string>
 Overlay,labels,false,Labels
