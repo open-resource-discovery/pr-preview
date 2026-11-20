@@ -1,0 +1,1 @@
+import{t as e}from"./iframe-e1-s8las.js";e();
