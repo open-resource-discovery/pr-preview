@@ -1,0 +1,32 @@
+apiVersion: 'metadata-service.resource.api.sap/v6alpha1'
+type: 'MetadataType'
+metadata:
+  name: 'overlaytarget'
+  path: '/sap/core/ucl/metadata/ord/v1'
+  labels: {}
+spec:
+  typeName: 'OverlayTarget'
+  key:
+    - 'id'
+  visibility: 'public'
+  embedded: true
+  description: "Selects one ORD resource and one concrete input resource definition.\nMatching is performed in the applicability context of the containing Overlay Resource.\nResolution MUST identify exactly one input definition; zero or multiple matches MUST error.\nRelationships to the patched resource are derived from `ordId` and MUST NOT be duplicated in related-resource lists."
+  metadataProperties:
+    - name: 'id'
+      type: 'guid'
+      mandatory: true
+      unique: true
+      description: 'UMS ID (globally unique), used for relations.'
+    - name: 'ordId'
+      type: 'string'
+      description: 'ORD ID of the resource whose definition is patched (e.g. API Resource, Event Resource, or Capability).'
+      mandatory: true
+      constraints:
+        maxLength: 255
+        pattern: '^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\-]+):([a-zA-Z0-9._\-]+):(v0|v[1-9][0-9]*)$'
+  customTypeDefinitions: []
+  metadataRelations:
+    - propertyName: 'resourceDefinition'
+      relatedTypeName: 'OverlayTargetResourceDefinition'
+      relatedTypeNamespace: '/sap/core/ucl/metadata/ord/v1'
+      mandatory: true
