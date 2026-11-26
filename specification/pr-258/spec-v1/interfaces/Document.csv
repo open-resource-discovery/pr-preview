@@ -268,7 +268,7 @@ Overlay,lastUpdate,false,string
 Overlay,visibility,true,string
 Overlay,releaseStatus,true,string
 Overlay,purpose,false,string
-Overlay,targets,false,array<OverlayResourceTarget>
+Overlay,targets,true,array<OverlayResourceTarget>
 Overlay,relatedApiResources,false,array<RelatedApiResource>
 Overlay,relatedEventResources,false,array<RelatedEventResource>
 Overlay,definitions,false,array<OverlayDefinition>
