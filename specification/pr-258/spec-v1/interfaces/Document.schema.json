@@ -209,7 +209,7 @@
     },
     "overlays": {
       "type": "array",
-      "description": "Array of all metadata overlays described in this ORD document.\n\nAn ORD Overlay resource is a standalone, versioned resource that references an overlay document which patches\nresource definitions (e.g. OpenAPI, AsyncAPI, OData CSDL) without modifying the originals.\n\nProviders MUST publish overlays as Overlay Resources with patch files referenced through `definitions`.\nAttaching overlays to API or Event `resourceDefinitions` is deprecated.",
+      "description": "Array of all metadata overlays described in this ORD document.\n\nAn ORD Overlay resource is a standalone, versioned resource that references an overlay document which patches\nresource definitions (e.g. OpenAPI, AsyncAPI, OData CSDL) without modifying the originals.\n\nNew overlay publications SHOULD use standalone Overlay Resources with patch files referenced through `definitions`.\nAttaching overlays as API or Event resource definitions is deprecated; existing publications remain valid.",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
       "items": {
@@ -1319,7 +1319,7 @@
         },
         "resourceDefinitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. overlays, AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/ApiResourceDefinition"
           }
@@ -2108,7 +2108,7 @@
         },
         "resourceDefinitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. overlays, AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/EventResourceDefinition"
           }
@@ -3913,17 +3913,17 @@
             {
               "const": "ord:overlay:v1",
               "x-deprecated-in-version": "1.18.0",
-              "x-deprecation-text": "Publish this file through an Overlay Resource in `overlays[].definitions[]` instead.\nProviders MUST NOT publish new overlays through API or Event `resourceDefinitions`.",
+              "x-deprecation-text": "New publications SHOULD reference this file through an Overlay Resource in `overlays[].definitions[]`.\nExisting attached resource definitions remain valid and supported.",
               "x-feature-status": "alpha",
               "x-introduced-in-version": "1.15.0",
-              "description": "DEPRECATED as of ORD 1.18.0: publish this file through an Overlay Resource in `overlays[].definitions[]`.\nProviders MUST NOT use this resource-definition type for new overlay publications.\n\nORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
+              "description": "ORD Overlay file for patching referenced resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
               "const": "oas-overlay-v1",
               "x-deprecated-in-version": "1.18.0",
-              "x-deprecation-text": "Publish this file through an Overlay Resource in `overlays[].definitions[]` instead.\nProviders MUST NOT publish new overlays through API or Event `resourceDefinitions`.",
+              "x-deprecation-text": "New publications SHOULD reference this file through an Overlay Resource in `overlays[].definitions[]`.\nExisting attached resource definitions remain valid and supported.",
               "x-introduced-in-version": "1.17.0",
-              "description": "DEPRECATED as of ORD 1.18.0: publish this file through an Overlay Resource in `overlays[].definitions[]`.\nProviders MUST NOT use this resource-definition type for new overlay publications.\n\n[OpenAPI Overlay v1.0.0](https://spec.openapis.org/overlay/v1.0.0.html) document for patching an OpenAPI definition.\nUse this when overlays are authored in the OpenAPI Initiative Overlay format rather than the\n[ORD Overlay](../../spec-v1/interfaces/OrdOverlay) format.\nThe `mediaType` MUST be set to `application/json` or `application/yaml`."
+              "description": "[OpenAPI Overlay v1.0.0](https://spec.openapis.org/overlay/v1.0.0.html) document for patching an OpenAPI definition.\nUse this when overlays are authored in the OpenAPI Initiative Overlay format rather than the\n[ORD Overlay](../../spec-v1/interfaces/OrdOverlay) format.\nThe `mediaType` MUST be set to `application/json` or `application/yaml`."
             },
             {
               "const": "custom",
@@ -3999,7 +3999,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an AI-enriched variant or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -4055,10 +4055,10 @@
             {
               "const": "ord:overlay:v1",
               "x-deprecated-in-version": "1.18.0",
-              "x-deprecation-text": "Publish this file through an Overlay Resource in `overlays[].definitions[]` instead.\nProviders MUST NOT publish new overlays through API or Event `resourceDefinitions`.",
+              "x-deprecation-text": "New publications SHOULD reference this file through an Overlay Resource in `overlays[].definitions[]`.\nExisting attached resource definitions remain valid and supported.",
               "x-feature-status": "alpha",
               "x-introduced-in-version": "1.15.0",
-              "description": "DEPRECATED as of ORD 1.18.0: publish this file through an Overlay Resource in `overlays[].definitions[]`.\nProviders MUST NOT use this resource-definition type for new overlay publications.\n\nORD Overlay file for patching metadata / resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
+              "description": "ORD Overlay file for patching metadata / resource definition files.\nFor details, see [ORD Overlay](../../spec-v1/interfaces/OrdOverlay).\nThe `mediaType` MUST be set to `application/json`."
             },
             {
               "const": "custom",
@@ -4133,7 +4133,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an AI-enriched variant or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",
@@ -4727,7 +4727,7 @@
       "x-ums-type": "root",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
-      "description": "An Overlay Resource is a standalone, versioned resource that references a metadata patch file.\nOverlays enrich / patch resource definition files (e.g. OpenAPI) without modifying the originals, e.g. to add AI-optimized descriptions, apply governance annotations, or adapt definitions for a specific audience / purpose.\n\nUse an Overlay Resource for overlays that serve a different concern or audience than the original metadata — such as AI enrichment, governance annotations, or audience-specific adaptations — and are managed independently.\nProviders MUST use an Overlay Resource for every published overlay, including producer-owned overlays\nthat patch a single resource. Attaching overlays to API or Event `resourceDefinitions` is deprecated.",
+      "description": "An Overlay Resource is a standalone, versioned resource that references a metadata patch file.\nOverlays enrich / patch resource definition files (e.g. OpenAPI) without modifying the originals, e.g. to add AI-optimized descriptions, apply governance annotations, or adapt definitions for a specific audience / purpose.\n\nUse an Overlay Resource for overlays that serve a different concern or audience than the original metadata — such as AI enrichment, governance annotations, or audience-specific adaptations — and are managed independently or applied across multiple resources.\nNew overlay publications SHOULD use an Overlay Resource, including producer-owned overlays that patch a single resource.\nAttaching overlays as API or Event resource definitions is deprecated; existing publications remain valid.",
       "properties": {
         "ordId": {
           "type": "string",
@@ -4772,7 +4772,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "Visibility of this Overlay Resource, all its patch files, and the projected resource definition.\nDefinition entries MUST inherit this visibility; they cannot override it.\nAggregators MUST enforce this audience on the overlay and the result, and MUST NOT expose\nrestricted input metadata to a broader audience without explicit authorization.",
+          "description": "Defines metadata access control - which categories of consumers are allowed to discover and access the resource and its metadata.\n\nThis controls who can see that the resource exists and retrieve its metadata level information.\nIt does NOT control runtime access to the resource itself - that is managed separately through authentication and authorization mechanisms.\n\nUse this to prevent exposing internal implementation details to inappropriate consumer audiences.",
           "oneOf": [
             {
               "const": "public",
@@ -4821,8 +4821,8 @@
         "purpose": {
           "type": "string",
           "x-feature-status": "alpha",
-          "x-introduced-in-version": "1.15.0",
-          "description": "Purpose of this Overlay Resource and of the projected resource definition produced by applying it.\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id).\nWhen omitted, the projected definition also has no purpose.",
+          "x-introduced-in-version": "1.18.0",
+          "description": "Optional default purpose of the resource definition produced by applying this overlay.\nThis describes the output; `targets[].resourceDefinition.purpose` selects the input.\nA legacy `definitions[].purpose`, when provided, continues to apply to that definition.\nIf neither property is provided, the output definition has no purpose.",
           "anyOf": [
             {
               "type": "string",
@@ -4844,13 +4844,55 @@
             "ord:ai-enrichment"
           ]
         },
-        "target": {
-          "$ref": "#/definitions/OverlayTarget"
+        "targets": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 1,
+          "x-introduced-in-version": "1.18.0",
+          "description": "Optional explicit selection of the input resource definition patched by the referenced overlay files.\nCurrently limited to one target.\nWhen omitted, consumers continue to resolve the target from the overlay file or externally supplied context.\nIf an overlay file also provides target metadata, it MUST identify the same input.",
+          "items": {
+            "$ref": "#/definitions/OverlayResourceTarget"
+          }
+        },
+        "relatedApiResources": {
+          "type": "array",
+          "x-introduced-in-version": "1.15.0",
+          "description": "Optional list of API Resources whose definition files this overlay patches.\n\nSHOULD be provided when the target resource is described in an ORD document accessible to the same aggregator,\nas it enables efficient indexing without requiring the aggregator to parse each overlay file.\nUse `relationType: ord:patches` to express the patching relationship.\n\nMay be omitted when the target resource is not described in an accessible ORD document,\nor when the overlay is cross-cutting and patches resources from multiple providers.",
+          "items": {
+            "$ref": "#/definitions/RelatedApiResource"
+          },
+          "examples": [
+            [
+              {
+                "ordId": "sap.s4:apiResource:API_BUSINESS_PARTNER:v1",
+                "relationType": "foo.bar:relationName"
+              }
+            ]
+          ],
+          "x-deprecated-in-version": "1.18.0",
+          "x-deprecation-text": "Use `targets` for explicit input-definition selection in new publications.\nExisting related-resource lists remain valid."
+        },
+        "relatedEventResources": {
+          "type": "array",
+          "x-introduced-in-version": "1.15.0",
+          "description": "Optional list of Event Resources whose definition files this overlay patches.\n\nSHOULD be provided when the target resource is described in an ORD document accessible to the same aggregator,\nas it enables efficient indexing without requiring the aggregator to parse each overlay file.\nUse `relationType: ord:patches` to express the patching relationship.\n\nMay be omitted when the target resource is not described in an accessible ORD document,\nor when the overlay is cross-cutting and patches resources from multiple providers.",
+          "items": {
+            "$ref": "#/definitions/RelatedEventResource"
+          },
+          "examples": [
+            [
+              {
+                "ordId": "sap.s4:eventResource:BusinessPartnerEvents:v1",
+                "relationType": "foo.bar:relationName"
+              }
+            ]
+          ],
+          "x-deprecated-in-version": "1.18.0",
+          "x-deprecation-text": "Use `targets` for explicit input-definition selection in new publications.\nExisting related-resource lists remain valid."
         },
         "definitions": {
           "type": "array",
-          "minItems": 1,
-          "description": "Ordered list of patch files contributing to this projection.\nEvery entry MUST have a unique combination of `type` and `mediaType` within this list.\nThe files are not necessarily alternative representations of the same operations.\nConsumers MUST apply every entry in array order, preserving patch order within each file.\nEach file operates on the result of the preceding file; later operations act on the modified state.\nA consumer that cannot process an entry MUST report an error rather than silently skip it.\nVisibility and purpose are defined exclusively on this Overlay Resource.",
+          "description": "List of overlay definition files referenced by this ORD Overlay Resource.\nEach entry points to an overlay document that contains the actual patches.",
           "items": {
             "$ref": "#/definitions/OverlayDefinition"
           }
@@ -4879,9 +4921,7 @@
         "ordId",
         "version",
         "releaseStatus",
-        "visibility",
-        "target",
-        "definitions"
+        "visibility"
       ],
       "x-recommended": [
         "lastUpdate"
@@ -4893,7 +4933,7 @@
       "x-ums-type": "custom",
       "x-introduced-in-version": "1.15.0",
       "x-feature-status": "alpha",
-      "description": "Link to a machine-readable patch file contributing to the containing Overlay Resource's projection.\nIts visibility is inherited from the Overlay Resource. Target, applicability, and purpose are defined on the entity.",
+      "description": "Link to a machine-readable [ORD Overlay](../../spec-v1/interfaces/OrdOverlay) document.",
       "properties": {
         "type": {
           "description": "Type of the overlay definition",
@@ -4950,6 +4990,54 @@
               }
             ]
           ]
+        },
+        "visibility": {
+          "type": "string",
+          "description": "The visibility states who is allowed to \"see\" and access the resource definition, in case it differs from the resource visibility.\n\nIf not given, the resource definition has the same visibility as the resource it describes.\nThe visibility of a resource definition MUST be lower (more restrictive) than the visibility of the resource it describes.\nE.g. a public resource can have metadata definitions that are internal only. An internal resource can't declare to have a public metadata definition.\n\nThis makes it also possible to provide both a public and an internal metadata description of the resource,\nin case that some metadata must only be made accessible to internal consumers.",
+          "oneOf": [
+            {
+              "const": "public",
+              "description": "Metadata can be discovered and accessed by anyone, including customers, partners, and unauthenticated external parties.\n\nPublic resources typically come with stability guarantees, expressed via versioning and formal API lifecycle management. For more details see [Versioning and Lifecycle](../concepts/versioning-and-lifecycle.md).\n\nExample: A REST API that customers use to integrate with your SaaS product."
+            },
+            {
+              "const": "internal",
+              "description": "Metadata can only be discovered and accessed by vendor internal consumers (e.g. applications or services of the same vendor).\nMUST NOT be made available to external parties or vendor customers.\n\nInternal resources are intended for integration between a vendors own applications and services.\nAPI stability and maturity are explicitly defined via the `releaseStatus` property, which is a separate concern from visibility.\n\nInternal resources MUST NOT be made available without checking the necessary access permissions.\nInternal resources MAY be published through an internal API Catalog if access permissions are ensured by it."
+            },
+            {
+              "const": "private",
+              "description": "Metadata should not be discoverable outside the application / service's own deployment scope (e.g., outside of the provider application or the same system namespace / system type).\nUsed for metadata completeness when describing implementation details or dependencies.\n\nPrivate resources usually have no stability guarantees and can change or be removed at any time.\nThese are typically implementation details not meant for consumption by other services.\n\nExample: Services only used within a microservice architecture or APIs that are only used for the own UIs, not for general consumption.\n\nPrivate resources MUST NOT be made discoverable or accessible outside the application / service's own deployment scope."
+            }
+          ],
+          "x-deprecated-in-version": "1.18.0",
+          "x-deprecation-text": "Prefer the containing Overlay Resource's `visibility` in new publications.\nExisting definition-level visibility continues to apply, including its inheritance and restriction rules."
+        },
+        "purpose": {
+          "type": "string",
+          "x-feature-status": "alpha",
+          "x-introduced-in-version": "1.15.0",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
+            },
+            {
+              "const": "ord:ai-enrichment",
+              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
+              "x-introduced-in-version": "1.15.0"
+            },
+            {
+              "const": "ord:agent-security-permissions",
+              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
+              "x-introduced-in-version": "1.16.2"
+            }
+          ],
+          "examples": [
+            "ord:ai-enrichment"
+          ],
+          "x-deprecated-in-version": "1.18.0",
+          "x-deprecation-text": "Prefer the containing Overlay Resource's `purpose` in new publications.\nExisting definition-level purpose continues to apply and takes precedence over the resource-level default."
         }
       },
       "additionalProperties": false,
@@ -4959,20 +5047,17 @@
         "url"
       ]
     },
-    "OverlayTarget": {
+    "OverlayResourceTarget": {
       "type": "object",
-      "title": "Overlay Target",
+      "title": "Overlay Resource Target",
       "x-ums-type": "embedded",
-      "description": "Selects one ORD resource and one concrete input resource definition.\nMatching is performed in the ORD aggregation context.\nResolution MUST identify exactly one input definition; zero or multiple matches MUST error.\nRelationships to the patched resource are derived from `ordId` and MUST NOT be duplicated in related-resource lists.",
+      "x-introduced-in-version": "1.18.0",
+      "description": "Selects one ORD resource and one concrete input resource definition in the aggregation context.\nConsumers MUST resolve exactly one input definition; zero or multiple matches MUST report an error.\nThis selection does not change the target resource's identity or the overlay's output visibility and purpose.",
       "additionalProperties": false,
-      "required": [
-        "ordId",
-        "resourceDefinition"
-      ],
       "properties": {
         "ordId": {
           "type": "string",
-          "description": "ORD ID of the resource whose definition is patched (e.g. API Resource, Event Resource, or Capability).",
+          "description": "ORD ID of the resource whose definition is patched.",
           "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
           "maxLength": 255,
           "examples": [
@@ -4982,19 +5067,19 @@
         "resourceDefinition": {
           "$ref": "#/definitions/OverlayTargetResourceDefinition"
         }
-      }
+      },
+      "required": [
+        "ordId",
+        "resourceDefinition"
+      ]
     },
     "OverlayTargetResourceDefinition": {
       "type": "object",
       "title": "Overlay Target Resource Definition",
       "x-ums-type": "embedded",
-      "description": "Matching criteria for the input resource definition, independent of the output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition exactly.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select a primary definition without a purpose; omission is not a wildcard.\nCustom formats MUST be identified directly by a Specification ID in `type`.\nResolution MUST identify exactly one input definition.",
+      "x-introduced-in-version": "1.18.0",
+      "description": "Exact matching criteria for the input definition, independent of the overlay's output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select the primary definition without a purpose; omission is not a wildcard.\nFor legacy input definitions with `type: custom`, match `type` against the input's `customType`.",
       "additionalProperties": false,
-      "required": [
-        "type",
-        "mediaType",
-        "visibility"
-      ],
       "properties": {
         "type": {
           "type": "string",
@@ -5002,8 +5087,7 @@
           "anyOf": [
             {
               "type": "string",
-              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$",
-              "description": "Any valid [Specification ID](../../spec-v1/concepts/identifiers.md#specification-id)."
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-]+):(v0|v[1-9][0-9]*)$"
             },
             {
               "const": "openapi-v2"
@@ -5051,12 +5135,10 @@
               "const": "sap.mdo:mdi-capability-definition:v1"
             },
             {
-              "const": "oas-overlay-v1",
-              "x-introduced-in-version": "1.17.0"
+              "const": "oas-overlay-v1"
             },
             {
-              "const": "arazzo-v1",
-              "x-introduced-in-version": "1.17.0"
+              "const": "arazzo-v1"
             }
           ]
         },
@@ -5072,7 +5154,7 @@
         },
         "visibility": {
           "type": "string",
-          "description": "Effective visibility of the input definition to select, including inheritance from its resource.",
+          "description": "Effective visibility of the input definition, including inheritance from its resource.",
           "oneOf": [
             {
               "const": "public",
@@ -5092,7 +5174,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Optional purpose of the input definition to select; omit to select the primary definition without a purpose.",
+          "description": "Optional purpose of the input definition; omit to select a definition without a purpose.",
           "anyOf": [
             {
               "type": "string",
@@ -5114,7 +5196,12 @@
             "ord:ai-enrichment"
           ]
         }
-      }
+      },
+      "required": [
+        "type",
+        "mediaType",
+        "visibility"
+      ]
     },
     "Product": {
       "type": "object",
@@ -5601,7 +5688,7 @@
         },
         "definitions": {
           "type": "array",
-          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
+          "description": "List of available machine-readable definitions, which describe the resource in detail.\nSee also [Resource Definitions](../index.md#resource-definitions) for more context.\n\nEvery entry MUST describe the *same* underlying resource. Allowed variations are alternative\nrepresentations (different formats) and complementary artifacts distinguished by `purpose`\n(e.g. overlays, AI-enriched variants, agent-security-permissions views).\nThis list MUST NOT be used to bundle multiple distinct resources under a single ORD resource.\nModel those as separate ORD resources instead.\n\nThe entry without a `purpose` value is the primary/default definition for its `(type, visibility)`;\nconsumers that don't filter by `purpose` MUST fall back to it. There SHOULD be exactly one such\ndefault per `(type, visibility)` combination.\n\nThe combination of `type` (or `customType` for `type: \"custom\"`), `purpose`, and `visibility` MUST\nbe unique within the list.\n\nIt is RECOMMENDED to provide the definitions as they enable machine-readable use cases.\nIf the definitions are added or changed, the `version` MUST be incremented.\nAn ORD aggregator MAY only (re)fetch the definitions again when the `version` was incremented.",
           "items": {
             "$ref": "#/definitions/CapabilityDefinition"
           }
@@ -6002,7 +6089,7 @@
           "type": "string",
           "x-feature-status": "alpha",
           "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an AI-enriched variant or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
+          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
           "anyOf": [
             {
               "type": "string",

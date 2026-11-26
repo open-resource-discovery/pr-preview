@@ -268,16 +268,20 @@ Overlay,lastUpdate,false,string
 Overlay,visibility,true,string
 Overlay,releaseStatus,true,string
 Overlay,purpose,false,string
-Overlay,target,true,OverlayTarget
-Overlay,definitions,true,array<OverlayDefinition>
+Overlay,targets,false,array<OverlayResourceTarget>
+Overlay,relatedApiResources,false,array<RelatedApiResource>
+Overlay,relatedEventResources,false,array<RelatedEventResource>
+Overlay,definitions,false,array<OverlayDefinition>
 Overlay,tags,false,array<string>
 Overlay,labels,false,Labels
 Overlay Definition,type,true,string
 Overlay Definition,mediaType,true,string
 Overlay Definition,url,true,string
 Overlay Definition,accessStrategies,false,array<AccessStrategy>
-Overlay Target,ordId,true,string
-Overlay Target,resourceDefinition,true,OverlayTargetResourceDefinition
+Overlay Definition,visibility,false,string
+Overlay Definition,purpose,false,string
+Overlay Resource Target,ordId,true,string
+Overlay Resource Target,resourceDefinition,true,OverlayTargetResourceDefinition
 Overlay Target Resource Definition,type,true,string
 Overlay Target Resource Definition,mediaType,true,string
 Overlay Target Resource Definition,visibility,true,string

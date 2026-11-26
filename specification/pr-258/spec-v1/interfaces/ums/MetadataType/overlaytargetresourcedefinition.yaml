@@ -10,7 +10,7 @@ spec:
     - 'id'
   visibility: 'public'
   embedded: true
-  description: "Matching criteria for the input resource definition, independent of the output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition exactly.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select a primary definition without a purpose; omission is not a wildcard.\nCustom formats MUST be identified directly by a Specification ID in `type`.\nResolution MUST identify exactly one input definition."
+  description: "Exact matching criteria for the input definition, independent of the overlay's output visibility and purpose.\n`type`, `mediaType`, and effective `visibility` MUST match the input definition.\nEffective visibility includes visibility inherited from the target resource.\nIf `purpose` is omitted, select the primary definition without a purpose; omission is not a wildcard.\nFor legacy input definitions with `type: custom`, match `type` against the input's `customType`."
   metadataProperties:
     - name: 'id'
       type: 'guid'
@@ -29,10 +29,10 @@ spec:
         pattern: '^(application|text)\/[a-zA-Z0-9][a-zA-Z0-9.+\-]*$'
     - name: 'visibility'
       type: 'string'
-      description: 'Effective visibility of the input definition to select, including inheritance from its resource.'
+      description: 'Effective visibility of the input definition, including inheritance from its resource.'
       mandatory: true
     - name: 'purpose'
       type: 'string'
-      description: 'Optional purpose of the input definition to select; omit to select the primary definition without a purpose.'
+      description: 'Optional purpose of the input definition; omit to select a definition without a purpose.'
   customTypeDefinitions: []
   metadataRelations: []
