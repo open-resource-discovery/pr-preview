@@ -266,8 +266,8 @@ Overlay,description,false,string
 Overlay,version,true,string
 Overlay,lastUpdate,false,string
 Overlay,visibility,true,string
-Overlay,releaseStatus,true,string
 Overlay,purpose,false,string
+Overlay,releaseStatus,true,string
 Overlay,targets,true,array<OverlayResourceTarget>
 Overlay,relatedApiResources,false,array<RelatedApiResource>
 Overlay,relatedEventResources,false,array<RelatedEventResource>
@@ -279,7 +279,6 @@ Overlay Definition,mediaType,true,string
 Overlay Definition,url,true,string
 Overlay Definition,accessStrategies,false,array<AccessStrategy>
 Overlay Definition,visibility,false,string
-Overlay Definition,purpose,false,string
 Overlay Resource Target,ordId,true,string
 Overlay Resource Target,resourceDefinition,true,OverlayTargetResourceDefinition
 Overlay Target Resource Definition,type,true,string

@@ -4788,6 +4788,32 @@
             }
           ]
         },
+        "purpose": {
+          "type": "string",
+          "x-feature-status": "alpha",
+          "x-introduced-in-version": "1.18.0",
+          "description": "Optional purpose of the resource definition produced by applying this overlay.\nThis describes the output; `targets[].resourceDefinition.purpose` selects the input.\nIf omitted, the output definition has no purpose.",
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
+              "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
+            },
+            {
+              "const": "ord:ai-enrichment",
+              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
+              "x-introduced-in-version": "1.15.0"
+            },
+            {
+              "const": "ord:agent-security-permissions",
+              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
+              "x-introduced-in-version": "1.16.2"
+            }
+          ],
+          "examples": [
+            "ord:ai-enrichment"
+          ]
+        },
         "releaseStatus": {
           "type": "string",
           "description": "Defines the maturity level and stability commitment for the resource's API contract (interface, behavior, data models).\n\nThis indicates whether the resource may undergo backward-incompatible changes. It helps consumers understand the risk\nof depending on the resource and whether it's suitable for production use.\n\nNote: This is independent of `visibility` and does not imply availability guarantees or SLAs - it concerns only the API contract stability.\n\nSee [Lifecycle](../concepts/versioning-and-lifecycle.md#lifecycle) and [Compatibility](../concepts/versioning-and-lifecycle.md#compatibility) for more details.",
@@ -4816,32 +4842,6 @@
           ],
           "examples": [
             "active"
-          ]
-        },
-        "purpose": {
-          "type": "string",
-          "x-feature-status": "alpha",
-          "x-introduced-in-version": "1.18.0",
-          "description": "Optional default purpose of the resource definition produced by applying this overlay.\nThis describes the output; `targets[].resourceDefinition.purpose` selects the input.\nA legacy `definitions[].purpose`, when provided, continues to apply to that definition.\nIf neither property is provided, the output definition has no purpose.",
-          "anyOf": [
-            {
-              "type": "string",
-              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
-              "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
-            },
-            {
-              "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
-              "x-introduced-in-version": "1.15.0"
-            },
-            {
-              "const": "ord:agent-security-permissions",
-              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
-              "x-introduced-in-version": "1.16.2"
-            }
-          ],
-          "examples": [
-            "ord:ai-enrichment"
           ]
         },
         "targets": {
@@ -5011,34 +5011,6 @@
           ],
           "x-deprecated-in-version": "1.18.0",
           "x-deprecation-text": "Prefer the containing Overlay Resource's `visibility` in new publications.\nExisting definition-level visibility continues to apply, including its inheritance and restriction rules."
-        },
-        "purpose": {
-          "type": "string",
-          "x-feature-status": "alpha",
-          "x-introduced-in-version": "1.15.0",
-          "description": "Marks a resource definition as a *complementary* variant of the resource's default definition,\nfor example an overlay, an AI-enriched variant, or an agent-security-permissions view.\nAll entries in the definitions list, with or without `purpose`, MUST describe the same\nunderlying resource; see the list property for the full modelling rules.\n\nTogether with `type` (or `customType`) and `visibility`, `purpose` forms the uniqueness\nkey for entries in the definitions list.\n\nMUST be a valid [Concept ID](../concepts/identifiers.md#concept-id). The `ord:` namespace is reserved for\nvalues standardized by the ORD specification itself; custom values MUST use a vendor- or\nproduct-specific namespace prefix (e.g. `foo.bar:my-purpose`).",
-          "anyOf": [
-            {
-              "type": "string",
-              "pattern": "^([a-z0-9]+(?:[.][a-z0-9]+)*):([a-zA-Z0-9._\\-\\/]+)$",
-              "description": "Any valid [Concept ID](../concepts/identifiers.md#concept-id)."
-            },
-            {
-              "const": "ord:ai-enrichment",
-              "description": "The definition is enriched with additional metadata specifically for AI/agent consumption.\nThis may include enhanced descriptions, examples, or semantic annotations that help AI systems\nbetter understand and utilize the API or event resource.",
-              "x-introduced-in-version": "1.15.0"
-            },
-            {
-              "const": "ord:agent-security-permissions",
-              "description": "The definition describes the security permissions an AI agent requires to access the resource.\nThis allows agent runtimes and consent flows to discover and request the appropriate\nauthorizations before the agent invokes the resource.",
-              "x-introduced-in-version": "1.16.2"
-            }
-          ],
-          "examples": [
-            "ord:ai-enrichment"
-          ],
-          "x-deprecated-in-version": "1.18.0",
-          "x-deprecation-text": "Prefer the containing Overlay Resource's `purpose` in new publications.\nExisting definition-level purpose continues to apply and takes precedence over the resource-level default."
         }
       },
       "additionalProperties": false,
